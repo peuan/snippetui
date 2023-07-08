@@ -18,6 +18,7 @@ const FolderList = () => {
 
   useEffect(() => {
     fetchFolderData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchFiles = async (folderList) => {
