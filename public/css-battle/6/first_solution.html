@@ -1,0 +1,39 @@
+<div class="main">
+  <div class="block one"></div>
+  <div class="block two"></div>
+  <div class="block three"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+  }
+  .main {
+    background: #e3516e;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 50px repeat(2, 1fr) 50px;
+  }
+  .block {
+    width: 100px;
+    height: 100px;
+    background: #fade8b;
+  }
+  .one {
+    background: #51b5a9;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    border-radius: 100% 0 0 0;
+  }
+  .two {
+    background: #fade8b;
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    border-radius: 0 100% 0 0;
+  }
+  .three {
+    background: #f7f3d7;
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    border-radius: 0 0 0 100%;
+  }
+</style>
