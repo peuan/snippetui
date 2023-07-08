@@ -12,7 +12,7 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
     }
     const renderFolderCards = () => {
         return files.map((folder, index) => (
-            <div key={index} className="flex gap-16 mt-10">
+            <div key={index} className="sm:flex gap-16 mt-10">
                 <h3 className="text-green-500 text-lg font-bold">
                     Challenge: {folder.folder}
                 </h3>
@@ -36,9 +36,9 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
                             <BiLinkExternal className="text-white" />
                         </div>
                     </div>
-                    <div className="flex justify-center rounded-[20px] hover:bg-white active:bg-white focus:outline-none focus:ring focus:ring-white">
+                    <div className="flex justify-center lg:scale-100 mobile-scale rounded-[20px] hover:bg-white active:bg-white focus:outline-none focus:ring focus:ring-white">
                         <Iframe
-                            className=" w-[400px] h-[300px] rounded-[20px] p-1 "
+                            className="w-[400px] h-[300px] rounded-[20px] p-1 "
                             url={`css-battle/${folder.folder}/${file}`}
                         />
                     </div>

@@ -5,3 +5,9 @@
 body {
   background: transparent !important;
 }
+
+@media (max-width: 640px) {
+  .mobile-scale {
+    transform: scale(0.75) !important;
+  }
+}
