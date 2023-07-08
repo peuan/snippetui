@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-w-[100vw] bg-slate-900">
+    <div className="mb-10">
       <Preview files={result} />
     </div>
   )

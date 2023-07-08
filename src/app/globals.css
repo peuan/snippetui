@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-  background: transparent !important;
+  margin: 0px;
+  @apply bg-slate-900;
 }
 
 @media (max-width: 640px) {
