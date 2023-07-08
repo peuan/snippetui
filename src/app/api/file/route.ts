@@ -2,7 +2,7 @@ import { readdir } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   const dirRelativeToPublicFolder = "css-battle";
   const dir = path.resolve("./public", dirRelativeToPublicFolder);
 
@@ -11,7 +11,6 @@ export async function GET(request: NextRequest) {
     const result = { files };
     const filtered = result.files.filter((v) => !v.includes("."));
     const fileResults: any[] = [];
-
     await Promise.all(
       filtered.map(async (file) => {
         const fileDir = path.resolve(dir, file);
@@ -19,7 +18,9 @@ export async function GET(request: NextRequest) {
         fileResults.push({ folder: file, files: fileLists });
       })
     );
-    return NextResponse.json({ files: fileResults });
+    return NextResponse.json({
+      files: fileResults.sort((a, b) => a.folder - b.folder),
+    });
   } catch (error) {
     console.error("Error reading directory:", error);
     return NextResponse.error();

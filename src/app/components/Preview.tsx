@@ -1,13 +1,15 @@
 import Iframe from "react-iframe";
-
+import { BiLinkExternal } from 'react-icons/bi'
 interface FilesProps {
     folder: string;
     files: string[]
 }
 const Preview = ({ files }: { files: FilesProps[] }) => {
-    console.log(files)
 
+    const handleClick = (folder: string, file: string) => {
+        window.open(`https://github.com/peuan/css-battle/blob/main/public/css-battle/${folder}/${file}`, '_ blank');
 
+    }
     const renderFolderCards = () => {
         return files.map((folder, index) => (
             <div key={index} className="flex gap-16 mt-10">
@@ -26,14 +28,15 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
             return (
                 <div key={index}>
                     <div className="flex justify-center p-2">
-                        <div className=" bg-gray-600">
+                        <div onClick={(() => handleClick(folder.folder, file))} className=" bg-gray-600 flex items-center px-2 cursor-pointer">
                             <h3 className="text-white font-bold py-2 px-4 text-md">
                                 {" "}
                                 {file.split("_")[0]}
                             </h3>
+                            <BiLinkExternal className="text-white" />
                         </div>
                     </div>
-                    <div className="flex justify-center rounded-[20px] hover:bg-white active:bg-white focus:outline-none focus:ring focus:ring-white ">
+                    <div className="flex justify-center rounded-[20px] hover:bg-white active:bg-white focus:outline-none focus:ring focus:ring-white">
                         <Iframe
                             className=" w-[400px] h-[300px] rounded-[20px] p-1 "
                             url={`css-battle/${folder.folder}/${file}`}
