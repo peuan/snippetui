@@ -1,0 +1,41 @@
+<div class="purple">
+  <div class="block">
+    <div class="banana down"></div>
+    <div class="banana up"></div>
+    <div class="banana down"></div>
+  </div>
+</div>
+<style>
+  body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #62306D;
+  }
+  .block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+  }
+  .banana {
+    width: 100px;
+    height: 100px;
+    background: #F7EC7D;
+  }
+  .up {
+    border-radius: 50% 50% 0 0;
+  }
+  .down {
+    border-radius: 0 0 50% 50%;
+  }
+  .banana:first-child {
+    margin-top: 150px;
+  }
+  .banana:nth-child(2) {
+    margin-top: 50px;
+  }
+  .banana:last-child {
+    margin-top: 150px;
+  }
+</style>
