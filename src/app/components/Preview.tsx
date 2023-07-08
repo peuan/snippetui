@@ -1,5 +1,5 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal } from 'react-icons/bi'
+import { BiLinkExternal, BiKnife, BiSolidGraduation, BiBomb } from 'react-icons/bi'
 interface FilesProps {
     folder: string;
     files: string[]
@@ -51,8 +51,9 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
     return (
         <>
             <div className="min-h-screen">
-                <h1 className="text-[50px] font-bold text-center p-10 text-yellow-400">
+                <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
                     CSSBattle
+                    <BiBomb className="ml-2" />
                 </h1>
                 <div className=" p-3 flex flex-col justify-center ">
                     {renderFolderCards()}
