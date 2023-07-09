@@ -2,6 +2,12 @@ import Iframe from "react-iframe";
 import { BiLinkExternal, BiPlay, BiBomb, BiMedal } from 'react-icons/bi'
 import { Avatar } from "@nextui-org/react";
 import clsx from 'clsx'
+import dynamic from "next/dynamic";
+
+const GitHubCorners = dynamic(() => import('@uiw/react-github-corners'), {
+    ssr: false,
+})
+
 interface FilesProps {
     folder: string;
     files: Array<{
@@ -99,6 +105,12 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
 
     return (
         <>
+            <GitHubCorners
+                position="right"
+                color="white"
+                size={100}
+                href="https://github.com/peuan/css-battle"
+            />
             <div className="min-h-screen">
                 <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
                     <div className="flex items-center shadow-xl">CSSBattle

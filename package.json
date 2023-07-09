@@ -13,6 +13,7 @@
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "@uiw/react-github-corners": "^1.5.15",
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
     "eslint": "8.44.0",
