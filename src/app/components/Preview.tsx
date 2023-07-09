@@ -1,9 +1,14 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal, BiPlay, BiBomb } from 'react-icons/bi'
+import { BiLinkExternal, BiPlay, BiBomb, BiMedal } from 'react-icons/bi'
 import { Avatar } from "@nextui-org/react";
+import clsx from 'clsx'
 interface FilesProps {
     folder: string;
-    files: string[]
+    files: Array<{
+        fileName: string;
+        characterCount: number;
+    }>;
+
 }
 const Preview = ({ files }: { files: FilesProps[] }) => {
 
@@ -51,27 +56,30 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
             return (
                 <div key={index}>
                     <div className="flex justify-center mb-2">
-
-
-                        <div onClick={(() => handleClickToCode(folder.folder, file))} className="rounded-full bg-blue-600 flex items-center px-2 cursor-pointer">
-
+                        <div onClick={(() => handleClickToCode(folder.folder, file.fileName))} className="rounded-full bg-blue-600 flex items-center px-2 cursor-pointer">
                             <Avatar
                                 rounded
-                                src={getAvatar(file.split("_")[0])!}
+                                src={getAvatar(file.fileName.split("_")[0])!}
                                 className="ml-[-8px]"
-                                text={getAvatar(file.split("_")[0]) ? '' : file.split("_")[0][0].toUpperCase()}
+                                text={getAvatar(file.fileName.split("_")[0]) ? '' : file.fileName.split("_")[0][0].toUpperCase()}
                             />
                             <h3 className="text-white font-bold py-1 px-4 text-md ">
                                 {" "}
-                                {file.split("_")[0]}
+                                {file.fileName.split("_")[0]}
                             </h3>
                             <BiLinkExternal className="text-white" />
                         </div>
                     </div>
+                    <div className="flex text-sm justify-center items-center text-white mb-2">
+                        <BiMedal className={clsx('w-7 h-7',
+                            index === 0 && 'text-yellow-500',
+                            index === 1 && 'text-slate-300',
+                            index === 2 && 'text-amber-600')} /> {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
+                    </div>
                     <div className="flex justify-center lg:scale-100 mobile-scale rounded-[20px] hover:bg-yellow-400 active:bg-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
                         <Iframe
                             className="w-[400px] h-[300px] rounded-[20px] p-1 "
-                            url={`css-battle/${folder.folder}/${file}`}
+                            url={`css-battle/${folder.folder}/${file.fileName}`}
                         />
                     </div>
                 </div>
