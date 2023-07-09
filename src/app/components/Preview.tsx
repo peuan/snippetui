@@ -52,8 +52,9 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
         <>
             <div className="min-h-screen">
                 <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
-                    <span className="shadow-xl ">CSSBattle</span>
-                    <BiBomb className="ml-2" />
+                    <div className="flex items-center shadow-xl">CSSBattle
+                        <BiBomb className="ml-2" />
+                    </div>
                 </h1>
                 <div className=" p-3 flex flex-col justify-center ">
                     {renderFolderCards()}

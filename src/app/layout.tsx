@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Kanit } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const kanit = Kanit({ subsets: ['thai'], weight: '600' })
 
 export const metadata: Metadata = {
   title: 'CSSBattle Showcase',
@@ -16,8 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body suppressHydrationWarning={true}
-        className={inter.className}>{children}</body>
+        className={kanit.className}>{children}</body>
     </html>
   )
 }
