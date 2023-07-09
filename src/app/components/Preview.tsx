@@ -1,9 +1,6 @@
 import Iframe from "react-iframe";
 import { BiLinkExternal, BiPlay, BiBomb } from 'react-icons/bi'
 import { Avatar } from "@nextui-org/react";
-
-import Image from 'next/image'
-
 interface FilesProps {
     folder: string;
     files: string[]
