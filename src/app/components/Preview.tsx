@@ -1,5 +1,9 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal, BiKnife, BiPlay, BiBomb } from 'react-icons/bi'
+import { BiLinkExternal, BiPlay, BiBomb } from 'react-icons/bi'
+import { Avatar } from "@nextui-org/react";
+
+import Image from 'next/image'
+
 interface FilesProps {
     folder: string;
     files: string[]
@@ -15,17 +19,30 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
         window.open(`https://cssbattle.dev/play/${level}`, '_ blank');
 
     }
+
+    const getAvatar = (name: string) => {
+        switch (name) {
+            case 'niaw':
+                return '/niaw.png'
+            case 'first':
+                return '/first.png'
+            case 'chok':
+                return '/chok.png'
+            default:
+                break;
+        }
+    }
     const renderFolderCards = () => {
         return files.map((folder, index) => (
             <div key={index} className="sm:flex-col gap-16 mt-10">
-                <div onClick={(() => handleClickToPlay(folder.folder))} className="px-2 cursor-pointer mb-5 w-fit">
+                <div onClick={(() => handleClickToPlay(folder.folder))} className="px-2 lg:mx-0 mx-2 cursor-pointer mb-5 w-fit">
                     <h3 className="hover:bg-green-400 active:bg-green-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 flex justify-start items-center rounded-full bg-yellow-500 w-fit text-white text-lg font-bold py-1 px-4 text-md ">
                         LEVEL: {folder.folder}
                         <BiPlay className="ml-2 text-white" />
                     </h3>
                 </div>
 
-                <div className="flex gap-4 flex-wrap justify-start ">
+                <div className="flex gap-4 flex-wrap lg:justify-start justify-center">
                     {renderFilePreviews(folder)}
                 </div>
             </div>
@@ -37,7 +54,16 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
             return (
                 <div key={index}>
                     <div className="flex justify-center mb-2">
+
+
                         <div onClick={(() => handleClickToCode(folder.folder, file))} className="rounded-full bg-blue-600 flex items-center px-2 cursor-pointer">
+
+                            <Avatar
+                                rounded
+                                src={getAvatar(file.split("_")[0])!}
+                                className="ml-[-8px]"
+                                text={getAvatar(file.split("_")[0]) ? '' : file.split("_")[0][0].toUpperCase()}
+                            />
                             <h3 className="text-white font-bold py-1 px-4 text-md ">
                                 {" "}
                                 {file.split("_")[0]}
@@ -66,7 +92,7 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
                     </div>
                 </h1>
                 <div className="flex justify-center">
-                    <div className="flex flex-col ">
+                    <div className="flex flex-col">
                         {renderFolderCards()}
                     </div>
                 </div>
