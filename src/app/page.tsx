@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Preview from "./components/Preview";
 import { useCallback } from "react";
 import Particles from "react-particles";
@@ -29,14 +29,13 @@ export default function Home() {
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
     await console.log(container);
   }, []);
-  const particlesRef = useRef(null);
 
   useEffect(() => {
     fetchFolderData();
   }, []);
   return (
     <div className="mb-10">
-      <Particles ref={particlesRef} id="tsparticles" init={particlesInit} loaded={particlesLoaded}
+      <Particles id="tsparticles" init={particlesInit} loaded={particlesLoaded}
         options={{
           "fullScreen": {
             "zIndex": 1

@@ -76,13 +76,22 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
                             index === 1 && 'text-slate-300',
                             index === 2 && 'text-amber-600')} /> {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
                     </div>
-                    <div className="flex justify-center lg:scale-100 mobile-scale rounded-[20px] hover:bg-yellow-400 active:bg-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
-                        <Iframe
-                            className="w-[400px] h-[300px] rounded-[20px] p-1 "
-                            url={`css-battle/${folder.folder}/${file.fileName}`}
-                        />
+                    <div className="flip-card">
+
+                        <div className="flip-card-inner flex justify-center lg:scale-100 mobile-scale rounded-[20px] hover:bg-yellow-400 active:bg-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
+                            <Iframe
+                                className="flip-card-front w-[400px] h-[300px] rounded-[20px] p-1"
+                                url={`css-battle/${folder.folder}/${file.fileName}`}
+                            />
+                            <div className="flip-card-back">
+                                <Iframe
+                                    className="w-[400px] h-[300px] rounded-[20px] p-1"
+                                    url={`css-battle/${folder.folder}/${file.fileName}`}
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div >
             );
         });
     };
