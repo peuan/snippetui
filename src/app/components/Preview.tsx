@@ -113,7 +113,7 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
             />
             <div className="min-h-screen">
                 <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
-                    <div className="flex items-center shadow-xl">CSSBattle
+                    <div className="flex items-center shadow-xl rounded-lg px-5">CSSBattle
                         <BiBomb className="ml-2" />
                     </div>
                 </h1>
