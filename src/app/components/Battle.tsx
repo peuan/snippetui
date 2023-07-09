@@ -1,12 +1,13 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal, BiPlay, BiBomb, BiMedal } from 'react-icons/bi'
+import { BiLinkExternal, BiPlay, BiMedal } from 'react-icons/bi'
 import { Avatar } from "@nextui-org/react";
 import clsx from 'clsx'
-import dynamic from "next/dynamic";
 
-const GitHubCorners = dynamic(() => import('@uiw/react-github-corners'), {
-    ssr: false,
-})
+// import dynamic from "next/dynamic";
+
+// const GitHubCorners = dynamic(() => import('@uiw/react-github-corners'), {
+//     ssr: false,
+// })
 
 interface FilesProps {
     folder: string;
@@ -16,7 +17,7 @@ interface FilesProps {
     }>;
 
 }
-const Preview = ({ files }: { files: FilesProps[] }) => {
+const Battle = ({ files }: { files: FilesProps[] }) => {
 
     const handleClickToCode = (folder: string, file: string) => {
         window.open(`https://github.com/peuan/css-battle/blob/main/public/css-battle/${folder}/${file}`, '_ blank');
@@ -105,26 +106,19 @@ const Preview = ({ files }: { files: FilesProps[] }) => {
 
     return (
         <>
-            <GitHubCorners
+            {/* <GitHubCorners
                 position="right"
                 color="white"
                 size={100}
                 href="https://github.com/peuan/css-battle"
-            />
-            <div className="min-h-screen">
-                <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
-                    <div className="flex items-center shadow-xl rounded-lg px-5">CSSBattle
-                        <BiBomb className="ml-2" />
-                    </div>
-                </h1>
-                <div className="flex justify-center">
-                    <div className="flex flex-col">
-                        {renderFolderCards()}
-                    </div>
+            /> */}
+            <div className="flex justify-center">
+                <div className="flex flex-col">
+                    {renderFolderCards()}
                 </div>
             </div>
         </>
     );
 }
 
-export default Preview;
+export default Battle;

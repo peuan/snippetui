@@ -1,15 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Preview from "./components/Preview";
+import Battle from "./components/Battle";
 import { useCallback } from "react";
 import Particles from "react-particles";
-import type { Container, Engine } from "tsparticles-engine";
+import type { Engine } from "tsparticles-engine";
 import { loadFull } from "tsparticles";
+import { TbMoustache } from 'react-icons/tb'
+import ShowCase from "./components/Showcase";
+import clsx from 'clsx'
 
-
+interface PageProps {
+  page: "BATTLE" | "SHOWCASE"
+}
 export default function Home() {
   const [result, setResult] = useState([])
+  const [currentPage, setCurrentPage] = useState<PageProps>({ page: 'BATTLE' })
   const fetchFolderData = async () => {
     try {
       const res = await fetch("/api/file", {
@@ -26,17 +32,16 @@ export default function Home() {
     await loadFull(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async (container: Container | undefined) => {
-    await console.log(container);
-  }, []);
-
+  const handleNavigate = () => {
+    console.log('hello')
+  }
   useEffect(() => {
     fetchFolderData();
   }, []);
   return (
     <>
       <div className="mb-10">
-        <Particles id="tsparticles" init={particlesInit} loaded={particlesLoaded}
+        <Particles id="tsparticles" init={particlesInit}
           options={{
             "fullScreen": {
               "zIndex": 1
@@ -164,7 +169,44 @@ export default function Home() {
 
           }}
         />
-        <Preview files={result} />
+
+        <div className="min-h-screen">
+          <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
+            <div className="flex items-center shadow-xl rounded-lg px-5">CSSBrother
+              <TbMoustache className="ml-2" />
+            </div>
+          </h1>
+          <div className="flex justify-center">
+
+            <div className="inline-flex ">
+              <button onClick={(() => setCurrentPage({ page: 'BATTLE' }))} className={clsx('text-white font-bold py-2 px-4  rounded-l-full',
+                currentPage.page === "BATTLE" && 'bg-blue-700  hover:bg-blue-800',
+                currentPage.page === "SHOWCASE" && 'bg-blue-500  hover:bg-blue-600',
+              )
+              }
+              >
+                Battle
+              </button>
+
+              <button onClick={(() => setCurrentPage({ page: 'SHOWCASE' }))} className={clsx('text-white font-bold py-2 px-4  rounded-r-full',
+                currentPage.page === "SHOWCASE" && 'bg-blue-700  hover:bg-blue-800',
+                currentPage.page === "BATTLE" && 'bg-blue-500  hover:bg-blue-600',
+              )
+              }
+              >
+                Showcase
+              </button>
+            </div>
+          </div>
+          {currentPage.page === 'BATTLE' && (
+            <Battle files={result} />
+          )}
+          {currentPage.page === 'SHOWCASE' && (
+            <ShowCase />
+          )}
+        </div>
+
+
       </div>
     </>
   )
