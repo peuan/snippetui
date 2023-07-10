@@ -1,0 +1,42 @@
+<div class="item-1 circle"></div>
+<div class="item-2 circle"></div>
+<div class="item-3 circle"></div>
+<div class="square"></div>
+<style>
+  body {
+    background: #6592cf;
+    position: relative;
+  }
+  div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .circle {
+    border-radius: 100%;
+  }
+  .item-1 {
+    height: 50px;
+    width: 50px;
+    z-index: 5;
+    background-color: #eeb850;
+  }
+  .item-2 {
+    height: 150px;
+    width: 150px;
+    z-index: 4;
+    background-color: #243d83;
+  }
+  .item-3 {
+    z-index: 3;
+    width: 250px;
+    height: 250px;
+    background-color: #6592cf;
+  }
+  .square {
+    width: 300px;
+    height: 150px;
+    background-color: #243d83;
+  }
+</style>
