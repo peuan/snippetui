@@ -1,0 +1,36 @@
+<div class="items">
+  <div class="item item-1"></div>
+  <div class="item item-2 triangle"></div>
+  <div class="item item-3 triangle"></div>
+</div>
+<style>
+  body {
+    background: #0b2429;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .items {
+    width: 120;
+    height: 120;
+  }
+  .item {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    background: #f3ac3c;
+    border-radius: 50%;
+  }
+  .item-1 {
+    margin: -60 0 0 60;
+  }
+  .item-2 {
+    background: #998235;
+  }
+  .item-3 {
+    margin: 60 0 0 -60;
+  }
+  .triangle {
+    border-radius: 50% 0% 50% 50%;
+  }
+</style>
