@@ -1,0 +1,30 @@
+<div class="c c1"></div>
+<div class="c c2"></div>
+<div class="c c3"></div>
+<style>
+  body {
+    background: #0B2429;
+    display: grid;
+    grid-template-columns: repeat(3, 60px);
+    place-items: center;
+    justify-content: center;
+  }
+  .c {
+    width: 120;
+    height: 120;
+    border-radius: 50% 0 50% 50%;
+    background: #F3AC3C
+  }
+  .c1 {
+    margin: 120 0 0;
+    z-index: 3;
+  }
+  .c2 {
+    background: #998235;
+    z-index: 2;
+  }
+  .c3 {
+    border-radius: 50%;
+    margin: -120 0 0;
+  }
+</style>
