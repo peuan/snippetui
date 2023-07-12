@@ -1,0 +1,46 @@
+<div class="main">
+  <div class="odd"></div>
+  <div class="even"></div>
+  <div class="odd"></div>
+  <div class="even"></div>
+  <div class="odd"></div>
+  <div class="even"></div>
+  <div class="odd"></div>
+</div>
+<div class="bottom"></div>
+<style>
+  body {
+    background: #6592cf;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+  }
+  .main {
+    width: 140px;
+    height: 190px;
+    background: #060f55;
+    border-radius: 0px 0px 70px 70px;
+    display: grid;
+    grid-template-columns: repeat(7, 20px);
+  }
+  .bottom {
+    width: 20px;
+    height: 50px;
+    background: #060f55;
+  }
+  .odd {
+    height: 100px;
+    background: #060f55;
+    border-radius: 70px 70px;
+    margin-top: -10px;
+  }
+  .even {
+    height: 100px;
+    background: #6592cf;
+    border-radius: 0 0 70px 70px;
+  }
+</style>
