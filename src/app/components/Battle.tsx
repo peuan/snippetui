@@ -20,12 +20,12 @@ interface FilesProps {
 const Battle = ({ files }: { files: FilesProps[] }) => {
 
     const handleClickToCode = (folder: string, file: string) => {
-        window.open(`https://github.com/peuan/css-battle/blob/main/public/css-battle/${folder}/${file}`, '_ blank');
+        window.open(`https://github.com/peuan/css-battle/blob/main/public/css-battle/${folder}/${file}`, file);
 
     }
 
     const handleClickToPlay = (level: string) => {
-        window.open(`https://cssbattle.dev/play/${level}`, '_ blank');
+        window.open(`https://cssbattle.dev/play/${level}`, level);
 
     }
 
