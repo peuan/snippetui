@@ -223,24 +223,26 @@ export default function Home() {
           {currentPage.page === 'BATTLE' && (
             <>
               <Battle files={result} />
-              <div className="flex justify-center items-center mt-10 gap-6">
-                <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
-                  pageNumber === 1 && 'opacity-50 cursor-not-allowed',
-                )
-                }
-                  disabled={pageNumber === 1} onClick={handlePreviousPage}>
-                  Previous
-                </button>
-                <span className="text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
+              {result && result.length > 0 && (
+                <div className="flex justify-center items-center mt-10 gap-6">
+                  <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
+                    pageNumber === 1 && 'opacity-50 cursor-not-allowed',
+                  )
+                  }
+                    disabled={pageNumber === 1} onClick={handlePreviousPage}>
+                    Previous
+                  </button>
+                  <span className="text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
 
-                <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
-                  pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
-                )
-                }
-                  disabled={pageNumber === totalPages} onClick={handleNextPage}>
-                  Next
-                </button>
-              </div>
+                  <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
+                    pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
+                  )
+                  }
+                    disabled={pageNumber === totalPages} onClick={handleNextPage}>
+                    Next
+                  </button>
+                </div>
+              )}
             </>
           )}
           {currentPage.page === 'SHOWCASE' && (
