@@ -13,16 +13,23 @@ import clsx from 'clsx'
 interface PageProps {
   page: "BATTLE" | "SHOWCASE"
 }
+const ITEMS_PER_PAGE = 3; // Number of items per page
+
 export default function Home() {
   const [result, setResult] = useState([])
-  const [currentPage, setCurrentPage] = useState<PageProps>({ page: 'BATTLE' })
-  const fetchFolderData = async () => {
+  const [currentPage, setCurrentPage] = useState<PageProps>({ page: 'BATTLE' });
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const fetchFolderData = async (page: number) => {
     try {
-      const res = await fetch("/api/file", {
+      const res = await fetch(`/api/file/${page}`, {
         method: "GET",
       });
-      const { files } = await res.json();
+      const { files, totalItems } = await res.json();
       setResult(files)
+      const total = Math.ceil(totalItems / ITEMS_PER_PAGE);
+      setTotalPages(total)
     } catch (error) {
       console.error(error);
     }
@@ -32,12 +39,27 @@ export default function Home() {
     await loadFull(engine);
   }, []);
 
-  const handleNavigate = () => {
-    console.log('hello')
-  }
   useEffect(() => {
-    fetchFolderData();
+    fetchFolderData(pageNumber);
   }, []);
+
+  const handlePreviousPage = () => {
+    if (pageNumber > 1) {
+      const previousPage = pageNumber - 1;
+      setPageNumber(previousPage);
+      fetchFolderData(previousPage);
+    }
+  };
+
+
+  const handleNextPage = () => {
+    if (pageNumber < totalPages) {
+      const nextPage = pageNumber + 1;
+      setPageNumber(nextPage);
+      fetchFolderData(nextPage);
+    }
+  };
+
   return (
     <>
       <div className="mb-10">
@@ -199,13 +221,23 @@ export default function Home() {
             </div>
           </div>
           {currentPage.page === 'BATTLE' && (
-            <Battle files={result} />
+            <>
+              <Battle files={result} />
+              <div className="flex justify-center items-center mt-10 gap-6">
+                <button className="w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full" disabled={pageNumber === 1} onClick={handlePreviousPage}>
+                  Previous
+                </button>
+                <span className="text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
+                <button className="w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full" disabled={pageNumber === totalPages} onClick={handleNextPage}>
+                  Next
+                </button>
+              </div>
+            </>
           )}
           {currentPage.page === 'SHOWCASE' && (
             <ShowCase />
           )}
         </div>
-
 
       </div>
     </>

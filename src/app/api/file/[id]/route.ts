@@ -1,16 +1,26 @@
 import { readFile, readdir } from "fs/promises";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 
-export async function GET() {
+export async function GET(
+  request: NextRequest,
+  context: { params: { id: string } }
+) {
+  const ITEMS_PER_PAGE = 3; // Number of items per page
+  const currentPage = Number(context.params.id);
   const dirRelativeToPublicFolder = "css-battle";
   const dir = path.resolve("./public", dirRelativeToPublicFolder);
 
   try {
     const files = await readdir(dir);
     const filteredFiles = files.filter((file) => !file.includes("."));
+    const paginatedFiles = paginateArray(
+      filteredFiles,
+      currentPage,
+      ITEMS_PER_PAGE
+    );
     const fileResults = await Promise.all(
-      filteredFiles.map(async (file) => {
+      paginatedFiles.map(async (file) => {
         const fileDir = path.resolve(dir, file);
         const fileLists = await readdir(fileDir);
         const filesWithCount = await Promise.all(
@@ -25,9 +35,23 @@ export async function GET() {
       })
     );
     fileResults.sort((a, b) => Number(a.folder) - Number(b.folder));
-    return NextResponse.json({ files: fileResults });
+
+    return NextResponse.json({
+      files: fileResults,
+      totalItems: filteredFiles.length,
+    });
   } catch (error) {
     console.error("Error reading directory:", error);
     return NextResponse.error();
+  }
+
+  function paginateArray(
+    array: any[],
+    currentPage: number,
+    itemsPerPage: number
+  ) {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return array.slice(startIndex, endIndex);
   }
 }
