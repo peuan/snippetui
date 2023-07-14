@@ -9,6 +9,9 @@ import { loadFull } from "tsparticles";
 import { TbMoustache } from 'react-icons/tb'
 import ShowCase from "./components/Showcase";
 import clsx from 'clsx'
+import Loading from './components/Loading'
+
+import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
 
 interface PageProps {
   page: "BATTLE" | "SHOWCASE"
@@ -20,6 +23,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState<PageProps>({ page: 'BATTLE' });
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchFolderData = async (page: number) => {
     try {
@@ -32,6 +36,12 @@ export default function Home() {
       setTotalPages(total)
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false)
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
   };
 
@@ -40,6 +50,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true)
     fetchFolderData(pageNumber);
   }, []);
 
@@ -222,9 +233,12 @@ export default function Home() {
           </div>
           {currentPage.page === 'BATTLE' && (
             <>
+              {isLoading && (
+                <Loading />
+              )}
               <Battle files={result} />
-              {result && result.length > 0 && (
-                <div className="flex justify-center items-center mt-10 gap-6">
+              {result && result.length > 0 && !isLoading && (
+                <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
                   <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
                     pageNumber === 1 && 'opacity-50 cursor-not-allowed',
                   )
@@ -241,6 +255,23 @@ export default function Home() {
                     disabled={pageNumber === totalPages} onClick={handleNextPage}>
                     Next
                   </button>
+                  <div className="fixed right-4 origin-top-right top-[50vh] rotate-90">
+                    <div className="visible lg:invisible flex justify-between w-[100px] bg-green-500 py-2 px-2 rounded-full">
+                      <button onClick={handlePreviousPage} className={clsx(' hover:text-green-700 text-white font-bold',
+                        pageNumber === 1 && 'opacity-50 cursor-not-allowed',
+                      )
+                      }>
+                        <BiLeftArrow />
+                      </button>
+                      <button onClick={handleNextPage} className={clsx(' hover:text-green-700 text-white font-bold',
+                        pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
+                      )
+                      }>
+                        <BiRightArrow />
+                      </button>
+                    </div>
+
+                  </div>
                 </div>
               )}
             </>
