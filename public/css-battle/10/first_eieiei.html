@@ -1,0 +1,54 @@
+<div class="stick short">
+  <div class="circle big">
+    <div class="circle small"></div>
+  </div>
+</div>
+<div class="stick tall">
+  <div class="circle big">
+    <div class="circle small"></div>
+  </div>
+</div>
+<div class="stick short">
+  <div class="circle big">
+    <div class="circle small"></div>
+  </div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #62306D;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .stick {
+    background: #F7EC7D;
+    width: 100;
+    height: 150;
+    border-radius: 50px 50px 0 0;
+  }
+  .tall {
+    height: 250
+  }
+  .circle {
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .big {
+    height: 100;
+  }
+  .small {
+    width: 60;
+    height: 60;
+  }
+  .short .big,
+  .tall .small{
+    background: #AA445F;
+  }
+  .tall .big,
+  .short .small {
+    background: #E38F66;
+  }
+</style>
