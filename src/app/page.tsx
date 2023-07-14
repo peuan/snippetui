@@ -10,6 +10,7 @@ import { TbMoustache } from 'react-icons/tb'
 import ShowCase from "./components/Showcase";
 import clsx from 'clsx'
 import Loading from './components/Loading'
+import ScrollToTop from './components/ScrollToTop';
 
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
 
@@ -39,7 +40,7 @@ export default function Home() {
     } finally {
       setIsLoading(false)
       window.scrollTo({
-        top: 0,
+        top: 200,
         behavior: 'smooth',
       });
     }
@@ -48,6 +49,7 @@ export default function Home() {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine);
   }, []);
+
 
   useEffect(() => {
     setIsLoading(true)
@@ -202,7 +204,7 @@ export default function Home() {
 
           }}
         />
-
+        <ScrollToTop />
         <div className="min-h-screen">
           <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
             <div className="flex items-center shadow-xl rounded-lg px-5">CSSBrother
