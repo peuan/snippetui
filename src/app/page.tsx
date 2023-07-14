@@ -255,7 +255,7 @@ export default function Home() {
                     disabled={pageNumber === totalPages} onClick={handleNextPage}>
                     Next
                   </button>
-                  <div className="fixed right-4 origin-top-right top-[50vh] rotate-90">
+                  <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
                     <div className="visible lg:invisible flex justify-between w-[100px] bg-green-500 py-2 px-2 rounded-full">
                       <button onClick={handlePreviousPage} className={clsx(' hover:text-green-700 text-white font-bold',
                         pageNumber === 1 && 'opacity-50 cursor-not-allowed',
