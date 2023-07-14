@@ -1,30 +1,47 @@
 "use client"
 import React from "react";
-import { Navbar, Button, Link } from "@nextui-org/react";
+import { Navbar, Button, Link, Text } from "@nextui-org/react";
 import { BiHome } from "react-icons/bi";
-import { SSRProvider } from '@react-aria/ssr';
-import { Box } from "./Box";
 
 export default function Nav() {
+    const collapseItems = [
+        "Playground",
+        "Blog",
+    ];
     return (
-        <Navbar variant={'floating'}>
-            <Navbar.Brand>
-                <BiHome />
+        <Navbar css={{
+        }} variant={'sticky'} isCompact isBordered={true}>
+            <Navbar.Brand  >
+                <Navbar.Toggle showIn={'xs'} aria-label="toggle navigation" />
             </Navbar.Brand>
-            <Navbar.Content hideIn="xs" activeColor={'primary'}>
-                <Navbar.Link isActive href="#">Playground</Navbar.Link>
-                <Navbar.Link href="#">About</Navbar.Link>
+            <Navbar.Content variant={'underline'} hideIn="xs" activeColor={'primary'}>
+                <Navbar.Link isActive href="/"><BiHome /></Navbar.Link>
+                <Navbar.Link href="#">Playground</Navbar.Link>
+                <Navbar.Link href="#">Blog</Navbar.Link>
             </Navbar.Content>
             <Navbar.Content>
-                <Navbar.Link color="inherit" href="#">
-                    Login
-                </Navbar.Link>
-                <Navbar.Item>
-                    <Button auto flat as={Link} href="#">
-                        Sign Up
+
+                <Navbar.Item >
+                    <Button rounded color={'primary'} auto as={Link} href="#">
+                        Sign In
                     </Button>
                 </Navbar.Item>
             </Navbar.Content>
+            <Navbar.Collapse>
+                {collapseItems.map((item, index) => (
+                    <Navbar.CollapseItem key={item}>
+                        <Link
+                            color="inherit"
+                            css={{
+                                minWidth: "100%",
+                            }}
+                            href="#"
+                        >
+                            {item}
+                        </Link>
+                    </Navbar.CollapseItem>
+                ))}
+            </Navbar.Collapse>
         </Navbar>
     )
 }
