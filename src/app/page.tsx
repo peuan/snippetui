@@ -263,6 +263,7 @@ export default function Home() {
                       }>
                         <BiLeftArrow />
                       </button>
+                      <span className="text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
                       <button onClick={handleNextPage} className={clsx(' hover:text-green-700 text-white font-bold',
                         pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
                       )
