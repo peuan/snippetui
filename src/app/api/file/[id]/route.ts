@@ -13,7 +13,9 @@ export async function GET(
 
   try {
     const files = await readdir(dir);
-    const filteredFiles = files.filter((file) => !file.includes("."));
+    const filteredFiles = files
+      .filter((file) => !file.includes("."))
+      .sort((a, b) => Number(a) - Number(b));
     const paginatedFiles = paginateArray(
       filteredFiles,
       currentPage,

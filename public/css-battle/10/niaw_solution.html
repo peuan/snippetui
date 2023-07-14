@@ -1,65 +1,62 @@
-<div class="container">
-  <div class="color-3 top">
+<div>
+  <div class="top color-3">
     <div class="circle color-2 circle-2">
       <div class="small color-1"></div>
     </div>
   </div>
-  <div class="color-3 square">
-    <div class="circle color-1 circle-1"><div class="small color-2"></div></div>
-    <div class="circle color-1 circle-1"><div class="small color-2"></div></div>
+  <div class="square color-3">
+    <div class="circle circle-1 color-1"><div class="small color-2"></div></div>
+    <div class="circle circle-1 color-1"><div class="small color-2"></div></div>
   </div>
+  <style>
+    .color-3 {
+      background: #f7ec7d;
+    }
+    .color-2 {
+      background: #e38f66;
+    }
+    .color-1 {
+      background: #aa445f;
+    }
+    body {
+      background: #62306d;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .square {
+      width: 300px;
+      height: 100px;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+    .top {
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      position: relative;
+    }
+    .circle {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+    .circle-1 {
+      margin-top: -50px;
+    }
+    .circle-2 {
+      position: absolute;
+      top: -50px;
+    }
+    .small {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  </style>
 </div>
-<style>
-  body {
-    background: #62306d;
-    margin: 0;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-  .square {
-    width: 300px;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-  }
-  .top {
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    position: relative;
-  }
-  .circle {
-    width: 100px;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
-  .circle-1 {
-    margin-top: -50px;
-  }
-  .circle-2 {
-    position: absolute;
-    top: -50px;
-    display: flex;
-  }
-  .color-3 {
-    background: #f7ec7d;
-  }
-  .color-2 {
-    background: #e38f66;
-  }
-  .color-1 {
-    background: #aa445f;
-  }
-  .small {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-  }
-</style>
