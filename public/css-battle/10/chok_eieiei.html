@@ -1,0 +1,50 @@
+<i class="item">
+  <i class="circle"></i>
+</i>
+<i class="item item-2">
+  <i class="circle"></i>
+</i>
+<i class="item">
+  <i class="circle"></i>
+</i>
+<style>
+  body {
+    margin: 0;
+    background: #62306d;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .item {
+    position: relative;
+    width: 100;
+    height: 100;
+    background: #f7ec7d;
+  }
+  .item-2 {
+    height: 200;
+  }
+  .circle {
+    width: 100;
+    height: 100;
+    border-radius: 50%;
+    background: #aa445f;
+    position: absolute;
+    top: -50px;
+  }
+  .circle::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    margin: 20;
+    width: 60;
+    height: 60;
+    background: #e38f66;
+  }
+  .item-2 .circle {
+    background: #e38f66;
+  }
+  .item-2 .circle::after {
+    background: #aa445f;
+  }
+</style>
