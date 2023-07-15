@@ -87,11 +87,13 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
 
                         <div className="flip-card-inner flex justify-center lg:scale-100 mobile-scale rounded-[20px] hover:bg-yellow-400 active:bg-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
                             <Iframe
+                                overflow="hidden"
                                 className="flip-card-front w-[400px] h-[300px] rounded-[20px] p-1"
                                 url={`css-battle/${folder.folder}/${file.fileName}`}
                             />
                             <div className="flip-card-back">
                                 <Iframe
+                                    overflow="hidden"
                                     className="w-[400px] h-[300px] rounded-[20px] p-1"
                                     url={`css-battle/${folder.folder}/${file.fileName}`}
                                 />
