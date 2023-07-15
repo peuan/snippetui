@@ -5,12 +5,25 @@
 :root {
   --nextui--navbarBlurBackgroundColor: @apply bg-slate-900 w-full p-0 m-0 !important;
 }
+.nextui-navbar-collapse-wrapper {
+  background-color: unset !important;
+}
+.nextui-navbar-toggle {
+  border-radius: 50% !important;
+  padding: 8px !important;
+}
+.nextui-navbar-toggle-icon .line {
+  background-color: #fff !important;
+}
 .nextui-navbar-container {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(15 23 42 / var(--tw-bg-opacity)) !important;
   padding: 0;
   margin: 0;
 }
 body {
   margin: 0px;
+  padding: 0px;
   @apply bg-slate-900;
 }
 

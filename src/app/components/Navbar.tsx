@@ -14,14 +14,17 @@ export default function Nav() {
             color: 'White'
         }} variant={'sticky'} isCompact isBordered={true}>
             <Navbar.Brand  >
-                <Navbar.Toggle showIn={'xs'} aria-label="toggle navigation" />
+                <Navbar.Toggle css={{
+                    color: '$primary',
+                    backgroundColor: '$primary',
+                }} showIn={'xs'} aria-label="toggle navigation" />
             </Navbar.Brand>
             <Navbar.Content variant={'underline'} hideIn="xs" activeColor={'primary'}>
                 <Navbar.Link isActive href="/"><BiHome /></Navbar.Link>
                 <Navbar.Link href="#">Playground</Navbar.Link>
                 <Navbar.Link href="#">Blog</Navbar.Link>
             </Navbar.Content>
-            <Navbar.Content>
+            <Navbar.Content >
 
                 <Navbar.Item >
                     <Button rounded color={'primary'} auto as={Link} href="#">
@@ -29,13 +32,17 @@ export default function Nav() {
                     </Button>
                 </Navbar.Item>
             </Navbar.Content>
-            <Navbar.Collapse>
+            <Navbar.Collapse css={{
+                backgroundColor: 'transparent'
+            }}>
                 {collapseItems.map((item, index) => (
-                    <Navbar.CollapseItem key={item}>
+                    <Navbar.CollapseItem css={{
+                        backgroundColor: 'transparent'
+                    }} key={item}>
                         <Link
-                            color="inherit"
                             css={{
                                 minWidth: "100%",
+                                color: '$accents1'
                             }}
                             href="#"
                         >
