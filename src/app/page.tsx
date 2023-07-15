@@ -207,7 +207,7 @@ export default function Home() {
         <ScrollToTop />
         <div className="min-h-screen">
           <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-10 text-yellow-400">
-            <div className="flex items-center shadow-xl rounded-lg px-5">CSSBrother
+            <div className="flex items-center px-5">CSSBrother
               <TbMoustache className="ml-2" />
             </div>
           </h1>

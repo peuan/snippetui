@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --nextui--navbarBlurBackgroundColor: @apply bg-slate-900 w-full p-0 m-0 !important;
+}
+.nextui-navbar-container {
+  padding: 0;
+  margin: 0;
+}
 body {
   margin: 0px;
   @apply bg-slate-900;

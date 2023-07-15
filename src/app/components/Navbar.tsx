@@ -10,6 +10,8 @@ export default function Nav() {
     ];
     return (
         <Navbar css={{
+            backgroundColor: 'bg-slate-900',
+            color: 'White'
         }} variant={'sticky'} isCompact isBordered={true}>
             <Navbar.Brand  >
                 <Navbar.Toggle showIn={'xs'} aria-label="toggle navigation" />
