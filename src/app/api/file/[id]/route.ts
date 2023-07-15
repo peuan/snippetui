@@ -15,7 +15,7 @@ export async function GET(
     const files = await readdir(dir);
     const filteredFiles = files
       .filter((file) => !file.includes("."))
-      .sort((a, b) => Number(a) - Number(b));
+      .sort((a, b) => Number(b) - Number(a));
     const paginatedFiles = paginateArray(
       filteredFiles,
       currentPage,
@@ -36,7 +36,7 @@ export async function GET(
         return { folder: file, files: filesWithCount };
       })
     );
-    fileResults.sort((a, b) => Number(a.folder) - Number(b.folder));
+    fileResults.sort((a, b) => Number(b.folder) - Number(a.folder));
 
     return NextResponse.json({
       files: fileResults,
