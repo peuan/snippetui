@@ -1,0 +1,64 @@
+<div class="circle big">
+  <div class="circle small"></div>
+</div>
+<div class="half up out">
+  <div class="up in"></div>
+</div>
+<div class="half down out">
+  <div class="down in"></div>
+</div>
+<style>
+  body {
+    background: #191210;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .big {
+    width: 140;
+    height: 140;
+    background: #ECA03D;
+  }
+  .small {
+    width: 50;
+    height: 50;
+    background: #84271C;
+    outline: #191210 25px solid;
+  }
+  .half {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+  }
+  .up {
+    border-radius: 0 0 50px 50px;
+  }
+  .down {
+    border-radius: 50px 50px 0 0;
+    align-items: end;
+  }
+  .out {
+    background: #ECA03D;
+    width: 100;
+    height: 50;
+  }
+  .in {
+    background: #191210;
+    width: 60;
+    height: 30;
+  }
+  .down.out {
+    margin-left: 200;
+    margin-top: -50;
+  }
+  .up.out {
+    margin-left: -200;
+    margin-top: 50;
+  }
+</style>
