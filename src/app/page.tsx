@@ -11,7 +11,6 @@ import ShowCase from "./components/Showcase";
 import clsx from 'clsx'
 import Loading from './components/Loading'
 import ScrollToTop from './components/ScrollToTop';
-import Nav from './components/Navbar'
 
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
 
@@ -76,7 +75,6 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
       <div className="mb-10">
         <Particles id="tsparticles" init={particlesInit}
           options={{

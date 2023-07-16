@@ -1,56 +1,44 @@
 "use client"
 import React from "react";
-import { Navbar, Button, Link, Text } from "@nextui-org/react";
+import { Navbar, Button, Text } from "@nextui-org/react";
 import { BiHome } from "react-icons/bi";
+import Link from 'next/link'
 
+
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuIndicator,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+    navigationMenuTriggerStyle
+} from "@/app/components/ui/navigation-menu"
 export default function Nav() {
     const collapseItems = [
         "Playground",
         "Blog",
     ];
     return (
-        <Navbar css={{
-            backgroundColor: 'bg-slate-900',
-            color: 'White'
-        }} variant={'sticky'} isCompact isBordered={true}>
-            <Navbar.Brand  >
-                <Navbar.Toggle css={{
-                    color: '$primary',
-                    backgroundColor: '$primary',
-                }} showIn={'xs'} aria-label="toggle navigation" />
-            </Navbar.Brand>
-            <Navbar.Content variant={'underline'} hideIn="xs" activeColor={'primary'}>
-                <Navbar.Link isActive href="/"><BiHome /></Navbar.Link>
-                <Navbar.Link href="#">Playground</Navbar.Link>
-                <Navbar.Link href="#">Blog</Navbar.Link>
-            </Navbar.Content>
-            <Navbar.Content >
-
-                <Navbar.Item >
-                    <Button rounded color={'primary'} auto as={Link} href="#">
-                        Sign In
-                    </Button>
-                </Navbar.Item>
-            </Navbar.Content>
-            <Navbar.Collapse css={{
-                backgroundColor: 'transparent'
-            }}>
-                {collapseItems.map((item, index) => (
-                    <Navbar.CollapseItem css={{
-                        backgroundColor: 'transparent'
-                    }} key={item}>
-                        <Link
-                            css={{
-                                minWidth: "100%",
-                                color: '$accents1'
-                            }}
-                            href="#"
-                        >
-                            {item}
+        <div className="h-12 bg-slate-800 min-w-full flex items-center px-6">
+            <NavigationMenu>
+                <NavigationMenuList>
+                    <NavigationMenuItem>
+                        <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+                            <BiHome />
+                        </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <Link href={'/playground'} legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                Playground
+                            </NavigationMenuLink>
                         </Link>
-                    </Navbar.CollapseItem>
-                ))}
-            </Navbar.Collapse>
-        </Navbar>
+                    </NavigationMenuItem>
+                </NavigationMenuList>
+            </NavigationMenu>
+        </div>
     )
 }

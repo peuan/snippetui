@@ -1,5 +1,5 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal, BiPlay, BiMedal } from 'react-icons/bi'
+import { BiLinkExternal, BiPlay, BiMedal, BiCode } from 'react-icons/bi'
 import { Avatar } from "@nextui-org/react";
 import clsx from 'clsx'
 
@@ -63,7 +63,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
             return (
                 <div key={index}>
                     <div className="flex justify-center mb-2">
-                        <div onClick={(() => handleClickToCode(folder.folder, file.fileName))} className="rounded-full bg-blue-600 flex items-center px-2 cursor-pointer">
+                        <div className="rounded-full bg-blue-600 flex items-center px-2">
                             <Avatar
                                 rounded
                                 src={getAvatar(file.fileName.split("_")[0])!}
@@ -74,7 +74,10 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                                 {" "}
                                 {file.fileName.split("_")[0]}
                             </h3>
-                            <BiLinkExternal className="text-white" />
+                            <button onClick={(() => handleClickToCode(folder.folder, file.fileName))}>
+                                <BiLinkExternal className="text-white" />
+                            </button>
+                            <button className="ml-6"><BiCode className="text-white" /></button>
                         </div>
                     </div>
                     <div className="flex text-sm justify-center items-center text-white mb-2">
