@@ -1,0 +1,75 @@
+<div class="main">
+  <div class="item left"></div>
+  <div class="item center"></div>
+  <div class="item right"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #F5D6B4;
+  }
+  .main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item {
+    position: relative;
+    background: #D86F45;
+    width: 100;
+    height: 50;
+    border-radius: 0 0 50px 50px;
+    margin-top: 50;
+    z-index: -1;
+  }
+  .center {
+    margin-top: -50;
+    border-radius: 50px 50px 0 0;
+  }
+  .center::after {
+    content: "";
+    position: absolute;
+    background: #F5D6B4;
+    border-radius: 50px 50px 0 0;
+    width: 60;
+    height: 30;
+    top: 20;
+    left: 20;
+  }
+  .left {
+    position: absolute;
+    margin-left: -160px;
+  }
+  .right {
+    position: absolute;
+    margin-left: 160px;
+  }
+  .left::after,
+  .right::after {
+    content: "";
+    position: absolute;
+    background: #F5D6B4;
+    border-radius: 0 0 50px 50px;
+    width: 60;
+    height: 30;
+    top: 0;
+    left: 20;
+  }
+  .left::before,
+  .right::before {
+    content: "";
+    position: absolute;
+    background: #D86F45;
+    border-radius: 20px 20px 0 0;
+    width: 20;
+    height: 10;
+    top: -10;
+  }
+  .left::before {
+    left: 0;
+  }
+  .right::before {
+    right: 0;
+  }
+</style>
