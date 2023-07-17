@@ -32,7 +32,22 @@ export async function GET(
             return { fileName, characterCount: fileData.trim().length };
           })
         );
-        filesWithCount.sort((a, b) => a.characterCount - b.characterCount);
+        filesWithCount.sort((a, b) => {
+          if (
+            a.fileName.includes("incomplete") &&
+            !b.fileName.includes("incomplete")
+          ) {
+            return 1; // b should come before a
+          } else if (
+            !a.fileName.includes("incomplete") &&
+            b.fileName.includes("incomplete")
+          ) {
+            return -1; // a should come before b
+          } else {
+            // Sort by characterCount if the "incomplete" condition is the same
+            return a.characterCount - b.characterCount;
+          }
+        });
         return { folder: file, files: filesWithCount };
       })
     );
