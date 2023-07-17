@@ -22,7 +22,6 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
             console.error(error);
         } finally {
             setIsLoading(false)
-            console.log(result)
             setCode(result)
         }
     };

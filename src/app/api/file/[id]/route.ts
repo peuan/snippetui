@@ -1,12 +1,14 @@
 import { readFile, readdir } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
+import yaml from "js-yaml";
+import { readFileSync } from "fs";
 
 export async function GET(
   request: NextRequest,
   context: { params: { id: string } }
 ) {
-  const ITEMS_PER_PAGE = 3; // Number of items per page
+  const ITEMS_PER_PAGE = 3;
   const currentPage = Number(context.params.id);
   const dirRelativeToPublicFolder = "css-battle";
   const dir = path.resolve("./public", dirRelativeToPublicFolder);
@@ -25,26 +27,52 @@ export async function GET(
       paginatedFiles.map(async (file) => {
         const fileDir = path.resolve(dir, file);
         const fileLists = await readdir(fileDir);
+        const fileListsFilterOutMarkdown = fileLists.filter(
+          (v) => !v.endsWith(".yml")
+        );
         const filesWithCount = await Promise.all(
-          fileLists.map(async (fileName) => {
+          fileListsFilterOutMarkdown.map(async (fileName) => {
             const filePath = path.resolve(fileDir, fileName);
             const fileData = await readFile(filePath, "utf-8");
-            return { fileName, characterCount: fileData.trim().length };
+
+            const markdownFilePath = path.join(
+              fileDir,
+              `${fileName.replace(".html", ".yml")}`
+            );
+
+            const markdownFileExists = await fileExists(markdownFilePath);
+
+            const markdownContent = markdownFileExists
+              ? yaml.load(readFileSync(markdownFilePath, "utf8"))
+              : ("" as any);
+            let status = "complete";
+            let description = null;
+
+            if (markdownContent) {
+              status = markdownContent.status;
+              description = markdownContent.description;
+            }
+
+            return {
+              fileName,
+              characterCount: fileData.trim().length,
+              description: description,
+              status,
+            };
           })
         );
         filesWithCount.sort((a, b) => {
           if (
-            a.fileName.includes("incomplete") &&
-            !b.fileName.includes("incomplete")
+            a.status.includes("incomplete") &&
+            !b.status.includes("incomplete")
           ) {
-            return 1; // b should come before a
+            return 1;
           } else if (
-            !a.fileName.includes("incomplete") &&
-            b.fileName.includes("incomplete")
+            !a.status.includes("incomplete") &&
+            b.status.includes("incomplete")
           ) {
-            return -1; // a should come before b
+            return -1;
           } else {
-            // Sort by characterCount if the "incomplete" condition is the same
             return a.characterCount - b.characterCount;
           }
         });
@@ -70,5 +98,14 @@ export async function GET(
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return array.slice(startIndex, endIndex);
+  }
+
+  async function fileExists(filePath: string) {
+    try {
+      await readFile(filePath);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 }

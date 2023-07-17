@@ -29,6 +29,7 @@
     "codemirror": "^6.0.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
+    "js-yaml": "^4.1.0",
     "lucide-react": "^0.260.0",
     "next": "13.4.9",
     "postcss": "8.4.25",
@@ -46,6 +47,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "@types/html-validator": "^5.0.3"
+    "@types/html-validator": "^5.0.3",
+    "@types/js-yaml": "^4.0.5"
   }
 }

@@ -1,17 +1,21 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal, BiPlay, BiMedal, BiCode } from 'react-icons/bi'
+import { BiLinkExternal, BiPlay, BiMedal, BiCode, BiInfoCircle } from 'react-icons/bi'
 import { FaHeartBroken } from 'react-icons/fa'
-import { Avatar, Button, Loading } from "@nextui-org/react";
+import { Avatar, Loading } from "@nextui-org/react";
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
-// import Loading from "./Loading";
+
+import { Modal, Button, Text } from "@nextui-org/react";
+
 
 interface FilesProps {
     folder: string;
     files: Array<{
         fileName: string;
         characterCount: number;
+        status: string;
+        description?: string
     }>;
 
 }
@@ -33,6 +37,14 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [currentLoading, setCurrentLoading] = useState("")
+    const [visible, setVisible] = useState(false);
+
+    const handler = () => setVisible(true);
+
+
+    const closeHandler = () => {
+        setVisible(false);
+    };
 
     const handleClickToPlayground = (folder: string, file: string) => {
         setIsLoading(true)
@@ -105,9 +117,35 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                             index === 0 && 'text-yellow-500',
                             index === 1 && 'text-slate-300',
                             index === 2 && 'text-amber-600')} /> {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
-                        {file.fileName.includes('incomplete') && (
+                        {file.status === "incomplete" && (
                             <div className="ml-2">
                                 <FaHeartBroken title="incomplete" className=" text-red-400" />
+                            </div>
+                        )}
+                        {file.description && (
+                            <div className="ml-2 flex justify-center items-center">
+                                <Button color={'error'} rounded auto size={'xs'} onPress={handler}>
+                                    <BiInfoCircle />
+                                </Button>
+                                <Modal
+                                    closeButton
+                                    aria-labelledby="modal-title"
+                                    open={visible}
+                                    onClose={closeHandler}
+                                    blur
+                                >
+                                    <Modal.Header>
+                                        <Modal.Body>
+                                            <Text id="modal-title" size={18}>
+                                                {file.description}
+                                            </Text>
+
+                                        </Modal.Body>
+                                    </Modal.Header>
+                                </Modal>
+
+
+
                             </div>
                         )}
                     </div>
@@ -132,7 +170,6 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
             );
         });
     };
-
 
     return (
         <>
