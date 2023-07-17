@@ -21,6 +21,7 @@ const Editor = ({ result }: EditorProps) => {
         <>
             <div className='lg:flex'>
                 <div className='w-full lg:w-1/2'>
+                    <div className='text-white text-right px-2'>{code?.trim().length} {" "}characters</div>
                     <CodeMirror
                         value={result}
                         minHeight="90vh"
