@@ -1,0 +1,46 @@
+<div class="top">
+  <p class="item"></p>
+  <p class="item"></p>
+  <p class="item"></p>
+  <p class="item"></p>
+  <p class="item"></p>
+  <p class="item"></p>
+  <p class="item"></p>
+</div>
+<div class="bottom"></div>
+<style>
+  body {
+    height: 100vh;
+    margin: 0;
+    background: #6592CF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .top {
+    display: flex;
+    height: 190;
+    background: #060F55;
+    border-radius: 0 0 90px 90px;
+  }
+  .bottom {
+    width: 20;
+    height: 50;
+    background: #060F55;
+  }
+  .item {
+    width: 20;
+    height: 100;
+  }
+  .item:nth-child(odd) {
+    margin-top: -10;
+    background: #060F55;
+    border-radius: 10px 10px 0 0;
+  }
+  .item:nth-child(even) {
+    margin: 0;
+    background: #6592CF;
+    border-radius: 0 0 10px 10px;
+  }
+</style>

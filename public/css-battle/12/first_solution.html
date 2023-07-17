@@ -1,14 +1,10 @@
-<div class="main">
-  <div class="item left"></div>
-  <div class="item center"></div>
-  <div class="item right"></div>
-</div>
+<div class="item left"></div>
+<div class="item center"></div>
+<div class="item right"></div>
 <style>
   body {
     margin: 0;
     background: #F5D6B4;
-  }
-  .main {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -27,16 +23,6 @@
     margin-top: -50;
     border-radius: 50px 50px 0 0;
   }
-  .center::after {
-    content: "";
-    position: absolute;
-    background: #F5D6B4;
-    border-radius: 50px 50px 0 0;
-    width: 60;
-    height: 30;
-    top: 20;
-    left: 20;
-  }
   .left {
     position: absolute;
     margin-left: -160px;
@@ -45,16 +31,24 @@
     position: absolute;
     margin-left: 160px;
   }
+  .center::after,
   .left::after,
   .right::after {
     content: "";
     position: absolute;
     background: #F5D6B4;
-    border-radius: 0 0 50px 50px;
     width: 60;
     height: 30;
-    top: 0;
     left: 20;
+  }
+  .center::after {
+    border-radius: 50px 50px 0 0;
+    top: 20;
+  }
+  .left::after,
+  .right::after {
+    border-radius: 0 0 50px 50px;
+    top: 0;
   }
   .left::before,
   .right::before {
