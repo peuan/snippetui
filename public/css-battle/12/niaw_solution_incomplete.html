@@ -1,75 +1,40 @@
-<div class="main">
-  <div class="item left"></div>
-  <div class="item center"></div>
-  <div class="item right"></div>
+<div class="container">
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+  <div class="circle circle-3"></div>
 </div>
 <style>
   body {
-    margin: 0;
     background: #f5d6b4;
-  }
-  .main {
     height: 100vh;
+    width: 100vw;
+    margin: 0;
+  }
+  .container {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .item {
+    height: 100vh;
     position: relative;
-    background: #d86f45;
-    width: 100;
-    height: 50;
-    border-radius: 0 0 50px 50px;
-    margin-top: 50;
-    z-index: -1;
   }
-  .center {
-    margin-top: -50;
-    border-radius: 50px 50px 0 0;
-  }
-  .center::after {
-    content: "";
-    position: absolute;
+  .circle {
+    width: 60px;
+    height: 60px;
     background: #f5d6b4;
-    border-radius: 50px 50px 0 0;
-    width: 60;
-    height: 30;
-    top: 20;
-    left: 20;
+    border-radius: 50%;
+    outline: 20px solid #d86f45;
   }
-  .left {
+  .circle-1 {
     position: absolute;
-    margin-left: -160px;
+    left: 90px;
+    bottom: 120px;
   }
-  .right {
+  .circle-2 {
     position: absolute;
-    margin-left: 160px;
   }
-  .left::after,
-  .right::after {
-    content: "";
+  .circle-3 {
     position: absolute;
-    background: #f5d6b4;
-    border-radius: 0 0 50px 50px;
-    width: 60;
-    height: 30;
-    top: 0;
-    left: 20;
-  }
-  .left::before,
-  .right::before {
-    content: "";
-    position: absolute;
-    background: #d86f45;
-    border-radius: 20px 20px 0 0;
-    width: 20;
-    height: 10;
-    top: -10;
-  }
-  .left::before {
-    left: 0;
-  }
-  .right::before {
-    right: 0;
+    right: 90px;
+    bottom: 120px;
   }
 </style>
