@@ -1,0 +1,52 @@
+<div class="item item-1"></div>
+<div class="item item-2"></div>
+<div class="item item-3"></div>
+<style>
+  body {
+    background: #f5d6b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item {
+    position: relative;
+    width: 60;
+    height: 80;
+    background: #f5d6b4;
+    border: 20px solid #d86f45;
+    border-radius: 0 0 50% 50%;
+    border-top: 0;
+  }
+  .item::after {
+    content: "";
+    position: absolute;
+    width: calc(100% + 40px);
+    left: -20px;
+    height: 40;
+    background: #f5d6b4;
+    z-index: 1;
+    top: 0;
+  }
+  .item-1 {
+    margin-right: -20;
+  }
+  .item-2 {
+    z-index: 2;
+
+    margin-top: 0;
+    transform: rotate(180deg);
+  }
+  .item-3 {
+    margin-left: -20;
+  }
+  .item-2::after {
+    content: "";
+    position: absolute;
+    width: calc(100% + 40px);
+    left: -20px;
+    height: 10;
+    background: #f5d6b4;
+    z-index: 1;
+    top: 0;
+  }
+</style>
