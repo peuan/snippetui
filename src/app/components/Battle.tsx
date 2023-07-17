@@ -1,5 +1,6 @@
 import Iframe from "react-iframe";
 import { BiLinkExternal, BiPlay, BiMedal, BiCode } from 'react-icons/bi'
+import { MdIncompleteCircle } from 'react-icons/md'
 import { Avatar, Button, Loading } from "@nextui-org/react";
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
@@ -104,6 +105,11 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                             index === 0 && 'text-yellow-500',
                             index === 1 && 'text-slate-300',
                             index === 2 && 'text-amber-600')} /> {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
+                        {file.fileName.includes('incomplete') && (
+                            <div className="ml-2">
+                                <MdIncompleteCircle className=" text-red-400" />
+                            </div>
+                        )}
                     </div>
                     <div className="flip-card">
 

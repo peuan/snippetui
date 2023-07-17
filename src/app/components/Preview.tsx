@@ -5,12 +5,10 @@ import { useEffect, useRef, useState } from "react";
 const Preview = ({ code }: { code: string }) => {
     const iframeRef = useRef<any>()
 
-
     useEffect(() => {
         if (iframeRef.current) {
             const document = iframeRef.current.contentDocument;
             const documentContents = `${code}`
-
             document.open();
             document.write(documentContents);
             document.close();
@@ -20,7 +18,7 @@ const Preview = ({ code }: { code: string }) => {
     return (
 
         <div className="target-container">
-            <iframe title="result" className="preview-iframe min-h-[90vh]" ref={iframeRef} />
+            <iframe title="result" className="preview-iframe" ref={iframeRef} />
         </div >
 
     );
