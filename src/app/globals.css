@@ -198,3 +198,16 @@ body {
     transform: translateY(0px);
   }
 }
+
+.preview-iframe {
+  background: white;
+  width: 50vw;
+  height: 90vh;
+  border: 0px;
+  outline: 0px;
+}
+
+.target-container {
+  position: relative;
+  cursor: col-resize;
+}

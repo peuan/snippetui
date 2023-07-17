@@ -1,13 +1,10 @@
 import Iframe from "react-iframe";
 import { BiLinkExternal, BiPlay, BiMedal, BiCode } from 'react-icons/bi'
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Button, Loading } from "@nextui-org/react";
 import clsx from 'clsx'
-
-// import dynamic from "next/dynamic";
-
-// const GitHubCorners = dynamic(() => import('@uiw/react-github-corners'), {
-//     ssr: false,
-// })
+import { useRouter } from 'next/navigation'
+import { useState } from "react";
+// import Loading from "./Loading";
 
 interface FilesProps {
     folder: string;
@@ -17,16 +14,29 @@ interface FilesProps {
     }>;
 
 }
+
+
+
+const handleClickToCode = (folder: string, file: string) => {
+    window.open(`https://github.com/peuan/css-battle/blob/main/public/css-battle/${folder}/${file}`, file);
+
+}
+
+const handleClickToPlay = (level: string) => {
+    window.open(`https://cssbattle.dev/play/${level}`, level);
+
+}
+
+
 const Battle = ({ files }: { files: FilesProps[] }) => {
+    const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
+    const [currentLoading, setCurrentLoading] = useState("")
 
-    const handleClickToCode = (folder: string, file: string) => {
-        window.open(`https://github.com/peuan/css-battle/blob/main/public/css-battle/${folder}/${file}`, file);
-
-    }
-
-    const handleClickToPlay = (level: string) => {
-        window.open(`https://cssbattle.dev/play/${level}`, level);
-
+    const handleClickToPlayground = (folder: string, file: string) => {
+        setIsLoading(true)
+        setCurrentLoading(`/playground/${folder}/${file.split('.')[0]}`)
+        router.push(`/playground/${folder}/${file.split('.')[0]}`)
     }
 
     const getAvatar = (name: string) => {
@@ -77,7 +87,15 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                             <button onClick={(() => handleClickToCode(folder.folder, file.fileName))}>
                                 <BiLinkExternal className="text-white" />
                             </button>
-                            <button className="ml-6"><BiCode className="text-white" /></button>
+
+                            <button className="ml-6" onClick={(() => handleClickToPlayground(folder.folder, file.fileName))}>
+                                {!isLoading && (
+                                    <BiCode className="text-white" />
+                                )}
+                                {isLoading && currentLoading === `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
+                                    <Loading color="success" size="xs" />
+                                )}
+                            </button>
                         </div>
                     </div>
                     <div className="flex text-sm justify-center items-center text-white mb-2">
@@ -111,12 +129,6 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
 
     return (
         <>
-            {/* <GitHubCorners
-                position="right"
-                color="white"
-                size={100}
-                href="https://github.com/peuan/css-battle"
-            /> */}
             <div className="flex justify-center">
                 <div className="flex flex-col">
                     {renderFolderCards()}

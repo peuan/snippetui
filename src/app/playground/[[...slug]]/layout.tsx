@@ -1,4 +1,4 @@
-import Nav from "../components/Navbar"
+import Nav from "../../components/Navbar"
 
 export default function DashboardLayout({
     children, // will be a page or nested layout
@@ -6,8 +6,8 @@ export default function DashboardLayout({
     children: React.ReactNode
 }) {
     return (
-        <>
+        <div className="mt-2">
             {children}
-        </>
+        </div>
     )
 }
