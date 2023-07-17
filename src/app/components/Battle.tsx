@@ -15,7 +15,8 @@ interface FilesProps {
         fileName: string;
         characterCount: number;
         status: string;
-        description?: string
+        description?: string;
+        color?: "default" | "primary" | "secondary" | "success" | "warning" | "error" | "gradient"
     }>;
 
 }
@@ -124,7 +125,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                         )}
                         {file.description && (
                             <div className="ml-2 flex justify-center items-center">
-                                <Button color={'error'} rounded auto size={'xs'} onPress={handler}>
+                                <Button color={file.color || 'primary'} rounded auto size={'xs'} onPress={handler}>
                                     <BiInfoCircle />
                                 </Button>
                                 <Modal

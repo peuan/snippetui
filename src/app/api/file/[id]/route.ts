@@ -47,10 +47,12 @@ export async function GET(
               : ("" as any);
             let status = "complete";
             let description = null;
+            let color = "primary";
 
             if (markdownContent) {
               status = markdownContent.status;
               description = markdownContent.description;
+              color = markdownContent.color || color;
             }
 
             return {
@@ -58,6 +60,7 @@ export async function GET(
               characterCount: fileData.trim().length,
               description: description,
               status,
+              color,
             };
           })
         );
