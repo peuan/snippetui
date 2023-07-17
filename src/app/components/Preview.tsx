@@ -20,7 +20,7 @@ const Preview = ({ code }: { code: string }) => {
     return (
 
         <div className="target-container">
-            <iframe title="result" className="preview-iframe" ref={iframeRef} />
+            <iframe title="result" className="preview-iframe min-h-[90vh]" ref={iframeRef} />
         </div >
 
     );

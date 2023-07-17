@@ -19,8 +19,8 @@ const Editor = ({ result }: EditorProps) => {
 
     return (
         <>
-            <div className='flex'>
-                <div className='w-1/2'>
+            <div className='lg:flex'>
+                <div className='w-full lg:w-1/2'>
                     <CodeMirror
                         value={result}
                         minHeight="90vh"
@@ -43,7 +43,7 @@ const Editor = ({ result }: EditorProps) => {
                         }}
                     />
                 </div>
-                <div className='w-1/2 bg-slate-800'>
+                <div className='w-full lg:w-1/2 bg-slate-800'>
                     <Preview code={code} />
                 </div>
             </div>
