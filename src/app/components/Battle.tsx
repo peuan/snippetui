@@ -89,7 +89,8 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                             </button>
 
                             <button className="ml-6" onClick={(() => handleClickToPlayground(folder.folder, file.fileName))}>
-                                {!isLoading && (
+
+                                {currentLoading !== `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
                                     <BiCode className="text-white" />
                                 )}
                                 {isLoading && currentLoading === `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
