@@ -38,7 +38,7 @@ const Editor = ({ result }: EditorProps) => {
 
     return (
         <div>
-            <div className='flex justify-center items-center py-2'>
+            <div className='flex justify-center items-center px-2'>
                 <div className='flex justify-center items-center'>
                     <button onClick={(() => handleFormatSyntax())} className='flex justify-center items-center h-6 w-6 rounded-full bg-blue-600 hover:bg-blue-700'>
                         <BiSolidMagicWand className='text-green-500' />
