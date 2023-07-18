@@ -10,7 +10,7 @@ export async function GET(
 ) {
   const ITEMS_PER_PAGE = 3;
   const currentPage = Number(context.params.id);
-  const dirRelativeToPublicFolder = "css-battle";
+  const dirRelativeToPublicFolder = "battle";
   const dir = path.resolve("./public", dirRelativeToPublicFolder);
 
   try {

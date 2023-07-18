@@ -7,7 +7,7 @@ export async function GET(
   context: { params: { id: [] } }
 ) {
   const filePath = `${context.params.id.join("/")}.html`;
-  const dirRelativeToPublicFolder = `css-battle/${filePath}`;
+  const dirRelativeToPublicFolder = `battle/${filePath}`;
   const dir = path.resolve("./public", dirRelativeToPublicFolder);
 
   console.log(dir);

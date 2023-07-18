@@ -156,13 +156,13 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                             <Iframe
                                 overflow="hidden"
                                 className="flip-card-front w-[400px] h-[300px] rounded-[20px] p-1"
-                                url={`css-battle/${folder.folder}/${file.fileName}`}
+                                url={`battle/${folder.folder}/${file.fileName}`}
                             />
                             <div className="flip-card-back">
                                 <Iframe
                                     overflow="hidden"
                                     className="w-[400px] h-[300px] rounded-[20px] p-1"
-                                    url={`css-battle/${folder.folder}/${file.fileName}`}
+                                    url={`battle/${folder.folder}/${file.fileName}`}
                                 />
                             </div>
                         </div>
