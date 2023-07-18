@@ -1,12 +1,17 @@
 "use client"
 import CodeMirror from '@uiw/react-codemirror';
 import { html } from '@codemirror/lang-html';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { githubDarkInit } from '@uiw/codemirror-theme-github';
 import Preview from './Preview';
 import { BiSolidMagicWand } from 'react-icons/bi'
 import { html_beautify, HTMLBeautifyOptions } from 'js-beautify';
 import debounce from 'lodash.debounce';
+import Particles from "react-particles";
+import { loadFull } from "tsparticles";
+
+import type { Container, Engine } from "tsparticles-engine";
+
 interface EditorProps {
     result: string
 };
@@ -18,7 +23,17 @@ const options: HTMLBeautifyOptions = {
 
 const Editor = ({ result }: EditorProps) => {
     const [code, setCode] = useState(result);
+    let particlesContainer = useRef<Container>(null)
 
+
+    const particlesInit = useCallback(async (engine: Engine) => {
+        await loadFull(engine);
+    }, []);
+
+
+    const particlesLoaded = useCallback(async (container: Container | undefined) => {
+        container?.stop();
+    }, []);
 
     const debouncedSetCode = useCallback(
         debounce((value: string) => {
@@ -32,12 +47,145 @@ const Editor = ({ result }: EditorProps) => {
     }, [debouncedSetCode]);
 
     const handleFormatSyntax = () => {
+        particlesContainer.current?.start();
+        setTimeout(() => {
+            particlesContainer.current?.stop();
+        }, 2000)
         const beautify = html_beautify(code, options);
         setCode(beautify);
     }
 
     return (
         <div>
+
+            <Particles container={particlesContainer} id="tsparticles" loaded={particlesLoaded} init={particlesInit}
+                options={{
+                    "fullScreen": {
+                        "zIndex": 1
+                    },
+                    "emitters": {
+                        "position": {
+                            "x": 50,
+                            "y": 100
+                        },
+                        "rate": {
+                            "quantity": 5,
+                            "delay": 0.15
+                        }
+                    },
+                    "particles": {
+                        "color": {
+                            "value": [
+                                "#1E00FF",
+                                "#FF0061",
+                                "#E1FF00",
+                                "#00FF9E"
+                            ]
+                        },
+                        "move": {
+                            "decay": 0.05,
+                            "direction": "top",
+                            "enable": true,
+                            "gravity": {
+                                "enable": true
+                            },
+                            "outModes": {
+                                "top": "none",
+                                "default": "destroy"
+                            },
+                            "speed": {
+                                "min": 50,
+                                "max": 100
+                            }
+                        },
+                        "number": {
+                            "value": 0
+                        },
+                        "opacity": {
+                            "value": 1
+                        },
+                        "rotate": {
+                            "value": {
+                                "min": 0,
+                                "max": 360
+                            },
+                            "direction": "random",
+                            "animation": {
+                                "enable": true,
+                                "speed": 30
+                            }
+                        },
+                        "tilt": {
+                            "direction": "random",
+                            "enable": true,
+                            "value": {
+                                "min": 0,
+                                "max": 360
+                            },
+                            "animation": {
+                                "enable": true,
+                                "speed": 30
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "animation": {
+                                "enable": true,
+                                "startValue": "min",
+                                "count": 1,
+                                "speed": 16,
+                                "sync": true
+                            }
+                        },
+                        "roll": {
+                            "darken": {
+                                "enable": true,
+                                "value": 25
+                            },
+                            "enlighten": {
+                                "enable": true,
+                                "value": 25
+                            },
+                            "enable": true,
+                            "speed": {
+                                "min": 5,
+                                "max": 15
+                            }
+                        },
+                        "wobble": {
+                            "distance": 30,
+                            "enable": true,
+                            "speed": {
+                                "min": -7,
+                                "max": 7
+                            }
+                        },
+                        "shape": {
+                            "type": [
+                                "circle",
+                                "square"
+                            ],
+                            "options": {}
+                        }
+                    },
+                    "responsive": [
+                        {
+                            "maxWidth": 1024,
+                            "options": {
+                                "particles": {
+                                    "move": {
+                                        "speed": {
+                                            "min": 33,
+                                            "max": 66
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
+
+                }}
+            />
             <div className='flex justify-center items-center px-2'>
                 <div className='flex justify-center items-center'>
                     <button onClick={(() => handleFormatSyntax())} className='flex justify-center items-center h-6 w-6 rounded-full bg-blue-600 hover:bg-blue-700'>
