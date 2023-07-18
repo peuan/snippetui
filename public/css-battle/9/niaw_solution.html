@@ -1,50 +1,40 @@
-<div class="container">
-  <div class="square">
-    <div class="item2 center">
-      <div class="item3 center"></div>
-    </div>
+<div class="square">
+  <div class="middle">
+    <div class="small"></div>
   </div>
 </div>
 <style>
   body {
     background: #222730;
-    margin: 0;
     height: 100vh;
     width: 100vw;
+    margin: 0;
     display: flex;
+    align-items: center;
+  }
+  .square,
+  .middle,
+  .small {
+    display: flex;
+    justify-content: center;
     align-items: center;
   }
   .square {
     width: 100vw;
     height: 150px;
     background: #4caab3;
-    position: relative;
   }
-  .item1 {
-    width: 250px;
-    height: 250px;
-    background: #222730;
-    transform: rotate(45deg);
-  }
-  .item2 {
+  .middle {
     width: 150px;
     height: 150px;
     background: #4caab3;
     outline: 50px solid #222730;
     transform: rotate(45deg);
   }
-  .item3 {
+  .small {
     width: 50px;
     height: 50px;
     background: #393e46;
     border-radius: 50%;
-  }
-  .center {
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
   }
 </style>
