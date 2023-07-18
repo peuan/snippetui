@@ -24,6 +24,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchFolderData = async (page: number) => {
+    setIsLoading(true)
     try {
       const res = await fetch(`/api/file/${page}`, {
         method: "GET",
@@ -44,15 +45,13 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setIsLoading(true)
     fetchFolderData(pageNumber);
-  }, []);
+  }, [pageNumber]);
 
   const handlePreviousPage = () => {
     if (pageNumber > 1) {
       const previousPage = pageNumber - 1;
       setPageNumber(previousPage);
-      fetchFolderData(previousPage);
     }
   };
 
@@ -61,10 +60,13 @@ export default function Home() {
     if (pageNumber < totalPages) {
       const nextPage = pageNumber + 1;
       setPageNumber(nextPage);
-      fetchFolderData(nextPage);
     }
   };
 
+  const onClickBattle = () => {
+    setCurrentPage({ page: 'BATTLE' })
+    setPageNumber(1);
+  }
   return (
     <>
 
@@ -82,7 +84,7 @@ export default function Home() {
           <div className="flex justify-center">
 
             <div className="inline-flex ">
-              <button onClick={(() => setCurrentPage({ page: 'BATTLE' }))} className={clsx('text-white font-bold py-2 px-4  rounded-l-full',
+              <button onClick={(() => onClickBattle())} className={clsx('text-white font-bold py-2 px-4  rounded-l-full',
                 currentPage.page === "BATTLE" && 'bg-blue-700  hover:bg-blue-800',
                 currentPage.page === "SHOWCASE" && 'bg-blue-500  hover:bg-blue-600',
               )
