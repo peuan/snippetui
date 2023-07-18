@@ -2,25 +2,38 @@
 import CodeMirror from '@uiw/react-codemirror';
 import { html } from '@codemirror/lang-html';
 import { useCallback, useEffect, useState } from 'react';
-import { tags as t } from '@lezer/highlight';
-// import { atomoneInit } from '@uiw/codemirror-theme-atomone';
 import { githubDarkInit } from '@uiw/codemirror-theme-github';
 import Preview from './Preview';
 import { BiSolidMagicWand } from 'react-icons/bi'
-import { Button } from '@nextui-org/react';
+import { html_beautify, HTMLBeautifyOptions } from 'js-beautify';
+import debounce from 'lodash.debounce';
 interface EditorProps {
     result: string
 };
 
+const options: HTMLBeautifyOptions = {
+    wrap_attributes: 'force-aligned',
+    indent_with_tabs: true
+}
 
 const Editor = ({ result }: EditorProps) => {
-    const [code, setCode] = useState(result)
+    const [code, setCode] = useState(result);
+
+
+    const debouncedSetCode = useCallback(
+        debounce((value: string) => {
+            setCode(value);
+        }, 50),
+        []
+    );
+
     const onChange = useCallback((value: any, viewUpdate: any): any => {
-        setCode(value)
-    }, []);
+        debouncedSetCode(value);
+    }, [debouncedSetCode]);
 
     const handleFormatSyntax = () => {
-        console.log('heelo')
+        const beautify = html_beautify(code, options);
+        setCode(beautify);
     }
 
     return (
@@ -37,7 +50,7 @@ const Editor = ({ result }: EditorProps) => {
             <div className='lg:flex'>
                 <div className='w-full lg:w-1/2 border-stone-600'>
                     <CodeMirror
-                        value={result}
+                        value={code}
                         minHeight="calc(100vh - 80px)"
                         maxHeight='calc(100vh - 80px)'
                         extensions={[html()]}
@@ -56,6 +69,7 @@ const Editor = ({ result }: EditorProps) => {
                             autocompletion: true,
                             defaultKeymap: true,
                             closeBrackets: true,
+                            highlightActiveLine: true,
                         }}
                     />
                 </div>
