@@ -24,7 +24,7 @@ interface FilesProps {
 
 
 const handleClickToCode = (folder: string, file: string) => {
-    window.open(`https://github.com/peuan/css-battle/blob/main/public/css-battle/${folder}/${file}`, file);
+    window.open(`https://github.com/peuan/css-battle/blob/main/public/battle/${folder}/${file}`, file);
 
 }
 
@@ -50,7 +50,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
     const handleClickToPlayground = (folder: string, file: string) => {
         setIsLoading(true)
         setCurrentLoading(`/playground/${folder}/${file.split('.')[0]}`)
-        router.push(`/playground/${folder}/${file.split('.')[0]}`)
+        router.push(`/playground/battle/${folder}/${file.split('.')[0]}`)
     }
 
     const getAvatar = (name: string) => {

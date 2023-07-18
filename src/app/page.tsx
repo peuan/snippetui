@@ -17,20 +17,26 @@ interface PageProps {
 const ITEMS_PER_PAGE = 3; // Number of items per page
 
 export default function Home() {
-  const [result, setResult] = useState([])
+
   const [currentPage, setCurrentPage] = useState<PageProps>({ page: 'BATTLE' });
+
+  const [battleResults, setBattleResults] = useState([])
+
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+
+  const [showCaseResults, setShowCaseResults] = useState([])
+
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchFolderData = async (page: number) => {
+  const fetchAllBattle = async (page: number) => {
     setIsLoading(true)
     try {
-      const res = await fetch(`/api/file/${page}`, {
+      const res = await fetch(`/api/battle/${page}`, {
         method: "GET",
       });
       const { files, totalItems } = await res.json();
-      setResult(files)
+      setBattleResults(files)
       const total = Math.ceil(totalItems / ITEMS_PER_PAGE);
       setTotalPages(total)
     } catch (error) {
@@ -44,9 +50,44 @@ export default function Home() {
     }
   };
 
+
+  const fetchAllShowCase = async (page: number) => {
+    setIsLoading(true)
+    try {
+      const res = await fetch(`/api/showcase/${page}`, {
+        method: "GET",
+      });
+      const { files, totalItems } = await res.json();
+      setShowCaseResults(files)
+      const total = Math.ceil(totalItems / ITEMS_PER_PAGE);
+      setTotalPages(total)
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false)
+      window.scrollTo({
+        top: 200,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+
   useEffect(() => {
-    fetchFolderData(pageNumber);
-  }, [pageNumber]);
+    if (currentPage.page === "BATTLE") {
+      fetchAllBattle(pageNumber);
+    }
+  }, [currentPage.page, pageNumber]);
+
+
+  useEffect(() => {
+    if (currentPage.page === "SHOWCASE") {
+      fetchAllShowCase(pageNumber);
+
+    }
+  }, [currentPage.page, pageNumber]);
+
+
 
   const handlePreviousPage = () => {
     if (pageNumber > 1) {
@@ -54,7 +95,6 @@ export default function Home() {
       setPageNumber(previousPage);
     }
   };
-
 
   const handleNextPage = () => {
     if (pageNumber < totalPages) {
@@ -65,6 +105,11 @@ export default function Home() {
 
   const onClickBattle = () => {
     setCurrentPage({ page: 'BATTLE' })
+    setPageNumber(1);
+  }
+
+  const onClickShowCase = () => {
+    setCurrentPage({ page: 'SHOWCASE' })
     setPageNumber(1);
   }
   return (
@@ -93,7 +138,7 @@ export default function Home() {
                 Battle
               </button>
 
-              <button onClick={(() => setCurrentPage({ page: 'SHOWCASE' }))} className={clsx('text-white font-bold py-2 px-4  rounded-r-full',
+              <button onClick={(() => onClickShowCase())} className={clsx('text-white font-bold py-2 px-4  rounded-r-full',
                 currentPage.page === "SHOWCASE" && 'bg-blue-700  hover:bg-blue-800',
                 currentPage.page === "BATTLE" && 'bg-blue-500  hover:bg-blue-600',
               )
@@ -105,49 +150,51 @@ export default function Home() {
           </div>
           {currentPage.page === 'BATTLE' && (
             <>
-              <Battle files={result} />
-              {result && result.length > 0 && !isLoading && (
-                <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
-                  <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
-                    pageNumber === 1 && 'opacity-50 cursor-not-allowed',
-                  )
-                  }
-                    disabled={pageNumber === 1} onClick={handlePreviousPage}>
-                    Previous
-                  </button>
-                  <span className="text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
-
-                  <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
-                    pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
-                  )
-                  }
-                    disabled={pageNumber === totalPages} onClick={handleNextPage}>
-                    Next
-                  </button>
-                  <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
-                    <div className="visible lg:invisible flex justify-between w-[100px] bg-green-500 py-2 px-2 rounded-full">
-                      <button onClick={handlePreviousPage} className={clsx(' hover:text-green-700 text-white font-bold',
-                        pageNumber === 1 && 'opacity-50 cursor-not-allowed',
-                      )
-                      }>
-                        <BiLeftArrow />
-                      </button>
-                      <span className="text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
-                      <button onClick={handleNextPage} className={clsx(' hover:text-green-700 text-white font-bold',
-                        pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
-                      )
-                      }>
-                        <BiRightArrow />
-                      </button>
-                    </div>
-
-                  </div>
-                </div>
-              )}
+              <Battle files={battleResults} />
             </>
           )}
           {currentPage.page === 'SHOWCASE' && (
-            <ShowCase />
+            <ShowCase files={showCaseResults} />
+          )}
+
+
+          {!isLoading && (
+            <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
+              <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
+                pageNumber === 1 && 'opacity-50 cursor-not-allowed',
+              )
+              }
+                disabled={pageNumber === 1} onClick={handlePreviousPage}>
+                Previous
+              </button>
+              <span className="text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
+
+              <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
+                pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
+              )
+              }
+                disabled={pageNumber === totalPages} onClick={handleNextPage}>
+                Next
+              </button>
+              <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
+                <div className="visible lg:invisible flex justify-between w-[100px] bg-green-500 py-2 px-2 rounded-full">
+                  <button onClick={handlePreviousPage} className={clsx(' hover:text-green-700 text-white font-bold',
+                    pageNumber === 1 && 'opacity-50 cursor-not-allowed',
+                  )
+                  }>
+                    <BiLeftArrow />
+                  </button>
+                  <span className="text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
+                  <button onClick={handleNextPage} className={clsx(' hover:text-green-700 text-white font-bold',
+                    pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
+                  )
+                  }>
+                    <BiRightArrow />
+                  </button>
+                </div>
+
+              </div>
+            </div>
           )}
         </div>
 
