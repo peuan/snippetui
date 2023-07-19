@@ -39,8 +39,12 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [currentLoading, setCurrentLoading] = useState("")
     const [visible, setVisible] = useState(false);
+    const [description, setDescription] = useState<string | undefined>("");
 
-    const handler = () => setVisible(true);
+    const handler = (description: string | undefined) => {
+        setVisible(true);
+        setDescription(description)
+    }
 
 
     const closeHandler = () => {
@@ -125,7 +129,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                         )}
                         {file.description && (
                             <div className="ml-2 flex justify-center items-center">
-                                <Button color={file.color || 'primary'} rounded auto size={'xs'} onPress={handler}>
+                                <Button color={file.color || 'primary'} rounded auto size={'xs'} onPress={(() => handler(file.description))}>
                                     <BiInfoCircle />
                                 </Button>
                                 <Modal
@@ -138,7 +142,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                                     <Modal.Header>
                                         <Modal.Body>
                                             <Text id="modal-title" size={18}>
-                                                {file.description}
+                                                {description}
                                             </Text>
 
                                         </Modal.Body>
