@@ -1,0 +1,43 @@
+<div class="tri down out">
+  <div class="tri down in"></div>
+</div>
+<div class="tri up out">
+  <div class="tri up in"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #F2F2B6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tri {
+    width: 0;
+    height: 0;
+    border-left: solid transparent 75px;
+    border-right: solid transparent 75px;
+  }
+  .down {
+    border-top: solid #FF6D00 130px;
+  }
+  .up {
+    border-bottom: solid #FF6D00 130px;
+  }
+  .out {
+    position: relative;
+  }
+  .down.in {
+    position: absolute;
+    top: -130;
+    left: -55;
+    z-index: -1;
+    border-top: solid #FD4602 130px;
+  }
+  .up.in {
+    position: absolute;
+    top: 0;
+    left: -95;
+    border-bottom: solid #FD4602 130px;
+  }
+</style>
