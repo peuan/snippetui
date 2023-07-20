@@ -1,19 +1,41 @@
-<div class="container">
-  <div class="item"></div>
-</div>
+<div class="tri-group1 tri-1"></div>
+<div class="tri-group1 tri-2"></div>
+<div class="tri-group2 tri-3"></div>
+<div class="tri-group2 tri-4"></div>
+
 <style>
   body {
     background: #f2f2b6;
-    height: 100vh;
-    width: 100vw;
     margin: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 90px);
+    place-items: center;
     justify-content: center;
-    align-items: center;
   }
-  .item {
-    width: 150px;
-    height: 150px;
-    background: #ff6d00;
+
+  .tri-group1,
+  .tri-group2 {
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+  }
+
+  .tri-group1.tri-1 {
+    border-top: 130px solid #ff6d00;
+    z-index: 1;
+    margin-left: 140px;
+  }
+
+  .tri-group1.tri-2 {
+    border-top: 130px solid #fd4602;
+  }
+
+  .tri-group2.tri-3 {
+    border-bottom: 130px solid #fd4602;
+    z-index: 1;
+  }
+
+  .tri-group2.tri-4 {
+    border-bottom: 130px solid #ff6d00;
+    margin-left: -140px;
   }
 </style>
