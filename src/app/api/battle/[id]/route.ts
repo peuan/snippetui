@@ -50,7 +50,7 @@ export async function GET(
             let color = "primary";
 
             if (yamlContent) {
-              status = yamlContent.status;
+              status = yamlContent.status || status;
               description = yamlContent.description;
               color = yamlContent.color || color;
             }
