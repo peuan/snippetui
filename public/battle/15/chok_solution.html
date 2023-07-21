@@ -1,0 +1,45 @@
+<div class="item-1">
+  <div class="center-1"></div>
+</div>
+<div class="item-2">
+  <div class="center-2"></div>
+</div>
+<style>
+  body {
+    background: #09042a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item-1,
+  .item-2 {
+    position: relative;
+    width: 150;
+    height: 150;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .item-1 {
+    margin-right: -50;
+    background: #7b3f61;
+  }
+  .item-2 {
+    background: #e78481;
+  }
+  .center-1,
+  .center-2 {
+    position: absolute;
+    background: #09042a;
+    height: 114;
+    top: 18;
+    width: 50;
+    border-radius: 50%;
+  }
+  .center-1 {
+    right: -6;
+    z-index: 2;
+  }
+  .center-2 {
+    left: -6;
+  }
+</style>
