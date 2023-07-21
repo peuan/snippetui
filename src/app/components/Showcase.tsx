@@ -87,7 +87,6 @@ const ShowCase = ({ files }: { files: FilesProps[] }) => {
                                 <Badge size={'xs'} key={index} disableOutline variant={'flat'} color="primary" className="mr-2">{tag}</Badge>
                             )
                         })}
-                        {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
                     </div>
                     <div className="flip-card">
                         <div className="flip-card-inner flex justify-center items-center lg:scale-100 mobile-scale rounded-[20px] border-[4px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">

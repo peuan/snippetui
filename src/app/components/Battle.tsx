@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from "react";
 
 import { Modal, Button, Text } from "@nextui-org/react";
+import CardEffect from "./CardEffect";
 
 
 interface FilesProps {
@@ -155,11 +156,11 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                         )}
                     </div>
                     <div className="flip-card">
-
                         <div className="flip-card-inner flex justify-center items-center lg:scale-100 mobile-scale rounded-[20px] border-[4px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
+                            {/* <CardEffect> */}
                             <Iframe
                                 overflow="hidden"
-                                className="flip-card-front w-[400px] h-[300px] rounded-[20px] p-2"
+                                className="flip-card-front w-[400px] h-[300px] rounded-[20px] p-2 "
                                 url={`battle/${folder.folder}/${file.fileName}`}
                             />
                             <div className="flip-card-back">
@@ -169,6 +170,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                                     url={`battle/${folder.folder}/${file.fileName}`}
                                 />
                             </div>
+                            {/* </CardEffect> */}
                         </div>
                     </div>
                 </div >
