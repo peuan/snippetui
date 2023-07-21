@@ -1,0 +1,41 @@
+<div class="c1">
+  <div class="m1"></div>
+</div>
+<div class="c2">
+  <div class="m2"></div>
+</div>
+<style>
+  body {
+    background: #09042A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .c1, .c2 {
+    width: 150;
+    height: 150;
+    background: #7B3F61;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  .c1 {
+    margin-right: -50px;
+  }
+  .c2 {
+    background: #E78481;
+  }
+  .m1, .m2 {
+    position: absolute;
+    width: 150;
+    height: 150;
+    border-radius: 50%;
+    background: #09042A;
+  }
+  .m1 {
+    right: -100;
+  }
+  .m2 {
+    left: -100;
+  }
+</style>
