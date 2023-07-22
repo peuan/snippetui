@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Kanit } from 'next/font/google'
-import Nav from './components/Navbar'
+import Nav from '@/components/Navbar'
+import { Providers } from '@/redux/provider'
 
 const kanit = Kanit({ subsets: ['thai'], weight: '600' })
 
@@ -22,8 +23,10 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning={true}
         className={kanit.className}>
-        <Nav />
-        {children}
+        <Providers>
+          <Nav />
+          {children}
+        </Providers>
       </body>
     </html >
   )

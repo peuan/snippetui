@@ -5,42 +5,26 @@ import { Avatar, Loading } from "@nextui-org/react";
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
-
 import { Modal, Button, Text } from "@nextui-org/react";
-import CardEffect from "./CardEffect";
+import { CSSBATTLE_URL, GITHUB_URL } from "@/config";
+import { IBattle, IBattleResult } from "@/interfaces/IBattle";
 
-
-interface FilesProps {
-    folder: string;
-    files: Array<{
-        fileName: string;
-        characterCount: number;
-        status: string;
-        description?: string;
-        color?: "default" | "primary" | "secondary" | "success" | "warning" | "error" | "gradient"
-    }>;
-
-}
-
-
-
-const handleClickToCode = (folder: string, file: string) => {
-    window.open(`https://github.com/peuan/css-battle/blob/main/public/battle/${folder}/${file}`, file);
-
-}
-
-const handleClickToPlay = (level: string) => {
-    window.open(`https://cssbattle.dev/play/${level}`, level);
-
-}
-
-
-const Battle = ({ files }: { files: FilesProps[] }) => {
+const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [currentLoading, setCurrentLoading] = useState("")
     const [visible, setVisible] = useState(false);
     const [description, setDescription] = useState<string | undefined>("");
+
+
+    const handleClickToCode = (folder: string, file: string) => {
+        window.open(`${GITHUB_URL}/blob/main/public/battle/${folder}/${file}`, file);
+    }
+
+    const handleClickToPlay = (level: string) => {
+        window.open(`${CSSBATTLE_URL}/play/${level}`, level);
+
+    }
 
     const handler = (description: string | undefined) => {
         setVisible(true);
@@ -71,7 +55,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
         }
     }
     const renderFolderCards = () => {
-        return files.map((folder, index) => (
+        return battleResults.files.map((folder, index) => (
             <div key={index} className="sm:flex-col gap-16 mt-10">
                 <div onClick={(() => handleClickToPlay(folder.folder))} className="px-2 lg:mx-0 mx-2 cursor-pointer mb-5 w-fit">
                     <h3 className="hover:bg-green-400 active:bg-green-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 flex justify-start items-center rounded-full bg-yellow-500 w-fit text-white text-lg font-bold py-1 px-4 text-md ">
@@ -87,7 +71,7 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
         ));
     };
 
-    const renderFilePreviews = (folder: FilesProps) => {
+    const renderFilePreviews = (folder: IBattle) => {
         return folder.files?.map((file, index) => {
             return (
                 <div key={index}>
@@ -157,7 +141,6 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                     </div>
                     <div className="flip-card">
                         <div className="flip-card-inner flex justify-center items-center lg:scale-100 mobile-scale rounded-[20px] border-[4px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
-                            {/* <CardEffect> */}
                             <Iframe
                                 overflow="hidden"
                                 className="flip-card-front w-[400px] h-[300px] rounded-[20px] p-2 "
@@ -170,7 +153,6 @@ const Battle = ({ files }: { files: FilesProps[] }) => {
                                     url={`battle/${folder.folder}/${file.fileName}`}
                                 />
                             </div>
-                            {/* </CardEffect> */}
                         </div>
                     </div>
                 </div >

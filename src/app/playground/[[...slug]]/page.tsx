@@ -1,39 +1,20 @@
 "use client"
-import { useEffect, useState } from "react";
-import Editor from "../../components/Editor";
-import Loading from "@/app/components/Loading";
+import { useEffect, useMemo, useState } from "react";
+import Editor from "@/components/Editor";
+import Loading from "@/components/Loading";
+import { useGetCodeByPathQuery } from "@/redux/services/playgroundApi";
 
 const Playground = ({ params }: { params: { slug: [] } }) => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [result, setResult] = useState<string>("")
 
     const path = params.slug?.join('/');
-
-    const apiPath = path?.includes('battle') ? `/api/battle-detail/${path?.replace('battle', '')}` : `/api/showcase-detail/${path?.replace('showcase', '')}`
-    const fetchFolderData = async () => {
-        try {
-            const res = await fetch(apiPath, {
-                method: "GET",
-            });
-            const { file } = await res.json();
-            setResult(file)
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false)
-        }
-    };
-
-
-    useEffect(() => {
-        setIsLoading(true)
-        if (path) {
-            fetchFolderData();
-        } else {
-            setIsLoading(false)
-
-        }
-    }, []);
+    var apiPath = ''
+    if (path?.includes('battle')) {
+        apiPath = `battle-detail/${path?.replace('battle', '')}`
+    }
+    if (path?.includes('showcase')) {
+        apiPath = `showcase-detail/${path?.replace('showcase', '')}`
+    }
+    const { isLoading, isFetching, data, error } = useGetCodeByPathQuery({ path: apiPath }, { skip: path === undefined });
 
     return (
         <>
@@ -42,7 +23,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
             )}
 
             {!isLoading && (
-                <Editor result={result} />
+                <Editor code={data?.code} />
             )}
         </>
     )

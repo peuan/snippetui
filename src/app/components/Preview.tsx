@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const Preview = ({ code }: { code: string }) => {
+const Preview = ({ code }: { code: string | undefined }) => {
     const iframeRef = useRef<any>()
 
     useEffect(() => {
-        if (iframeRef.current) {
+        if (iframeRef.current && code) {
             const document = iframeRef.current.contentDocument;
             const documentContents = `${code}`
             document.open();

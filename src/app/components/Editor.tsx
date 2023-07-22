@@ -11,18 +11,16 @@ import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 
 import type { Container, Engine } from "tsparticles-engine";
+import { IPlayground } from '@/interfaces/IPlayground';
 
-interface EditorProps {
-    result: string
-};
 
 const options: HTMLBeautifyOptions = {
     wrap_attributes: 'force-aligned',
     indent_with_tabs: true
 }
 
-const Editor = ({ result }: EditorProps) => {
-    const [code, setCode] = useState(result);
+const Editor = ({ code }: IPlayground) => {
+    const [editorCode, setEditorCode] = useState<string | undefined>(code);
     let particlesContainer = useRef<Container>(null)
 
 
@@ -35,9 +33,10 @@ const Editor = ({ result }: EditorProps) => {
         container?.stop();
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedSetCode = useCallback(
         debounce((value: string) => {
-            setCode(value);
+            setEditorCode(value);
         }, 50),
         []
     );
@@ -51,8 +50,10 @@ const Editor = ({ result }: EditorProps) => {
         setTimeout(() => {
             particlesContainer.current?.stop();
         }, 2000)
-        const beautify = html_beautify(code, options);
-        setCode(beautify);
+        if (code) {
+            const beautify = html_beautify(code, options);
+            setEditorCode(beautify);
+        }
     }
 
     return (
@@ -198,7 +199,7 @@ const Editor = ({ result }: EditorProps) => {
             <div className='lg:flex'>
                 <div className='w-full lg:w-1/2 border-stone-600'>
                     <CodeMirror
-                        value={code}
+                        value={editorCode}
                         minHeight="calc(100vh - 80px)"
                         maxHeight='calc(100vh - 80px)'
                         extensions={[html()]}
@@ -222,7 +223,7 @@ const Editor = ({ result }: EditorProps) => {
                     />
                 </div>
                 <div className='w-full lg:w-1/2 bg-slate-800'>
-                    <Preview code={code} />
+                    <Preview code={editorCode} />
                 </div>
             </div>
         </div>

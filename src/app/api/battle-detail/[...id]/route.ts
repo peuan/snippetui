@@ -13,7 +13,7 @@ export async function GET(
   try {
     const fileData = await readFile(dir, "utf-8");
     return NextResponse.json({
-      file: fileData,
+      code: fileData,
     });
   } catch (error) {
     console.error("Error reading directory:", error);

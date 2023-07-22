@@ -1,91 +1,70 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Battle from "./components/Battle";
-import { useCallback } from "react";
+import Battle from "@/components/Battle";
 import { TbMoustache } from 'react-icons/tb'
-import ShowCase from "./components/Showcase";
+import ShowCase from "@/components/Showcase";
 import clsx from 'clsx'
-import Loading from './components/Loading'
-import ScrollToTop from './components/ScrollToTop';
+import Loading from '@/components/Loading'
+import ScrollToTop from '@/components/ScrollToTop';
 
+import { setBattleResult } from "@/redux/features/battleSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+
+import { useGetBattlesQuery } from "@/redux/services/battleApi";
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
+import { setShowCaseResult } from "./redux/features/showCaseSlice";
+import { useGetShowCasesQuery } from "./redux/services/showCaseApi";
+import { IPages } from "./interfaces/IPage";
 
-interface PageProps {
-  page: "BATTLE" | "SHOWCASE"
-}
-const ITEMS_PER_PAGE = 3; // Number of items per page
+const ITEMS_PER_PAGE = 3;
 
 export default function Home() {
+  const battleResults = useAppSelector((state) => state.battleReducer);
+  const totalPages = useAppSelector((state) => state.battleReducer.totalItems);
 
-  const [currentPage, setCurrentPage] = useState<PageProps>({ page: 'BATTLE' });
+  const showCaseResults = useAppSelector((state) => state.showCaseReducer);
 
-  const [battleResults, setBattleResults] = useState([])
+  const dispatch = useAppDispatch();
 
   const [pageNumber, setPageNumber] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
 
-  const [showCaseResults, setShowCaseResults] = useState([])
+  const [currentPage, setCurrentPage] = useState<IPages>({ page: 'BATTLE' });
 
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading: battleLoading, isFetching: battleIsFetching, data: battleData, error: battleError } = useGetBattlesQuery({ pageNumber: pageNumber }, { skip: currentPage.page !== 'BATTLE' });
+  const { isLoading: showCaseLoading, isFetching: showCaseFetching, data: showCaseData, error: showCaseError } = useGetShowCasesQuery({ pageNumber: pageNumber }, { skip: currentPage.page !== 'SHOWCASE' });
 
-  const fetchAllBattle = async (page: number) => {
-    setIsLoading(true)
-    try {
-      const res = await fetch(`/api/battle/${page}`, {
-        method: "GET",
-      });
-      const { files, totalItems } = await res.json();
-      setBattleResults(files)
-      const total = Math.ceil(totalItems / ITEMS_PER_PAGE);
-      setTotalPages(total)
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false)
+  useEffect(() => {
+    if (battleData && currentPage.page === "BATTLE" && !battleLoading) {
+      const total = Math.ceil(battleData.totalItems / ITEMS_PER_PAGE);
+      dispatch(setBattleResult({
+        files: battleData.files,
+        totalItems: total
+      }
+      ))
+
       window.scrollTo({
         top: 200,
         behavior: 'smooth',
       });
     }
-  };
+  }, [currentPage.page, pageNumber, battleData, dispatch, battleLoading]);
 
+  useEffect(() => {
+    if (showCaseData && currentPage.page === "SHOWCASE" && !showCaseLoading) {
+      const total = Math.ceil(showCaseData.totalItems / ITEMS_PER_PAGE);
+      dispatch(setShowCaseResult({
+        files: showCaseData.files,
+        totalItems: total
+      }
+      ))
 
-  const fetchAllShowCase = async (page: number) => {
-    setIsLoading(true)
-    try {
-      const res = await fetch(`/api/showcase/${page}`, {
-        method: "GET",
-      });
-      const { files, totalItems } = await res.json();
-      setShowCaseResults(files)
-      const total = Math.ceil(totalItems / ITEMS_PER_PAGE);
-      setTotalPages(total)
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false)
       window.scrollTo({
         top: 200,
         behavior: 'smooth',
       });
     }
-  };
-
-
-  useEffect(() => {
-    if (currentPage.page === "BATTLE") {
-      fetchAllBattle(pageNumber);
-    }
-  }, [currentPage.page, pageNumber]);
-
-
-  useEffect(() => {
-    if (currentPage.page === "SHOWCASE") {
-      fetchAllShowCase(pageNumber);
-
-    }
-  }, [currentPage.page, pageNumber]);
+  }, [currentPage.page, pageNumber, showCaseData, dispatch, showCaseLoading]);
 
 
 
@@ -116,7 +95,7 @@ export default function Home() {
     <>
 
       <div className="mb-10">
-        {isLoading && (
+        {(battleLoading || showCaseLoading) && (
           <Loading />
         )}
         <ScrollToTop />
@@ -150,15 +129,15 @@ export default function Home() {
           </div>
           {currentPage.page === 'BATTLE' && (
             <>
-              <Battle files={battleResults} />
+              <Battle battleResults={battleResults} />
             </>
           )}
           {currentPage.page === 'SHOWCASE' && (
-            <ShowCase files={showCaseResults} />
+            <ShowCase showCaseResults={showCaseResults} />
           )}
 
 
-          {!isLoading && (
+          {!(battleLoading && showCaseLoading) && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
               <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
                 pageNumber === 1 && 'opacity-50 cursor-not-allowed',

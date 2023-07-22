@@ -15,7 +15,7 @@ import {
     NavigationMenuTrigger,
     NavigationMenuViewport,
     navigationMenuTriggerStyle
-} from "@/app/components/ui/navigation-menu"
+} from "@/components/ui/navigation-menu"
 export default function Nav() {
     const collapseItems = [
         "Playground",

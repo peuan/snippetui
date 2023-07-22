@@ -1,34 +1,18 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal, BiMedal, BiCode } from 'react-icons/bi'
+import { BiLinkExternal, BiCode } from 'react-icons/bi'
 import { Avatar, Loading } from "@nextui-org/react";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import { Badge } from "@nextui-org/react";
-
-
-
-interface FilesProps {
-    folder: string;
-    files: Array<{
-        fileName: string;
-        characterCount: number;
-        name?: string;
-        auther?: string;
-        color?: "default" | "primary" | "secondary" | "success" | "warning" | "error" | "gradient";
-        tags?: string[]
-    }>;
-
-}
-
-
+import { GITHUB_URL } from "@/config";
+import { IShowCase, IShowCaseResult } from "@/interfaces/IShowCase";
 
 const handleClickToCode = (folder: string, file: string) => {
-    window.open(`https://github.com/peuan/css-battle/blob/main/public/showcase/${folder}/${file}`, file);
+    window.open(`${GITHUB_URL}/blob/main/public/showcase/${folder}/${file}`, file);
 
 }
 
-
-const ShowCase = ({ files }: { files: FilesProps[] }) => {
+const ShowCase = ({ showCaseResults }: { showCaseResults: IShowCaseResult }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [currentLoading, setCurrentLoading] = useState("")
@@ -42,7 +26,7 @@ const ShowCase = ({ files }: { files: FilesProps[] }) => {
 
 
     const renderFolderCards = () => {
-        return files.map((folder, index) => (
+        return showCaseResults.files.map((folder, index) => (
             <div key={index} className="sm:flex-col gap-16 mt-10">
                 <div className="flex gap-4 flex-wrap lg:justify-start justify-center">
                     {renderFilePreviews(folder)}
@@ -51,7 +35,7 @@ const ShowCase = ({ files }: { files: FilesProps[] }) => {
         ));
     };
 
-    const renderFilePreviews = (folder: FilesProps) => {
+    const renderFilePreviews = (folder: IShowCase) => {
         return folder.files?.map((file, index) => {
             return (
                 <div key={index}>
