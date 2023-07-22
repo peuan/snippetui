@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { setChatGPTApiKey } from "@/redux/features/chatGPTSlice";
+import Image from "next/image";
 const Playground = ({ params }: { params: { slug: [] } }) => {
     const [message, setMessage] = useState("")
     const [chatMessage, setChatMessage] = useState("")
@@ -114,8 +115,8 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
 
             {!isFetching && (
                 <div>
-                    <div className="flex">
-                        <form onSubmit={onSubmit} className="ml-2 flex flex-row w-[calc(50%-8rem)] mb-2">
+                    <div className="flex lg:flex-row flex-col w-full lg:justify-start justify-center lg:items-center items-start">
+                        <form onSubmit={onSubmit} className="ml-2 flex flex-row lg:w-[38%] w-[60%]">
                             <div className={clsx(`flex w-full flex-grow relative border-2 bg-white rounded-md  dark:text-white  shadow-xs dark:shadow-xs`,
                                 isInvalidInput && "border-red-500"
                             )}>
@@ -133,7 +134,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
 
                         <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
                             <DialogTrigger asChild>
-                                <Button onClick={(() => onOpenDialog)} className="ml-3" variant="outline">Get Started</Button>
+                                <Button onClick={(() => onOpenDialog)} className="ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4" variant="outline">Get Started <Image className="ml-2" src={'/ChatGPT.svg'} alt="chatgpt" width={'30'} height={'30'} /></Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[425px]" >
                                 <DialogHeader>
@@ -156,7 +157,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
                                     </div>
                                 </div>
                                 <DialogFooter>
-                                    <Button onClick={onSubmitApiKey}>Save</Button>
+                                    <Button className="bg-green-500 hover:bg-green-600" onClick={onSubmitApiKey}>Save</Button>
                                 </DialogFooter>
                             </DialogContent>
                         </Dialog>

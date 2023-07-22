@@ -1,6 +1,5 @@
 "use client"
 import React from "react";
-import { Navbar, Button, Text } from "@nextui-org/react";
 import { BiHome } from "react-icons/bi";
 import Link from 'next/link'
 

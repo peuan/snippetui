@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const battleApi = createApi({
   reducerPath: "battleApi",
-  refetchOnFocus: true,
+  refetchOnFocus: false,
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/",
   }),

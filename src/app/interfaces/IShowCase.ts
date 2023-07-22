@@ -7,12 +7,11 @@ interface IShowCase {
     auther?: string;
     color?:
       | "default"
-      | "primary"
-      | "secondary"
-      | "success"
-      | "warning"
-      | "error"
-      | "gradient";
+      | "destructive"
+      | "ghost"
+      | "link"
+      | "outline"
+      | "secondary";
     tags?: string[];
   }>;
 }

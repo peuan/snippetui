@@ -62,7 +62,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     }
 
     return (
-        <>
+        <div className='mt-2'>
             <Particles container={particlesContainer} id="tsparticles" loaded={particlesLoaded} init={particlesInit}
                 options={{
                     "fullScreen": {
@@ -231,7 +231,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     <Preview isLoading={isLoading} code={editorCode} />
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

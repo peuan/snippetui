@@ -7,12 +7,11 @@ interface IBattle {
     description?: string;
     color?:
       | "default"
-      | "primary"
-      | "secondary"
-      | "success"
-      | "warning"
-      | "error"
-      | "gradient";
+      | "destructive"
+      | "ghost"
+      | "link"
+      | "outline"
+      | "secondary";
   }>;
 }
 

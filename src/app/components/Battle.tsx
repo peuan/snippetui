@@ -1,19 +1,32 @@
 import Iframe from "react-iframe";
-import { BiLinkExternal, BiPlay, BiMedal, BiCode, BiInfoCircle } from 'react-icons/bi'
+import { BiLinkExternal, BiPlay, BiMedal, BiCode, BiInfoCircle, } from 'react-icons/bi'
 import { FaHeartBroken } from 'react-icons/fa'
 import { Avatar, Loading } from "@nextui-org/react";
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
-import { Modal, Button, Text } from "@nextui-org/react";
 import { CSSBATTLE_URL, GITHUB_URL } from "@/config";
 import { IBattle, IBattleResult } from "@/interfaces/IBattle";
+import { Button } from "./ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+
 
 const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [currentLoading, setCurrentLoading] = useState("")
-    const [visible, setVisible] = useState(false);
+
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+
     const [description, setDescription] = useState<string | undefined>("");
 
 
@@ -27,14 +40,13 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
     }
 
     const handler = (description: string | undefined) => {
-        setVisible(true);
+        setIsDialogOpen(true)
         setDescription(description)
     }
 
-
-    const closeHandler = () => {
-        setVisible(false);
-    };
+    const onOpenDialog = () => {
+        setIsDialogOpen(!isDialogOpen)
+    }
 
     const handleClickToPlayground = (folder: string, file: string) => {
         setIsLoading(true)
@@ -114,28 +126,19 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
                         )}
                         {file.description && (
                             <div className="ml-2 flex justify-center items-center">
-                                <Button color={file.color || 'primary'} rounded auto size={'xs'} onPress={(() => handler(file.description))}>
+                                <Button variant={file.color || 'destructive'} className="rounded-full" size={'sm'} onClick={(() => handler(file.description))}>
                                     <BiInfoCircle />
                                 </Button>
-                                <Modal
-                                    closeButton
-                                    aria-labelledby="modal-title"
-                                    open={visible}
-                                    onClose={closeHandler}
-                                    blur
-                                >
-                                    <Modal.Header>
-                                        <Modal.Body>
-                                            <Text id="modal-title" size={18}>
-                                                {description}
-                                            </Text>
-
-                                        </Modal.Body>
-                                    </Modal.Header>
-                                </Modal>
 
 
 
+                                <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
+                                    <DialogContent className="sm:max-w-[425px]" >
+                                        <DialogHeader>
+                                            <DialogTitle> {description}</DialogTitle>
+                                        </DialogHeader>
+                                    </DialogContent>
+                                </Dialog>
                             </div>
                         )}
                     </div>
