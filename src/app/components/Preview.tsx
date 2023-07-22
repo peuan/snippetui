@@ -6,9 +6,9 @@ const Preview = ({ code }: { code: string | undefined }) => {
     const iframeRef = useRef<any>()
 
     useEffect(() => {
-        if (iframeRef.current && code) {
+        if (iframeRef.current) {
             const document = iframeRef.current.contentDocument;
-            const documentContents = `${code}`
+            const documentContents = `${code || ""}`
             document.open();
             document.write(documentContents);
             document.close();
