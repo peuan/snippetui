@@ -26,15 +26,13 @@ export default function Nav() {
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                        <NavigationMenuLink href="/" className={navigationMenuTriggerStyle()}>
+                        <Link href={'/'} className={navigationMenuTriggerStyle()}>
                             <BiHome />
-                        </NavigationMenuLink>
+                        </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                        <Link href={'/playground'} legacyBehavior passHref>
-                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                Playground
-                            </NavigationMenuLink>
+                        <Link href={'playground'} className={navigationMenuTriggerStyle()}>
+                            Playground
                         </Link>
                     </NavigationMenuItem>
                 </NavigationMenuList>

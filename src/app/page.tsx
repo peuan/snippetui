@@ -34,6 +34,7 @@ export default function Home() {
   const { isLoading: battleLoading, isFetching: battleIsFetching, data: battleData, error: battleError } = useGetBattlesQuery({ pageNumber: pageNumber }, { skip: currentPage.page !== 'BATTLE' });
   const { isLoading: showCaseLoading, isFetching: showCaseFetching, data: showCaseData, error: showCaseError } = useGetShowCasesQuery({ pageNumber: pageNumber }, { skip: currentPage.page !== 'SHOWCASE' });
 
+
   useEffect(() => {
     if (battleData && currentPage.page === "BATTLE" && !battleLoading) {
       const total = Math.ceil(battleData.totalItems / ITEMS_PER_PAGE);
@@ -44,7 +45,7 @@ export default function Home() {
       ))
 
       window.scrollTo({
-        top: 200,
+        top: 0,
         behavior: 'smooth',
       });
     }
@@ -60,7 +61,7 @@ export default function Home() {
       ))
 
       window.scrollTo({
-        top: 200,
+        top: 0,
         behavior: 'smooth',
       });
     }

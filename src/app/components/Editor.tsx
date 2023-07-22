@@ -1,6 +1,7 @@
 "use client"
 import CodeMirror from '@uiw/react-codemirror';
 import { html } from '@codemirror/lang-html';
+import { javascript } from '@codemirror/lang-javascript';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { githubDarkInit } from '@uiw/codemirror-theme-github';
 import Preview from './Preview';
@@ -19,10 +20,14 @@ const options: HTMLBeautifyOptions = {
     indent_with_tabs: true
 }
 
-const Editor = ({ code }: IPlayground) => {
+const Editor = ({ code, isLoading }: IPlayground) => {
     const [editorCode, setEditorCode] = useState<string | undefined>(code);
     let particlesContainer = useRef<Container>(null)
 
+    useEffect(() => {
+        console.log(code)
+        setEditorCode(code)
+    }, [code])
 
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadFull(engine);
@@ -57,8 +62,7 @@ const Editor = ({ code }: IPlayground) => {
     }
 
     return (
-        <div>
-
+        <>
             <Particles container={particlesContainer} id="tsparticles" loaded={particlesLoaded} init={particlesInit}
                 options={{
                     "fullScreen": {
@@ -187,7 +191,7 @@ const Editor = ({ code }: IPlayground) => {
 
                 }}
             />
-            <div className='flex justify-center items-center px-2'>
+            <div className='flex justify-center items-center px-2 my-2  absolute z-[1] top-[55px] right-0'>
                 <div className='flex justify-center items-center'>
                     <button onClick={(() => handleFormatSyntax())} className='flex justify-center items-center h-6 w-6 rounded-full bg-blue-600 hover:bg-blue-700'>
                         <BiSolidMagicWand className='text-green-500' />
@@ -200,9 +204,9 @@ const Editor = ({ code }: IPlayground) => {
                 <div className='w-full lg:w-1/2 border-stone-600'>
                     <CodeMirror
                         value={editorCode}
-                        minHeight="calc(100vh - 80px)"
-                        maxHeight='calc(100vh - 80px)'
-                        extensions={[html()]}
+                        minHeight="calc(100vh - 120px)"
+                        maxHeight='calc(100vh - 120px)'
+                        extensions={[html(), javascript()]}
                         onChange={onChange}
                         theme={[githubDarkInit({
                             settings: {
@@ -223,10 +227,11 @@ const Editor = ({ code }: IPlayground) => {
                     />
                 </div>
                 <div className='w-full lg:w-1/2 bg-slate-800'>
-                    <Preview code={editorCode} />
+
+                    <Preview isLoading={isLoading} code={editorCode} />
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
