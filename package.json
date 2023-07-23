@@ -44,6 +44,7 @@
     "lucide-react": "^0.260.0",
     "next": "13.4.9",
     "openai": "^3.3.0",
+    "playwright": "^1.36.1",
     "postcss": "8.4.25",
     "puppeteer": "^20.9.0",
     "react": "18.2.0",
@@ -63,6 +64,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.36.1",
     "@types/html-validator": "^5.0.3",
     "@types/js-beautify": "^1.13.3",
     "@types/js-yaml": "^4.0.5",

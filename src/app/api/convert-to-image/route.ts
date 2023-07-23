@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import { chromium } from "playwright";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest, response: NextResponse) {
@@ -6,10 +6,9 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const data = await request.json();
     const htmlContent = data.htmlContent;
 
-    const browser = await puppeteer.launch({
-      headless: "new",
-    });
-    const page = await browser.newPage();
+    const browser = await chromium.launch({ headless: true });
+    const context = await browser.newContext();
+    const page = await context.newPage();
 
     // Set the page content with the provided HTML
     await page.setContent(htmlContent);
