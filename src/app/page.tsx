@@ -101,11 +101,17 @@ export default function Home() {
         )}
         <ScrollToTop />
         <div>
-          <h1 className="flex justify-center items-center text-[50px] font-bold text-center p-2 text-yellow-400">
-            <div className="flex items-center px-5">CSSBrother
-              <TbMoustache className="ml-2" />
-            </div>
-          </h1>
+          <div className="flex flex-col justify-center items-center ">
+            <h1 className="text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
+              <div className="flex items-center px-5">SnippetUI
+                <TbMoustache className="ml-2" />
+              </div>
+            </h1>
+            <h6 className="text-[30px] font-bold text-center px-2 pb-4 text-orange-400">
+              Your One-Stop Snippet Solution
+            </h6>
+
+          </div>
           <div className="flex justify-center">
 
             <div className="inline-flex ">
@@ -127,7 +133,7 @@ export default function Home() {
                 Showcase
               </button>
             </div>
-          </div>
+            h</div>
           {currentPage.page === 'BATTLE' && (
             <>
               <Battle battleResults={battleResults} />
