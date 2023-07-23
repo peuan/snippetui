@@ -206,14 +206,9 @@ body {
   height: calc(100vh - 110px);
 }
 
-.target-container {
-  position: relative;
-  cursor: col-resize;
-}
 .cm-theme {
   font-weight: 400 !important;
 }
-
-.cm-scroller::-webkit-scrollbar {
-  width: 10px;
+.cm-editor {
+  /* overflow: auto; */
 }

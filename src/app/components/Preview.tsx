@@ -18,15 +18,14 @@ const Preview = ({ code, isLoading }: { code: string | undefined, isLoading?: bo
 
     return (
 
-        <div className="target-container">
+        <div className="relative w-full">
             {isLoading && (
                 <Loading />
             )}
-            {!isLoading && (
-                <>
-                    <iframe title="result" className="preview-iframe" ref={iframeRef} />
-                </>
-            )}
+
+            <>
+                <iframe title="result" className="preview-iframe" ref={iframeRef} />
+            </>
         </div >
 
     );
