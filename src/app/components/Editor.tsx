@@ -27,6 +27,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     let particlesContainer = useRef<Container>(null)
     const [downloadUrl, setDownloadUrl] = useState("");
     const [isDownload, setIsDownload] = useState(false);
+    const [imagePath, setImagePath] = useState("");
 
 
     useEffect(() => {
@@ -76,6 +77,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                 body: JSON.stringify({ htmlContent: editorCode }),
             });
             if (response.ok) {
+
                 const arrayBuffer = await response.arrayBuffer();
                 const base64String = btoa(
                     new Uint8Array(arrayBuffer).reduce(
@@ -83,6 +85,16 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                         ""
                     )
                 );
+
+                const imagePathHeader = response.headers.get("X-Image-Path");
+                if (imagePathHeader) {
+                    const imagePath = imagePathHeader.split('/').pop();
+                    if (imagePath) {
+                        console.log(imagePath)
+                        setImagePath(imagePath);
+                    }
+                }
+
                 setDownloadUrl(`data:image/png;base64,${base64String}`);
             }
 
