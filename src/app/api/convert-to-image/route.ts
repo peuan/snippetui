@@ -1,5 +1,7 @@
 import { chromium } from "playwright";
 import { NextRequest, NextResponse } from "next/server";
+import { writeFile } from "fs/promises";
+import path from "path";
 
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
@@ -16,11 +18,26 @@ export async function POST(request: NextRequest, response: NextResponse) {
     // Take a screenshot of the page and save it as PNG
     const screenshotBuffer = await page.screenshot({ type: "png" });
 
+    // Generate a unique filename for the image
+    const timestamp = Date.now();
+    const fileName = `${timestamp}.png`;
+
+    // Save the screenshot as a PNG file
     // Close the browser
     await browser.close();
 
     // Return the screenshot as the response body
-    return new Response(screenshotBuffer, { status: 200 });
+
+    // Return the screenshot URL as part of the response
+    const imagePath = path.resolve("./public/screenshots", fileName);
+    await writeFile(imagePath, screenshotBuffer);
+    console.log(imagePath);
+
+    // Create a custom header with the imagePath
+    const headers = new Headers();
+    headers.set("X-Image-Path", imagePath);
+
+    return new Response(screenshotBuffer, { status: 200, headers });
   } catch (error) {
     console.error("Error converting HTML to image:", error);
     return new Response("Error converting HTML to image", { status: 500 });
