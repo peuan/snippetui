@@ -101,14 +101,14 @@ export default function Home() {
         )}
         <ScrollToTop />
         <div>
-          <div className="flex flex-col justify-center items-center ">
+          <div className="flex flex-col justify-center items-center mt-2">
             <h1 className="text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
               <div className="flex items-center px-5">SnippetUI
                 <TbMoustache className="ml-2" />
               </div>
             </h1>
-            <h6 className="text-[30px] font-bold text-center px-2 pb-4 text-orange-400">
-              Your One-Stop Snippet Solution
+            <h6 className="text-[24px] font-light text-center px-2 pb-4 text-yellow-400">
+              “Begin Your Coding Journey Here”
             </h6>
 
           </div>
@@ -144,7 +144,7 @@ export default function Home() {
           )}
 
 
-          {!(battleLoading && showCaseLoading) && (
+          {(!battleLoading && !showCaseLoading) && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
               <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
                 pageNumber === 1 && 'opacity-50 cursor-not-allowed',

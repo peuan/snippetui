@@ -26,7 +26,6 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     let particlesContainer = useRef<Container>(null)
 
     useEffect(() => {
-        console.log(code)
         setEditorCode(code)
     }, [code])
 
