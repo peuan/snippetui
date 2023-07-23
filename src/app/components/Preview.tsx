@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Loading from "./Loading";
-
 const Preview = ({ code, isLoading }: { code: string | undefined, isLoading?: boolean }) => {
     const iframeRef = useRef<any>()
 
@@ -16,6 +15,7 @@ const Preview = ({ code, isLoading }: { code: string | undefined, isLoading?: bo
         }
 
     }, [code])
+
     return (
 
         <div className="target-container">
@@ -23,7 +23,9 @@ const Preview = ({ code, isLoading }: { code: string | undefined, isLoading?: bo
                 <Loading />
             )}
             {!isLoading && (
-                <iframe title="result" className="preview-iframe" ref={iframeRef} />
+                <>
+                    <iframe title="result" className="preview-iframe" ref={iframeRef} />
+                </>
             )}
         </div >
 

@@ -213,3 +213,7 @@ body {
 .cm-theme {
   font-weight: 400 !important;
 }
+
+.cm-scroller::-webkit-scrollbar {
+  width: 10px;
+}
