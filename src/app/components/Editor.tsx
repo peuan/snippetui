@@ -276,7 +276,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                         }}
                     />
                 </div>
-                <div className='w-full lg:w-1/2 bg-slate-800'>
+                <div className='w-full lg:w-1/2 bg-slate-800 flex justify-center items-center'>
                     <Preview isLoading={isLoading} code={editorCode} />
                 </div>
             </div>

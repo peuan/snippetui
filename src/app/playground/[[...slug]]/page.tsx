@@ -65,6 +65,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
             setIsInvalidInput(true)
         }
         setChatMessage("")
+        setIsInvalidInput(false)
     }
 
     const onMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
