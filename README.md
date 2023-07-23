@@ -1,4 +1,18 @@
-![alt text](demo.png)
+# Home Page
+
+![alt text](/doc-images/homepage.png)
+
+# ShowCase
+
+![alt text](/doc-images/showcase.png)
+
+# Playground
+
+![alt text](/doc-images/playground.png)
+
+# Integrate with ChatGPT
+
+![alt text](/doc-images/chatgpt-popup-apikey.png)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
