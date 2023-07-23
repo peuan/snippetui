@@ -16,8 +16,15 @@
 
 https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-03a6b0e8ab68
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Code Formatter
 
+![alt text](/doc-images/code-formatter.png)
+
+# Download as image
+
+![alt text](/doc-images/download-as-image.png)
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
