@@ -85,7 +85,8 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
         }
     }
 
-    const onSubmitApiKey = () => {
+    const onSubmitApiKey = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         if (!isInvalidApiKey && apiKey) {
             dispatch(setChatGPTApiKey({ apiKey: apiKey }))
             setIsDialogOpen(false)
@@ -103,6 +104,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
         setCode(dataMessage?.message);
         setIsCallingApi(false)
     }, [dataMessage])
+
     useEffect(() => {
         setCode(data?.code);
         setIsCallingApi(false)
@@ -115,26 +117,26 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
 
             {!isFetching && (
                 <div>
-                    <div className="flex lg:flex-row flex-col w-full lg:justify-start justify-center lg:items-center items-start">
-                        <form onSubmit={onSubmit} className="ml-2 flex flex-row lg:w-[38%] w-[60%]">
+                    <div className="flex lg:flex-row flex-col w-full lg:justify-start justify-center lg:items-center items-center lg:pb-0 pb-4">
+                        <form onSubmit={onSubmit} className="ml-2 flex flex-row lg:w-[38%] w-[90%]">
                             <div className={clsx(`flex w-full flex-grow relative border-2 bg-white rounded-md  dark:text-white  shadow-xs dark:shadow-xs`,
                                 isInvalidInput && "border-red-500"
                             )}>
                                 <Input disabled={!chatGPTApiKey} onChange={((event) => onMessageChange(event))} value={chatMessage} placeholder="Send a message" className="border-none" />
-                                <button type="submit" className="p-2 text-green-700" disabled={isCallingApi || !chatGPTApiKey}>
+                                <Button type="submit" variant={'ghost'} className="p-2 text-green-600" disabled={isCallingApi || !chatGPTApiKey}>
                                     {isCallingApi && (
                                         <LoadingButton color="success" size="xs" />
                                     )}
                                     {!isCallingApi && (
                                         <BiSolidSend />
                                     )}
-                                </button>
+                                </Button>
                             </div>
                         </form>
 
                         <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
                             <DialogTrigger asChild>
-                                <Button onClick={(() => onOpenDialog)} className="ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4" variant="outline">Get Started <Image className="ml-2" src={'/ChatGPT.svg'} alt="chatgpt" width={'30'} height={'30'} /></Button>
+                                <Button onClick={(() => onOpenDialog)} className="ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4 bg-indigo-500 hover:bg-indigo-600" variant="default">Get Started <Image className="ml-2" src={'/ChatGPT.svg'} alt="chatgpt" width={'30'} height={'30'} /></Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[425px]" >
                                 <DialogHeader>
@@ -146,19 +148,22 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
                                         Rest assured, your API key is safe with us. We take data security and privacy seriously and ensure that your information is protected.
                                     </DialogDescription>
                                 </DialogHeader>
-                                <div className="grid">
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <Label htmlFor="name" className="text-right">
-                                            API KEY
-                                        </Label>
-                                        <Input id="apiKey" type="password" onChange={((event) => onApiKeyChange(event))} value={apiKey} placeholder="Enter your ChatGPT API key here" className={clsx(`col-span-3`,
-                                            isInvalidApiKey && "border-rose-500"
-                                        )} />
+                                <form onSubmit={onSubmitApiKey}>
+                                    <div className="flex justify-between items-end gap-4">
+                                        <div className="items-center w-full">
+                                            <Label htmlFor="name" className="text-right">
+                                                API KEY
+                                            </Label>
+                                            <Input id="apiKey" type="password" onChange={((event) => onApiKeyChange(event))} value={apiKey} placeholder="Enter your ChatGPT API key here" className={clsx(`col-span-3`,
+                                                isInvalidApiKey && "border-rose-500"
+                                            )} />
+                                        </div>
+                                        <DialogFooter>
+                                            <Button className="bg-indigo-500 hover:bg-indigo-600" type="submit">Save</Button>
+                                        </DialogFooter>
                                     </div>
-                                </div>
-                                <DialogFooter>
-                                    <Button className="bg-green-500 hover:bg-green-600" onClick={onSubmitApiKey}>Save</Button>
-                                </DialogFooter>
+
+                                </form>
                             </DialogContent>
                         </Dialog>
                     </div>

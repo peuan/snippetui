@@ -13,6 +13,7 @@ import { loadFull } from "tsparticles";
 
 import type { Container, Engine } from "tsparticles-engine";
 import { IPlayground } from '@/interfaces/IPlayground';
+import { Button } from './ui/button';
 
 
 const options: HTMLBeautifyOptions = {
@@ -191,21 +192,21 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
                 }}
             />
-            <div className='flex justify-center items-center px-2 my-2  absolute z-[1] top-[55px] right-0'>
+            <div className='flex justify-center items-center px-2 my-2  absolute z-[1] lg:top-[55px] top-[155px]  lg:right-0 right-2'>
                 <div className='flex justify-center items-center'>
-                    <button onClick={(() => handleFormatSyntax())} className='flex justify-center items-center h-6 w-6 rounded-full bg-blue-600 hover:bg-blue-700'>
-                        <BiSolidMagicWand className='text-green-500' />
-                    </button>
+                    <Button size={'sm'} variant={'outline'} onClick={(() => handleFormatSyntax())} className='flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
+                        <BiSolidMagicWand className='text-white' />
+                    </Button>
 
                 </div>
-                <div className='text-slate-500 text-sm text-right ml-2'>{code?.trim().length} {" "}characters</div>
+                <div className='text-white text-sm text-right ml-2'>{code?.trim().length} {" "}characters</div>
             </div>
             <div className='lg:flex'>
                 <div className='w-full lg:w-1/2 border-stone-600'>
                     <CodeMirror
                         value={editorCode}
-                        minHeight="calc(100vh - 120px)"
-                        maxHeight='calc(100vh - 120px)'
+                        minHeight="calc(100vh - 110px)"
+                        maxHeight='calc(100vh - 110px)'
                         extensions={[html(), javascript()]}
                         onChange={onChange}
                         theme={[githubDarkInit({
