@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import Loading from "./Loading";
 const Preview = ({ code, isLoading }: { code: string | undefined, isLoading?: boolean }) => {
     const iframeRef = useRef<any>()
-
     useEffect(() => {
         if (iframeRef.current) {
+            // create a dom content with html code
             const document = iframeRef.current.contentDocument;
             const documentContents = `${code || ""}`
             document.open();
@@ -22,7 +22,6 @@ const Preview = ({ code, isLoading }: { code: string | undefined, isLoading?: bo
             {isLoading && (
                 <Loading />
             )}
-
             <>
                 <iframe title="result" className="preview-iframe" ref={iframeRef} />
             </>

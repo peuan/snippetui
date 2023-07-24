@@ -4,11 +4,12 @@ import { writeFile } from "fs/promises";
 import path from "path";
 
 export async function POST(request: NextRequest, response: NextResponse) {
+  let browser;
   try {
     const data = await request.json();
     const htmlContent = data.htmlContent;
 
-    const browser = await chromium.launch({ headless: true });
+    browser = await chromium.launch({ headless: true });
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -23,8 +24,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const fileName = `${timestamp}.png`;
 
     // Save the screenshot as a PNG file
-    // Close the browser
-    await browser.close();
 
     // Return the screenshot as the response body
 
@@ -41,5 +40,11 @@ export async function POST(request: NextRequest, response: NextResponse) {
   } catch (error) {
     console.error("Error converting HTML to image:", error);
     return new Response("Error converting HTML to image", { status: 500 });
+  } finally {
+    if (browser) {
+      // Close the browser
+
+      await browser.close();
+    }
   }
 }

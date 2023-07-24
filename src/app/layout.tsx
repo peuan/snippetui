@@ -6,9 +6,10 @@ import { Providers } from '@/redux/provider'
 
 const kanit = Kanit({ subsets: ['thai'], weight: '600' })
 
+// layout metadata
 export const metadata: Metadata = {
-  title: 'CSSBattle Showcase',
-  description: 'CSSBattle Showcase',
+  title: 'SnippetUI',
+  description: 'Begin Your Coding Journey Here',
 }
 
 export default function RootLayout({
