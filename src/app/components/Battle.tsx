@@ -52,9 +52,12 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
 
     const handleClickToPlayground = (folder: string, file: string) => {
         setIsLoading(true)
-        setCurrentLoading(`/playground/${folder}/${file.split('.')[0]}`)
 
-        router.push(`/playground/battle/${folder}/${file.split('.')[0]}`)
+        let fileName = file.split('.')[0]
+
+        setCurrentLoading(`/playground/${folder}/${fileName}`)
+
+        router.push(`/playground/battle/${folder}/${fileName}`)
     }
 
     const getAvatar = (name: string) => {
@@ -88,19 +91,22 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
 
     const renderFilePreviews = (folder: IBattle) => {
         return folder.files?.map((file, index) => {
+            const autherName = file.fileName.split("_")[0];
+            const fileName = file.fileName.split('.')[0];
+
             return (
                 <div key={index}>
                     <div className="flex justify-center mb-2">
                         <div className="rounded-full bg-blue-600 flex items-center px-2">
                             <Avatar
                                 rounded
-                                src={getAvatar(file.fileName.split("_")[0])!}
+                                src={getAvatar(autherName)!}
                                 className="ml-[-8px]"
-                                text={getAvatar(file.fileName.split("_")[0]) ? '' : file.fileName.split("_")[0][0].toUpperCase()}
+                                text={getAvatar(autherName) ? '' : autherName[0].toUpperCase()}
                             />
                             <h3 className="text-white font-bold py-1 px-4 text-md ">
                                 {" "}
-                                {file.fileName.split("_")[0]}
+                                {autherName}
                             </h3>
                             <button onClick={(() => handleClickToCode(folder.folder, file.fileName))}>
                                 <BiLinkExternal className="text-white" />
@@ -108,10 +114,10 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
 
                             <button className="ml-6" onClick={(() => handleClickToPlayground(folder.folder, file.fileName))}>
 
-                                {currentLoading !== `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
+                                {currentLoading !== `/playground/${folder.folder}/${fileName}` && (
                                     <BiCode className="text-white" />
                                 )}
-                                {isLoading && currentLoading === `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
+                                {isLoading && currentLoading === `/playground/${folder.folder}/${fileName}` && (
                                     <Loading color="success" size="xs" />
                                 )}
                             </button>
