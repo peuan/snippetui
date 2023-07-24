@@ -30,11 +30,14 @@ const ITEMS_PER_PAGE = 3;
 
 export default function Home() {
   const battleResults = useAppSelector((state) => state.battleReducer);
-  const totalPages = useAppSelector((state) => state.battleReducer.totalItems);
+  const battleTotalPages = useAppSelector((state) => state.battleReducer.totalItems);
+
   const showCaseResults = useAppSelector((state) => state.showCaseReducer);
+  const showCaseTotalPages = useAppSelector((state) => state.showCaseReducer.totalItems);
 
 
   const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState<IPages>({ page: 'BATTLE' });
 
   const {
@@ -53,8 +56,9 @@ export default function Home() {
 
   useEffect(() => {
 
-    if (battleData && !battleLoading) {
+    if (battleData && !battleLoading && currentPage.page === 'BATTLE') {
       const total = Math.ceil(battleData.totalItems / ITEMS_PER_PAGE);
+      setTotalPages(total)
       dispatch(setBattleResult({
         files: battleData.files,
         totalItems: total
@@ -69,9 +73,9 @@ export default function Home() {
   }, [currentPage.page, pageNumber, battleData, dispatch, battleLoading]);
 
   useEffect(() => {
-    if (showCaseData && !showCaseLoading) {
+    if (showCaseData && !showCaseLoading && currentPage.page === 'SHOWCASE') {
       const total = Math.ceil(showCaseData.totalItems / ITEMS_PER_PAGE);
-
+      setTotalPages(total)
       dispatch(setShowCaseResult({
         files: showCaseData.files,
         totalItems: total

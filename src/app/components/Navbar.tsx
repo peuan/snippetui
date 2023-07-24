@@ -21,7 +21,7 @@ export default function Nav() {
         "Blog",
     ];
     return (
-        <div className="h-12 bg-slate-800/50 min-w-full flex items-center px-6">
+        <div className="h-12 bg-slate-800/50 min-w-full flex items-center pl-6">
             <NavigationMenu>
                 <NavigationMenuList>
                     <NavigationMenuItem>
