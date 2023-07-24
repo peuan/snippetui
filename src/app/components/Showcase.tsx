@@ -1,26 +1,25 @@
 import Iframe from "react-iframe";
 import { BiLinkExternal, BiCode } from 'react-icons/bi'
 import { Avatar, Loading } from "@nextui-org/react";
+import { Badge } from "@nextui-org/react";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
-import { Badge } from "@nextui-org/react";
+
 import { GITHUB_URL } from "@/config";
 import { IShowCase, IShowCaseResult } from "@/interfaces/IShowCase";
 
-const handleClickToCode = (folder: string, file: string) => {
-    window.open(`${GITHUB_URL}/blob/main/public/showcase/${folder}/${file}`, file);
 
-}
 
 const ShowCase = ({ showCaseResults }: { showCaseResults: IShowCaseResult }) => {
     const router = useRouter()
-    const [isLoading, setIsLoading] = useState(false)
-    const [currentLoading, setCurrentLoading] = useState("")
+    const [currentSelected, setCurrentSelected] = useState("")
 
+    const handleClicktoGithubRepo = (folder: string, file: string) => {
+        window.open(`${GITHUB_URL}/blob/main/public/showcase/${folder}/${file}`, file);
+    }
 
     const handleClickToPlayground = (folder: string, file: string) => {
-        setIsLoading(true)
-        setCurrentLoading(`/playground/${folder}/${file.split('.')[0]}`)
+        setCurrentSelected(`/playground/${folder}/${file.split('.')[0]}`)
         router.push(`/playground/showcase/${folder}/${file.split('.')[0]}`)
     }
 
@@ -50,16 +49,14 @@ const ShowCase = ({ showCaseResults }: { showCaseResults: IShowCaseResult }) => 
                                 {" "}
                                 {file.name}
                             </h3>
-                            <button onClick={(() => handleClickToCode(folder.folder, file.fileName))}>
+                            <button onClick={(() => handleClicktoGithubRepo(folder.folder, file.fileName))}>
                                 <BiLinkExternal className="text-white" />
                             </button>
-
                             <button className="ml-6" onClick={(() => handleClickToPlayground(folder.folder, file.fileName))}>
-
-                                {currentLoading !== `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
+                                {currentSelected !== `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
                                     <BiCode className="text-white" />
                                 )}
-                                {isLoading && currentLoading === `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
+                                {currentSelected === `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
                                     <Loading color="success" size="xs" />
                                 )}
                             </button>

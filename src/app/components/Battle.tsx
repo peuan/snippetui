@@ -1,13 +1,12 @@
+import { useState } from "react";
+import { useRouter } from 'next/navigation'
+
 import Iframe from "react-iframe";
 import { BiLinkExternal, BiPlay, BiMedal, BiCode, BiInfoCircle, } from 'react-icons/bi'
 import { FaHeartBroken } from 'react-icons/fa'
 import { Avatar, Loading } from "@nextui-org/react";
 import clsx from 'clsx'
-import { useRouter } from 'next/navigation'
-import { useState } from "react";
-import { CSSBATTLE_URL, GITHUB_URL } from "@/config";
-import { IBattle, IBattleResult } from "@/interfaces/IBattle";
-import { Button } from "./ui/button";
+
 import {
     Dialog,
     DialogContent,
@@ -18,6 +17,9 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 
+import { CSSBATTLE_URL, GITHUB_URL } from "@/config";
+import { IBattle, IBattleResult } from "@/interfaces/IBattle";
+import { Button } from "./ui/button";
 
 const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
     const router = useRouter()
@@ -25,7 +27,6 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
     const [currentLoading, setCurrentLoading] = useState("")
 
     const [isDialogOpen, setIsDialogOpen] = useState(false)
-
 
     const [description, setDescription] = useState<string | undefined>("");
 
@@ -39,7 +40,8 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
 
     }
 
-    const handler = (description: string | undefined) => {
+    //handle dialog for display description
+    const handleDialog = (description: string | undefined) => {
         setIsDialogOpen(true)
         setDescription(description)
     }
@@ -51,6 +53,7 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
     const handleClickToPlayground = (folder: string, file: string) => {
         setIsLoading(true)
         setCurrentLoading(`/playground/${folder}/${file.split('.')[0]}`)
+
         router.push(`/playground/battle/${folder}/${file.split('.')[0]}`)
     }
 
@@ -126,11 +129,9 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
                         )}
                         {file.description && (
                             <div className="ml-2 flex justify-center items-center">
-                                <Button variant={file.color || 'destructive'} className="rounded-full" size={'sm'} onClick={(() => handler(file.description))}>
+                                <Button variant={file.color || 'destructive'} className="rounded-full" size={'sm'} onClick={(() => handleDialog(file.description))}>
                                     <BiInfoCircle />
                                 </Button>
-
-
 
                                 <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
                                     <DialogContent className="sm:max-w-[425px]" >

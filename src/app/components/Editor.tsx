@@ -1,26 +1,30 @@
 "use client"
-import CodeMirror from '@uiw/react-codemirror';
-import { html } from '@codemirror/lang-html';
-import { javascript } from '@codemirror/lang-javascript';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation'
+
+import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
+import { html } from '@codemirror/lang-html';
 import { githubDarkInit } from '@uiw/codemirror-theme-github';
-import Preview from './Preview';
+
 import { BiSolidMagicWand, BiDownload } from 'react-icons/bi'
 import { html_beautify, HTMLBeautifyOptions } from 'js-beautify';
-import debounce from 'lodash.debounce';
 import Particles from "react-particles";
+import debounce from 'lodash.debounce';
 import { loadFull } from "tsparticles";
-
 import type { Container, Engine } from "tsparticles-engine";
-import { IPlayground } from '@/interfaces/IPlayground';
-import { Button } from './ui/button';
 import { ReloadIcon } from "@radix-ui/react-icons"
+import {
+    FacebookShareButton,
+    FacebookIcon,
+} from 'next-share'
 
+import Preview from './Preview';
+import { Button } from './ui/button';
 
-const options: HTMLBeautifyOptions = {
-    wrap_attributes: 'force-aligned',
-    indent_with_tabs: true
-}
+import { IPlayground } from '@/interfaces/IPlayground';
+import { WEBSITE_LINK } from '@/config';
+
 
 const Editor = ({ code, isLoading }: IPlayground) => {
     const [editorCode, setEditorCode] = useState<string | undefined>(code);
@@ -28,20 +32,29 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     const [downloadUrl, setDownloadUrl] = useState("");
     const [isDownload, setIsDownload] = useState(false);
     const [imagePath, setImagePath] = useState("");
+    const pathName = usePathname()
 
+    // formatter options
+    const options: HTMLBeautifyOptions = {
+        wrap_attributes: 'force-aligned',
+        indent_with_tabs: true
+    }
 
     useEffect(() => {
         setEditorCode(code)
     }, [code])
 
+    // particle effect
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadFull(engine);
     }, []);
 
-
     const particlesLoaded = useCallback(async (container: Container | undefined) => {
         container?.stop();
     }, []);
+
+
+    // debounced 50 millisecond before set to the state
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedSetCode = useCallback(
@@ -55,6 +68,8 @@ const Editor = ({ code, isLoading }: IPlayground) => {
         debouncedSetCode(value);
     }, [debouncedSetCode]);
 
+
+    // handle formatter
     const handleFormatSyntax = () => {
         particlesContainer.current?.start();
         setTimeout(() => {
@@ -66,6 +81,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
         }
     }
 
+    // handle download image
     const handleDownloadImage = async () => {
         setIsDownload(true)
         try {
@@ -88,9 +104,9 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
                 const imagePathHeader = response.headers.get("X-Image-Path");
                 if (imagePathHeader) {
-                    const imagePath = imagePathHeader.split('/').pop();
-                    if (imagePath) {
-                        console.log(imagePath)
+                    const imgPath = imagePathHeader.split('/').pop();
+                    if (imgPath) {
+                        console.log(imgPath)
                         setImagePath(imagePath);
                     }
                 }
@@ -102,6 +118,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
             setIsDownload(false)
         }
     }
+
 
 
     useEffect(() => {
@@ -251,7 +268,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     </Button>
                 </div>
                 <div className='text-white text-sm text-right ml-2'>{code?.trim().length || 0} {" "}characters</div>
-                <Button disabled={isDownload} size={'sm'} variant={'outline'} onClick={(() => handleDownloadImage())} className='ml-2 flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
+                <Button disabled={isDownload || !editorCode} size={'sm'} variant={'outline'} onClick={(() => handleDownloadImage())} className='ml-2 flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
                     {!isDownload && (
                         <BiDownload className='text-white' />
                     )}
@@ -260,7 +277,15 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                         <ReloadIcon className="h-4 w-4 animate-spin" />
                     )}
                 </Button>
-
+                <div className='ml-2 mr-2 mt-2'>
+                    <FacebookShareButton
+                        url={`${WEBSITE_LINK}${pathName}`}
+                        quote={'Begin Your Coding Journey Here.'}
+                        hashtag={'#snippetui'}
+                    >
+                        <FacebookIcon size={25} round />
+                    </FacebookShareButton>
+                </div>
             </div>
             <div className='lg:flex'>
                 <div className='w-full lg:w-1/2 border-stone-600'>
