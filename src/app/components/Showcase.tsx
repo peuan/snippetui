@@ -19,8 +19,10 @@ const ShowCase = ({ showCaseResults }: { showCaseResults: IShowCaseResult }) => 
     }
 
     const handleClickToPlayground = (folder: string, file: string) => {
-        setCurrentSelected(`/playground/${folder}/${file.split('.')[0]}`)
-        router.push(`/playground/showcase/${folder}/${file.split('.')[0]}`)
+        let fileName = file.split('.')[0];
+
+        setCurrentSelected(`/playground/${folder}/${fileName}`)
+        router.push(`/playground/showcase/${folder}/${fileName}`)
     }
 
 
@@ -36,6 +38,7 @@ const ShowCase = ({ showCaseResults }: { showCaseResults: IShowCaseResult }) => 
 
     const renderFilePreviews = (folder: IShowCase) => {
         return folder.files?.map((file, index) => {
+            const fileName = file.fileName.split('.')[0]
             return (
                 <div key={index}>
                     <div className="flex justify-center mb-2">
@@ -53,10 +56,10 @@ const ShowCase = ({ showCaseResults }: { showCaseResults: IShowCaseResult }) => 
                                 <BiLinkExternal className="text-white" />
                             </button>
                             <button className="ml-6" onClick={(() => handleClickToPlayground(folder.folder, file.fileName))}>
-                                {currentSelected !== `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
+                                {currentSelected !== `/playground/${folder.folder}/${fileName}` && (
                                     <BiCode className="text-white" />
                                 )}
-                                {currentSelected === `/playground/${folder.folder}/${file.fileName.split('.')[0]}` && (
+                                {currentSelected === `/playground/${folder.folder}/${fileName}` && (
                                     <Loading color="success" size="xs" />
                                 )}
                             </button>
