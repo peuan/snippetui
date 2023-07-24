@@ -7,6 +7,9 @@ import { javascript } from '@codemirror/lang-javascript';
 import { html } from '@codemirror/lang-html';
 import { githubDarkInit } from '@uiw/codemirror-theme-github';
 
+
+import clsx from 'clsx';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
 import { BiSolidMagicWand, BiDownload } from 'react-icons/bi'
 import { html_beautify, HTMLBeautifyOptions } from 'js-beautify';
 import Particles from "react-particles";
@@ -24,6 +27,7 @@ import { Button } from './ui/button';
 
 import { IPlayground } from '@/interfaces/IPlayground';
 import { WEBSITE_LINK } from '@/config';
+import ResizeHandle from './ResizeHandle';
 
 
 const Editor = ({ code, isLoading }: IPlayground) => {
@@ -32,7 +36,19 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     const [downloadUrl, setDownloadUrl] = useState("");
     const [isDownload, setIsDownload] = useState(false);
     const [imagePath, setImagePath] = useState("");
+    const defaultLayout = [50, 50]
+
+
+    const convertPixelToPercentage = (pixelValue: string, containerWidth: number) => {
+        return (parseFloat(pixelValue) / containerWidth) * 100;
+    }
+
     const pathName = usePathname()
+
+
+    const onLayout = (sizes: number[]) => {
+        document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`;
+    };
 
     // formatter options
     const options: HTMLBeautifyOptions = {
@@ -133,6 +149,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
     return (
         <div className='mt-2'>
+
             <Particles container={particlesContainer} id="tsparticles" loaded={particlesLoaded} init={particlesInit}
                 options={{
                     "fullScreen": {
@@ -261,6 +278,8 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
                 }}
             />
+
+
             <div className='flex justify-center items-center px-2 my-2  absolute z-[1] lg:top-[55px] top-[155px]  lg:right-0 right-2'>
                 <div className='flex justify-center items-center'>
                     <Button size={'sm'} variant={'outline'} onClick={(() => handleFormatSyntax())} className='flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
@@ -287,35 +306,45 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     </FacebookShareButton>
                 </div>
             </div>
+
             <div className='lg:flex'>
-                <div className='w-full lg:w-1/2 border-stone-600'>
-                    <CodeMirror
-                        value={editorCode}
-                        minHeight="calc(100vh - 110px)"
-                        maxHeight='calc(100vh - 110px)'
-                        extensions={[html(), javascript()]}
-                        onChange={onChange}
-                        theme={[githubDarkInit({
-                            settings: {
-                                caret: '#c6c6c6',
-                            }
-                        })]}
-                        basicSetup={{
-                            foldGutter: false,
-                            dropCursor: false,
-                            allowMultipleSelections: false,
-                            indentOnInput: false,
-                            highlightSelectionMatches: true,
-                            autocompletion: true,
-                            defaultKeymap: true,
-                            closeBrackets: true,
-                            highlightActiveLine: true,
-                        }}
-                    />
-                </div>
-                <div className='w-full lg:w-1/2 bg-slate-800 flex justify-center items-center'>
-                    <Preview isLoading={isLoading} code={editorCode} />
-                </div>
+                <PanelGroup direction="horizontal" onLayout={onLayout}>
+                    <Panel defaultSize={defaultLayout[0]} className=''>
+                        <div className='w-full border-stone-600'>
+                            <CodeMirror
+                                value={editorCode}
+                                minHeight="calc(100vh - 110px)"
+                                maxHeight='calc(100vh - 110px)'
+                                extensions={[html(), javascript()]}
+                                onChange={onChange}
+                                theme={[githubDarkInit({
+                                    settings: {
+                                        caret: '#c6c6c6',
+                                    }
+                                })]}
+                                basicSetup={{
+                                    foldGutter: false,
+                                    dropCursor: false,
+                                    allowMultipleSelections: false,
+                                    indentOnInput: false,
+                                    highlightSelectionMatches: true,
+                                    autocompletion: true,
+                                    defaultKeymap: true,
+                                    closeBrackets: true,
+                                    highlightActiveLine: true,
+                                }}
+                            />
+                        </div>
+                    </Panel>
+                    <ResizeHandle />
+                    <Panel defaultSize={defaultLayout[1]}>
+                        <div className="w-full  h-full bg-slate-800 flex justify-center items-center cursor-col-resize">
+                            <Preview isLoading={isLoading} code={editorCode} />
+                        </div>
+                    </Panel>
+                </PanelGroup>
+
+
             </div>
         </div>
     )
