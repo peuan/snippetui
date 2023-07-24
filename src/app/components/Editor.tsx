@@ -2,14 +2,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation'
 
-import CodeMirror from '@uiw/react-codemirror';
+import CodeMirror, { ReactCodeMirrorRef } from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
 import { html } from '@codemirror/lang-html';
 import { githubDarkInit } from '@uiw/codemirror-theme-github';
 
 
 import clsx from 'clsx';
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
+import { Panel, PanelGroup } from 'react-resizable-panels'
 import { BiSolidMagicWand, BiDownload } from 'react-icons/bi'
 import { html_beautify, HTMLBeautifyOptions } from 'js-beautify';
 import Particles from "react-particles";
@@ -28,6 +28,7 @@ import { Button } from './ui/button';
 import { IPlayground } from '@/interfaces/IPlayground';
 import { WEBSITE_LINK } from '@/config';
 import ResizeHandle from './ResizeHandle';
+import Log from './Log';
 
 
 const Editor = ({ code, isLoading }: IPlayground) => {
@@ -36,12 +37,12 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     const [downloadUrl, setDownloadUrl] = useState("");
     const [isDownload, setIsDownload] = useState(false);
     const [imagePath, setImagePath] = useState("");
-    const defaultLayout = [50, 50]
+    const [isShowLog, setIsShowLog] = useState(false);
 
+    const [log, setLog] = useState("");
 
-    const convertPixelToPercentage = (pixelValue: string, containerWidth: number) => {
-        return (parseFloat(pixelValue) / containerWidth) * 100;
-    }
+    const defaultLayout = [50, 50, 50]
+    const codeMirrorRef = useRef<ReactCodeMirrorRef>({});
 
     const pathName = usePathname()
 
@@ -59,6 +60,27 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     useEffect(() => {
         setEditorCode(code)
     }, [code])
+
+    useEffect(() => {
+        if (codeMirrorRef.current?.state) {
+            let code = codeMirrorRef.current?.state.doc.toString()
+            setLog(code)
+        }
+
+        if (codeMirrorRef.current?.view) {
+            console.log('EditorView:', codeMirrorRef.current?.view?.state?.doc?.toString())
+        };
+        if (codeMirrorRef.current?.state) {
+            let code = codeMirrorRef.current?.state.doc.toString();
+            // console.log(code)
+
+            // console.log('EditorState:', codeMirrorRef.current?.state);
+        }
+        if (codeMirrorRef.current?.editor) {
+            // console.log('HTMLDivElement:', codeMirrorRef.current?.editor);
+        }
+
+    }, [code, editorCode]);
 
     // particle effect
     const particlesInit = useCallback(async (engine: Engine) => {
@@ -312,6 +334,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     <Panel defaultSize={defaultLayout[0]} className=''>
                         <div className='w-full border-stone-600'>
                             <CodeMirror
+                                ref={codeMirrorRef}
                                 value={editorCode}
                                 minHeight="calc(100vh - 110px)"
                                 maxHeight='calc(100vh - 110px)'
@@ -337,14 +360,28 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                         </div>
                     </Panel>
                     <ResizeHandle />
-                    <Panel defaultSize={defaultLayout[1]}>
-                        <div className="w-full  h-full bg-slate-800 flex justify-center items-center cursor-col-resize">
-                            <Preview isLoading={isLoading} code={editorCode} />
-                        </div>
+                    <Panel>
+                        <PanelGroup direction="vertical" onLayout={onLayout}>
+                            <Panel defaultSize={defaultLayout[1]}>
+                                <div className="h-full bg-slate-800 flex justify-center items-center">
+                                    <Preview isLoading={isLoading} code={editorCode} />
+                                </div>
+                            </Panel>
+                            {isShowLog && (
+                                <>
+                                    <ResizeHandle className='rotate-90' />
+                                    <Panel defaultSize={defaultLayout[2]} collapsible={true}
+                                    >
+                                        <div className="h-full flex justify-center items-center">
+                                            <Log log={log} />
+                                        </div>
+                                    </Panel>
+                                </>
+                            )}
+                            <Button onClick={(() => setIsShowLog(!isShowLog))} className='w-20 h-6 my-2 bg-slate-700 text-white border-none rounded-none' size={'default'} variant={'outline'}>LOG</Button>
+                        </PanelGroup>
                     </Panel>
                 </PanelGroup>
-
-
             </div>
         </div>
     )
