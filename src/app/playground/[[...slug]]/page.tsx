@@ -137,7 +137,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
 
                         <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
                             <DialogTrigger asChild>
-                                <Button onClick={(() => onOpenDialog)} className="ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4 bg-indigo-500 hover:bg-indigo-600" variant="default">Get Started <Image className="ml-2" src={'/ChatGPT.svg'} alt="chatgpt" width={'30'} height={'30'} /></Button>
+                                <Button onClick={(() => onOpenDialog)} className="ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4 bg-indigo-500 hover:bg-indigo-600 h-11" variant="default">Get Started <Image className="ml-2" src={'/ChatGPT.svg'} alt="chatgpt" width={'30'} height={'30'} /></Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[425px]" >
                                 <DialogHeader>
