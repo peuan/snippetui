@@ -31,7 +31,16 @@ import ResizeHandle from './ResizeHandle';
 import Log from './Log';
 
 
+var minLines = 0;
+var startingValue = '';
+for (var i = 0; i < minLines; i++) {
+    startingValue += '\n';
+}
+
 const Editor = ({ code, isLoading }: IPlayground) => {
+
+
+
     const [editorCode, setEditorCode] = useState<string | undefined>(code);
     let particlesContainer = useRef<Container>(null)
     const [downloadUrl, setDownloadUrl] = useState("");
@@ -39,7 +48,6 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     const [imagePath, setImagePath] = useState("");
     const [isShowLog, setIsShowLog] = useState(false);
 
-    const [log, setLog] = useState("");
 
     const defaultLayout = [50, 50, 50]
     const codeMirrorRef = useRef<ReactCodeMirrorRef>({});
@@ -57,30 +65,43 @@ const Editor = ({ code, isLoading }: IPlayground) => {
         indent_with_tabs: true
     }
 
+
+
+    const executeCode = (code: string) => {
+        console.log(code)
+    };
+
+
+    const debouncedExcuteCode = useCallback(
+        debounce(async (value: string) => {
+            executeCode(value)
+        }, 100),
+        []
+    );
+
     useEffect(() => {
         setEditorCode(code)
     }, [code])
 
     useEffect(() => {
-        if (codeMirrorRef.current?.state) {
-            let code = codeMirrorRef.current?.state.doc.toString()
-            setLog(code)
-        }
+        // Example usage:
 
-        if (codeMirrorRef.current?.view) {
-            console.log('EditorView:', codeMirrorRef.current?.view?.state?.doc?.toString())
-        };
-        if (codeMirrorRef.current?.state) {
-            let code = codeMirrorRef.current?.state.doc.toString();
-            // console.log(code)
-
-            // console.log('EditorState:', codeMirrorRef.current?.state);
+        if (editorCode) {
+            debouncedExcuteCode(editorCode)
         }
-        if (codeMirrorRef.current?.editor) {
-            // console.log('HTMLDivElement:', codeMirrorRef.current?.editor);
-        }
+        // if (codeMirrorRef.current?.view) {
+        // };
+        // if (codeMirrorRef.current?.state) {
+        //     let code = codeMirrorRef.current?.state.doc.toString();
+        //     // console.log(code)
 
-    }, [code, editorCode]);
+        //     // console.log('EditorState:', codeMirrorRef.current?.state);
+        // }
+        // if (codeMirrorRef.current?.editor) {
+        //     // console.log('HTMLDivElement:', codeMirrorRef.current?.editor);
+        // }
+
+    }, [code, debouncedExcuteCode, editorCode]);
 
     // particle effect
     const particlesInit = useCallback(async (engine: Engine) => {
@@ -331,7 +352,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
             <div className='lg:flex'>
                 <PanelGroup direction="horizontal" onLayout={onLayout}>
-                    <Panel defaultSize={defaultLayout[0]} className=''>
+                    <Panel id="panel-1" order={1} defaultSize={defaultLayout[0]} className=''>
                         <div className='w-full border-stone-600'>
                             <CodeMirror
                                 ref={codeMirrorRef}
@@ -360,9 +381,9 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                         </div>
                     </Panel>
                     <ResizeHandle />
-                    <Panel>
+                    <Panel id="panel-2" order={2} defaultSize={defaultLayout[1]}>
                         <PanelGroup direction="vertical" onLayout={onLayout}>
-                            <Panel defaultSize={defaultLayout[1]}>
+                            <Panel id="panel-3" order={3} defaultSize={defaultLayout[1]}>
                                 <div className="h-full bg-slate-800 flex justify-center items-center">
                                     <Preview isLoading={isLoading} code={editorCode} />
                                 </div>
@@ -370,10 +391,10 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                             {isShowLog && (
                                 <>
                                     <ResizeHandle className='rotate-90' />
-                                    <Panel defaultSize={defaultLayout[2]} collapsible={true}
+                                    <Panel id="panel-4" order={4} defaultSize={defaultLayout[2]} collapsible={true}
                                     >
                                         <div className="h-full flex justify-center items-center">
-                                            <Log log={log} />
+                                            <Log />
                                         </div>
                                     </Panel>
                                 </>

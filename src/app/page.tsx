@@ -150,7 +150,7 @@ export default function Home() {
                 Showcase
               </button>
             </div>
-            h</div>
+          </div>
           {currentPage.page === 'BATTLE' && (
             <>
               <Battle battleResults={battleResults} />
