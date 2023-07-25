@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Editor from "@/components/Editor";
 import Loading from "@/components/Loading";
 import { useGetCodeByPathQuery } from "@/redux/services/playgroundApi";
@@ -48,7 +48,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
     const [isInvalidApiKey, setIsInvalidApiKey] = useState(false);
 
     const [code, setCode] = useState(data?.code)
-
+    const inputRef = useRef<any>()
     const dispatch = useAppDispatch();
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -91,6 +91,10 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
         if (!isInvalidApiKey && apiKey) {
             dispatch(setChatGPTApiKey({ apiKey: apiKey }))
             setIsDialogOpen(false)
+            setTimeout(() => {
+                inputRef.current.focus();
+
+            }, 200)
         } else {
             setIsInvalidApiKey(true)
         }
@@ -123,7 +127,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
                             <div className={clsx(`flex w-full flex-grow relative border-2 bg-white rounded-md  dark:text-white  shadow-xs dark:shadow-xs`,
                                 isInvalidInput && "border-red-500"
                             )}>
-                                <Input disabled={!chatGPTApiKey} onChange={((event) => onMessageChange(event))} value={chatMessage} placeholder="Send a message" className="border-none" />
+                                <Input ref={inputRef} disabled={!chatGPTApiKey} onChange={((event) => onMessageChange(event))} value={chatMessage} placeholder="Send a message" className="border-none" />
                                 <Button type="submit" variant={'ghost'} className="p-2 text-green-600" disabled={isCallingApi || !chatGPTApiKey}>
                                     {isCallingApi && (
                                         <LoadingButton color="success" size="xs" />
@@ -137,7 +141,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
 
                         <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
                             <DialogTrigger asChild>
-                                <Button onClick={(() => onOpenDialog)} className="ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4 bg-indigo-500 hover:bg-indigo-600 h-11" variant="default">Get Started <Image className="ml-2" src={'/ChatGPT.svg'} alt="chatgpt" width={'30'} height={'30'} /></Button>
+                                <Button onClick={(() => onOpenDialog)} className=" border-transparent focus:border-transparent focus:ring-0 ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4 bg-indigo-500 hover:bg-indigo-600 h-11" variant="default">Get Started <Image className="ml-2" src={'/ChatGPT.svg'} alt="chatgpt" width={'30'} height={'30'} /></Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-[425px]" >
                                 <DialogHeader>

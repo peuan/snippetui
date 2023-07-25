@@ -19,7 +19,6 @@ export async function POST(request: NextRequest) {
           content: `${data.message}. No explaination and Don't include the question in your response and got only the code as output. Don't seperate html and css please response in once`,
         },
       ],
-      max_tokens: 1000,
       n: 1,
       stream: false,
       stop: null,

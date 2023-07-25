@@ -232,3 +232,7 @@ body {
 .cm-lineNumbers {
   background: #0f172a !important;
 }
+
+.log-container {
+  transition: height 0.3s ease; /* Add a transition property for the height with a duration and easing */
+}

@@ -1,15 +1,14 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from 'react';
+import { Console, Hook, Unhook } from 'console-feed';
 
-interface LogProp {
-    log: any
-}
-const Log = ({ log }: LogProp) => {
-    useEffect(() => {
-        console.log(log)
-    }, [log])
+const ConsoleOutput: React.FC = () => {
+
+
     return (
-        <div>{log}</div>
+        <div>
+            <h1>helllo</h1>
+        </div>
     );
-}
+};
 
-export default Log;
+export default ConsoleOutput;
