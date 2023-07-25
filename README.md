@@ -1,3 +1,18 @@
+# Integrate with ChatGPT
+
+![alt text](/doc-images/chatgpt-popup-apikey.png)
+![alt text](/doc-images/chat-gpt.png)
+
+https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-03a6b0e8ab68
+
+# Realtime Logging
+
+![alt text](/doc-images/logging.png)
+
+# Resize Panel
+
+![alt text](/doc-images/resize-panel.png)
+
 # Home Page
 
 ![alt text](/doc-images/homepage.png)
@@ -10,12 +25,6 @@
 
 ![alt text](/doc-images/playground.png)
 
-# Integrate with ChatGPT
-
-![alt text](/doc-images/chatgpt-popup-apikey.png)
-
-https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-03a6b0e8ab68
-
 # Code Formatter
 
 ![alt text](/doc-images/code-formatter.png)
@@ -23,6 +32,10 @@ https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-
 # Download as image
 
 ![alt text](/doc-images/download-as-image.png)
+
+# Social Share
+
+![alt text](/doc-images/social-share.png)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
