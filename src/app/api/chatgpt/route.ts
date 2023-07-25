@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       messages: [
         {
           role: "user",
-          content: `${data.message}. No explaination and Don't include the question in your response and got only the code as output. Don't seperate html and css please response in once`,
+          content: `${data.message}. No explaination and Don't include the question in your response and got only the code as output. Don't seperate html,css,javascript please response in once`,
         },
       ],
       n: 1,

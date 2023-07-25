@@ -8,7 +8,6 @@ import { html } from '@codemirror/lang-html';
 import { githubDarkInit } from '@uiw/codemirror-theme-github';
 
 
-import clsx from 'clsx';
 import { Panel, PanelGroup } from 'react-resizable-panels'
 import { BiSolidMagicWand, BiDownload } from 'react-icons/bi'
 import { html_beautify, HTMLBeautifyOptions } from 'js-beautify';
@@ -24,11 +23,19 @@ import {
 
 import Preview from './Preview';
 import { Button } from './ui/button';
-
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import { IPlayground } from '@/interfaces/IPlayground';
 import { WEBSITE_LINK } from '@/config';
 import ResizeHandle from './ResizeHandle';
 import Log from './Log';
+
+import { generateHtmlResult } from '@/lib/html';
 
 
 var minLines = 0;
@@ -47,7 +54,11 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     const [isDownload, setIsDownload] = useState(false);
     const [imagePath, setImagePath] = useState("");
     const [isShowLog, setIsShowLog] = useState(false);
+    const [log, setLog] = useState('Console was cleared');
+    const [bottomPanel, setBottomPanel] = useState(50);
+    const [language, setLanguage] = useState('html');
 
+    const iframeRef = useRef<any>()
 
     const defaultLayout = [50, 50, 50]
     const codeMirrorRef = useRef<ReactCodeMirrorRef>({});
@@ -66,16 +77,55 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     }
 
 
+    const addLog = (type: any, method: any, arg: any) => {
+        let data = arg;
+        setLog(data)
+    }
+
+    const validateJS = (iframe: any, js: any) => {
+        let isValid = false;
+        try {
+            iframe.contentWindow.eval(js);
+            isValid = true;
+        } catch (error) {
+            addLog('string', 'error', error);
+        }
+        return isValid;
+    }
+
+    const updateConsole = (iframe: any) => {
+
+        const methods = ['log', 'debug', 'warn', 'error', 'info'];
+        methods.forEach((method) => {
+            iframe.contentWindow.console[method] = function () {
+                for (let i in arguments) {
+                    const arg = arguments[i];
+                    const type = typeof arg;
+                    addLog(type, method, arg);
+                }
+            }
+        });
+    }
+
 
     const executeCode = (code: string) => {
-        console.log(code)
+        const isValid = validateJS(iframeRef.current, code);
+        if (isValid) {
+            const document = iframeRef.current.contentDocument;
+            document.open()
+            document.write(generateHtmlResult(
+                code,
+            ));
+            document.close();
+            updateConsole(iframeRef.current);
+        }
     };
 
 
     const debouncedExcuteCode = useCallback(
-        debounce(async (value: string) => {
+        debounce((value: string) => {
             executeCode(value)
-        }, 100),
+        }, 500),
         []
     );
 
@@ -84,22 +134,23 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     }, [code])
 
     useEffect(() => {
+        if (!isShowLog) {
+            setLog("Console was cleared")
+        }
+    }, [isShowLog])
+    useEffect(() => {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('/sw.js')
+                .then((registration) => console.log('scope is: ', registration.scope));
+        }
+    }, []);
+    useEffect(() => {
         // Example usage:
 
         if (editorCode) {
             debouncedExcuteCode(editorCode)
         }
-        // if (codeMirrorRef.current?.view) {
-        // };
-        // if (codeMirrorRef.current?.state) {
-        //     let code = codeMirrorRef.current?.state.doc.toString();
-        //     // console.log(code)
-
-        //     // console.log('EditorState:', codeMirrorRef.current?.state);
-        // }
-        // if (codeMirrorRef.current?.editor) {
-        //     // console.log('HTMLDivElement:', codeMirrorRef.current?.editor);
-        // }
 
     }, [code, debouncedExcuteCode, editorCode]);
 
@@ -128,6 +179,9 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     }, [debouncedSetCode]);
 
 
+    const onResize = (e: any) => {
+        setBottomPanel(Math.ceil(e))
+    }
     // handle formatter
     const handleFormatSyntax = () => {
         particlesContainer.current?.start();
@@ -176,6 +230,10 @@ const Editor = ({ code, isLoading }: IPlayground) => {
         } finally {
             setIsDownload(false)
         }
+    }
+
+    const handleSelectLanguage = (event: string) => {
+        setLanguage(event)
     }
 
 
@@ -323,43 +381,60 @@ const Editor = ({ code, isLoading }: IPlayground) => {
             />
 
 
-            <div className='flex justify-center items-center px-2 my-2  absolute z-[1] lg:top-[55px] top-[155px]  lg:right-0 right-2'>
-                <div className='flex justify-center items-center'>
-                    <Button size={'sm'} variant={'outline'} onClick={(() => handleFormatSyntax())} className='flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
-                        <BiSolidMagicWand className='text-white' />
-                    </Button>
+            <div className='flex lg:justify-between justify-center lg:gap-0 gap-10 items-center px-2 my-2  lg:w-1/2 w-full absolute z-[1] lg:top-[55px] top-[155px]  lg:right-0'>
+                <div>
+                    <div className='lg:w-[10vw] w-[30vw]'>
+                        <Select defaultValue={language} onValueChange={((event) => handleSelectLanguage(event))}>
+                            <SelectTrigger className='bg-white'>
+                                <SelectValue placeholder="Select Language" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="html">HTML</SelectItem>
+                                <SelectItem value="javascript">JavaScript</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
-                <div className='text-white text-sm text-right ml-2'>{code?.trim().length || 0} {" "}characters</div>
-                <Button disabled={isDownload || !editorCode} size={'sm'} variant={'outline'} onClick={(() => handleDownloadImage())} className='ml-2 flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
-                    {!isDownload && (
-                        <BiDownload className='text-white' />
-                    )}
+                <div className='flex justify-center items-center'>
+                    <div className='flex justify-center items-center'>
+                        <Button size={'sm'} variant={'outline'} onClick={(() => handleFormatSyntax())} className='flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
+                            <BiSolidMagicWand className='text-white' />
+                        </Button>
+                    </div>
+                    <div className='text-white text-sm text-right ml-2'>{code?.trim().length || 0} {" "}characters</div>
+                    <Button disabled={isDownload || !editorCode} size={'sm'} variant={'outline'} onClick={(() => handleDownloadImage())} className='ml-2 flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
+                        {!isDownload && (
+                            <BiDownload className='text-white' />
+                        )}
 
-                    {isDownload && (
-                        <ReloadIcon className="h-4 w-4 animate-spin" />
-                    )}
-                </Button>
-                <div className='ml-2 mr-2 mt-2'>
-                    <FacebookShareButton
-                        url={`${WEBSITE_LINK}${pathName}`}
-                        quote={'Begin Your Coding Journey Here.'}
-                        hashtag={'#snippetui'}
-                    >
-                        <FacebookIcon size={25} round />
-                    </FacebookShareButton>
+                        {isDownload && (
+                            <ReloadIcon className="h-4 w-4 animate-spin" />
+                        )}
+                    </Button>
+                    <div className='ml-2 mr-2 mt-2'>
+                        <FacebookShareButton
+                            url={`${WEBSITE_LINK}${pathName}`}
+                            quote={'Begin Your Coding Journey Here.'}
+                            hashtag={'#snippetui'}
+                        >
+                            <FacebookIcon size={25} round />
+                        </FacebookShareButton>
+                    </div>
                 </div>
             </div>
 
             <div className='lg:flex'>
+
                 <PanelGroup direction="horizontal" onLayout={onLayout}>
                     <Panel id="panel-1" order={1} defaultSize={defaultLayout[0]} className=''>
                         <div className='w-full border-stone-600'>
+
                             <CodeMirror
                                 ref={codeMirrorRef}
                                 value={editorCode}
                                 minHeight="calc(100vh - 110px)"
                                 maxHeight='calc(100vh - 110px)'
-                                extensions={[html(), javascript()]}
+                                extensions={[language === 'html' ? html() : javascript()]}
                                 onChange={onChange}
                                 theme={[githubDarkInit({
                                     settings: {
@@ -391,10 +466,10 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                             {isShowLog && (
                                 <>
                                     <ResizeHandle className='rotate-90' />
-                                    <Panel id="panel-4" order={4} defaultSize={defaultLayout[2]} collapsible={true}
+                                    <Panel onResize={((e) => onResize(e))} id="panel-4" order={4} defaultSize={defaultLayout[2]} collapsible={true}
                                     >
                                         <div className="h-full flex justify-center items-center">
-                                            <Log />
+                                            <Log code={log} />
                                         </div>
                                     </Panel>
                                 </>
@@ -404,6 +479,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     </Panel>
                 </PanelGroup>
             </div>
+            <iframe className='hidden' ref={iframeRef}></iframe>
         </div>
     )
 }

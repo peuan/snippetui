@@ -23,7 +23,7 @@ const Preview = ({ code, isLoading }: { code: string | undefined, isLoading?: bo
                 <Loading />
             )}
             <>
-                <iframe title="result" className="preview-iframe" ref={iframeRef} />
+                <iframe title="result" className={`preview-iframe mt-10`} ref={iframeRef} />
             </>
         </div >
 
