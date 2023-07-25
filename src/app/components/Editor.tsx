@@ -125,7 +125,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     const debouncedExcuteCode = useCallback(
         debounce((value: string) => {
             executeCode(value)
-        }, 500),
+        }, 200),
         []
     );
 

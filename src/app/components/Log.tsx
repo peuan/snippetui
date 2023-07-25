@@ -31,6 +31,7 @@ const ConsoleLog = ({ code }: { code: any }) => {
 
         // Log a message to demonstrate the functionality
         console.log(code);
+
     }, [code, getTimestamp]);
 
     return (
