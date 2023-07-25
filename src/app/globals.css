@@ -236,3 +236,7 @@ body {
 .log-container {
   transition: height 0.3s ease; /* Add a transition property for the height with a duration and easing */
 }
+
+li[role="treeitem"] {
+  background: unset !important;
+}
