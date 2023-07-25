@@ -64,7 +64,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
         } else {
             setIsInvalidInput(true)
         }
-        // setChatMessage("")
+        setChatMessage("")
         setIsInvalidInput(false)
     }
 
