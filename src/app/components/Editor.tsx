@@ -401,7 +401,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                             <BiSolidMagicWand className='text-white' />
                         </Button>
                     </div>
-                    <div className='text-white text-sm text-right ml-2'>{editorCode?.trim().length || 0} {" "}characters</div>
+                    <div className='text-white text-sm text-right ml-2'>{editorCode?.trim().length.toLocaleString("en-US") || 0} {" "}characters</div>
                     <Button disabled={isDownload || !editorCode} size={'sm'} variant={'outline'} onClick={(() => handleDownloadImage())} className='ml-2 flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none'>
                         {!isDownload && (
                             <BiDownload className='text-white' />
