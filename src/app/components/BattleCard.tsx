@@ -55,6 +55,7 @@ const Card = ({ folder, file, index }: { folder: string, file: IFile, index: num
 
     //handle dialog for display description
     const handleDialog = () => {
+        console.log('hello')
         setIsDialogOpen(true)
     }
 
@@ -125,12 +126,12 @@ const Card = ({ folder, file, index }: { folder: string, file: IFile, index: num
                     )}
                     {file.description && (
                         <div className="ml-2 flex justify-center items-center">
-                            <Button variant={file.color || 'destructive'} className="rounded-full" size={'sm'} onClick={(() => handleDialog)}>
+                            <Button variant={file.color || 'destructive'} className="rounded-full" size={'sm'} onClick={(() => handleDialog())}>
                                 <BiInfoCircle />
                             </Button>
 
                             <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
-                                <DialogContent className="sm:max-w-[425px]" >
+                                <DialogContent className="max-w-[300px]" >
                                     <DialogHeader>
                                         <DialogTitle> {file.description}</DialogTitle>
                                     </DialogHeader>
