@@ -3,7 +3,7 @@ import { BiPlay } from 'react-icons/bi'
 
 import { CSSBATTLE_URL } from "@/config";
 import { IBattleResult } from "@/interfaces/IBattle";
-import Card from "./Card";
+import Card from "./BattleCard";
 
 const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
 
