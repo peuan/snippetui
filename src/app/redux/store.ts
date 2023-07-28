@@ -1,13 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-import battleReducer from "./features/battleSlice";
-import showCaseReducer from "./features/showCaseSlice";
-import playgroundReducer from "./features/playgroundSlice";
-import chatGPTReducer from "./features/chatGPTSlice";
-import { battleApi } from "@/redux/services/battleApi";
-import { showCaseApi } from "@/redux/services/showCaseApi";
-import { playgroundApi } from "@/redux/services/playgroundApi";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
-import { chatGPTApi } from "@/redux/services/chatGPTApi";
+import { configureStore } from "@reduxjs/toolkit"
+import battleReducer from "./features/battleSlice"
+import showCaseReducer from "./features/showCaseSlice"
+import playgroundReducer from "./features/playgroundSlice"
+import chatGPTReducer from "./features/chatGPTSlice"
+import { battleApi } from "@/redux/services/battleApi"
+import { showCaseApi } from "@/redux/services/showCaseApi"
+import { playgroundApi } from "@/redux/services/playgroundApi"
+import { setupListeners } from "@reduxjs/toolkit/dist/query"
+import { chatGPTApi } from "@/redux/services/chatGPTApi"
 
 export const store = configureStore({
   reducer: {
@@ -28,9 +28,9 @@ export const store = configureStore({
       playgroundApi.middleware,
       chatGPTApi.middleware
     ),
-});
+})
 
-setupListeners(store.dispatch);
+setupListeners(store.dispatch)
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

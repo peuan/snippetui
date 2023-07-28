@@ -1,5 +1,5 @@
-import { IShowCaseResult } from "@/interfaces/IShowCase";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IShowCaseResult } from "@/interfaces/IShowCase"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const showCaseApi = createApi({
   reducerPath: "showCaseApi",
@@ -15,6 +15,6 @@ export const showCaseApi = createApi({
       query: ({ pageNumber }) => `showcase/${pageNumber}`,
     }),
   }),
-});
+})
 
-export const { useGetShowCasesQuery, useGetShowCaseByIdQuery } = showCaseApi;
+export const { useGetShowCasesQuery, useGetShowCaseByIdQuery } = showCaseApi

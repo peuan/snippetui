@@ -1,5 +1,5 @@
 interface IPlayground {
-  code?: string;
-  isLoading?: boolean;
+  code?: string
+  isLoading?: boolean
 }
-export type { IPlayground };
+export type { IPlayground }

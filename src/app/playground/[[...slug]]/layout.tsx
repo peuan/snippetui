@@ -1,11 +1,7 @@
 export default function DashboardLayout({
-    children, // will be a page or nested layout
+  children, // will be a page or nested layout
 }: {
-    children: React.ReactNode
+  children: React.ReactNode
 }) {
-    return (
-        <div className="mt-2">
-            {children}
-        </div>
-    )
+  return <div className="mt-2">{children}</div>
 }
