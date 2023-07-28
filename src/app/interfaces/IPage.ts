@@ -1,5 +1,5 @@
 interface IPages {
-  page: "BATTLE" | "SHOWCASE";
+  page: "BATTLE" | "SHOWCASE"
 }
 
-export type { IPages };
+export type { IPages }

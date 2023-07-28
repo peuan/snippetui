@@ -1,128 +1,133 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { TbMoustache } from 'react-icons/tb'
-import clsx from 'clsx'
-import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
+import { useEffect, useState } from "react"
+import { TbMoustache } from "react-icons/tb"
+import clsx from "clsx"
+import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
 
 // import component
-import Battle from "@/components/Battle";
-import ShowCase from "@/components/Showcase";
-import Loading from '@/components/Loading'
-import ScrollToTop from '@/components/ScrollToTop';
+import Battle from "@/components/Battle"
+import ShowCase from "@/components/Showcase"
+import Loading from "@/components/Loading"
+import ScrollToTop from "@/components/ScrollToTop"
 
 // import reducer
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { setBattleResult } from "@/redux/features/battleSlice";
-import { setShowCaseResult } from "./redux/features/showCaseSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { setBattleResult } from "@/redux/features/battleSlice"
+import { setShowCaseResult } from "./redux/features/showCaseSlice"
 
 // import api services
-import { useGetBattlesQuery } from "@/redux/services/battleApi";
-import { useGetShowCasesQuery } from "./redux/services/showCaseApi";
-
+import { useGetBattlesQuery } from "@/redux/services/battleApi"
+import { useGetShowCasesQuery } from "./redux/services/showCaseApi"
 
 // import interface
-import { IPages } from "./interfaces/IPage";
-
+import { IPages } from "./interfaces/IPage"
 
 // items per page
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 3
 
 export default function Home() {
-  const battleResults = useAppSelector((state) => state.battleReducer);
-  const battleTotalPages = useAppSelector((state) => state.battleReducer.totalItems);
+  const battleResults = useAppSelector((state) => state.battleReducer)
+  const battleTotalPages = useAppSelector(
+    (state) => state.battleReducer.totalItems
+  )
 
-  const showCaseResults = useAppSelector((state) => state.showCaseReducer);
-  const showCaseTotalPages = useAppSelector((state) => state.showCaseReducer.totalItems);
+  const showCaseResults = useAppSelector((state) => state.showCaseReducer)
+  const showCaseTotalPages = useAppSelector(
+    (state) => state.showCaseReducer.totalItems
+  )
 
-
-  const [pageNumber, setPageNumber] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [currentPage, setCurrentPage] = useState<IPages>({ page: 'BATTLE' });
+  const [pageNumber, setPageNumber] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [currentPage, setCurrentPage] = useState<IPages>({ page: "BATTLE" })
 
   const {
     isLoading: battleLoading,
     isFetching: battleIsFetching,
     data: battleData,
-    error: battleError
-  } = useGetBattlesQuery({ pageNumber: pageNumber }, { skip: currentPage.page !== 'BATTLE' });
-  const { isLoading: showCaseLoading,
+    error: battleError,
+  } = useGetBattlesQuery(
+    { pageNumber: pageNumber },
+    { skip: currentPage.page !== "BATTLE" }
+  )
+  const {
+    isLoading: showCaseLoading,
     isFetching: showCaseFetching,
     data: showCaseData,
-    error: showCaseError
-  } = useGetShowCasesQuery({ pageNumber: pageNumber }, { skip: currentPage.page !== 'SHOWCASE' });
+    error: showCaseError,
+  } = useGetShowCasesQuery(
+    { pageNumber: pageNumber },
+    { skip: currentPage.page !== "SHOWCASE" }
+  )
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-
-    if (battleData && !battleLoading && currentPage.page === 'BATTLE') {
-      const total = Math.ceil(battleData.totalItems / ITEMS_PER_PAGE);
+    if (battleData && !battleLoading && currentPage.page === "BATTLE") {
+      const total = Math.ceil(battleData.totalItems / ITEMS_PER_PAGE)
       setTotalPages(total)
-      dispatch(setBattleResult({
-        files: battleData.files,
-        totalItems: total
-      }
-      ))
+      dispatch(
+        setBattleResult({
+          files: battleData.files,
+          totalItems: total,
+        })
+      )
 
       window.scrollTo({
         top: 0,
-        behavior: 'smooth',
-      });
+        behavior: "smooth",
+      })
     }
-  }, [currentPage.page, pageNumber, battleData, dispatch, battleLoading]);
+  }, [currentPage.page, pageNumber, battleData, dispatch, battleLoading])
 
   useEffect(() => {
-    if (showCaseData && !showCaseLoading && currentPage.page === 'SHOWCASE') {
-      const total = Math.ceil(showCaseData.totalItems / ITEMS_PER_PAGE);
+    if (showCaseData && !showCaseLoading && currentPage.page === "SHOWCASE") {
+      const total = Math.ceil(showCaseData.totalItems / ITEMS_PER_PAGE)
       setTotalPages(total)
-      dispatch(setShowCaseResult({
-        files: showCaseData.files,
-        totalItems: total
-      }
-      ))
+      dispatch(
+        setShowCaseResult({
+          files: showCaseData.files,
+          totalItems: total,
+        })
+      )
 
       window.scrollTo({
         top: 0,
-        behavior: 'smooth',
-      });
+        behavior: "smooth",
+      })
     }
-  }, [currentPage.page, pageNumber, showCaseData, dispatch, showCaseLoading]);
-
+  }, [currentPage.page, pageNumber, showCaseData, dispatch, showCaseLoading])
 
   // pagination
   const handlePreviousPage = () => {
     if (pageNumber > 1) {
-      const previousPage = pageNumber - 1;
-      setPageNumber(previousPage);
+      const previousPage = pageNumber - 1
+      setPageNumber(previousPage)
     }
-  };
+  }
   const handleNextPage = () => {
     if (pageNumber < totalPages) {
-      const nextPage = pageNumber + 1;
-      setPageNumber(nextPage);
+      const nextPage = pageNumber + 1
+      setPageNumber(nextPage)
     }
-  };
+  }
 
   // handle to display battle/showcase section
   const handlePageSection = (page: IPages) => {
     setCurrentPage({ page: page.page })
-    setPageNumber(1);
+    setPageNumber(1)
   }
-
 
   return (
     <>
-
       <div className="mb-10">
-        {(battleLoading || showCaseLoading) && (
-          <Loading />
-        )}
+        {(battleLoading || showCaseLoading) && <Loading />}
         <ScrollToTop />
         <div>
           <div className="flex flex-col justify-center items-center mt-2">
             <h1 className="text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
-              <div className="flex items-center px-5">SnippetUI
+              <div className="flex items-center px-5">
+                SnippetUI
                 <TbMoustache className="ml-2" />
               </div>
             </h1>
@@ -131,65 +136,85 @@ export default function Home() {
             </h6>
           </div>
           <div className="flex justify-center">
-
             <div className="inline-flex ">
-              <button onClick={(() => handlePageSection({ page: 'BATTLE' }))} className={clsx('text-white font-bold py-2 px-4  rounded-l-full',
-                currentPage.page === "BATTLE" && 'bg-blue-700  hover:bg-blue-800',
-                currentPage.page === "SHOWCASE" && 'bg-blue-500  hover:bg-blue-600',
-              )
-              }
+              <button
+                onClick={() => handlePageSection({ page: "BATTLE" })}
+                className={clsx(
+                  "text-white font-bold py-2 px-4  rounded-l-full",
+                  currentPage.page === "BATTLE" &&
+                    "bg-blue-700  hover:bg-blue-800",
+                  currentPage.page === "SHOWCASE" &&
+                    "bg-blue-500  hover:bg-blue-600"
+                )}
               >
                 Battle
               </button>
-              <button onClick={(() => handlePageSection({ page: 'SHOWCASE' }))} className={clsx('text-white font-bold py-2 px-4  rounded-r-full',
-                currentPage.page === "SHOWCASE" && 'bg-blue-700  hover:bg-blue-800',
-                currentPage.page === "BATTLE" && 'bg-blue-500  hover:bg-blue-600',
-              )
-              }
+              <button
+                onClick={() => handlePageSection({ page: "SHOWCASE" })}
+                className={clsx(
+                  "text-white font-bold py-2 px-4  rounded-r-full",
+                  currentPage.page === "SHOWCASE" &&
+                    "bg-blue-700  hover:bg-blue-800",
+                  currentPage.page === "BATTLE" &&
+                    "bg-blue-500  hover:bg-blue-600"
+                )}
               >
                 Showcase
               </button>
             </div>
           </div>
-          {currentPage.page === 'BATTLE' && (
+          {currentPage.page === "BATTLE" && (
             <>
               <Battle battleResults={battleResults} />
             </>
           )}
-          {currentPage.page === 'SHOWCASE' && (
+          {currentPage.page === "SHOWCASE" && (
             <ShowCase showCaseResults={showCaseResults} />
           )}
-          {(!battleLoading && !showCaseLoading) && (
+          {!battleLoading && !showCaseLoading && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
-              <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
-                pageNumber === 1 && 'opacity-50 cursor-not-allowed',
-              )
-              }
-                disabled={pageNumber === 1} onClick={handlePreviousPage}>
+              <button
+                className={clsx(
+                  "w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full",
+                  pageNumber === 1 && "opacity-50 cursor-not-allowed"
+                )}
+                disabled={pageNumber === 1}
+                onClick={handlePreviousPage}
+              >
                 Previous
               </button>
               <span className="text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
 
-              <button className={clsx('w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full',
-                pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
-              )
-              }
-                disabled={pageNumber === totalPages} onClick={handleNextPage}>
+              <button
+                className={clsx(
+                  "w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full",
+                  pageNumber === totalPages && "opacity-50 cursor-not-allowed"
+                )}
+                disabled={pageNumber === totalPages}
+                onClick={handleNextPage}
+              >
                 Next
               </button>
               <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
                 <div className="visible lg:invisible flex justify-between w-[100px] bg-green-500 py-2 px-2 rounded-full">
-                  <button onClick={handlePreviousPage} className={clsx(' hover:text-green-700 text-white font-bold',
-                    pageNumber === 1 && 'opacity-50 cursor-not-allowed',
-                  )
-                  }>
+                  <button
+                    onClick={handlePreviousPage}
+                    className={clsx(
+                      " hover:text-green-700 text-white font-bold",
+                      pageNumber === 1 && "opacity-50 cursor-not-allowed"
+                    )}
+                  >
                     <BiLeftArrow />
                   </button>
                   <span className="text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
-                  <button onClick={handleNextPage} className={clsx(' hover:text-green-700 text-white font-bold',
-                    pageNumber === totalPages && 'opacity-50 cursor-not-allowed',
-                  )
-                  }>
+                  <button
+                    onClick={handleNextPage}
+                    className={clsx(
+                      " hover:text-green-700 text-white font-bold",
+                      pageNumber === totalPages &&
+                        "opacity-50 cursor-not-allowed"
+                    )}
+                  >
                     <BiRightArrow />
                   </button>
                 </div>

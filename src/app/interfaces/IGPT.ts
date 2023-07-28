@@ -1,5 +1,5 @@
 interface IChatGPT {
-  message?: string;
-  apiKey: string;
+  message?: string
+  apiKey: string
 }
-export type { IChatGPT };
+export type { IChatGPT }

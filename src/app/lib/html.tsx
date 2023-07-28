@@ -1,6 +1,5 @@
-
 export function generateHtmlResult(js: any) {
-    return `
+  return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,5 +16,5 @@ ${js}
 })();
 </script>
 </body>
-</html>`;
+</html>`
 }

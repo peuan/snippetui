@@ -1,10 +1,10 @@
-import { IBattleResult } from "@/interfaces/IBattle";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IBattleResult } from "@/interfaces/IBattle"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initialState: IBattleResult = {
   files: [],
   totalItems: 0,
-};
+}
 
 export const battle = createSlice({
   name: "battle",
@@ -12,10 +12,10 @@ export const battle = createSlice({
   reducers: {
     reset: () => initialState,
     setBattleResult: (state, action: PayloadAction<IBattleResult>) => {
-      return { state, ...action.payload };
+      return { state, ...action.payload }
     },
   },
-});
+})
 
-export const { setBattleResult, reset } = battle.actions;
-export default battle.reducer;
+export const { setBattleResult, reset } = battle.actions
+export default battle.reducer

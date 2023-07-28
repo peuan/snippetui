@@ -1,5 +1,5 @@
-import { IBattleResult } from "@/interfaces/IBattle";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IBattleResult } from "@/interfaces/IBattle"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const battleApi = createApi({
   reducerPath: "battleApi",
@@ -15,6 +15,6 @@ export const battleApi = createApi({
       query: ({ pageNumber }) => `battle/${pageNumber}`,
     }),
   }),
-});
+})
 
-export const { useGetBattlesQuery, useGetBattleByIdQuery } = battleApi;
+export const { useGetBattlesQuery, useGetBattleByIdQuery } = battleApi

@@ -1,150 +1,163 @@
 "use client"
-import { IFile } from "@/interfaces/IBattle";
-import Iframe from "react-iframe";
-import { GITHUB_URL } from "@/config";
+import { IFile } from "@/interfaces/IBattle"
+import Iframe from "react-iframe"
+import { GITHUB_URL } from "@/config"
 
-import { useRouter } from 'next/navigation'
-import { BiCode, BiInfoCircle, BiLinkExternal, BiMedal } from "react-icons/bi";
-import { useState } from "react";
-import clsx from "clsx";
-import { FaHeartBroken } from "react-icons/fa";
-import { Button } from "./ui/button";
+import { useRouter } from "next/navigation"
+import { BiCode, BiInfoCircle, BiLinkExternal, BiMedal } from "react-icons/bi"
+import { useState } from "react"
+import clsx from "clsx"
+import { FaHeartBroken } from "react-icons/fa"
+import { Button } from "./ui/button"
 
 import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
 } from "@/components/ui/dialog"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { ReloadIcon } from "@radix-ui/react-icons"
 
+const Card = ({
+  folder,
+  file,
+  index,
+}: {
+  folder: string
+  file: IFile
+  index: number
+}) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-const Card = ({ folder, file, index }: { folder: string, file: IFile, index: number }) => {
-    const [isLoading, setIsLoading] = useState(false)
-    const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const router = useRouter()
 
-    const router = useRouter()
+  const autherName = file.fileName.split("_")[0]
 
-    const autherName = file.fileName.split("_")[0];
-
-    const getAvatar = (name: string) => {
-        switch (name) {
-            case 'niaw':
-                return '/niaw.png'
-            case 'first':
-                return '/first.png'
-            case 'chok':
-                return '/chok.png'
-            default:
-                break;
-        }
+  const getAvatar = (name: string) => {
+    switch (name) {
+      case "niaw":
+        return "/niaw.png"
+      case "first":
+        return "/first.png"
+      case "chok":
+        return "/chok.png"
+      default:
+        break
     }
+  }
 
-    const handleClickToCode = (folder: string, file: string) => {
-        window.open(`${GITHUB_URL}/blob/main/public/battle/${folder}/${file}`, file);
-    }
+  const handleClickToCode = (folder: string, file: string) => {
+    window.open(`${GITHUB_URL}/blob/main/public/battle/${folder}/${file}`, file)
+  }
 
+  const handleClickToPlayground = (folder: string, file: string) => {
+    setIsLoading(true)
 
-    const handleClickToPlayground = (folder: string, file: string) => {
-        setIsLoading(true)
+    let fileName = file.split(".")[0]
 
-        let fileName = file.split('.')[0]
+    router.push(`/playground/battle/${folder}/${fileName}`)
+  }
 
-        router.push(`/playground/battle/${folder}/${fileName}`)
-    }
+  //handle dialog for display description
+  const handleDialog = () => {
+    console.log("hello")
+    setIsDialogOpen(true)
+  }
 
-    //handle dialog for display description
-    const handleDialog = () => {
-        console.log('hello')
-        setIsDialogOpen(true)
-    }
+  const onOpenDialog = () => {
+    setIsDialogOpen(!isDialogOpen)
+  }
 
-    const onOpenDialog = () => {
-        setIsDialogOpen(!isDialogOpen)
-    }
+  return (
+    <div className="overflow-hidden bg-slate-900 box-content mobile-scale rounded-[30px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
+      <div className="flip-card overflow-hidden">
+        <div className="flip-card-inner flex justify-center items-center lg:scale-100">
+          <Iframe
+            title={file.fileName}
+            overflow="hidden"
+            className="flip-card-front"
+            url={`battle/${folder}/${file.fileName}`}
+          />
+          <div className="flip-card-back">
+            <Iframe
+              title={file.fileName}
+              overflow="hidden"
+              className="w-[380px] h-[280px]"
+              url={`battle/${folder}/${file.fileName}`}
+            />
+          </div>
+        </div>
+      </div>
 
+      <div className="flex justify-between mt-2 px-2">
+        <div className="flex justify-center mb-2">
+          <div className="rounded-full bg-slate-800 flex items-center px-2">
+            <Avatar className="ml-[-8px]">
+              <AvatarImage src={getAvatar(autherName)!} />
+              <AvatarFallback>
+                {getAvatar(autherName) ? "" : autherName[0].toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+            <h3 className="text-white font-bold py-1 px-4 text-md ">
+              {" "}
+              {autherName}
+            </h3>
+            <button onClick={() => handleClickToCode(folder, file.fileName)}>
+              <BiLinkExternal className="text-white" />
+            </button>
 
-    return (
-
-        <div className="overflow-hidden bg-slate-900 box-content mobile-scale rounded-[30px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
-
-            <div className="flip-card overflow-hidden">
-                <div className="flip-card-inner flex justify-center items-center lg:scale-100">
-                    <Iframe
-                        title={file.fileName}
-                        overflow="hidden"
-                        className="flip-card-front"
-                        url={`battle/${folder}/${file.fileName}`}
-                    />
-                    <div className="flip-card-back">
-                        <Iframe
-                            title={file.fileName}
-                            overflow="hidden"
-                            className="w-[380px] h-[280px]"
-                            url={`battle/${folder}/${file.fileName}`}
-                        />
-                    </div>
-                </div>
+            <button
+              className="ml-6"
+              onClick={() => handleClickToPlayground(folder, file.fileName)}
+            >
+              {!isLoading && <BiCode className="text-white" />}
+              {isLoading && (
+                <ReloadIcon className="text-white mr-2 h-4 w-4 animate-spin" />
+              )}
+            </button>
+          </div>
+        </div>
+        <div className="flex text-sm justify-center items-center text-white mb-2">
+          <BiMedal
+            className={clsx(
+              "w-7 h-7",
+              index === 0 && "text-yellow-500",
+              index === 1 && "text-slate-300",
+              index === 2 && "text-amber-600"
+            )}
+          />{" "}
+          {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
+          {file.status === "incomplete" && (
+            <div className="ml-2">
+              <FaHeartBroken title="incomplete" className=" text-red-400" />
             </div>
+          )}
+          {file.description && (
+            <div className="ml-2 flex justify-center items-center">
+              <Button
+                variant={file.color || "destructive"}
+                className="rounded-full"
+                size={"sm"}
+                onClick={() => handleDialog()}
+              >
+                <BiInfoCircle />
+              </Button>
 
-            <div className="flex justify-between mt-2 px-2">
-                <div className="flex justify-center mb-2">
-                    <div className="rounded-full bg-slate-800 flex items-center px-2">
-                        <Avatar
-                            className="ml-[-8px]"
-                        >
-                            <AvatarImage src={getAvatar(autherName)!} />
-                            <AvatarFallback>{getAvatar(autherName) ? '' : autherName[0].toUpperCase()}</AvatarFallback>
-
-                        </Avatar>
-                        <h3 className="text-white font-bold py-1 px-4 text-md ">
-                            {" "}
-                            {autherName}
-                        </h3>
-                        <button onClick={(() => handleClickToCode(folder, file.fileName))}>
-                            <BiLinkExternal className="text-white" />
-                        </button>
-
-                        <button className="ml-6" onClick={(() => handleClickToPlayground(folder, file.fileName))}>
-                            {!isLoading && (
-                                <BiCode className="text-white" />
-                            )}
-                            {isLoading && (
-                                <ReloadIcon className="text-white mr-2 h-4 w-4 animate-spin" />
-                            )}
-                        </button>
-                    </div>
-                </div>
-                <div className="flex text-sm justify-center items-center text-white mb-2">
-                    <BiMedal className={clsx('w-7 h-7',
-                        index === 0 && 'text-yellow-500',
-                        index === 1 && 'text-slate-300',
-                        index === 2 && 'text-amber-600')} /> {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
-                    {file.status === "incomplete" && (
-                        <div className="ml-2">
-                            <FaHeartBroken title="incomplete" className=" text-red-400" />
-                        </div>
-                    )}
-                    {file.description && (
-                        <div className="ml-2 flex justify-center items-center">
-                            <Button variant={file.color || 'destructive'} className="rounded-full" size={'sm'} onClick={(() => handleDialog())}>
-                                <BiInfoCircle />
-                            </Button>
-
-                            <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
-                                <DialogContent className="max-w-[300px]" >
-                                    <DialogHeader>
-                                        <DialogTitle> {file.description}</DialogTitle>
-                                    </DialogHeader>
-                                </DialogContent>
-                            </Dialog>
-                        </div>
-                    )}
-                </div>
+              <Dialog open={isDialogOpen} onOpenChange={onOpenDialog}>
+                <DialogContent className="max-w-[300px]">
+                  <DialogHeader>
+                    <DialogTitle> {file.description}</DialogTitle>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             </div>
-        </div >
-    );
+          )}
+        </div>
+      </div>
+    </div>
+  )
 }
 
-export default Card;
+export default Card

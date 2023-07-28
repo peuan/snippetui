@@ -1,6 +1,6 @@
-import { IBattleResult } from "@/interfaces/IBattle";
-import { IChatGPT } from "@/interfaces/IGPT";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IBattleResult } from "@/interfaces/IBattle"
+import { IChatGPT } from "@/interfaces/IGPT"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const chatGPTApi = createApi({
   reducerPath: "chatGPTApi",
@@ -24,6 +24,6 @@ export const chatGPTApi = createApi({
       }),
     }),
   }),
-});
+})
 
-export const { usePostMessageQuery } = chatGPTApi;
+export const { usePostMessageQuery } = chatGPTApi

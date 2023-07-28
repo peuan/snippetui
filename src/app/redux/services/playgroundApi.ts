@@ -1,5 +1,5 @@
-import { IPlayground } from "@/interfaces/IPlayground";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IPlayground } from "@/interfaces/IPlayground"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const playgroundApi = createApi({
   reducerPath: "playgroundApi",
@@ -12,6 +12,6 @@ export const playgroundApi = createApi({
       query: ({ path }) => path,
     }),
   }),
-});
+})
 
-export const { useGetCodeByPathQuery } = playgroundApi;
+export const { useGetCodeByPathQuery } = playgroundApi
