@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       throw error
     }
   } catch (error: any) {
-    return new Response(error.response?.data?.error?.message, {
+    return new Response(JSON.stringify(error.response?.data?.error), {
       status: error.response?.status,
     })
   }
