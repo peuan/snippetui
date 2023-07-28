@@ -36,13 +36,16 @@ export async function POST(request: NextRequest, response: NextResponse) {
     headers.set("X-Image-Path", imagePath)
 
     return new Response(screenshotBuffer, { status: 200, headers })
-  } catch (error) {
-    console.error("Error converting HTML to image:", error)
-    return new Response("Error converting HTML to image", { status: 500 })
+  } catch (error: any) {
+    // console.error("Error converting HTML to image:", error)
+    // return new Response("Error converting HTML to image", { status: 500 })
+
+    return new Response(JSON.stringify(error.response?.data?.error), {
+      status: error.response?.status,
+    })
   } finally {
     if (browser) {
       // Close the browser
-
       await browser.close()
     }
   }

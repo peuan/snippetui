@@ -22,12 +22,21 @@ export const rtkQueryErrorLogger: Middleware =
     const { dispatch } = api
 
     if (isRejectedWithValue(action)) {
-      dispatch(
-        setToast({
-          title: action.payload.data,
-          status: action.payload.originalStatus,
-        })
-      )
+      if (action.payload.status) {
+        dispatch(
+          setToast({
+            title: action.payload.data.message,
+            status: action.payload.status,
+          })
+        )
+      } else {
+        dispatch(
+          setToast({
+            title: "Something Went Wrong, Please Try Again",
+            status: 500,
+          })
+        )
+      }
     }
 
     return next(action)
