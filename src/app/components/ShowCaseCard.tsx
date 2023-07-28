@@ -1,11 +1,11 @@
 import { BiCode, BiLinkExternal } from "react-icons/bi";
 import Iframe from "react-iframe";
-import { Avatar, Badge, Loading } from "@nextui-org/react";
 import { GITHUB_URL } from "@/config";
 import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import { IShowCaseFile } from "@/interfaces/IShowCase";
-
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { Badge } from "./ui/badge";
 const Card = ({ folder, file }: { folder: string, file: IShowCaseFile }) => {
 
     const [isLoading, setIsLoading] = useState(false)
@@ -48,12 +48,7 @@ const Card = ({ folder, file }: { folder: string, file: IShowCaseFile }) => {
             <div className="flex justify-between mt-2 px-2">
                 <div className="flex justify-center mb-2">
                     <div className="rounded-full bg-slate-800 flex items-center px-2">
-                        <Avatar
-                            rounded
-                            className="ml-[-8px]"
-                            text={file.auther}
-                        />
-                        <h3 className="text-white font-bold py-1 px-4 text-md ">
+                        <h3 className="text-white font-bold py-2 px-4 text-md ">
                             {" "}
                             {file.name}
                         </h3>
@@ -65,7 +60,7 @@ const Card = ({ folder, file }: { folder: string, file: IShowCaseFile }) => {
                                 <BiCode className="text-white" />
                             )}
                             {isLoading && (
-                                <Loading color="success" size="xs" />
+                                <ReloadIcon className="text-white mr-2 h-4 w-4 animate-spin" />
                             )}
                         </button>
                     </div>
@@ -74,7 +69,7 @@ const Card = ({ folder, file }: { folder: string, file: IShowCaseFile }) => {
                 <div className="flex text-sm justify-center items-center text-white mb-2">
                     {file.tags?.map((tag, index) => {
                         return (
-                            <Badge size={'xs'} key={index} disableOutline variant={'flat'} color="primary" className="mr-2">{tag}</Badge>
+                            <Badge variant={'destructive'} key={index} className="bg-blue-500 mr-2">{tag}</Badge>
                         )
                     })}
                 </div>

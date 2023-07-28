@@ -5,7 +5,6 @@ import Loading from "@/components/Loading";
 import { useGetCodeByPathQuery } from "@/redux/services/playgroundApi";
 import { usePostMessageQuery } from "@/redux/services/chatGPTApi";
 import { BiSolidSend } from 'react-icons/bi'
-import { Loading as LoadingButton } from "@nextui-org/react";
 import clsx from 'clsx'
 
 import {
@@ -24,6 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { setChatGPTApiKey } from "@/redux/features/chatGPTSlice";
 import Image from "next/image";
+import { ReloadIcon } from "@radix-ui/react-icons";
 const Playground = ({ params }: { params: { slug: [] } }) => {
     const [message, setMessage] = useState("")
     const [chatMessage, setChatMessage] = useState("")
@@ -130,7 +130,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
                                 <Input ref={inputRef} disabled={!chatGPTApiKey} onChange={((event) => onMessageChange(event))} value={chatMessage} placeholder="Send a message" className="border-none" />
                                 <Button type="submit" variant={'ghost'} className="p-2 text-green-600" disabled={isCallingApi || !chatGPTApiKey}>
                                     {isCallingApi && (
-                                        <LoadingButton color="success" size="xs" />
+                                        <ReloadIcon className="text-white mr-2 h-4 w-4 animate-spin" />
                                     )}
                                     {!isCallingApi && (
                                         <BiSolidSend />

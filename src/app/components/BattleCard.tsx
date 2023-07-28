@@ -1,7 +1,6 @@
 "use client"
 import { IFile } from "@/interfaces/IBattle";
 import Iframe from "react-iframe";
-import { Avatar, Loading } from "@nextui-org/react";
 import { GITHUB_URL } from "@/config";
 
 import { useRouter } from 'next/navigation'
@@ -17,6 +16,8 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 
 const Card = ({ folder, file, index }: { folder: string, file: IFile, index: number }) => {
@@ -91,11 +92,12 @@ const Card = ({ folder, file, index }: { folder: string, file: IFile, index: num
                 <div className="flex justify-center mb-2">
                     <div className="rounded-full bg-slate-800 flex items-center px-2">
                         <Avatar
-                            rounded
-                            src={getAvatar(autherName)!}
                             className="ml-[-8px]"
-                            text={getAvatar(autherName) ? '' : autherName[0].toUpperCase()}
-                        />
+                        >
+                            <AvatarImage src={getAvatar(autherName)!} />
+                            <AvatarFallback>{getAvatar(autherName) ? '' : autherName[0].toUpperCase()}</AvatarFallback>
+
+                        </Avatar>
                         <h3 className="text-white font-bold py-1 px-4 text-md ">
                             {" "}
                             {autherName}
@@ -109,7 +111,7 @@ const Card = ({ folder, file, index }: { folder: string, file: IFile, index: num
                                 <BiCode className="text-white" />
                             )}
                             {isLoading && (
-                                <Loading color="success" size="xs" />
+                                <ReloadIcon className="text-white mr-2 h-4 w-4 animate-spin" />
                             )}
                         </button>
                     </div>

@@ -408,7 +408,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                         )}
 
                         {isDownload && (
-                            <ReloadIcon className="h-4 w-4 animate-spin" />
+                            <ReloadIcon className="text-white h-4 w-4 animate-spin" />
                         )}
                     </Button>
                     <div className='ml-2 mr-2 mt-2'>
