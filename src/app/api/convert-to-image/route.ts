@@ -30,7 +30,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     // Return the screenshot URL as part of the response
     const imagePath = path.resolve("./public/screenshots", fileName)
     await writeFile(imagePath, screenshotBuffer)
-    console.log(imagePath)
 
     // Create a custom header with the imagePath
     const headers = new Headers()

@@ -206,7 +206,6 @@ const Editor = ({ code, isLoading }: IPlayground) => {
         if (imagePathHeader) {
           const imgPath = imagePathHeader.split("/").pop()
           if (imgPath) {
-            console.log(imgPath)
             setImagePath(imagePath)
           }
         }

@@ -62,7 +62,6 @@ const Card = ({
 
   //handle dialog for display description
   const handleDialog = () => {
-    console.log("hello")
     setIsDialogOpen(true)
   }
 

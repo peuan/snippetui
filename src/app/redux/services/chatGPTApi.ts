@@ -10,13 +10,16 @@ export const chatGPTApi = createApi({
   }),
   tagTypes: ["Post"],
   endpoints: (builder) => ({
-    postMessage: builder.query<IChatGPT, { message: string; apiKey: string }>({
-      query: (message) => ({
+    postMessage: builder.mutation<
+      IChatGPT,
+      { message: string; apiKey: string }
+    >({
+      query: (body) => ({
         url: "/chatgpt",
         method: "POST",
         body: JSON.stringify({
-          message: message.message,
-          apikey: message.apiKey,
+          message: body.message,
+          apikey: body.apiKey,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -26,4 +29,4 @@ export const chatGPTApi = createApi({
   }),
 })
 
-export const { usePostMessageQuery } = chatGPTApi
+export const { usePostMessageMutation } = chatGPTApi
