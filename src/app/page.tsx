@@ -28,14 +28,8 @@ const ITEMS_PER_PAGE = 3
 
 export default function Home() {
   const battleResults = useAppSelector((state) => state.battleReducer)
-  const battleTotalPages = useAppSelector(
-    (state) => state.battleReducer.totalItems
-  )
 
   const showCaseResults = useAppSelector((state) => state.showCaseReducer)
-  const showCaseTotalPages = useAppSelector(
-    (state) => state.showCaseReducer.totalItems
-  )
 
   const [pageNumber, setPageNumber] = useState(1)
   const [totalPages, setTotalPages] = useState(1)

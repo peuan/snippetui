@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import Editor from "@/components/Editor"
 import Loading from "@/components/Loading"
 import { useGetCodeByPathQuery } from "@/redux/services/playgroundApi"
-import { usePostMessageQuery } from "@/redux/services/chatGPTApi"
+import { usePostMessageMutation } from "@/redux/services/chatGPTApi"
 import { BiSolidSend } from "react-icons/bi"
 import clsx from "clsx"
 
@@ -24,13 +24,11 @@ import { Input } from "@/components/ui/input"
 import { setChatGPTApiKey } from "@/redux/features/chatGPTSlice"
 import Image from "next/image"
 import { ReloadIcon } from "@radix-ui/react-icons"
-const Playground = ({ params }: { params: { slug: [] } }) => {
-  const [message, setMessage] = useState("")
-  const [chatMessage, setChatMessage] = useState("")
-  const [apiKey, setApiKey] = useState("")
-  const [isInvalidInput, setIsInvalidInput] = useState(false)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
+import { reset } from "@/redux/features/toastSlice"
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
 
+const Playground = ({ params }: { params: { slug: [] } }) => {
   const path = params.slug?.join("/")
   var apiPath = ""
   if (path?.includes("battle")) {
@@ -39,68 +37,64 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
   if (path?.includes("showcase")) {
     apiPath = `showcase-detail/${path?.replace("showcase", "")}`
   }
+
   const {
     isLoading: isFetching,
     data,
     error,
   } = useGetCodeByPathQuery({ path: apiPath }, { skip: path === undefined })
-  const {
-    isLoading: isLoadingMessage,
-    isFetching: isFetchingMessage,
-    data: dataMessage,
-    error: postMessageError,
-  } = usePostMessageQuery(
-    { message: message, apiKey: apiKey },
-    { skip: message === "" }
-  )
+  const [sendMessage, sendMessageResult] = usePostMessageMutation()
   const chatGPTApiKey = useAppSelector((state) => state.chatGPTReducer.apiKey)
-
-  const [isCallingApi, setIsCallingApi] = useState(isLoadingMessage)
+  const toastResult = useAppSelector((state) => state.toastReducer.title)
+  const [chatMessage, setChatMessage] = useState("")
+  const [apiKey, setApiKey] = useState("")
+  const [isInvalidMessage, setIsInvalidMessage] = useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isInvalidApiKey, setIsInvalidApiKey] = useState(false)
-
   const [code, setCode] = useState(data?.code)
+
+  const { toast } = useToast()
+
   const inputRef = useRef<any>()
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (error || postMessageError) {
-      alert("error")
+    if (toastResult) {
+      toast({
+        variant: "destructive",
+        title: toastResult,
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      })
+      dispatch(reset())
     }
-  }, [error, postMessageError])
+  }, [dispatch, toast, toastResult])
 
   useEffect(() => {
-    setCode(dataMessage?.message)
-    setIsCallingApi(false)
-  }, [dataMessage])
+    setCode(sendMessageResult?.data?.message)
+  }, [sendMessageResult?.data?.message])
 
   useEffect(() => {
     setCode(data?.code)
-    setIsCallingApi(false)
   }, [data?.code])
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!isInvalidInput) {
-      setMessage(chatMessage)
-    }
-
     if (chatMessage) {
-      setIsCallingApi(true)
-      setIsInvalidInput(false)
+      sendMessage({ message: chatMessage, apiKey: apiKey })
+      setIsInvalidMessage(false)
+      setChatMessage("")
     } else {
-      setIsInvalidInput(true)
+      setIsInvalidMessage(true)
     }
-    setChatMessage("")
-    setIsInvalidInput(false)
   }
 
   const onMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChatMessage(event.target.value)
     if (event.target.value) {
-      setIsInvalidInput(false)
+      setIsInvalidMessage(false)
     } else {
-      setIsInvalidInput(true)
+      setIsInvalidMessage(true)
     }
   }
 
@@ -135,7 +129,6 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
   return (
     <div>
       {isFetching && <Loading />}
-
       {!isFetching && (
         <div>
           <div className="flex lg:flex-row flex-col w-full lg:justify-start justify-center lg:items-center items-center lg:pb-0 pb-4">
@@ -146,7 +139,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
               <div
                 className={clsx(
                   `flex w-full flex-grow relative border-2 bg-white rounded-md  dark:text-white  shadow-xs dark:shadow-xs`,
-                  isInvalidInput && "border-red-500"
+                  isInvalidMessage && "border-red-500"
                 )}
               >
                 <Input
@@ -161,12 +154,12 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
                   type="submit"
                   variant={"ghost"}
                   className="p-2 text-green-600"
-                  disabled={isCallingApi || !chatGPTApiKey}
+                  disabled={sendMessageResult.isLoading || !chatGPTApiKey}
                 >
-                  {isCallingApi && (
-                    <ReloadIcon className="text-white mr-2 h-4 w-4 animate-spin" />
+                  {sendMessageResult.isLoading && (
+                    <ReloadIcon className="text-green mr-2 h-4 w-4 animate-spin" />
                   )}
-                  {!isCallingApi && <BiSolidSend />}
+                  {!sendMessageResult.isLoading && <BiSolidSend />}
                 </Button>
               </div>
             </form>
@@ -232,7 +225,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
               </DialogContent>
             </Dialog>
           </div>
-          <Editor isLoading={isCallingApi} code={code} />
+          <Editor isLoading={sendMessageResult.isLoading} code={code} />
         </div>
       )}
     </div>

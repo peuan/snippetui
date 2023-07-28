@@ -18,7 +18,6 @@ const Card = ({ folder, file }: { folder: string; file: IShowCaseFile }) => {
   }
 
   const handleClickToPlayground = () => {
-    console.log("hello")
     setIsLoading(true)
 
     router.push(
