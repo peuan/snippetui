@@ -194,7 +194,7 @@ export default function Home() {
                   <button
                     onClick={handlePreviousPage}
                     className={clsx(
-                      " hover:bg-slate-700 hover:text-white text-slate-800 dark:text-white font-bold",
+                      "  hover:text-white text-slate-800 dark:text-white font-bold",
                       pageNumber === 1 && "opacity-50 cursor-not-allowed"
                     )}
                   >
