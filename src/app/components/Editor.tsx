@@ -432,7 +432,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
             defaultSize={defaultLayout[0]}
             className=""
           >
-            <div className="w-full border-2 border-slate-300 dark:border-none">
+            <div className="w-full border-slate-300 dark:border-none">
               <CodeMirror
                 ref={codeMirrorRef}
                 value={editorCode}
@@ -467,7 +467,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
           <Panel id="panel-2" order={2} defaultSize={defaultLayout[1]}>
             <PanelGroup direction="vertical" onLayout={onLayout}>
               <Panel id="panel-3" order={3} defaultSize={defaultLayout[1]}>
-                <div className="h-full border-2 bg-slate-300 flex justify-center items-center">
+                <div className="h-full  bg-slate-300 flex justify-center items-center">
                   <Preview isLoading={isLoading} code={editorCode} />
                 </div>
               </Panel>

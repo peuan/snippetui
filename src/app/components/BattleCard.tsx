@@ -104,7 +104,7 @@ const Card = ({
               {autherName}
             </h3>
             <button onClick={() => handleClickToCode(folder, file.fileName)}>
-              <BiLinkExternal className="dark:text-white text-slate-800" />
+              <BiLinkExternal className="dark:text-white text-slate-800 hover:text-white" />
             </button>
 
             <button
@@ -112,10 +112,10 @@ const Card = ({
               onClick={() => handleClickToPlayground(folder, file.fileName)}
             >
               {!isLoading && (
-                <BiCode className="dark:text-white text-slate-800" />
+                <BiCode className="dark:text-white text-slate-800 hover:text-white" />
               )}
               {isLoading && (
-                <ReloadIcon className="dark:text-white text-slate-800 mr-2 h-4 w-4 animate-spin" />
+                <ReloadIcon className="dark:text-white text-slate-800 hover:text-white mr-2 h-4 w-4 animate-spin" />
               )}
             </button>
           </div>
