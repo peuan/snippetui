@@ -168,7 +168,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
               <DialogTrigger asChild>
                 <Button
                   onClick={() => onOpenDialog}
-                  className="dark:text-white border-transparent focus:border-transparent focus:ring-0 ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4 bg-slate-400 hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600 h-11"
+                  className="dark:text-white text-slate-800 hover:text-white border-transparent focus:border-transparent focus:ring-0 ml-2 lg:w-fit lg:mt-0 lg:mb-0 w-[90%] mt-4 mb-4 bg-slate-400 hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600 h-11"
                   variant="default"
                 >
                   Get Started{" "}
@@ -214,7 +214,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
                     </div>
                     <DialogFooter>
                       <Button
-                        className="bg-slate-400 hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600"
+                        className="bg-slate-400 text-slate-800 hover:text-white dark:text-white hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600"
                         type="submit"
                       >
                         Save

@@ -32,8 +32,8 @@ import ResizeHandle from "./ResizeHandle"
 import Log from "./Log"
 
 import { generateHtmlResult } from "@/lib/html"
-import { useAppSelector } from "@/redux/hooks"
 import { useTheme } from "next-themes"
+import { useAppSelector } from "@/redux/hooks"
 
 var minLines = 0
 var startingValue = ""
@@ -53,10 +53,8 @@ const Editor = ({ code, isLoading }: IPlayground) => {
   const [language, setLanguage] = useState("html")
   const { resolvedTheme } = useTheme()
 
-  const [theme, setTheme] = useState(
-    resolvedTheme === "dark" ? [githubDarkInit()] : []
-  )
   const iframeRef = useRef<any>()
+  const globalTheme = useAppSelector((state) => state.themeReducer.theme)
 
   const defaultLayout = [50, 50, 50]
   const codeMirrorRef = useRef<ReactCodeMirrorRef>({})
@@ -371,6 +369,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
       <div className="flex lg:justify-between justify-center lg:gap-0 gap-10 items-center px-2 mt-1  lg:w-1/2 w-full absolute z-[1] lg:top-[55px] top-[155px]  lg:right-0">
         <div>
+          <div>{}</div>
           <div className="lg:w-[10vw] w-[30vw]">
             <Select
               defaultValue={language}
@@ -433,7 +432,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
             defaultSize={defaultLayout[0]}
             className=""
           >
-            <div className="w-full border-2 border-slate-300">
+            <div className="w-full border-2 border-slate-300 dark:border-none">
               <CodeMirror
                 ref={codeMirrorRef}
                 value={editorCode}
@@ -441,7 +440,15 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                 maxHeight="calc(100vh - 110px)"
                 extensions={[language === "html" ? html() : javascript()]}
                 onChange={onChange}
-                theme={theme}
+                theme={
+                  globalTheme === "system"
+                    ? resolvedTheme === "dark"
+                      ? [githubDarkInit()]
+                      : []
+                    : globalTheme === "dark"
+                    ? [githubDarkInit()]
+                    : []
+                }
                 basicSetup={{
                   foldGutter: false,
                   dropCursor: false,
@@ -474,7 +481,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     defaultSize={defaultLayout[2]}
                     collapsible={true}
                   >
-                    <div className="h-full flex bg-slate-200 dark:bg-slate-900 justify-center items-center">
+                    <div className="h-full flex justify-center items-center">
                       <Log code={log} />
                     </div>
                   </Panel>
@@ -482,7 +489,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
               )}
               <Button
                 onClick={() => setIsShowLog(!isShowLog)}
-                className="w-20 h-6 my-2 bg-slate-700 text-white border-none rounded-none"
+                className="w-20 h-6 my-2 bg-slate-400 text-slate-800 hover:bg-slate-500 hover:text-white dark:text-white border-none rounded-none"
                 size={"default"}
                 variant={"outline"}
               >

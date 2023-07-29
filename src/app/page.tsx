@@ -134,11 +134,11 @@ export default function Home() {
               <button
                 onClick={() => handlePageSection({ page: "BATTLE" })}
                 className={clsx(
-                  "text-white font-bold py-2 px-4  rounded-l-full",
+                  "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-l-full",
                   currentPage.page === "BATTLE" &&
-                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  dark:hover:bg-blue-800",
+                    "bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800",
                   currentPage.page === "SHOWCASE" &&
-                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  dark:hover:bg-blue-600"
+                    "bg-slate-300 hover:bg-slate-400  dark:bg-blue-500  dark:hover:bg-blue-600"
                 )}
               >
                 Battle
@@ -146,7 +146,7 @@ export default function Home() {
               <button
                 onClick={() => handlePageSection({ page: "SHOWCASE" })}
                 className={clsx(
-                  "text-white font-bold py-2 px-4  rounded-r-full",
+                  "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-r-full",
                   currentPage.page === "SHOWCASE" &&
                     "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-800",
                   currentPage.page === "BATTLE" &&
@@ -169,7 +169,7 @@ export default function Home() {
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
               <button
                 className={clsx(
-                  "w-[100px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full",
+                  "hover:text-white w-[100px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold py-2 px-4  rounded-full",
                   pageNumber === 1 && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === 1}
@@ -177,11 +177,11 @@ export default function Home() {
               >
                 Previous
               </button>
-              <span className="text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
+              <span className="text-slate-800 dark:text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
 
               <button
                 className={clsx(
-                  "w-[100px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-white dark:text-white font-bold py-2 px-4  rounded-full",
+                  "w-[100px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold py-2 px-4  rounded-full",
                   pageNumber === totalPages && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === totalPages}
@@ -194,17 +194,17 @@ export default function Home() {
                   <button
                     onClick={handlePreviousPage}
                     className={clsx(
-                      " hover:bg-slate-700 hover:text-green-700 text-white dark:text-white font-bold",
+                      " hover:bg-slate-700 hover:text-white text-slate-800 dark:text-white font-bold",
                       pageNumber === 1 && "opacity-50 cursor-not-allowed"
                     )}
                   >
                     <BiLeftArrow />
                   </button>
-                  <span className="text-white dark:text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
+                  <span className="text-slate-800 dark:text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
                   <button
                     onClick={handleNextPage}
                     className={clsx(
-                      " hover:text-slate-700 dark:hover:text-green-700 text-white font-bold",
+                      " hover:text-white dark:hover:text-green-700 text-slate-800 font-bold",
                       pageNumber === totalPages &&
                         "opacity-50 cursor-not-allowed"
                     )}
