@@ -12,6 +12,7 @@ import { setToast } from "./features/toastSlice"
 import chatGPTReducer from "./features/chatGPTSlice"
 import toastReducer from "./features/toastSlice"
 import themeReducer from "./features/themeSlice"
+import pageReducer from "./features/pageSlice"
 
 import { battleApi } from "@/redux/services/battleApi"
 import { showCaseApi } from "@/redux/services/showCaseApi"
@@ -54,6 +55,7 @@ export const store = configureStore({
     chatGPTReducer,
     toastReducer,
     themeReducer,
+    pageReducer,
     [battleApi.reducerPath]: battleApi.reducer,
     [showCaseApi.reducerPath]: showCaseApi.reducer,
     [playgroundApi.reducerPath]: playgroundApi.reducer,

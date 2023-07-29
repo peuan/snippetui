@@ -22,6 +22,7 @@ import { useGetShowCasesQuery } from "./redux/services/showCaseApi"
 
 // import interface
 import { IPages } from "./interfaces/IPage"
+import { setPage } from "./redux/features/pageSlice"
 
 // items per page
 const ITEMS_PER_PAGE = 3
@@ -30,10 +31,10 @@ export default function Home() {
   const battleResults = useAppSelector((state) => state.battleReducer)
 
   const showCaseResults = useAppSelector((state) => state.showCaseReducer)
+  const currentPage = useAppSelector((state) => state.pageReducer.page)
+  const pageNumber = useAppSelector((state) => state.pageReducer.pageNumber)
 
-  const [pageNumber, setPageNumber] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
-  const [currentPage, setCurrentPage] = useState<IPages>({ page: "BATTLE" })
 
   const {
     isLoading: battleLoading,
@@ -42,7 +43,7 @@ export default function Home() {
     error: battleError,
   } = useGetBattlesQuery(
     { pageNumber: pageNumber },
-    { skip: currentPage.page !== "BATTLE" }
+    { skip: currentPage !== "BATTLE" }
   )
   const {
     isLoading: showCaseLoading,
@@ -51,13 +52,13 @@ export default function Home() {
     error: showCaseError,
   } = useGetShowCasesQuery(
     { pageNumber: pageNumber },
-    { skip: currentPage.page !== "SHOWCASE" }
+    { skip: currentPage !== "SHOWCASE" }
   )
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (battleData && !battleLoading && currentPage.page === "BATTLE") {
+    if (battleData && !battleLoading && currentPage === "BATTLE") {
       const total = Math.ceil(battleData.totalItems / ITEMS_PER_PAGE)
       setTotalPages(total)
       dispatch(
@@ -72,10 +73,10 @@ export default function Home() {
         behavior: "smooth",
       })
     }
-  }, [currentPage.page, pageNumber, battleData, dispatch, battleLoading])
+  }, [currentPage, pageNumber, battleData, dispatch, battleLoading])
 
   useEffect(() => {
-    if (showCaseData && !showCaseLoading && currentPage.page === "SHOWCASE") {
+    if (showCaseData && !showCaseLoading && currentPage === "SHOWCASE") {
       const total = Math.ceil(showCaseData.totalItems / ITEMS_PER_PAGE)
       setTotalPages(total)
       dispatch(
@@ -90,26 +91,25 @@ export default function Home() {
         behavior: "smooth",
       })
     }
-  }, [currentPage.page, pageNumber, showCaseData, dispatch, showCaseLoading])
+  }, [currentPage, pageNumber, showCaseData, dispatch, showCaseLoading])
 
   // pagination
   const handlePreviousPage = () => {
     if (pageNumber > 1) {
       const previousPage = pageNumber - 1
-      setPageNumber(previousPage)
+      dispatch(setPage({ page: currentPage, pageNumber: previousPage }))
     }
   }
   const handleNextPage = () => {
     if (pageNumber < totalPages) {
       const nextPage = pageNumber + 1
-      setPageNumber(nextPage)
+      dispatch(setPage({ page: currentPage, pageNumber: nextPage }))
     }
   }
 
   // handle to display battle/showcase section
   const handlePageSection = (page: IPages) => {
-    setCurrentPage({ page: page.page })
-    setPageNumber(1)
+    dispatch(setPage({ page: page.page, pageNumber: 1 }))
   }
 
   return (
@@ -132,24 +132,28 @@ export default function Home() {
           <div className="flex justify-center">
             <div className="inline-flex ">
               <button
-                onClick={() => handlePageSection({ page: "BATTLE" })}
+                onClick={() =>
+                  handlePageSection({ page: "BATTLE", pageNumber })
+                }
                 className={clsx(
                   "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-l-full",
-                  currentPage.page === "BATTLE" &&
+                  currentPage === "BATTLE" &&
                     "bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800",
-                  currentPage.page === "SHOWCASE" &&
+                  currentPage === "SHOWCASE" &&
                     "bg-slate-300 hover:bg-slate-400  dark:bg-blue-500  dark:hover:bg-blue-600"
                 )}
               >
                 Battle
               </button>
               <button
-                onClick={() => handlePageSection({ page: "SHOWCASE" })}
+                onClick={() =>
+                  handlePageSection({ page: "SHOWCASE", pageNumber })
+                }
                 className={clsx(
                   "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-r-full",
-                  currentPage.page === "SHOWCASE" &&
+                  currentPage === "SHOWCASE" &&
                     "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-800",
-                  currentPage.page === "BATTLE" &&
+                  currentPage === "BATTLE" &&
                     "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
                 )}
               >
@@ -157,12 +161,12 @@ export default function Home() {
               </button>
             </div>
           </div>
-          {currentPage.page === "BATTLE" && (
+          {currentPage === "BATTLE" && (
             <>
               <Battle battleResults={battleResults} />
             </>
           )}
-          {currentPage.page === "SHOWCASE" && (
+          {currentPage === "SHOWCASE" && (
             <ShowCase showCaseResults={showCaseResults} />
           )}
           {!battleLoading && !showCaseLoading && (
