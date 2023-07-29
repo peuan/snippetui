@@ -32,6 +32,8 @@ import ResizeHandle from "./ResizeHandle"
 import Log from "./Log"
 
 import { generateHtmlResult } from "@/lib/html"
+import { useAppSelector } from "@/redux/hooks"
+import { useTheme } from "next-themes"
 
 var minLines = 0
 var startingValue = ""
@@ -49,7 +51,11 @@ const Editor = ({ code, isLoading }: IPlayground) => {
   const [log, setLog] = useState("Console was cleared")
   const [bottomPanel, setBottomPanel] = useState(50)
   const [language, setLanguage] = useState("html")
+  const { resolvedTheme } = useTheme()
 
+  const [theme, setTheme] = useState(
+    resolvedTheme === "dark" ? [githubDarkInit()] : []
+  )
   const iframeRef = useRef<any>()
 
   const defaultLayout = [50, 50, 50]
@@ -99,11 +105,18 @@ const Editor = ({ code, isLoading }: IPlayground) => {
   const executeCode = (code: string) => {
     const isValid = validateJS(iframeRef.current, code)
     if (isValid) {
-      const document = iframeRef.current.contentDocument
-      document.open()
-      document.write(generateHtmlResult(code))
-      document.close()
-      updateConsole(iframeRef.current)
+      const iframeWindow = iframeRef.current.contentWindow
+      if (iframeWindow) {
+        // Get the document of the iframe
+        const iframeDocument = iframeWindow.document
+
+        // Clear the existing content
+        iframeDocument.body.innerHTML = ""
+
+        // Write the new code directly to the body of the document
+        iframeDocument.body.innerHTML = generateHtmlResult(code) || ""
+        updateConsole(iframeRef.current)
+      }
     }
   }
 
@@ -363,7 +376,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
               defaultValue={language}
               onValueChange={(event) => handleSelectLanguage(event)}
             >
-              <SelectTrigger className="bg-white">
+              <SelectTrigger>
                 <SelectValue placeholder="Select Language" />
               </SelectTrigger>
               <SelectContent>
@@ -420,7 +433,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
             defaultSize={defaultLayout[0]}
             className=""
           >
-            <div className="w-full border-stone-600">
+            <div className="w-full border-2 border-slate-300">
               <CodeMirror
                 ref={codeMirrorRef}
                 value={editorCode}
@@ -428,13 +441,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                 maxHeight="calc(100vh - 110px)"
                 extensions={[language === "html" ? html() : javascript()]}
                 onChange={onChange}
-                theme={[
-                  githubDarkInit({
-                    settings: {
-                      caret: "#c6c6c6",
-                    },
-                  }),
-                ]}
+                theme={theme}
                 basicSetup={{
                   foldGutter: false,
                   dropCursor: false,
@@ -453,13 +460,13 @@ const Editor = ({ code, isLoading }: IPlayground) => {
           <Panel id="panel-2" order={2} defaultSize={defaultLayout[1]}>
             <PanelGroup direction="vertical" onLayout={onLayout}>
               <Panel id="panel-3" order={3} defaultSize={defaultLayout[1]}>
-                <div className="h-full bg-slate-800 flex justify-center items-center">
+                <div className="h-full border-2 bg-slate-300 flex justify-center items-center">
                   <Preview isLoading={isLoading} code={editorCode} />
                 </div>
               </Panel>
               {isShowLog && (
                 <>
-                  <ResizeHandle className="rotate-90" />
+                  <ResizeHandle className="rotate-90 " />
                   <Panel
                     onResize={(e) => onResize(e)}
                     id="panel-4"
@@ -467,7 +474,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     defaultSize={defaultLayout[2]}
                     collapsible={true}
                   >
-                    <div className="h-full flex justify-center items-center">
+                    <div className="h-full flex bg-slate-200 dark:bg-slate-900 justify-center items-center">
                       <Log code={log} />
                     </div>
                   </Panel>

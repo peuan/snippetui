@@ -8,14 +8,16 @@ import {
 import battleReducer from "./features/battleSlice"
 import showCaseReducer from "./features/showCaseSlice"
 import playgroundReducer from "./features/playgroundSlice"
+import { setToast } from "./features/toastSlice"
 import chatGPTReducer from "./features/chatGPTSlice"
 import toastReducer from "./features/toastSlice"
+import themeReducer from "./features/themeSlice"
+
 import { battleApi } from "@/redux/services/battleApi"
 import { showCaseApi } from "@/redux/services/showCaseApi"
 import { playgroundApi } from "@/redux/services/playgroundApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import { chatGPTApi } from "@/redux/services/chatGPTApi"
-import { setToast } from "./features/toastSlice"
 
 export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
@@ -51,6 +53,7 @@ export const store = configureStore({
     playgroundReducer,
     chatGPTReducer,
     toastReducer,
+    themeReducer,
     [battleApi.reducerPath]: battleApi.reducer,
     [showCaseApi.reducerPath]: showCaseApi.reducer,
     [playgroundApi.reducerPath]: playgroundApi.reducer,

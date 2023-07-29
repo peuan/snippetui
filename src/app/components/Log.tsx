@@ -7,7 +7,7 @@ const ConsoleLog = ({ code }: { code: any }) => {
   const getNumberStringWithWidth = useCallback((num: number, width: number) => {
     const str = num.toString()
     if (width > str.length) return "0".repeat(width - str.length) + str
-    return str.substr(0, width)
+    return str.substring(0, width)
   }, [])
 
   const getTimestamp = useCallback(() => {

@@ -136,9 +136,9 @@ export default function Home() {
                 className={clsx(
                   "text-white font-bold py-2 px-4  rounded-l-full",
                   currentPage.page === "BATTLE" &&
-                    "bg-blue-700  hover:bg-blue-800",
+                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  dark:hover:bg-blue-800",
                   currentPage.page === "SHOWCASE" &&
-                    "bg-blue-500  hover:bg-blue-600"
+                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  dark:hover:bg-blue-600"
                 )}
               >
                 Battle
@@ -148,9 +148,9 @@ export default function Home() {
                 className={clsx(
                   "text-white font-bold py-2 px-4  rounded-r-full",
                   currentPage.page === "SHOWCASE" &&
-                    "bg-blue-700  hover:bg-blue-800",
+                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-800",
                   currentPage.page === "BATTLE" &&
-                    "bg-blue-500  hover:bg-blue-600"
+                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
                 )}
               >
                 Showcase
@@ -169,7 +169,7 @@ export default function Home() {
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
               <button
                 className={clsx(
-                  "w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full",
+                  "w-[100px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full",
                   pageNumber === 1 && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === 1}
@@ -181,7 +181,7 @@ export default function Home() {
 
               <button
                 className={clsx(
-                  "w-[100px] bg-green-500  hover:bg-green-700 text-white font-bold py-2 px-4  rounded-full",
+                  "w-[100px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-white dark:text-white font-bold py-2 px-4  rounded-full",
                   pageNumber === totalPages && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === totalPages}
@@ -190,21 +190,21 @@ export default function Home() {
                 Next
               </button>
               <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
-                <div className="visible lg:invisible flex justify-between w-[100px] bg-green-500 py-2 px-2 rounded-full">
+                <div className="visible lg:invisible flex justify-between w-[100px] bg-slate-500 dark:bg-green-500 py-2 px-2 rounded-full">
                   <button
                     onClick={handlePreviousPage}
                     className={clsx(
-                      " hover:text-green-700 text-white font-bold",
+                      " hover:bg-slate-700 hover:text-green-700 text-white dark:text-white font-bold",
                       pageNumber === 1 && "opacity-50 cursor-not-allowed"
                     )}
                   >
                     <BiLeftArrow />
                   </button>
-                  <span className="text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
+                  <span className="text-white dark:text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
                   <button
                     onClick={handleNextPage}
                     className={clsx(
-                      " hover:text-green-700 text-white font-bold",
+                      " hover:text-slate-700 dark:hover:text-green-700 text-white font-bold",
                       pageNumber === totalPages &&
                         "opacity-50 cursor-not-allowed"
                     )}
