@@ -28,6 +28,7 @@ import {
 import { useAppDispatch } from "@/redux/hooks"
 import { setGlobalTheme } from "@/redux/features/themeSlice"
 import { Itheme } from "@/interfaces/Itheme"
+import { reset } from "@/redux/features/pageSlice"
 
 export default function Nav() {
   const { setTheme, theme, resolvedTheme } = useTheme()
@@ -38,12 +39,20 @@ export default function Nav() {
     setTheme(theme.theme)
     dispatch(setGlobalTheme({ theme: theme.theme }))
   }
+
+  const handleHomePage = () => {
+    dispatch(reset())
+  }
   return (
-    <div className="h-12 dark:bg-slate-800 bg-white shadow-sm min-w-full flex items-center pl-6">
+    <div className="h-12 dark:bg-slate-900 bg-white min-w-full flex items-center pl-6">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href={"/"} className={navigationMenuTriggerStyle()}>
+            <Link
+              onClick={handleHomePage}
+              href={"/"}
+              className={navigationMenuTriggerStyle()}
+            >
               <BiHome />
             </Link>
           </NavigationMenuItem>
