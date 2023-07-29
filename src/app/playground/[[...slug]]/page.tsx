@@ -148,7 +148,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
                   onChange={(event) => onMessageChange(event)}
                   value={chatMessage}
                   placeholder="Send a message"
-                  className="border-none"
+                  className="border-none dark:text-slate-800"
                 />
                 <Button
                   type="submit"
