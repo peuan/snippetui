@@ -77,6 +77,5 @@
   left: calc(50% - 0.5rem);
   top: calc(50% - 0.5rem);
   transform: rotate(90deg);
-  color: white;
   opacity: 0.5;
 }
