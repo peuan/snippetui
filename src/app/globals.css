@@ -34,10 +34,11 @@
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+    --cm-line: white;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: bg-slate-900;
     --foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
@@ -65,12 +66,7 @@
     --destructive-foreground: 0 85.7% 97.3%;
 
     --ring: 217.2 32.6% 17.5%;
-  }
-}
-
-@layer base {
-  body {
-    @apply bg-background text-foreground;
+    --cm-line: black;
   }
 }
 
@@ -89,11 +85,6 @@
   background-color: rgb(15 23 42 / var(--tw-bg-opacity)) !important;
   padding: 0;
   margin: 0;
-}
-body {
-  margin: 0px;
-  padding: 0px;
-  @apply bg-slate-900;
 }
 
 @media (max-width: 640px) {
@@ -227,7 +218,7 @@ body {
 }
 
 .cm-lineNumbers {
-  background: #0f172a !important;
+  background: var(--cm-line) !important;
 }
 
 .log-container {

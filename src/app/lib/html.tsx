@@ -12,7 +12,11 @@ export function generateHtmlResult(js: any) {
 <body>
 <script type="text/javascript">
 (function() {
-${js}
+  try {
+    ${js}
+  } catch (error) {
+    console.log(error)
+  }
 })();
 </script>
 </body>

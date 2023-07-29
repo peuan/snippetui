@@ -26,7 +26,7 @@ const Card = ({ folder, file }: { folder: string; file: IShowCaseFile }) => {
   }
 
   return (
-    <div className="overflow-hidden bg-slate-900 box-content mobile-scale rounded-[30px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
+    <div className="overflow-hidden bg-yellow-200 dark:bg-slate-900 box-content mobile-scale rounded-[30px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
       <div className="flip-card overflow-hidden">
         <div className="flip-card-inner flex justify-center items-center lg:scale-100">
           <Iframe
@@ -48,30 +48,32 @@ const Card = ({ folder, file }: { folder: string; file: IShowCaseFile }) => {
 
       <div className="flex justify-between mt-2 px-2">
         <div className="flex justify-center mb-2">
-          <div className="rounded-full bg-slate-800 flex items-center px-2">
-            <h3 className="text-white font-bold py-2 px-4 text-md ">
+          <div className="rounded-full bg-yellow-300 dark:bg-slate-800 flex items-center px-2">
+            <h3 className="dark:text-white text-slate-800 font-bold py-2 px-4 text-md ">
               {" "}
               {file.name}
             </h3>
             <button onClick={() => handleClicktoGithubRepo()}>
-              <BiLinkExternal className="text-white" />
+              <BiLinkExternal className="dark:text-white text-slate-800" />
             </button>
             <button className="ml-6" onClick={() => handleClickToPlayground()}>
-              {!isLoading && <BiCode className="text-white" />}
+              {!isLoading && (
+                <BiCode className="dark:text-white text-slate-800" />
+              )}
               {isLoading && (
-                <ReloadIcon className="text-white mr-2 h-4 w-4 animate-spin" />
+                <ReloadIcon className="dark:text-white text-slate-800 mr-2 h-4 w-4 animate-spin" />
               )}
             </button>
           </div>
         </div>
 
-        <div className="flex text-sm justify-center items-center text-white mb-2">
+        <div className="flex text-sm justify-center items-center dark:text-white text-slate-800 mb-2">
           {file.tags?.map((tag, index) => {
             return (
               <Badge
-                variant={"destructive"}
+                variant={"default"}
                 key={index}
-                className="bg-blue-500 mr-2"
+                className="dark:text-white bg-slate-500 dark:bg-blue-500 mr-2"
               >
                 {tag}
               </Badge>

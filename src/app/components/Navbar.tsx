@@ -2,6 +2,9 @@
 import React from "react"
 import { BiHome } from "react-icons/bi"
 import Link from "next/link"
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
+import { useTheme } from "next-themes"
+import { Button } from "@/components/ui/button"
 
 import {
   NavigationMenu,
@@ -14,10 +17,29 @@ import {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
+
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useAppDispatch } from "@/redux/hooks"
+import { setGlobalTheme } from "@/redux/features/themeSlice"
+import { Itheme } from "@/interfaces/Itheme"
+
 export default function Nav() {
-  const collapseItems = ["Playground", "Blog"]
+  const { setTheme, theme, resolvedTheme } = useTheme()
+
+  const dispatch = useAppDispatch()
+
+  const handleTheme = (theme: Itheme) => {
+    setTheme(theme.theme)
+    dispatch(setGlobalTheme({ theme: theme.theme }))
+  }
   return (
-    <div className="h-12 bg-slate-800/50 min-w-full flex items-center pl-6">
+    <div className="h-12 dark:bg-slate-800 bg-white shadow-sm min-w-full flex items-center pl-6">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -29,6 +51,39 @@ export default function Nav() {
             <Link href={"/playground"} className={navigationMenuTriggerStyle()}>
               Playground
             </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                  <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                  <span className="sr-only">Toggle theme</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" defaultValue={resolvedTheme}>
+                <DropdownMenuCheckboxItem
+                  checked={theme === "light"}
+                  onCheckedChange={() => handleTheme({ theme: "light" })}
+                >
+                  Light
+                </DropdownMenuCheckboxItem>
+
+                <DropdownMenuCheckboxItem
+                  checked={theme === "dark"}
+                  onCheckedChange={() => handleTheme({ theme: "dark" })}
+                >
+                  Dark
+                </DropdownMenuCheckboxItem>
+
+                <DropdownMenuCheckboxItem
+                  checked={theme === "system"}
+                  onCheckedChange={() => handleTheme({ theme: "system" })}
+                >
+                  System
+                </DropdownMenuCheckboxItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
