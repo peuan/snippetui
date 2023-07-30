@@ -34,6 +34,7 @@ import Log from "./Log"
 import { generateHtmlResult } from "@/lib/html"
 import { useTheme } from "next-themes"
 import { useAppSelector } from "@/redux/hooks"
+import { ITemplate } from "@/interfaces/ITemplate"
 
 var minLines = 0
 var startingValue = ""
@@ -50,7 +51,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
   const [isShowLog, setIsShowLog] = useState(false)
   const [log, setLog] = useState("Console was cleared")
   const [bottomPanel, setBottomPanel] = useState(50)
-  const [language, setLanguage] = useState("html")
+  const [template, setTemplate] = useState<ITemplate>({ template: "html" })
   const { resolvedTheme } = useTheme()
 
   const iframeRef = useRef<any>()
@@ -228,8 +229,31 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     }
   }
 
-  const handleSelectLanguage = (event: string) => {
-    setLanguage(event)
+  const handleSelectLanguage = (event: ITemplate) => {
+    setEditorCode("")
+    setTemplate({ template: event.template })
+    if (event.template === "javascript") {
+      setIsShowLog(true)
+      setEditorCode("console.log('Hello world!');")
+      setLog("Hello world!")
+    } else {
+      setIsShowLog(false)
+    }
+
+    if (event.template === "tailwindcss") {
+      setEditorCode(`<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <h1 class="text-3xl font-bold underline text-yellow-500">Hello world!</h1>
+  </body>
+</html>
+      `)
+    }
   }
 
   useEffect(() => {
@@ -372,8 +396,10 @@ const Editor = ({ code, isLoading }: IPlayground) => {
           <div>{}</div>
           <div className="lg:w-[10vw] w-[30vw]">
             <Select
-              defaultValue={language}
-              onValueChange={(event) => handleSelectLanguage(event)}
+              defaultValue={template.template}
+              onValueChange={(event: any) =>
+                handleSelectLanguage({ template: event })
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select Language" />
@@ -381,6 +407,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
               <SelectContent>
                 <SelectItem value="html">HTML</SelectItem>
                 <SelectItem value="javascript">JavaScript</SelectItem>
+                <SelectItem value="tailwindcss">Tailwindcss</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -391,9 +418,9 @@ const Editor = ({ code, isLoading }: IPlayground) => {
               size={"sm"}
               variant={"outline"}
               onClick={() => handleFormatSyntax()}
-              className="flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none"
+              className="flex justify-center items-center rounded-full  bg-slate-400 hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600 border-none"
             >
-              <BiSolidMagicWand className="text-white" />
+              <BiSolidMagicWand className="text-slate-800 dark:text-white " />
             </Button>
           </div>
           <div className="text-white text-sm text-right ml-2">
@@ -404,12 +431,14 @@ const Editor = ({ code, isLoading }: IPlayground) => {
             size={"sm"}
             variant={"outline"}
             onClick={() => handleDownloadImage()}
-            className="ml-2 flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none"
+            className="ml-2 flex justify-center items-center rounded-full bg-slate-400 hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600 border-none"
           >
-            {!isDownload && <BiDownload className="text-white" />}
+            {!isDownload && (
+              <BiDownload className="text-slate-800 dark:text-white" />
+            )}
 
             {isDownload && (
-              <ReloadIcon className="text-white h-4 w-4 animate-spin" />
+              <ReloadIcon className="text-slate-800 dark:text-white h-4 w-4 animate-spin" />
             )}
           </Button>
           <div className="ml-2 mr-2 mt-2">
@@ -438,7 +467,11 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                 value={editorCode}
                 minHeight="calc(100vh - 110px)"
                 maxHeight="calc(100vh - 110px)"
-                extensions={[language === "html" ? html() : javascript()]}
+                extensions={[
+                  template.template === ("html" || "html+tailwindcss")
+                    ? html()
+                    : javascript(),
+                ]}
                 onChange={onChange}
                 theme={
                   globalTheme === "system"
@@ -467,7 +500,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
           <Panel id="panel-2" order={2} defaultSize={defaultLayout[1]}>
             <PanelGroup direction="vertical" onLayout={onLayout}>
               <Panel id="panel-3" order={3} defaultSize={defaultLayout[1]}>
-                <div className="h-full  bg-slate-300 flex justify-center items-center">
+                <div className="h-full  border-l-2 dark:border-none bg-slate-300 flex justify-center items-center">
                   <Preview isLoading={isLoading} code={editorCode} />
                 </div>
               </Panel>
@@ -487,9 +520,10 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                   </Panel>
                 </>
               )}
+
               <Button
                 onClick={() => setIsShowLog(!isShowLog)}
-                className="w-20 h-6 my-2 bg-slate-400 text-slate-800 hover:bg-slate-500 hover:text-white dark:text-white border-none rounded-none"
+                className="w-20 h-6 my-2 dark:bg-indigo-500 dark:hover:bg-indigo-600 bg-slate-400 text-slate-800 hover:bg-slate-500 hover:text-white dark:text-white border-none rounded-none"
                 size={"default"}
                 variant={"outline"}
               >
