@@ -127,7 +127,12 @@ const Editor = ({ code, isLoading }: IPlayground) => {
   )
 
   useEffect(() => {
-    setEditorCode(code)
+    if (!code && template.template === "html") {
+      handleSelectLanguage({ template: "html" })
+    } else {
+      setEditorCode(code)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code])
 
   useEffect(() => {
@@ -239,7 +244,19 @@ const Editor = ({ code, isLoading }: IPlayground) => {
     } else {
       setIsShowLog(false)
     }
-
+    if (event.template === "html") {
+      setEditorCode(`<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h1>Hello world!</h1>
+  </body>
+</html>
+      `)
+    }
     if (event.template === "tailwindcss") {
       setEditorCode(`<!DOCTYPE html>
 <html>
@@ -468,7 +485,8 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                 minHeight="calc(100vh - 110px)"
                 maxHeight="calc(100vh - 110px)"
                 extensions={[
-                  template.template === ("html" || "html+tailwindcss")
+                  template.template === "html" ||
+                  template.template === "tailwindcss"
                     ? html()
                     : javascript(),
                 ]}
@@ -514,7 +532,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                     defaultSize={defaultLayout[2]}
                     collapsible={true}
                   >
-                    <div className="h-full flex justify-center items-center">
+                    <div className="border-l-2 dark:border-none h-full flex justify-center items-center">
                       <Log code={log} />
                     </div>
                   </Panel>
