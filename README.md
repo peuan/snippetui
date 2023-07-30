@@ -42,6 +42,10 @@ https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-
 ![alt text](/doc-images/dark-mode.png)
 ![alt text](/doc-images/light-mode.png)
 
+# Tailwindcss Template
+
+![alt text](/doc-images/template-tailwindcss.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
