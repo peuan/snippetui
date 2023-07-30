@@ -230,6 +230,11 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
   const handleSelectLanguage = (event: string) => {
     setLanguage(event)
+    if (event === "javascript") {
+      setIsShowLog(true)
+    } else {
+      setIsShowLog(false)
+    }
   }
 
   useEffect(() => {
@@ -391,9 +396,9 @@ const Editor = ({ code, isLoading }: IPlayground) => {
               size={"sm"}
               variant={"outline"}
               onClick={() => handleFormatSyntax()}
-              className="flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none"
+              className="flex justify-center items-center rounded-full  bg-slate-400 hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600 border-none"
             >
-              <BiSolidMagicWand className="text-white" />
+              <BiSolidMagicWand className="text-slate-800 dark:text-white " />
             </Button>
           </div>
           <div className="text-white text-sm text-right ml-2">
@@ -404,12 +409,14 @@ const Editor = ({ code, isLoading }: IPlayground) => {
             size={"sm"}
             variant={"outline"}
             onClick={() => handleDownloadImage()}
-            className="ml-2 flex justify-center items-center rounded-full bg-indigo-500 hover:bg-indigo-600 border-none"
+            className="ml-2 flex justify-center items-center rounded-full bg-slate-400 hover:bg-slate-500 dark:bg-indigo-500 dark:hover:bg-indigo-600 border-none"
           >
-            {!isDownload && <BiDownload className="text-white" />}
+            {!isDownload && (
+              <BiDownload className="text-slate-800 dark:text-white" />
+            )}
 
             {isDownload && (
-              <ReloadIcon className="text-white h-4 w-4 animate-spin" />
+              <ReloadIcon className="text-slate-800 dark:text-white h-4 w-4 animate-spin" />
             )}
           </Button>
           <div className="ml-2 mr-2 mt-2">
@@ -467,7 +474,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
           <Panel id="panel-2" order={2} defaultSize={defaultLayout[1]}>
             <PanelGroup direction="vertical" onLayout={onLayout}>
               <Panel id="panel-3" order={3} defaultSize={defaultLayout[1]}>
-                <div className="h-full  bg-slate-300 flex justify-center items-center">
+                <div className="h-full  border-l-2 dark:border-none bg-slate-300 flex justify-center items-center">
                   <Preview isLoading={isLoading} code={editorCode} />
                 </div>
               </Panel>
@@ -487,9 +494,10 @@ const Editor = ({ code, isLoading }: IPlayground) => {
                   </Panel>
                 </>
               )}
+
               <Button
                 onClick={() => setIsShowLog(!isShowLog)}
-                className="w-20 h-6 my-2 bg-slate-400 text-slate-800 hover:bg-slate-500 hover:text-white dark:text-white border-none rounded-none"
+                className="w-20 h-6 my-2 dark:bg-indigo-500 dark:hover:bg-indigo-600 bg-slate-400 text-slate-800 hover:bg-slate-500 hover:text-white dark:text-white border-none rounded-none"
                 size={"default"}
                 variant={"outline"}
               >
