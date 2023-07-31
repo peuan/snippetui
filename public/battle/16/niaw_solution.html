@@ -10,16 +10,14 @@
     margin: 0;
     background: #0b2429;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-content: center;
   }
   .eye,
   .big,
   .middle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    place-content: center;
   }
   .big,
   .middle,
@@ -30,8 +28,8 @@
     width: 200px;
     height: 200px;
     background: #998235;
-    border-radius: 0 50%;
-    transform: rotate(135deg);
+    border-radius: 50% 0;
+    transform: rotate(45deg);
   }
   .big {
     width: 180px;
