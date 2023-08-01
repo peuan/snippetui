@@ -8,7 +8,7 @@ import { BiCode, BiInfoCircle, BiLinkExternal, BiMedal } from "react-icons/bi"
 import { useState } from "react"
 import clsx from "clsx"
 import { FaHeartBroken } from "react-icons/fa"
-import { Button } from "./ui/button"
+import { Button } from "@/components/ui/button"
 
 import {
   Dialog,
@@ -16,7 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ReloadIcon } from "@radix-ui/react-icons"
 
 const Card = ({

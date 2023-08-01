@@ -1,5 +1,5 @@
 import { IShowCaseResult } from "@/interfaces/IShowCase"
-import Card from "./ShowCaseCard"
+import Card from "@/components/ShowCaseCard"
 
 const ShowCase = ({
   showCaseResults,

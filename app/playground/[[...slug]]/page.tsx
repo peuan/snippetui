@@ -1,11 +1,9 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
-import Editor from "@/components/Editor"
-import Loading from "@/components/Loading"
-import { useGetCodeByPathQuery } from "@/redux/services/playgroundApi"
-import { usePostMessageMutation } from "@/redux/services/chatGPTApi"
 import { BiSolidSend } from "react-icons/bi"
 import clsx from "clsx"
+import Image from "next/image"
+import { ReloadIcon } from "@radix-ui/react-icons"
 
 import {
   Dialog,
@@ -17,13 +15,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 
+import Editor from "@/components/Editor"
+import Loading from "@/components/Loading"
+import { useGetCodeByPathQuery } from "@/redux/services/playgroundApi"
+import { usePostMessageMutation } from "@/redux/services/chatGPTApi"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { setChatGPTApiKey } from "@/redux/features/chatGPTSlice"
-import Image from "next/image"
-import { ReloadIcon } from "@radix-ui/react-icons"
 import { reset } from "@/redux/features/toastSlice"
 import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"

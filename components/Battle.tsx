@@ -2,7 +2,7 @@ import { BiPlay } from "react-icons/bi"
 
 import { CSSBATTLE_URL } from "@/config"
 import { IBattleResult } from "@/interfaces/IBattle"
-import Card from "./BattleCard"
+import Card from "@/components/BattleCard"
 
 const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
   const handleClickToPlay = (level: string) => {

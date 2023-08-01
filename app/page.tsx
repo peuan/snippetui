@@ -14,15 +14,15 @@ import ScrollToTop from "@/components/ScrollToTop"
 // import reducer
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { setBattleResult } from "@/redux/features/battleSlice"
-import { setShowCaseResult } from "./redux/features/showCaseSlice"
+import { setShowCaseResult } from "@/redux/features/showCaseSlice"
 
 // import api services
 import { useGetBattlesQuery } from "@/redux/services/battleApi"
-import { useGetShowCasesQuery } from "./redux/services/showCaseApi"
+import { useGetShowCasesQuery } from "@/redux/services/showCaseApi"
 
 // import interface
-import { IPages } from "./interfaces/IPage"
-import { setPage } from "./redux/features/pageSlice"
+import { IPages } from "@/interfaces/IPage"
+import { setPage } from "@/redux/features/pageSlice"
 
 // items per page
 const ITEMS_PER_PAGE = 3

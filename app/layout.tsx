@@ -1,10 +1,11 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { Kanit } from "next/font/google"
+import clsx from "clsx"
+
 import Nav from "@/components/Navbar"
 import { Providers } from "@/redux/provider"
-import Toast from "./components/Toast"
-import clsx from "clsx"
+import Toast from "@/components/Toast"
 import { ThemeProvider } from "@/components/ThemeProvider"
 
 const kanit = Kanit({ subsets: ["thai"], weight: "600" })

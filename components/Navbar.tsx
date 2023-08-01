@@ -16,7 +16,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
+} from "./ui/navigation-menu"
 
 import {
   DropdownMenu,
@@ -24,11 +24,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useAppDispatch } from "@/redux/hooks"
-import { setGlobalTheme } from "@/redux/features/themeSlice"
-import { Itheme } from "@/interfaces/Itheme"
-import { reset } from "@/redux/features/pageSlice"
+} from "./ui/dropdown-menu"
+import { useAppDispatch } from "../redux/hooks"
+import { setGlobalTheme } from "../redux/features/themeSlice"
+import { Itheme } from "../interfaces/Itheme"
+import { reset } from "../redux/features/pageSlice"
 
 export default function Nav() {
   const { setTheme, theme, resolvedTheme } = useTheme()
@@ -44,7 +44,7 @@ export default function Nav() {
     dispatch(reset())
   }
   return (
-    <div className="h-12 dark:bg-slate-900 bg-white min-w-full flex items-center pl-6">
+    <div className="h-12 dark:bg-slate-900 bg-white min-w-full flex items-center pl-6 mt-6">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
