@@ -17,8 +17,8 @@ import type { Container, Engine } from "tsparticles-engine"
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { FacebookShareButton, FacebookIcon } from "next-share"
 
-import Preview from "./Preview"
-import { Button } from "./ui/button"
+import Preview from "@/components/Preview"
+import { Button } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
@@ -28,8 +28,8 @@ import {
 } from "@/components/ui/select"
 import { IPlayground } from "@/interfaces/IPlayground"
 import { WEBSITE_LINK } from "@/config"
-import ResizeHandle from "./ResizeHandle"
-import Log from "./Log"
+import ResizeHandle from "@/components/ResizeHandle"
+import Log from "@/components/Log"
 
 import { generateHtmlResult } from "@/lib/html"
 import { useTheme } from "next-themes"
@@ -283,7 +283,7 @@ const Editor = ({ code, isLoading }: IPlayground) => {
   }, [downloadUrl, isDownload])
 
   return (
-    <div className="mt-2">
+    <div className="mt-2 relative">
       <Particles
         container={particlesContainer}
         id="tsparticles"
@@ -408,9 +408,8 @@ const Editor = ({ code, isLoading }: IPlayground) => {
         }}
       />
 
-      <div className="flex lg:justify-between justify-center lg:gap-0 gap-10 items-center px-2 mt-1  lg:w-1/2 w-full absolute z-[1] lg:top-[55px] top-[155px]  lg:right-0">
-        <div>
-          <div>{}</div>
+      <div className="flex lg:justify-between justify-center lg:gap-0 gap-10 items-center px-2  lg:w-1/2 w-full lg:absolute lg:-top-[50px] lg:mt-0 -mt-[30px] right-0 z-[1] lg:right-0">
+        <div className="">
           <div className="lg:w-[10vw] w-[30vw]">
             <Select
               defaultValue={template.template}
@@ -482,8 +481,8 @@ const Editor = ({ code, isLoading }: IPlayground) => {
               <CodeMirror
                 ref={codeMirrorRef}
                 value={editorCode}
-                minHeight="calc(100vh - 110px)"
-                maxHeight="calc(100vh - 110px)"
+                minHeight="calc(100vh - 135px)"
+                maxHeight="calc(100vh - 135px)"
                 extensions={[
                   template.template === "html" ||
                   template.template === "tailwindcss"

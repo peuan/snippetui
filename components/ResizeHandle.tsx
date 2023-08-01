@@ -1,7 +1,7 @@
 import { PanelResizeHandle } from "react-resizable-panels"
 import clsx from "clsx"
 
-import styles from "@/styles.module.css"
+import styles from "@/app/styles.module.css"
 
 export default function ResizeHandle({
   className = "",

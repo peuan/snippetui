@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { IShowCaseFile } from "@/interfaces/IShowCase"
 import { ReloadIcon } from "@radix-ui/react-icons"
-import { Badge } from "./ui/badge"
+import { Badge } from "@/components/ui/badge"
 const Card = ({ folder, file }: { folder: string; file: IShowCaseFile }) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()

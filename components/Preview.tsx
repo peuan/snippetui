@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import Loading from "./Loading"
+import Loading from "@/components/Loading"
 const Preview = ({
   code,
   isLoading,
