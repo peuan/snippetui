@@ -6,7 +6,8 @@
     "dev": "rm -rf .next && next dev",
     "build": "next build && npx playwright install",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@codemirror/lang-html": "^6.4.5",
