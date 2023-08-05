@@ -1,0 +1,61 @@
+<div class="main">
+  <div class="top"></div>
+  <div class="bottom"></div>
+  <div class="left"></div>
+  <div class="right"></div>
+  <div class="under"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #09042a;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+  }
+  .main {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+  }
+  .right,
+  .left,
+  .top,
+  .bottom {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  .left,
+  .right {
+    border: 10px solid #e78481;
+  }
+  .top {
+    position: absolute;
+    background: #f5bb9c;
+    top: -53px;
+    border: 10px solid #09042a;
+  }
+  .bottom {
+    position: absolute;
+    background: #f5bb9c;
+    bottom: -53px;
+    border: 10px solid #09042a;
+  }
+  .left {
+    background: #09042a;
+  }
+  .right {
+    background: #09042a;
+  }
+  .under {
+    position: absolute;
+    background: #e78481;
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+  }
+</style>
