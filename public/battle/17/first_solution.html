@@ -1,0 +1,51 @@
+<div class="horizontal">
+  <div class="circle back"></div>
+  <div class="rec"></div>
+  <div class="circle back"></div>
+</div>
+<div class="vertical">
+  <div class="circle in"></div>
+  <div class="circle in"></div>
+</div>
+<style>
+  body {
+    background: #09042A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .horizontal {
+    width: 200;
+    height: 80;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .back {
+    border: solid #E78481 10px;
+  }
+  .rec {
+    width: 60;
+    height: 60;
+    background: #E78481;
+    position: absolute;
+    left: 70;
+  }
+  .circle {
+    width: 60;
+    height: 60;
+    border-radius: 50%;
+  }
+  .vertical {
+    position: absolute;
+    height: 186;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .in {
+    background: #F5BB9C;
+    border: solid #09042A 10px;
+  }
+</style>
