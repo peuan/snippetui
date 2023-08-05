@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="top circle"></div>
+  <div class="middle">
+    <div class="circle"></div>
+    <div class="fill"></div>
+    <div class="circle"></div>
+  </div>
+  <div class="bottom circle"></div>
+</div>
+<style>
+  body {
+    background: #09042a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .middle {
+    display: flex;
+  }
+  .circle {
+    width: 60;
+    height: 60;
+    border-radius: 50%;
+  }
+  .top,
+  .bottom {
+    background: #f5bb9c;
+    border: 10px solid #09042a;
+    z-index: 2;
+  }
+  .top {
+    margin-bottom: -27px;
+  }
+  .bottom {
+    margin-top: -27px;
+  }
+  .middle .circle {
+    background: #09042a;
+    border: 10px solid #e78481;
+  }
+  .fill {
+    background: #e78481;
+    width: 60;
+    margin: 0 -10;
+  }
+</style>
