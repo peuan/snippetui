@@ -1,0 +1,50 @@
+<div class="main">
+  <div class="item oval1"></div>
+  <div class="item round"></div>
+  <div class="item rec"></div>
+  <div class="item oval2"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #62306D;
+    display: flex;
+    align-items: flex-end;
+  }
+  .main {
+    width: 200;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .item {
+    background: #F7EC7D;
+  }
+  .oval1 {
+    width: 75;
+    height: 125;
+    border-radius: 50px 50px 0 0;
+  }
+  .oval2 {
+    width: 125;
+    height: 75;
+    border-radius: 0 50px 50px 0;
+  }
+  .round {
+    width: 125;
+    height: 125;
+    background: #62306D;
+    border-radius: 0 0 0 25px;
+  }
+  .round::after {
+    content: "";
+    position: absolute;
+    width: 125;
+    height: 125;
+    background: #F7EC7D;
+    z-index: -1;
+  }
+  .rec {
+    width: 75;
+    height: 75;
+  }
+</style>
