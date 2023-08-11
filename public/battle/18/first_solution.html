@@ -1,0 +1,67 @@
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<div class="sq">
+  <div class="circle center"></div>
+</div>
+<div class="sq">
+  <div class="circle center"></div>
+</div>
+<div class="sq">
+  <div class="circle center"></div>
+</div>
+<div class="sq">
+  <div class="circle center"></div>
+</div>
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<div class="sq">
+  <div class="circle"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #5C434C;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .sq {
+    width: 80;
+    height: 80;
+    margin: 10;
+    overflow: hidden;
+  }
+  .circle {
+    width: 160;
+    height: 160;
+    border-radius: 50%;
+  }
+  .sq:nth-child(odd) .circle {
+    background: #F09462;
+  }
+  .sq:nth-child(even) .circle {
+    background: #F5D6B4;
+  }
+  .sq:nth-child(odd) .center {
+    background: #F5D6B4;
+  }
+  .sq:nth-child(even) .center {
+    background: #F09462;
+  }
+</style>
