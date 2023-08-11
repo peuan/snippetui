@@ -3,8 +3,7 @@ import { NextAuthOptions } from "next-auth"
 import GitHubProvider from "next-auth/providers/github"
 
 import { env } from "@/env.mjs"
-import { siteConfig } from "@/config/site"
-// import { db } from "@/lib/db"
+import { db } from "@/lib/db"
 
 export const authOptions: NextAuthOptions = {
   // huh any! I know.
@@ -24,33 +23,36 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // async session({ token, session }) {
-    //   if (token) {
-    //     session.user.id = token.id
-    //     session.user.name = token.name
-    //     session.user.email = token.email
-    //     session.user.image = token.picture
-    //   }
-    //   return session
-    // },
-    // async jwt({ token, user }) {
-    //   const dbUser = await db.user.findFirst({
-    //     where: {
-    //       email: token.email,
-    //     },
-    //   })
-    //   if (!dbUser) {
-    //     if (user) {
-    //       token.id = user?.id
-    //     }
-    //     return token
-    //   }
-    //   return {
-    //     id: dbUser.id,
-    //     name: dbUser.name,
-    //     email: dbUser.email,
-    //     picture: dbUser.image,
-    //   }
-    // },
+    async session({ token, session }: { token: any; session: any }) {
+      if (token && session.user) {
+        session.user.id = token.id
+        session.user.name = token.name
+        session.user.email = token.email
+        session.user.image = token.picture
+      }
+
+      return session
+    },
+    async jwt({ token, user }) {
+      const dbUser = await db.user.findFirst({
+        where: {
+          email: token.email,
+        },
+      })
+
+      if (!dbUser) {
+        if (user) {
+          token.id = user?.id
+        }
+        return token
+      }
+
+      return {
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
+      }
+    },
   },
 }
