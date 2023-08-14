@@ -83,7 +83,7 @@ const Card = ({
             <Iframe
               title={file.fileName}
               overflow="hidden"
-              className="w-[380px] h-[280px]"
+              className="w-[400px] h-[300px]"
               url={`battle/${folder}/${file.fileName}`}
             />
           </div>

@@ -95,16 +95,16 @@
 
 .flip-card {
   background-color: transparent;
-  width: 380px;
-  height: 280px;
+  width: 400px;
+  height: 300px;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
 /* This container is needed to position the front and back side */
 .flip-card-inner {
   position: relative;
-  width: 380px;
-  height: 280px;
+  width: 400px;
+  height: 300px;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
@@ -119,8 +119,8 @@
 .flip-card-front,
 .flip-card-back {
   position: absolute;
-  width: 380px;
-  height: 280px;
+  width: 400px;
+  height: 300px;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
 }
