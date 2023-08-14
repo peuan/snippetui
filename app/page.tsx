@@ -231,7 +231,7 @@ export default function Home() {
                 Next
               </button>
               <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
-                <div className="visible lg:invisible flex justify-between w-[200px] bg-slate-500 dark:bg-green-500 py-2 px-2 rounded-full">
+                <div className="visible lg:invisible flex justify-between w-[100px] bg-slate-500 dark:bg-green-500 py-2 px-2 rounded-full">
                   <button
                     onClick={handlePreviousPage}
                     className={clsx(
@@ -242,20 +242,7 @@ export default function Home() {
                     <BiLeftArrow />
                   </button>
                   <div className="flex items-center gap-2 text-slate-800 dark:text-white text-xs font-bold">
-                    <Input
-                      onChange={onChangePage}
-                      type="number"
-                      className="lg:w-20 w-20 h-[14px] text-center rounded-full"
-                      value={paginationValue!}
-                      onBlur={() =>
-                        paginationValue <= 0
-                          ? setPaginationValue(pageNumber)
-                          : null
-                      }
-                      max={totalPages}
-                      min={1}
-                    />
-                    / {totalPages}
+                    {pageNumber} / {totalPages}
                   </div>
 
                   <button
