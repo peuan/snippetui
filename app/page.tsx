@@ -210,7 +210,7 @@ export default function Home() {
                 <Input
                   onChange={onChangePage}
                   type="number"
-                  className="w-20 text-center"
+                  className="w-20 text-center rounded-full"
                   value={paginationValue!}
                   onBlur={() =>
                     paginationValue <= 0 ? setPaginationValue(pageNumber) : null
@@ -245,7 +245,7 @@ export default function Home() {
                     <Input
                       onChange={onChangePage}
                       type="number"
-                      className="lg:w-20 w-20 h-[14px] text-center"
+                      className="lg:w-20 w-20 h-[14px] text-center rounded-full"
                       value={paginationValue!}
                       onBlur={() =>
                         paginationValue <= 0
