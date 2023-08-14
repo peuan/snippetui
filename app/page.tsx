@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { TbMoustache } from "react-icons/tb"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
@@ -23,6 +23,8 @@ import { useGetShowCasesQuery } from "@/redux/services/showCaseApi"
 // import interface
 import { IPages } from "@/interfaces/IPage"
 import { setPage } from "@/redux/features/pageSlice"
+import { Input } from "@/components/ui/input"
+import debounce from "lodash.debounce"
 
 // items per page
 const ITEMS_PER_PAGE = 3
@@ -35,6 +37,7 @@ export default function Home() {
   const pageNumber = useAppSelector((state) => state.pageReducer.pageNumber)
 
   const [totalPages, setTotalPages] = useState(1)
+  const [paginationValue, setPaginationValue] = useState<any>(pageNumber)
 
   const {
     isLoading: battleLoading,
@@ -68,10 +71,10 @@ export default function Home() {
         })
       )
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
+      // window.scrollTo({
+      //   top: 0,
+      //   behavior: "smooth",
+      // })
     }
   }, [currentPage, pageNumber, battleData, dispatch, battleLoading])
 
@@ -97,12 +100,14 @@ export default function Home() {
   const handlePreviousPage = () => {
     if (pageNumber > 1) {
       const previousPage = pageNumber - 1
+      setPaginationValue(previousPage)
       dispatch(setPage({ page: currentPage, pageNumber: previousPage }))
     }
   }
   const handleNextPage = () => {
     if (pageNumber < totalPages) {
       const nextPage = pageNumber + 1
+      setPaginationValue(nextPage)
       dispatch(setPage({ page: currentPage, pageNumber: nextPage }))
     }
   }
@@ -110,6 +115,23 @@ export default function Home() {
   // handle to display battle/showcase section
   const handlePageSection = (page: IPages) => {
     dispatch(setPage({ page: page.page, pageNumber: 1 }))
+  }
+
+  const debouncedChangePagination = useCallback(
+    debounce((value: number) => {
+      dispatch(setPage({ page: currentPage, pageNumber: value }))
+    }, 500),
+    []
+  )
+
+  const onChangePage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const page = Number(event.target.value)
+    if (page > 0 && page <= totalPages) {
+      setPaginationValue(page)
+      debouncedChangePagination(page)
+    } else {
+      setPaginationValue("")
+    }
   }
 
   return (
@@ -169,6 +191,7 @@ export default function Home() {
           {currentPage === "SHOWCASE" && (
             <ShowCase showCaseResults={showCaseResults} />
           )}
+
           {!battleLoading && !showCaseLoading && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
               <button
@@ -181,8 +204,21 @@ export default function Home() {
               >
                 Previous
               </button>
-              <span className="text-slate-800 dark:text-white font-bold">{`Page ${pageNumber} of ${totalPages}`}</span>
-
+              <div className="flex items-center gap-2">
+                Page
+                <Input
+                  onChange={onChangePage}
+                  type="number"
+                  className="w-20 text-center"
+                  value={paginationValue!}
+                  onBlur={() =>
+                    paginationValue <= 0 ? setPaginationValue(pageNumber) : null
+                  }
+                  max={totalPages}
+                  min={1}
+                />
+                of {totalPages}
+              </div>
               <button
                 className={clsx(
                   "w-[100px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold py-2 px-4  rounded-full",
@@ -194,7 +230,7 @@ export default function Home() {
                 Next
               </button>
               <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
-                <div className="visible lg:invisible flex justify-between w-[100px] bg-slate-500 dark:bg-green-500 py-2 px-2 rounded-full">
+                <div className="visible lg:invisible flex justify-between w-[200px] bg-slate-500 dark:bg-green-500 py-2 px-2 rounded-full">
                   <button
                     onClick={handlePreviousPage}
                     className={clsx(
@@ -204,7 +240,23 @@ export default function Home() {
                   >
                     <BiLeftArrow />
                   </button>
-                  <span className="text-slate-800 dark:text-white text-xs font-bold">{`${pageNumber}/${totalPages}`}</span>
+                  <div className="flex items-center gap-2 text-slate-800 dark:text-white text-xs font-bold">
+                    <Input
+                      onChange={onChangePage}
+                      type="number"
+                      className="lg:w-20 w-20 h-[14px] text-center"
+                      value={paginationValue!}
+                      onBlur={() =>
+                        paginationValue <= 0
+                          ? setPaginationValue(pageNumber)
+                          : null
+                      }
+                      max={totalPages}
+                      min={1}
+                    />
+                    / {totalPages}
+                  </div>
+
                   <button
                     onClick={handleNextPage}
                     className={clsx(
