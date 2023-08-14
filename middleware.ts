@@ -10,25 +10,24 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/login") ||
       req.nextUrl.pathname.startsWith("/register")
 
-    //TODO
-    // if (isAuthPage) {
-    //   if (isAuth) {
-    //     return NextResponse.redirect(new URL("/playground", req.url))
-    //   }
+    if (isAuthPage) {
+      if (isAuth) {
+        return NextResponse.redirect(new URL("/playground", req.url))
+      }
 
-    //   return null
-    // }
+      return null
+    }
 
-    // if (!isAuth) {
-    //   let from = req.nextUrl.pathname
-    //   if (req.nextUrl.search) {
-    //     from += req.nextUrl.search
-    //   }
+    if (!isAuth) {
+      let from = req.nextUrl.pathname
+      if (req.nextUrl.search) {
+        from += req.nextUrl.search
+      }
 
-    //   return NextResponse.redirect(
-    //     new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
-    //   )
-    // }
+      return NextResponse.redirect(
+        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+      )
+    }
   },
   {
     callbacks: {
