@@ -115,6 +115,7 @@ export default function Home() {
   // handle to display battle/showcase section
   const handlePageSection = (page: IPages) => {
     dispatch(setPage({ page: page.page, pageNumber: 1 }))
+    setPaginationValue(1)
   }
 
   const debouncedChangePagination = useCallback(
