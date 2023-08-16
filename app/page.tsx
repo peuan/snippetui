@@ -1,9 +1,11 @@
 "use client"
 
+// import libs
 import { useCallback, useEffect, useState } from "react"
 import { TbMoustache } from "react-icons/tb"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
+import debounce from "lodash.debounce"
 
 // import component
 import Battle from "@/components/Battle"
@@ -15,6 +17,7 @@ import ScrollToTop from "@/components/ScrollToTop"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { setBattleResult } from "@/redux/features/battleSlice"
 import { setShowCaseResult } from "@/redux/features/showCaseSlice"
+import { setPage } from "@/redux/features/pageSlice"
 
 // import api services
 import { useGetBattlesQuery } from "@/redux/services/battleApi"
@@ -22,9 +25,7 @@ import { useGetShowCasesQuery } from "@/redux/services/showCaseApi"
 
 // import interface
 import { IPages } from "@/interfaces/IPage"
-import { setPage } from "@/redux/features/pageSlice"
 import { Input } from "@/components/ui/input"
-import debounce from "lodash.debounce"
 
 // items per page
 const ITEMS_PER_PAGE = 3
