@@ -1,0 +1,48 @@
+<div class="sqr sqr-1">
+  <div class="tri"></div>
+</div>
+<div class="sqr sqr-2"></div>
+<div class="sqr sqr-3">
+  <div class="tri tri-2"></div>
+</div>
+<style>
+  body {
+    background: #0b2429;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .sqr {
+    width: 100;
+    height: 100;
+    background: #f3ac3c;
+  }
+  .sqr-1,
+  .sqr-3 {
+    width: 70;
+    height: 140;
+    position: absolute;
+    top: 45;
+    background: #998235;
+  }
+  .sqr-1 {
+    left: 130;
+  }
+  .sqr-2 {
+    z-index: 2;
+    margin-top: 70;
+    transform: rotate(45deg);
+  }
+  .sqr-3 {
+    right: 130;
+    background: #1a4341;
+  }
+  .tri {
+    border-right: 70px solid transparent;
+    border-bottom: 45px solid transparent;
+    border-top: 70px solid #0b2429;
+  }
+  .tri-2 {
+    border-left: 70px solid transparent;
+  }
+</style>
