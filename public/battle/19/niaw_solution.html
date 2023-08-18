@@ -17,22 +17,22 @@
     transform: rotate(45deg);
     margin-top: 70px;
   }
-  .left {
-    width: 70px;
-    height: 70px;
-    background: #998235;
-    margin-top: -70px;
-    margin-left: -70px;
-    position: absolute;
-    transform: skewY(-45deg);
-  }
+  .left,
   .right {
     width: 70px;
     height: 70px;
+    position: absolute;
+  }
+  .left {
+    background: #998235;
+    margin-top: -70px;
+    margin-left: -70px;
+    transform: skewY(-45deg);
+  }
+  .right {
     background: #1a4341;
     margin-top: -70px;
     margin-left: 70px;
-    position: absolute;
     transform: skewY(45deg);
   }
 </style>
