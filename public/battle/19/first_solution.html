@@ -1,0 +1,50 @@
+<div class="main">
+  <div class="top left"></div>
+  <div class="top right"></div>
+  <div class="mid right"></div>
+  <div class="mid left"></div>
+  <div class="bottom right"></div>
+  <div class="bottom left"></div>
+</div>
+<style>
+  body {
+    background: #0B2429;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main {
+    display: flex;
+    flex-wrap: wrap;
+    width: 140;
+  }
+  .top {
+    border-top: solid #0B2429 70px;
+  }
+  .top.left {
+    background: #998235;
+    border-right: solid transparent 70px;
+  }
+  .top.right {
+    background: #1A4341;
+    border-left: solid transparent 70px;
+  }
+  .mid.left {
+    background: #1A4341;
+    border-left: solid #F3AC3C 70px;
+  }
+  .mid.right {
+    background: #998235;
+    border-right: solid #F3AC3C 70px;
+  }
+  .mid,.bottom {
+    background: #F3AC3C;
+    border-top: solid transparent 70px;
+  }
+  .bottom.left {
+    border-right: solid #0B2429 70px;
+  }
+  .bottom.right {
+    border-left: solid #0B2429 70px;
+  }
+</style>
