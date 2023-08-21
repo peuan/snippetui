@@ -1,8 +1,9 @@
 "use client"
 
 // import libs
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { TbMoustache } from "react-icons/tb"
+import { AiFillSound } from "react-icons/ai"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
 import debounce from "lodash.debounce"
@@ -39,7 +40,7 @@ export default function Home() {
 
   const [totalPages, setTotalPages] = useState(1)
   const [paginationValue, setPaginationValue] = useState<any>(pageNumber)
-
+  const audioRef = useRef<any>(null)
   const {
     isLoading: battleLoading,
     isFetching: battleIsFetching,
@@ -143,10 +144,15 @@ export default function Home() {
         <ScrollToTop />
         <div>
           <div className="flex flex-col justify-center items-center mt-2">
+            <AiFillSound
+              className="absolute mb-[120px] -ml-[250px] hover:cursor-pointer text-yellow-400 "
+              onClick={() => audioRef.current.play()}
+            />
             <h1 className="text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
               <div className="flex items-center px-5">
                 SnippetUI
                 <TbMoustache className="ml-2" />
+                <audio ref={audioRef} src={"/snippetUI.mp3"} />
               </div>
             </h1>
             <h6 className="text-[24px] font-light text-center px-2 pb-4 text-yellow-400">
