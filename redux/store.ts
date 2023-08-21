@@ -20,6 +20,7 @@ import { showCaseApi } from "@/redux/services/showCaseApi"
 import { playgroundApi } from "@/redux/services/playgroundApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import { chatGPTApi } from "@/redux/services/chatGPTApi"
+import { kataApi } from "@/redux/services/kataApi"
 
 export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
@@ -62,6 +63,7 @@ export const store = configureStore({
     [showCaseApi.reducerPath]: showCaseApi.reducer,
     [playgroundApi.reducerPath]: playgroundApi.reducer,
     [chatGPTApi.reducerPath]: chatGPTApi.reducer,
+    [kataApi.reducerPath]: kataApi.reducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
@@ -69,7 +71,8 @@ export const store = configureStore({
       battleApi.middleware,
       showCaseApi.middleware,
       playgroundApi.middleware,
-      chatGPTApi.middleware
+      chatGPTApi.middleware,
+      kataApi.middleware
     ),
   enhancers: [middlewareEnhancer],
 })

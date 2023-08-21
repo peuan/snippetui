@@ -1,0 +1,54 @@
+<div class="group">
+  <div class="item-1"></div>
+  <div class="item-2"></div>
+  <div class="item-3"></div>
+  <div class="item-4"></div>
+</div>
+<style>
+  body {
+    background: #222;
+    height: 100vh;
+    display: grid;
+    place-content: center;
+  }
+  .group {
+    position: relative;
+    transform: rotate(45deg);
+    top: -25px;
+    left: -76px;
+  }
+  div {
+    position: absolute;
+  }
+  .item-1 {
+    width: 80px;
+    height: 30px;
+    background: #f2994a;
+    border-radius: 0px 5px 0px 10px;
+    bottom: 0px;
+  }
+  .item-2 {
+    width: 90px;
+    height: 30px;
+    background: #f2994a;
+    transform: rotate(90deg);
+    bottom: 40px;
+    left: -30px;
+  }
+  .item-3 {
+    width: 80px;
+    height: 30px;
+    background: #2d9cdb;
+    border-radius: 0px 10px 0px 5px;
+    bottom: 52px;
+    left: 50px;
+  }
+  .item-4 {
+    width: 90px;
+    height: 30px;
+    background: #2d9cdb;
+    transform: rotate(90deg);
+    bottom: 12px;
+    left: 70px;
+  }
+</style>

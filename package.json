@@ -40,6 +40,7 @@
     "@uiw/react-codemirror": "^4.21.7",
     "@uiw/react-github-corners": "^1.5.15",
     "autoprefixer": "10.4.14",
+    "chai": "^4.3.7",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
     "codemirror": "^6.0.1",
@@ -47,6 +48,7 @@
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "framer-motion": "^10.13.0",
+    "highlight.js": "^11.8.0",
     "html-to-image": "^1.11.11",
     "husky": "^8.0.3",
     "is-lambda": "^1.0.1",
@@ -83,6 +85,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.36.1",
+    "@types/chai": "^4.3.5",
     "@types/html-validator": "^5.0.3",
     "@types/js-beautify": "^1.13.3",
     "@types/js-yaml": "^4.0.5",
