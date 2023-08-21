@@ -1,0 +1,46 @@
+<div class="rec">
+  <div class="orange vertical"></div>
+  <div class="orange horizontal"></div>
+  <div class="blue vertical"></div>
+  <div class="blue horizontal"></div>
+</div>
+<style>
+  body {
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .rec {
+    display: grid;
+    grid-template-rows: 20px 30px 20px 30px 20px;
+    grid-template-columns: 30px 20px 30px 20px 30px;
+    transform: rotate(45deg);
+  }
+  .orange {
+    background: #F2994A;
+  }
+  .orange.vertical {
+    grid-column: 1 / 2;
+    grid-row: 1 / 5;
+    border-radius: 0 0 0 10px;
+  }
+  .orange.horizontal {
+    grid-column: 2 / 4;
+    grid-row: 4 / 5;
+    border-radius: 0 5px 0 0;
+  }
+  .blue {
+    background: #2D9CDB;
+  }
+  .blue.vertical {
+    grid-column: 3 / 5;
+    grid-row: 2 / 3;
+    border-radius: 0 0 0 5px;
+  }
+  .blue.horizontal {
+    grid-column: 5 / 6;
+    grid-row: 2 / 6;
+    border-radius: 0 10px 0 0;
+  }
+</style>
