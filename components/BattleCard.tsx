@@ -43,6 +43,8 @@ const Card = ({
         return "/first.png"
       case "chok":
         return "/chok.png"
+      case "ake":
+        return "/ake.png"
       default:
         break
     }

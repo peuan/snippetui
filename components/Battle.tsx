@@ -11,8 +11,8 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
 
   return (
     <>
-      <div className="flex justify-start lg:container">
-        <div className="flex flex-col">
+      <div className="flex justify-center ">
+        <div className="flex flex-col lg:container ">
           {battleResults.files.map((folder, index) => (
             <div key={index} className="sm:flex-col mb-10">
               <div
