@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="l top">
+    <div class="vertical"></div>
+    <div class="horizontal"></div>
+  </div>
+  <div class="l bottom">
+    <div class="vertical"></div>
+    <div class="horizontal"></div>
+  </div>
+</div>
+
+<style>
+  body {
+    margin: 0;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    position: relative;
+    width: 120;
+    height: 120;
+  }
+
+  .top {
+    transform: rotate(45deg);
+    position: absolute;
+    margin-left: 5;
+    margin-top: -15;
+  }
+  .bottom {
+    transform: rotate(225deg);
+    position: absolute;
+    margin-left: 30;
+    margin-top: 35;
+  }
+  .vertical {
+    width: 30;
+    height: 70;
+    background: #f2994a;
+  }
+
+  .horizontal {
+    height: 30;
+    width: 80;
+    margin-top: -1px;
+    background: #f2994a;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 5px;
+  }
+  .bottom .vertical,
+  .bottom .horizontal {
+    background: #2d9cdb;
+  }
+</style>
