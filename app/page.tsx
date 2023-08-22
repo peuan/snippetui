@@ -233,6 +233,8 @@ export default function Home() {
 
   const handleOnSorting = (event: Sorting) => {
     setSorting(event)
+    dispatch(setPage({ page: currentPage, pageNumber: 1 }))
+    setPaginationValue(1)
   }
   return (
     <>
