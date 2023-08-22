@@ -1,4 +1,5 @@
 import { IBattleResult } from "@/interfaces/IBattle"
+import { Sorting } from "@/types/sorting.enum"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
 export const battleApi = createApi({
@@ -8,8 +9,12 @@ export const battleApi = createApi({
     baseUrl: "/api/",
   }),
   endpoints: (builder) => ({
-    getBattles: builder.query<IBattleResult, { pageNumber: number }>({
-      query: ({ pageNumber }) => `battle/${pageNumber}`,
+    getBattles: builder.query<
+      IBattleResult,
+      { pageNumber: number; sorting: Sorting }
+    >({
+      query: ({ pageNumber, sorting }) =>
+        `battle/${pageNumber}?sorting=${sorting}`,
     }),
     getBattleById: builder.query<{ file: string }, { pageNumber: number }>({
       query: ({ pageNumber }) => `battle/${pageNumber}`,

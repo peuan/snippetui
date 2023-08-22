@@ -12,7 +12,7 @@ export const showCase = createSlice({
   reducers: {
     reset: () => initialState,
     setShowCaseResult: (state, action: PayloadAction<IShowCaseResult>) => {
-      return { state, ...action.payload }
+      return { ...state, ...action.payload }
     },
   },
 })
