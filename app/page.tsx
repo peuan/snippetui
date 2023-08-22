@@ -7,6 +7,7 @@ import { AiFillSound } from "react-icons/ai"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
 import debounce from "lodash.debounce"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 // import component
 import Battle from "@/components/Battle"
@@ -32,6 +33,10 @@ import { Input } from "@/components/ui/input"
 const ITEMS_PER_PAGE = 3
 
 export default function Home() {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams: any = useSearchParams()!
+
   const battleResults = useAppSelector((state) => state.battleReducer)
 
   const showCaseResults = useAppSelector((state) => state.showCaseReducer)
@@ -62,6 +67,26 @@ export default function Home() {
 
   const dispatch = useAppDispatch()
 
+  const createQueryString = useCallback(
+    (type: string, typeValue: string, page: string, pageValue: string) => {
+      const params = new URLSearchParams(searchParams)
+      params.set(type, typeValue)
+      params.set(page, pageValue)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
+
+  useEffect(() => {
+    const type = searchParams.get("type")
+    const page = searchParams.get("page")
+    if (type && page) {
+      setPaginationValue(Number(page))
+      dispatch(setPage({ page: type.toUpperCase(), pageNumber: Number(page) }))
+    }
+  }, [dispatch, searchParams])
+
   useEffect(() => {
     if (battleData && !battleLoading && currentPage === "BATTLE") {
       const total = Math.ceil(battleData.totalItems / ITEMS_PER_PAGE)
@@ -73,12 +98,28 @@ export default function Home() {
         })
       )
 
-      // window.scrollTo({
-      //   top: 0,
-      //   behavior: "smooth",
-      // })
+      router.push(
+        pathname +
+          "?" +
+          createQueryString(
+            "type",
+            currentPage.toLocaleLowerCase(),
+            "page",
+            pageNumber.toString()
+          )
+      )
     }
-  }, [currentPage, pageNumber, battleData, dispatch, battleLoading])
+  }, [
+    currentPage,
+    pageNumber,
+    battleData,
+    dispatch,
+    battleLoading,
+    router,
+    pathname,
+    createQueryString,
+    searchParams,
+  ])
 
   useEffect(() => {
     if (showCaseData && !showCaseLoading && currentPage === "SHOWCASE") {
@@ -91,12 +132,27 @@ export default function Home() {
         })
       )
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
+      router.push(
+        pathname +
+          "?" +
+          createQueryString(
+            "type",
+            currentPage.toLocaleLowerCase(),
+            "page",
+            pageNumber.toString()
+          )
+      )
     }
-  }, [currentPage, pageNumber, showCaseData, dispatch, showCaseLoading])
+  }, [
+    currentPage,
+    pageNumber,
+    showCaseData,
+    dispatch,
+    showCaseLoading,
+    router,
+    pathname,
+    createQueryString,
+  ])
 
   // pagination
   const handlePreviousPage = () => {
@@ -242,7 +298,7 @@ export default function Home() {
                   <button
                     onClick={handlePreviousPage}
                     className={clsx(
-                      "  hover:text-white text-slate-800 dark:text-white font-bold",
+                      "hover:text-white text-slate-800 dark:text-white font-bold",
                       pageNumber === 1 && "opacity-50 cursor-not-allowed"
                     )}
                   >
@@ -255,7 +311,7 @@ export default function Home() {
                   <button
                     onClick={handleNextPage}
                     className={clsx(
-                      " hover:text-white dark:hover:text-green-700 text-slate-800 font-bold",
+                      "hover:text-white text-slate-800 dark:text-white font-bold",
                       pageNumber === totalPages &&
                         "opacity-50 cursor-not-allowed"
                     )}
