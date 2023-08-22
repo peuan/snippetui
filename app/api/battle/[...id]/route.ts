@@ -3,16 +3,16 @@ import { NextRequest, NextResponse } from "next/server"
 import path from "path"
 import yaml from "js-yaml"
 import { readFileSync } from "fs"
+import { Sorting } from "@/types/sorting.enum"
 
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: { id: string; sorting: Sorting } }
 ) {
   const ITEMS_PER_PAGE = 3
   const currentPage = Number(context.params.id)
-  const { searchParams } = new URL(request.url)
-  const sorting = searchParams.get("sorting")
-
+  const sorting = context.params.sorting
+  console.log(sorting)
   const dirRelativeToPublicFolder = "battle"
   const dir = path.resolve("./public", dirRelativeToPublicFolder)
 
@@ -20,9 +20,7 @@ export async function GET(
     const files = await readdir(dir)
     const filteredFiles = files
       .filter((file) => !file.includes("."))
-      .sort((a, b) =>
-        sorting === "DESC" ? Number(b) - Number(a) : Number(a) - Number(b)
-      )
+      .sort((a, b) => Number(b) - Number(a))
     const paginatedFiles = paginateArray(
       filteredFiles,
       currentPage,
@@ -88,11 +86,7 @@ export async function GET(
         return { folder: file, files: filesWithCount }
       })
     )
-    fileResults.sort((a, b) =>
-      sorting === "DESC"
-        ? Number(b.folder) - Number(a.folder)
-        : Number(a.folder) - Number(b.folder)
-    )
+    fileResults.sort((a, b) => Number(b.folder) - Number(a.folder))
 
     return NextResponse.json({
       files: fileResults,

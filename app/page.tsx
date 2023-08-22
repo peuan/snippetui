@@ -3,7 +3,11 @@
 // import libs
 import { useCallback, useEffect, useRef, useState } from "react"
 import { TbMoustache } from "react-icons/tb"
-import { AiFillSound } from "react-icons/ai"
+import {
+  AiFillSound,
+  AiOutlineCaretDown,
+  AiOutlineCaretUp,
+} from "react-icons/ai"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
 import debounce from "lodash.debounce"
@@ -28,6 +32,18 @@ import { useGetShowCasesQuery } from "@/redux/services/showCaseApi"
 // import interface
 import { IPages } from "@/interfaces/IPage"
 import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarTrigger,
+} from "@/components/ui/menubar"
+import { Sorting } from "@/types/sorting.enum"
 
 // items per page
 const ITEMS_PER_PAGE = 3
@@ -44,6 +60,7 @@ export default function Home() {
   const pageNumber = useAppSelector((state) => state.pageReducer.pageNumber)
 
   const [totalPages, setTotalPages] = useState(1)
+  const [sorting, setSorting] = useState<Sorting>(Sorting.DESC)
   const [paginationValue, setPaginationValue] = useState<any>(pageNumber)
   const audioRef = useRef<any>(null)
   const {
@@ -52,7 +69,7 @@ export default function Home() {
     data: battleData,
     error: battleError,
   } = useGetBattlesQuery(
-    { pageNumber: pageNumber },
+    { pageNumber: pageNumber, sorting: sorting },
     { skip: currentPage !== "BATTLE" }
   )
   const {
@@ -68,21 +85,36 @@ export default function Home() {
   const dispatch = useAppDispatch()
 
   const createQueryString = useCallback(
-    (type: string, typeValue: string, page: string, pageValue: string) => {
+    (
+      type: string,
+      typeValue: string,
+      page: string,
+      pageValue: string,
+      sorting: string,
+      sortingValue: Sorting
+    ) => {
       const params = new URLSearchParams(searchParams)
       params.set(type, typeValue)
       params.set(page, pageValue)
 
+      if (currentPage === "BATTLE") {
+        params.set(sorting, sortingValue)
+      } else {
+        params.delete("sorting")
+      }
+
       return params.toString()
     },
-    [searchParams]
+    [currentPage, searchParams]
   )
 
   useEffect(() => {
     const type = searchParams.get("type")
     const page = searchParams.get("page")
-    if (type && page) {
+    const sorting = searchParams.get("sorting")
+    if (type && page && sorting) {
       setPaginationValue(Number(page))
+      setSorting(sorting.toUpperCase())
       dispatch(setPage({ page: type.toUpperCase(), pageNumber: Number(page) }))
     }
   }, [dispatch, searchParams])
@@ -105,7 +137,9 @@ export default function Home() {
             "type",
             currentPage.toLocaleLowerCase(),
             "page",
-            pageNumber.toString()
+            pageNumber.toString(),
+            "sorting",
+            sorting.toLocaleLowerCase() as unknown as any
           )
       )
     }
@@ -119,6 +153,7 @@ export default function Home() {
     pathname,
     createQueryString,
     searchParams,
+    sorting,
   ])
 
   useEffect(() => {
@@ -139,7 +174,9 @@ export default function Home() {
             "type",
             currentPage.toLocaleLowerCase(),
             "page",
-            pageNumber.toString()
+            pageNumber.toString(),
+            "sorting",
+            sorting.toLocaleLowerCase() as unknown as any
           )
       )
     }
@@ -152,6 +189,7 @@ export default function Home() {
     router,
     pathname,
     createQueryString,
+    sorting,
   ])
 
   // pagination
@@ -175,12 +213,12 @@ export default function Home() {
     dispatch(setPage({ page: page.page, pageNumber: 1 }))
     setPaginationValue(1)
   }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedChangePagination = useCallback(
     debounce((value: number) => {
       dispatch(setPage({ page: currentPage, pageNumber: value }))
     }, 500),
-    []
+    [currentPage]
   )
 
   const onChangePage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,6 +231,9 @@ export default function Home() {
     }
   }
 
+  const handleOnSorting = (event: Sorting) => {
+    setSorting(event)
+  }
   return (
     <>
       <div className="mb-10">
@@ -215,9 +256,9 @@ export default function Home() {
               “Begin Your Coding Journey Here”
             </h6>
           </div>
-          <div className="flex justify-center">
-            <div className="inline-flex ">
-              <button
+          <div className="flex-col justify-center items-center gap-4">
+            <div className="flex justify-center">
+              <Button
                 onClick={() =>
                   handlePageSection({ page: "BATTLE", pageNumber })
                 }
@@ -230,8 +271,8 @@ export default function Home() {
                 )}
               >
                 Battle
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() =>
                   handlePageSection({ page: "SHOWCASE", pageNumber })
                 }
@@ -244,8 +285,24 @@ export default function Home() {
                 )}
               >
                 Showcase
-              </button>
+              </Button>
             </div>
+            {currentPage === "BATTLE" && (
+              <div className="flex container lg:justify-end justify-center items-center gap-4  mt-4">
+                <div>SORT</div>
+                <Menubar
+                  onValueChange={(value) => handleOnSorting(value as Sorting)}
+                  defaultValue={sorting}
+                >
+                  <MenubarMenu value="ASC">
+                    <MenubarTrigger>LEVEL ASC</MenubarTrigger>
+                  </MenubarMenu>
+                  <MenubarMenu value="DESC">
+                    <MenubarTrigger>LEVEL DESC</MenubarTrigger>
+                  </MenubarMenu>
+                </Menubar>
+              </div>
+            )}
           </div>
           {currentPage === "BATTLE" && (
             <>
