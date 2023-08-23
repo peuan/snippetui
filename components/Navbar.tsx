@@ -5,7 +5,7 @@ import Link from "next/link"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-
+import { IoMdColorPalette } from "react-icons/io"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -44,7 +44,7 @@ export default function Nav() {
     dispatch(reset())
   }
   return (
-    <div className="h-12 dark:bg-slate-900 bg-white min-w-full flex items-center pl-6 mt-6">
+    <div className="h-10 dark:bg-slate-900 bg-white min-w-full flex items-center pl-6 mt-6">
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -59,6 +59,7 @@ export default function Nav() {
           <NavigationMenuItem>
             <Link href={"/playground"} className={navigationMenuTriggerStyle()}>
               Playground
+              <IoMdColorPalette className="ml-2" />
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>

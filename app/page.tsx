@@ -3,13 +3,20 @@
 // import libs
 import { useCallback, useEffect, useRef, useState } from "react"
 import { TbMoustache } from "react-icons/tb"
+import { GiMagicAxe } from "react-icons/gi"
 import {
   AiFillSound,
   AiOutlineCaretDown,
+  AiFillCaretDown,
+  AiFillCaretUp,
+  AiFillCaretLeft,
+  AiFillCaretRight,
   AiOutlineCaretUp,
+  AiOutlineAntDesign,
 } from "react-icons/ai"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
+import { IoMdColorWand } from "react-icons/io"
 import debounce from "lodash.debounce"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
@@ -33,16 +40,6 @@ import { useGetShowCasesQuery } from "@/redux/services/showCaseApi"
 import { IPages } from "@/interfaces/IPage"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from "@/components/ui/menubar"
 import { Sorting } from "@/types/sorting.enum"
 
 // items per page
@@ -267,12 +264,13 @@ export default function Home() {
                 className={clsx(
                   "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-l-full",
                   currentPage === "BATTLE" &&
-                    "bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800",
+                    "bg-slate-300 hover:bg-slate-400  dark:bg-blue-500  dark:hover:bg-blue-600",
                   currentPage === "SHOWCASE" &&
-                    "bg-slate-300 hover:bg-slate-400  dark:bg-blue-500  dark:hover:bg-blue-600"
+                    "bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-600"
                 )}
               >
                 Battle
+                <GiMagicAxe className="ml-2" />
               </Button>
               <Button
                 onClick={() =>
@@ -281,28 +279,42 @@ export default function Home() {
                 className={clsx(
                   "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-r-full",
                   currentPage === "SHOWCASE" &&
-                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-800",
+                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600",
                   currentPage === "BATTLE" &&
-                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-600"
                 )}
               >
                 Showcase
+                <IoMdColorWand className="ml-2" />
               </Button>
             </div>
             {currentPage === "BATTLE" && (
               <div className="flex container lg:justify-end justify-center items-center gap-4  mt-4">
-                <div>SORT</div>
-                <Menubar
-                  onValueChange={(value) => handleOnSorting(value as Sorting)}
-                  defaultValue={sorting}
-                >
-                  <MenubarMenu value="ASC">
-                    <MenubarTrigger>LEVEL ASC</MenubarTrigger>
-                  </MenubarMenu>
-                  <MenubarMenu value="DESC">
-                    <MenubarTrigger>LEVEL DESC</MenubarTrigger>
-                  </MenubarMenu>
-                </Menubar>
+                <div className=" flex">
+                  <Button
+                    onClick={() => handleOnSorting(Sorting.ASC)}
+                    className={clsx(
+                      `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs  rounded-r-none bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800`,
+                      sorting === Sorting.ASC &&
+                        "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                    )}
+                  >
+                    ASC
+                    <AiFillCaretUp className="ml-2" />
+                  </Button>
+
+                  <Button
+                    onClick={() => handleOnSorting(Sorting.DESC)}
+                    className={clsx(
+                      `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800  rounded-l-none`,
+                      sorting === Sorting.DESC &&
+                        "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                    )}
+                  >
+                    DESC
+                    <AiFillCaretDown className="ml-2" />
+                  </Button>
+                </div>
               </div>
             )}
           </div>
@@ -317,16 +329,17 @@ export default function Home() {
 
           {!battleLoading && !showCaseLoading && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
-              <button
+              <Button
                 className={clsx(
-                  "hover:text-white w-[100px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold py-2 px-4  rounded-full",
+                  "hover:text-white w-[120px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full",
                   pageNumber === 1 && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === 1}
                 onClick={handlePreviousPage}
               >
+                <AiFillCaretLeft className="mr-2" />
                 Previous
-              </button>
+              </Button>
               <div className="flex items-center gap-2">
                 Page
                 <Input
@@ -342,16 +355,16 @@ export default function Home() {
                 />
                 of {totalPages}
               </div>
-              <button
+              <Button
                 className={clsx(
-                  "w-[100px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold py-2 px-4  rounded-full",
+                  "w-[120px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full",
                   pageNumber === totalPages && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === totalPages}
                 onClick={handleNextPage}
               >
-                Next
-              </button>
+                Next <AiFillCaretRight className="ml-2" />
+              </Button>
               <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
                 <div className="visible lg:invisible flex justify-between w-[100px] bg-slate-500 dark:bg-green-500 py-2 px-2 rounded-full">
                   <button
