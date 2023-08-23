@@ -33,16 +33,6 @@ import { useGetShowCasesQuery } from "@/redux/services/showCaseApi"
 import { IPages } from "@/interfaces/IPage"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from "@/components/ui/menubar"
 import { Sorting } from "@/types/sorting.enum"
 
 // items per page
@@ -267,9 +257,9 @@ export default function Home() {
                 className={clsx(
                   "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-l-full",
                   currentPage === "BATTLE" &&
-                    "bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800",
+                    "bg-slate-300 hover:bg-slate-400  dark:bg-blue-500  dark:hover:bg-blue-600",
                   currentPage === "SHOWCASE" &&
-                    "bg-slate-300 hover:bg-slate-400  dark:bg-blue-500  dark:hover:bg-blue-600"
+                    "bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-600"
                 )}
               >
                 Battle
@@ -281,9 +271,9 @@ export default function Home() {
                 className={clsx(
                   "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-r-full",
                   currentPage === "SHOWCASE" &&
-                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-800",
+                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600",
                   currentPage === "BATTLE" &&
-                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-600"
                 )}
               >
                 Showcase
@@ -291,18 +281,29 @@ export default function Home() {
             </div>
             {currentPage === "BATTLE" && (
               <div className="flex container lg:justify-end justify-center items-center gap-4  mt-4">
-                <div>SORT</div>
-                <Menubar
-                  onValueChange={(value) => handleOnSorting(value as Sorting)}
-                  defaultValue={sorting}
-                >
-                  <MenubarMenu value="ASC">
-                    <MenubarTrigger>LEVEL ASC</MenubarTrigger>
-                  </MenubarMenu>
-                  <MenubarMenu value="DESC">
-                    <MenubarTrigger>LEVEL DESC</MenubarTrigger>
-                  </MenubarMenu>
-                </Menubar>
+                <div className=" flex">
+                  <Button
+                    onClick={() => handleOnSorting(Sorting.ASC)}
+                    className={clsx(
+                      `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs  rounded-r-none bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800`,
+                      sorting === Sorting.ASC &&
+                        "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                    )}
+                  >
+                    ASC
+                  </Button>
+
+                  <Button
+                    onClick={() => handleOnSorting(Sorting.DESC)}
+                    className={clsx(
+                      `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800  rounded-l-none`,
+                      sorting === Sorting.DESC &&
+                        "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                    )}
+                  >
+                    DESC
+                  </Button>
+                </div>
               </div>
             )}
           </div>
