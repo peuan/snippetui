@@ -25,7 +25,7 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
                                     focus:ring-blue-bg-yellow-400 
                                     flex justify-start items-center
                                     rounded-full bg-slate-300 text-slate-800 dark:bg-yellow-500 w-fit 
-                                    dark:text-white text-lg font-bold py-1 px-4 text-md"
+                                    dark:text-white text-lg font-bold py-1 px-4 text-sm"
                 >
                   LEVEL: {folder.folder}
                   <BiPlay className="group-hover:text-white ml-2 text-slate-800 dark:text-white" />

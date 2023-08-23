@@ -3,13 +3,20 @@
 // import libs
 import { useCallback, useEffect, useRef, useState } from "react"
 import { TbMoustache } from "react-icons/tb"
+import { GiMagicAxe } from "react-icons/gi"
 import {
   AiFillSound,
   AiOutlineCaretDown,
+  AiFillCaretDown,
+  AiFillCaretUp,
+  AiFillCaretLeft,
+  AiFillCaretRight,
   AiOutlineCaretUp,
+  AiOutlineAntDesign,
 } from "react-icons/ai"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
+import { IoMdColorWand } from "react-icons/io"
 import debounce from "lodash.debounce"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
@@ -263,6 +270,7 @@ export default function Home() {
                 )}
               >
                 Battle
+                <GiMagicAxe className="ml-2" />
               </Button>
               <Button
                 onClick={() =>
@@ -277,6 +285,7 @@ export default function Home() {
                 )}
               >
                 Showcase
+                <IoMdColorWand className="ml-2" />
               </Button>
             </div>
             {currentPage === "BATTLE" && (
@@ -291,6 +300,7 @@ export default function Home() {
                     )}
                   >
                     ASC
+                    <AiFillCaretUp className="ml-2" />
                   </Button>
 
                   <Button
@@ -302,6 +312,7 @@ export default function Home() {
                     )}
                   >
                     DESC
+                    <AiFillCaretDown className="ml-2" />
                   </Button>
                 </div>
               </div>
@@ -318,16 +329,17 @@ export default function Home() {
 
           {!battleLoading && !showCaseLoading && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
-              <button
+              <Button
                 className={clsx(
-                  "hover:text-white w-[100px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold py-2 px-4  rounded-full",
+                  "hover:text-white w-[120px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full",
                   pageNumber === 1 && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === 1}
                 onClick={handlePreviousPage}
               >
+                <AiFillCaretLeft className="mr-2" />
                 Previous
-              </button>
+              </Button>
               <div className="flex items-center gap-2">
                 Page
                 <Input
@@ -343,16 +355,16 @@ export default function Home() {
                 />
                 of {totalPages}
               </div>
-              <button
+              <Button
                 className={clsx(
-                  "w-[100px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold py-2 px-4  rounded-full",
+                  "w-[120px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full",
                   pageNumber === totalPages && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === totalPages}
                 onClick={handleNextPage}
               >
-                Next
-              </button>
+                Next <AiFillCaretRight className="ml-2" />
+              </Button>
               <div className="fixed right-2 origin-top-right top-[50vh] rotate-90">
                 <div className="visible lg:invisible flex justify-between w-[100px] bg-slate-500 dark:bg-green-500 py-2 px-2 rounded-full">
                   <button
