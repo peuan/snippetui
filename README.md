@@ -1,5 +1,6 @@
 # Integrate with ChatGPT
 
+
 ![alt text](/doc-images/chatgpt-popup-apikey.png)
 ![alt text](/doc-images/chat-gpt.png)
 
