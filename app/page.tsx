@@ -59,6 +59,7 @@ export default function Home() {
   const [totalPages, setTotalPages] = useState(1)
   const [sorting, setSorting] = useState<Sorting>(Sorting.DESC)
   const [paginationValue, setPaginationValue] = useState<any>(pageNumber)
+  const [searchValue, setSearchValue] = useState<any>("")
   const audioRef = useRef<any>(null)
   const {
     isLoading: battleLoading,
@@ -66,7 +67,7 @@ export default function Home() {
     data: battleData,
     error: battleError,
   } = useGetBattlesQuery(
-    { pageNumber: pageNumber, sorting: sorting },
+    { pageNumber: pageNumber, sorting: sorting, search: searchValue },
     { skip: currentPage !== "BATTLE" }
   )
   const {
@@ -75,7 +76,7 @@ export default function Home() {
     data: showCaseData,
     error: showCaseError,
   } = useGetShowCasesQuery(
-    { pageNumber: pageNumber },
+    { pageNumber: pageNumber, search: searchValue },
     { skip: currentPage !== "SHOWCASE" }
   )
 
@@ -88,7 +89,9 @@ export default function Home() {
       page: string,
       pageValue: string,
       sorting: string,
-      sortingValue: Sorting
+      sortingValue: Sorting,
+      q?: string,
+      qValue?: string
     ) => {
       const params = new URLSearchParams(searchParams)
       params.set(type, typeValue)
@@ -100,6 +103,12 @@ export default function Home() {
         params.delete("sorting")
       }
 
+      if (q && qValue) {
+        params.set(q, qValue)
+      } else {
+        params.delete("q")
+      }
+
       return params.toString()
     },
     [currentPage, searchParams]
@@ -109,9 +118,16 @@ export default function Home() {
     const type = searchParams.get("type")
     const page = searchParams.get("page")
     const sorting = searchParams.get("sorting")
+    const q = searchParams.get("q")
+
+    if (q) {
+      setSearchValue(q)
+    }
+    if (sorting) {
+      setSorting(sorting.toUpperCase())
+    }
     if (type && page && sorting) {
       setPaginationValue(Number(page))
-      setSorting(sorting.toUpperCase())
       dispatch(setPage({ page: type.toUpperCase(), pageNumber: Number(page) }))
     }
   }, [dispatch, searchParams])
@@ -136,7 +152,9 @@ export default function Home() {
             "page",
             pageNumber.toString(),
             "sorting",
-            sorting.toLocaleLowerCase() as unknown as any
+            sorting.toLocaleLowerCase() as unknown as any,
+            "q",
+            searchValue
           )
       )
     }
@@ -151,6 +169,7 @@ export default function Home() {
     createQueryString,
     searchParams,
     sorting,
+    searchValue,
   ])
 
   useEffect(() => {
@@ -173,7 +192,9 @@ export default function Home() {
             "page",
             pageNumber.toString(),
             "sorting",
-            sorting.toLocaleLowerCase() as unknown as any
+            sorting.toLocaleLowerCase() as unknown as any,
+            "q",
+            searchValue
           )
       )
     }
@@ -187,6 +208,7 @@ export default function Home() {
     pathname,
     createQueryString,
     sorting,
+    searchValue,
   ])
 
   // pagination
@@ -232,6 +254,32 @@ export default function Home() {
     setSorting(event)
     dispatch(setPage({ page: currentPage, pageNumber: 1 }))
     setPaginationValue(1)
+  }
+
+  const debouncedChangeSearch = useCallback(
+    debounce((value: string) => {
+      router.push(
+        pathname +
+          "?" +
+          createQueryString(
+            "type",
+            currentPage.toLocaleLowerCase(),
+            "page",
+            pageNumber.toString(),
+            "sorting",
+            sorting.toLocaleLowerCase() as unknown as any,
+            "q",
+            value
+          )
+      )
+    }, 500),
+    []
+  )
+
+  const onSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    setSearchValue(event?.target?.value)
+    debouncedChangeSearch(event?.target?.value)
   }
   return (
     <>
@@ -279,7 +327,7 @@ export default function Home() {
                 className={clsx(
                   "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-r-full",
                   currentPage === "SHOWCASE" &&
-                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600",
+                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600 mb-8",
                   currentPage === "BATTLE" &&
                     "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-600"
                 )}
@@ -317,6 +365,15 @@ export default function Home() {
                 </div>
               </div>
             )}
+          </div>
+          <div className="flex justify-center">
+            <Input
+              onChange={onSearchChange}
+              type="text"
+              className="max-w-sm text-center lg:mt-0 mt-10 border-slate-700 rounded-full"
+              placeholder="Search here..."
+              value={searchValue}
+            />
           </div>
           {currentPage === "BATTLE" && (
             <>

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import path from "path"
 import yaml from "js-yaml"
 import { readFileSync } from "fs"
+import { IBattle, IFile } from "@/interfaces/IBattle"
 
 export async function GET(
   request: NextRequest,
@@ -12,6 +13,7 @@ export async function GET(
   const currentPage = Number(context.params.id)
   const { searchParams } = new URL(request.url)
   const sorting = searchParams.get("sorting")
+  const search = searchParams.get("q")!
 
   const dirRelativeToPublicFolder = "battle"
   const dir = path.resolve("./public", dirRelativeToPublicFolder)
@@ -94,13 +96,32 @@ export async function GET(
         : Number(a.folder) - Number(b.folder)
     )
 
+    const filteredFile = filteredFileResults(fileResults as IBattle[], search)
+    const filterEmpty = filteredFile.filter((item) => item.files.length > 0)
     return NextResponse.json({
-      files: fileResults,
+      files: filterEmpty,
       totalItems: filteredFiles.length,
     })
   } catch (error) {
     console.error("Error reading directory:", error)
     return NextResponse.error()
+  }
+
+  function filteredFileResults(fileResults: IBattle[], search?: string) {
+    return search
+      ? fileResults.map((folderData) => {
+          const filteredFiles = folderData.files.filter((file) => {
+            const folderMatches = search
+              ? folderData.folder.includes(search)
+              : false
+            const fileMatches = search ? file.fileName.includes(search) : false
+            const statusMatches = search ? file.status.includes(search) : false
+            return folderMatches || fileMatches || statusMatches
+          })
+
+          return { folder: folderData.folder, files: filteredFiles }
+        })
+      : fileResults
   }
 
   function paginateArray(
