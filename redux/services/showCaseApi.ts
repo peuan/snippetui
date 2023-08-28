@@ -8,8 +8,12 @@ export const showCaseApi = createApi({
     baseUrl: "/api/",
   }),
   endpoints: (builder) => ({
-    getShowCases: builder.query<IShowCaseResult, { pageNumber: number }>({
-      query: ({ pageNumber }) => `showcase/${pageNumber}`,
+    getShowCases: builder.query<
+      IShowCaseResult,
+      { pageNumber: number; search: string }
+    >({
+      query: ({ pageNumber, search }) =>
+        `showcase/${pageNumber}?search=${search}`,
     }),
     getShowCaseById: builder.query<{ file: string }, { pageNumber: number }>({
       query: ({ pageNumber }) => `showcase/${pageNumber}`,

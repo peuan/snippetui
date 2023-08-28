@@ -11,10 +11,10 @@ export const battleApi = createApi({
   endpoints: (builder) => ({
     getBattles: builder.query<
       IBattleResult,
-      { pageNumber: number; sorting: Sorting }
+      { pageNumber: number; sorting: Sorting; search: string }
     >({
-      query: ({ pageNumber, sorting }) =>
-        `battle/${pageNumber}?sorting=${sorting}`,
+      query: ({ pageNumber, sorting, search }) =>
+        `battle/${pageNumber}?sorting=${sorting}&q=${search}`,
     }),
     getBattleById: builder.query<{ file: string }, { pageNumber: number }>({
       query: ({ pageNumber }) => `battle/${pageNumber}`,
