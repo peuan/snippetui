@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="top"></div>
+  <div class="left"></div>
+  <div class="bottom"></div>
+</div>
+<style>
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background: #F5D6B4;
+  }
+
+  .container {
+    position: relative;
+    width: 200px;
+    height: 130px;
+  }
+
+  .top,
+  .left,
+  .bottom {
+    position: absolute;
+    background: #D86F45;
+  }
+
+  .top {
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+  }
+
+  .left {
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+  }
+
+  .bottom {
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    height: 50px;
+    border-radius: 0 25px 25px 0;
+  }
+</style>
