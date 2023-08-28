@@ -1,0 +1,41 @@
+<div class="big"></div>
+<div class="small"></div>
+<div class="bottom"></div>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #f5d6b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  div {
+    background: #d86f45;
+    position: absolute;
+  }
+  .small,
+  .big {
+    border-radius: 50%;
+  }
+  .small {
+    width: 100px;
+    height: 100px;
+    margin-top: 30px;
+    margin-left: -100px;
+  }
+  .big {
+    width: 100px;
+    height: 100px;
+    margin-top: -30px;
+    margin-left: 60px;
+  }
+  .bottom {
+    width: 170px;
+    height: 50px;
+    border-radius: 30px;
+    margin-top: 80px;
+    margin-left: 30px;
+  }
+</style>
