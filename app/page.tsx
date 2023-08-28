@@ -14,6 +14,7 @@ import {
   AiOutlineCaretUp,
   AiOutlineAntDesign,
 } from "react-icons/ai"
+import { BiSearchAlt } from "react-icons/bi"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
 import { IoMdColorWand } from "react-icons/io"
@@ -377,6 +378,14 @@ export default function Home() {
           </div>
           {currentPage === "BATTLE" && (
             <>
+              {battleResults.totalItems === 0 && (
+                <div className="flex-col justify-center items-center mt-4">
+                  <BiSearchAlt className="text-center flex justify-center w-full h-[40px]" />
+                  <div className="flex-col text-center justify-center  items-center">
+                    No search results found
+                  </div>
+                </div>
+              )}
               <Battle battleResults={battleResults} />
             </>
           )}
