@@ -372,7 +372,7 @@ export default function Home() {
               onChange={onSearchChange}
               type="text"
               className="max-w-sm text-center lg:mt-0 mt-10 border-slate-700 rounded-full"
-              placeholder="Search here..."
+              placeholder="Search with level, player and status"
               value={searchValue}
             />
           </div>
