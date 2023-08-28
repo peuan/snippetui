@@ -30,8 +30,9 @@ export async function GET(
       currentPage,
       ITEMS_PER_PAGE
     )
+    const getAllResult = search ? filteredFiles : paginatedFiles
     const fileResults = await Promise.all(
-      paginatedFiles.map(async (file) => {
+      getAllResult.map(async (file) => {
         const fileDir = path.resolve(dir, file)
         const fileLists = await readdir(fileDir)
         const fileListsFilterOutYaml = fileLists.filter(
