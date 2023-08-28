@@ -26,7 +26,6 @@ export async function POST(request: NextRequest) {
   try {
     const { stdout, stderr } = await exec(`node -e "${code}"`)
     const userOutput = stdout.trim()
-    console.log(userOutput)
     const results = testCases.map((testCase, index) => {
       const input = testCase.input
       const expectedOutput = testCase.output
