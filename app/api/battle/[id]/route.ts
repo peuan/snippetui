@@ -99,9 +99,11 @@ export async function GET(
 
     const filteredFile = filteredFileResults(fileResults as IBattle[], search)
     const filterEmpty = filteredFile.filter((item) => item.files.length > 0)
+
+    const sliceItems = paginateArray(filterEmpty, currentPage, ITEMS_PER_PAGE)
     return NextResponse.json({
-      files: filterEmpty,
-      totalItems: filteredFiles.length,
+      files: sliceItems,
+      totalItems: search ? filterEmpty.length : filteredFiles.length,
     })
   } catch (error) {
     console.error("Error reading directory:", error)
