@@ -115,10 +115,20 @@ export async function GET(
       ? fileResults.map((folderData) => {
           const filteredFiles = folderData.files.filter((file) => {
             const folderMatches = search
-              ? folderData.folder.includes(search)
+              ? folderData.folder
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase())
               : false
-            const fileMatches = search ? file.fileName.includes(search) : false
-            const statusMatches = search ? file.status.includes(search) : false
+            const fileMatches = search
+              ? file.fileName
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase())
+              : false
+            const statusMatches = search
+              ? file.status
+                  .toLocaleLowerCase()
+                  .includes(search.toLocaleLowerCase())
+              : false
             return folderMatches || fileMatches || statusMatches
           })
 
