@@ -1,0 +1,41 @@
+<div class="canvas">
+  <div class="circle left"></div>
+  <div class="circle right"></div>
+  <div class="line"></div>
+</div>
+<style>
+  body {
+    background: #F5D6B4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .canvas {
+    width: 200;
+    height: 130;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .line {
+    width: 180;
+    height: 50;
+    background: #D86F45;
+    border-radius: 50px;
+  }
+  .circle {
+    background: #D86F45;
+    border-radius: 50%;
+    position: absolute;
+    width: 100;
+    height: 100;
+  }
+  .left {
+    left: 0;
+  }
+  .right {
+    right: 20;
+    top: 0;
+  }
+</style>
