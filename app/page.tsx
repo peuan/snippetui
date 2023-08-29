@@ -23,19 +23,16 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 // import component
 import Battle from "@/components/Battle"
-import ShowCase from "@/components/Showcase"
 import Loading from "@/components/Loading"
 import ScrollToTop from "@/components/ScrollToTop"
 
 // import reducer
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { setBattleResult } from "@/redux/features/battleSlice"
-import { setShowCaseResult } from "@/redux/features/showCaseSlice"
 import { setPage } from "@/redux/features/pageSlice"
 
 // import api services
 import { useGetBattlesQuery } from "@/redux/services/battleApi"
-import { useGetShowCasesQuery } from "@/redux/services/showCaseApi"
 
 // import interface
 import { IPages } from "@/interfaces/IPage"
@@ -53,7 +50,6 @@ export default function Home() {
 
   const battleResults = useAppSelector((state) => state.battleReducer)
 
-  const showCaseResults = useAppSelector((state) => state.showCaseReducer)
   const currentPage = useAppSelector((state) => state.pageReducer.page)
   const pageNumber = useAppSelector((state) => state.pageReducer.pageNumber)
 
@@ -70,15 +66,6 @@ export default function Home() {
   } = useGetBattlesQuery(
     { pageNumber: pageNumber, sorting: sorting, search: searchValue },
     { skip: currentPage !== "BATTLE" }
-  )
-  const {
-    isLoading: showCaseLoading,
-    isFetching: showCaseFetching,
-    data: showCaseData,
-    error: showCaseError,
-  } = useGetShowCasesQuery(
-    { pageNumber: pageNumber, search: searchValue },
-    { skip: currentPage !== "SHOWCASE" }
   )
 
   const dispatch = useAppDispatch()
@@ -173,45 +160,6 @@ export default function Home() {
     searchValue,
   ])
 
-  useEffect(() => {
-    if (showCaseData && !showCaseLoading && currentPage === "SHOWCASE") {
-      const total = Math.ceil(showCaseData.totalItems / ITEMS_PER_PAGE)
-      setTotalPages(total)
-      dispatch(
-        setShowCaseResult({
-          files: showCaseData.files,
-          totalItems: total,
-        })
-      )
-
-      router.push(
-        pathname +
-          "?" +
-          createQueryString(
-            "type",
-            currentPage.toLocaleLowerCase(),
-            "page",
-            pageNumber.toString(),
-            "sorting",
-            sorting.toLocaleLowerCase() as unknown as any,
-            "q",
-            searchValue
-          )
-      )
-    }
-  }, [
-    currentPage,
-    pageNumber,
-    showCaseData,
-    dispatch,
-    showCaseLoading,
-    router,
-    pathname,
-    createQueryString,
-    sorting,
-    searchValue,
-  ])
-
   // pagination
   const handlePreviousPage = () => {
     if (pageNumber > 1) {
@@ -228,11 +176,6 @@ export default function Home() {
     }
   }
 
-  // handle to display battle/showcase section
-  const handlePageSection = (page: IPages) => {
-    dispatch(setPage({ page: page.page, pageNumber: 1 }))
-    setPaginationValue(1)
-  }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedChangePagination = useCallback(
     debounce((value: number) => {
@@ -285,7 +228,7 @@ export default function Home() {
   return (
     <>
       <div className="mb-10">
-        {(battleLoading || showCaseLoading) && <Loading />}
+        {battleLoading && <Loading />}
         <ScrollToTop />
         <div>
           <div className="flex flex-col justify-center items-center mt-2">
@@ -305,40 +248,8 @@ export default function Home() {
             </h6>
           </div>
           <div className="flex-col justify-center items-center gap-4">
-            <div className="flex justify-center">
-              <Button
-                onClick={() =>
-                  handlePageSection({ page: "BATTLE", pageNumber })
-                }
-                className={clsx(
-                  "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-l-full",
-                  currentPage === "BATTLE" &&
-                    "bg-slate-300 hover:bg-slate-400  dark:bg-blue-500  dark:hover:bg-blue-600",
-                  currentPage === "SHOWCASE" &&
-                    "bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-600"
-                )}
-              >
-                Battle
-                <GiMagicAxe className="ml-2" />
-              </Button>
-              <Button
-                onClick={() =>
-                  handlePageSection({ page: "SHOWCASE", pageNumber })
-                }
-                className={clsx(
-                  "text-slate-800 dark:text-white hover:text-white font-bold py-2 px-4  rounded-r-full",
-                  currentPage === "SHOWCASE" &&
-                    "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600 mb-8",
-                  currentPage === "BATTLE" &&
-                    "bg-slate-400 hover:bg-slate-400 dark:bg-blue-700  hover:dark:bg-blue-600"
-                )}
-              >
-                Showcase
-                <IoMdColorWand className="ml-2" />
-              </Button>
-            </div>
             {currentPage === "BATTLE" && (
-              <div className="flex container lg:justify-end justify-center items-center gap-4  mt-4">
+              <div className="flex container justify-center items-center gap-4  mt-4">
                 <div className=" flex">
                   <Button
                     onClick={() => handleOnSorting(Sorting.ASC)}
@@ -367,11 +278,11 @@ export default function Home() {
               </div>
             )}
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-4">
             <Input
               onChange={onSearchChange}
               type="text"
-              className="max-w-sm text-center lg:mt-0 mt-10 border-slate-700 rounded-full"
+              className="max-w-[300px] text-center lg:mt-0  border-slate-700 rounded-full"
               placeholder="Search with level, player and status"
               value={searchValue}
             />
@@ -389,11 +300,8 @@ export default function Home() {
               <Battle battleResults={battleResults} />
             </>
           )}
-          {currentPage === "SHOWCASE" && (
-            <ShowCase showCaseResults={showCaseResults} />
-          )}
 
-          {!battleLoading && !showCaseLoading && (
+          {!battleLoading && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
               <Button
                 className={clsx(
