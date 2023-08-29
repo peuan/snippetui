@@ -29,9 +29,11 @@ import { useAppDispatch } from "../redux/hooks"
 import { setGlobalTheme } from "../redux/features/themeSlice"
 import { Itheme } from "../interfaces/Itheme"
 import { reset } from "../redux/features/pageSlice"
+import { useRouter } from "next/navigation"
 
 export default function Nav() {
   const { setTheme, theme, resolvedTheme } = useTheme()
+  const router = useRouter()
 
   const dispatch = useAppDispatch()
 
@@ -48,13 +50,13 @@ export default function Nav() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link
+            <a
               onClick={handleHomePage}
               href={"/"}
               className={navigationMenuTriggerStyle()}
             >
               <BiHome />
-            </Link>
+            </a>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link href={"/playground"} className={navigationMenuTriggerStyle()}>
