@@ -49,7 +49,6 @@ export default function Home() {
   const searchParams: any = useSearchParams()!
 
   const battleResults = useAppSelector((state) => state.battleReducer)
-
   const currentPage = useAppSelector((state) => state.pageReducer.page)
   const pageNumber = useAppSelector((state) => state.pageReducer.pageNumber)
 
@@ -67,7 +66,6 @@ export default function Home() {
     { pageNumber: pageNumber, sorting: sorting, search: searchValue },
     { skip: currentPage !== "BATTLE" }
   )
-
   const dispatch = useAppDispatch()
 
   const createQueryString = useCallback(
@@ -248,35 +246,33 @@ export default function Home() {
             </h6>
           </div>
           <div className="flex-col justify-center items-center gap-4">
-            {currentPage === "BATTLE" && (
-              <div className="flex container justify-center items-center gap-4  mt-4">
-                <div className=" flex">
-                  <Button
-                    onClick={() => handleOnSorting(Sorting.ASC)}
-                    className={clsx(
-                      `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs  rounded-r-none bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800`,
-                      sorting === Sorting.ASC &&
-                        "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
-                    )}
-                  >
-                    ASC
-                    <AiFillCaretUp className="ml-2" />
-                  </Button>
+            <div className="flex container justify-center items-center gap-4  mt-4">
+              <div className=" flex">
+                <Button
+                  onClick={() => handleOnSorting(Sorting.ASC)}
+                  className={clsx(
+                    `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs  rounded-r-none bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800`,
+                    sorting === Sorting.ASC &&
+                      "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                  )}
+                >
+                  ASC
+                  <AiFillCaretUp className="ml-2" />
+                </Button>
 
-                  <Button
-                    onClick={() => handleOnSorting(Sorting.DESC)}
-                    className={clsx(
-                      `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800  rounded-l-none`,
-                      sorting === Sorting.DESC &&
-                        "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
-                    )}
-                  >
-                    DESC
-                    <AiFillCaretDown className="ml-2" />
-                  </Button>
-                </div>
+                <Button
+                  onClick={() => handleOnSorting(Sorting.DESC)}
+                  className={clsx(
+                    `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800  rounded-l-none`,
+                    sorting === Sorting.DESC &&
+                      "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
+                  )}
+                >
+                  DESC
+                  <AiFillCaretDown className="ml-2" />
+                </Button>
               </div>
-            )}
+            </div>
           </div>
           <div className="flex justify-center mt-4">
             <Input
