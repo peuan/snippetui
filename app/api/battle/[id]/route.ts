@@ -99,7 +99,7 @@ export async function GET(
 
     const filteredFile = filteredFileResults(fileResults as IBattle[], search)
     const filterEmpty = filteredFile.filter((item) => item.files.length > 0)
-
+    console.log(filteredFile)
     const sliceItems = paginateArray(filterEmpty, currentPage, ITEMS_PER_PAGE)
     return NextResponse.json({
       files: sliceItems,
