@@ -1,0 +1,40 @@
+<div class="parent"></div>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    margin: 0;
+    background: #F3AC3C;
+  }
+
+  .parent,
+  .parent::before,
+  .parent::after {
+    aspect-ratio: 1 / 1;
+  }
+
+  .parent {
+    position: relative;
+    width: 200px;
+    background: #1A4341;
+  }
+
+  .parent::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    background: #998235;
+  }
+
+  .parent::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 25%;
+    background: #F3AC3C;
+  }
+</style>
