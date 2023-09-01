@@ -123,14 +123,16 @@ const Card = ({
           </div>
         </div>
         <div className="flex text-sm justify-center items-center dark:text-white text-slate-800 mb-2">
-          <BiMedal
-            className={clsx(
-              "w-7 h-7",
-              index === 0 && "text-yellow-500",
-              index === 1 && "text-slate-300",
-              index === 2 && "text-amber-600"
-            )}
-          />{" "}
+          {index <= 2 && (
+            <BiMedal
+              className={clsx(
+                "w-7 h-7",
+                index === 0 && "text-yellow-500",
+                index === 1 && "text-slate-300",
+                index === 2 && "text-amber-600"
+              )}
+            />
+          )}{" "}
           {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
           {file.status === "incomplete" && (
             <div className="ml-2">
