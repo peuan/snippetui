@@ -67,7 +67,6 @@ export default function Home() {
     { skip: currentPage !== "BATTLE" }
   )
   const dispatch = useAppDispatch()
-
   const createQueryString = useCallback(
     (
       type: string,
