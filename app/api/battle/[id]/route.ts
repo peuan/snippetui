@@ -99,8 +99,9 @@ export async function GET(
 
     const filteredFile = filteredFileResults(fileResults as IBattle[], search)
     const filterEmpty = filteredFile.filter((item) => item.files.length > 0)
-    console.log(filteredFile)
-    const sliceItems = paginateArray(filterEmpty, currentPage, ITEMS_PER_PAGE)
+    const sliceItems = search
+      ? paginateArray(filterEmpty, currentPage, ITEMS_PER_PAGE)
+      : filterEmpty
     return NextResponse.json({
       files: sliceItems,
       totalItems: search ? filterEmpty.length : filteredFiles.length,
