@@ -25,6 +25,19 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta property="og:url" content="https://css-battle-eta.vercel.app" />
+        <meta
+          property="og:title"
+          content="SnippetUI | Begin Your Coding Journey Here"
+        />
+        <meta property="og:title" content="Begin Your Coding Journey Here" />
+        <meta
+          property="og:image"
+          content="https://css-battle-eta.vercel.app/og-image.png"
+        />
+        <meta property="og:image:type" content="website" />
+        <meta property="og:image:width" content="" />
+        <meta property="og:image:height" content="" />
       </head>
       <body
         suppressHydrationWarning={true}
