@@ -30,7 +30,6 @@ export default function RootLayout({
           property="og:title"
           content="SnippetUI | Begin Your Coding Journey Here"
         />
-        <meta property="og:title" content="Begin Your Coding Journey Here" />
         <meta
           property="og:image"
           content="https://css-battle-eta.vercel.app/og-image.png"

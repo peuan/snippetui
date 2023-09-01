@@ -1,0 +1,41 @@
+<div class="item-1">
+  <div>
+    <div></div>
+  </div>
+</div>
+<div class="item-2">
+  <div>
+    <div></div>
+  </div>
+</div>
+<style>
+  body {
+    background: #62306d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  .item-1 {
+    transform: rotate(180deg);
+  }
+  .item-1 > div {
+    background: #aa445f;
+  }
+  .item-2 > div {
+    background: #e38f66;
+  }
+  .item-1 div,
+  .item-2 div {
+    width: 100px;
+    height: 150px;
+    border-radius: 50px;
+    margin-bottom: -50px;
+  }
+  .item-1 > div > div,
+  .item-2 > div > div {
+    width: 100px;
+    height: 100px;
+    background: #f7ec7d;
+  }
+</style>
