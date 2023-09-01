@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="top">
+        <div class="circle"></div>
+    </div>
+    <div class="bottom">
+        <div class="circle"></div>
+    </div>
+</div>
+<style>
+  body {
+    background: #62306D;
+    display: grid;
+    place-items: center;
+  }
+  .container {
+    width: 240px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .top,
+  .bottom {
+    height: 150px;
+    border-radius: 50px;
+  }
+  
+  .top {
+    background: #AA445F;
+    display: flex;
+    align-items: flex-end;
+  }
+  .bottom {
+    align-self: flex-end;
+    background: #E38F66;
+  }
+  .circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #F7EC7D;
+  }
+</style>  
