@@ -1,0 +1,31 @@
+<div class="circle left"></div>
+<div class="circle right"></div>
+<style>
+  body {
+    background: #926927;
+  }
+  .circle {
+    border-radius: 50%;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: solid 40px #6D480A;
+  }
+  .circle::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #6D480A;
+    top: -50;
+    right: 50;
+  }
+  .left {
+    right: 10;
+    top: -90;
+  }
+  .right {
+    right: -90;
+    top: 10;
+  }
+</style>
