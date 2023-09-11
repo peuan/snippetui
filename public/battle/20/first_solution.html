@@ -1,0 +1,64 @@
+<div class="left">
+  <div class="circle c1"></div>
+  <div class="circle c2"></div>
+  <div class="middle c3"></div>
+  <div class="middle c4"></div>
+</div>
+<div class="right">
+  <div class="circle c5"></div>
+  <div class="circle c6"></div>
+</div>
+<style>
+  body {
+    background: #62306D;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .left, .right {
+    height: 100px;
+    position: relative;
+  }
+  .left {
+    width: 140px;
+    background: #F7EC7D;
+  }
+  .right {
+    width: 60px;
+    background: #E38F66;
+  }
+  .circle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #62306D;
+  }
+  .left .circle {
+    left: -20;
+  }
+  .right .circle {
+    right: -20;
+  }
+  .c1, .c5 {
+    top: -20;
+  }
+  .c2, .c6 {
+    bottom: -20;
+  }
+  .middle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #62306D;
+    position: absolute;
+    right: -10;
+    z-index: 2;
+  }
+  .c3 {
+    top: -10;
+  }
+  .c4 {
+    bottom: -10;
+  }
+</style>
