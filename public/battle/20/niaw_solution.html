@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="left">
+    <div class="dot-1"></div>
+    <div class="dot-2"></div>
+    <div class="dot-3"></div>
+    <div class="dot-4"></div>
+  </div>
+  <div class="right">
+    <div class="dot-5"></div>
+    <div class="dot-6"></div>
+  </div>
+  <style>
+    body {
+      background: #62306d;
+      margin: 0;
+      display: grid;
+      place-content: center;
+    }
+    .container {
+      display: flex;
+      position: relative;
+    }
+    .left {
+      width: 140px;
+      height: 100px;
+      background: #f7ec7d;
+    }
+    .right {
+      width: 60px;
+      height: 100px;
+      background: #e38f66;
+    }
+    .left > div {
+      width: 40px;
+    }
+    .right > div {
+      width: 20px;
+    }
+    .left > div,
+    .right > div {
+      border-radius: 50%;
+      position: absolute;
+      aspect-ratio: 1/1;
+      background: #62306d;
+    }
+    .dot-1,
+    .dot-2 {
+      left: -20px;
+    }
+    .dot-1,
+    .dot-3 {
+      top: -20px;
+    }
+    .dot-2,
+    .dot-4 {
+      bottom: -20px;
+    }
+    .dot-3,
+    .dot-4 {
+      right: -20px;
+    }
+    .dot-5,
+    .dot-6 {
+      right: 50px;
+    }
+    .dot-5 {
+      top: -10px;
+    }
+    .dot-6 {
+      bottom: -10px;
+    }
+  </style>
+</div>
