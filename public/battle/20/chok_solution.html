@@ -1,0 +1,65 @@
+<div class="box-left">
+  <div class="circle bottom left"></div>
+  <div class="circle top left"></div>
+</div>
+<div class="box-right">
+  <div class="circle small top left"></div>
+  <div class="circle small bottom left"></div>
+  <div class="circle top right"></div>
+  <div class="circle bottom right"></div>
+</div>
+<style>
+  body {
+    background: #62306d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .box-left {
+    position: relative;
+    width: 140px;
+    height: 100px;
+    background: #f7ec7d;
+  }
+  .box-right {
+    position: relative;
+    width: 60px;
+    height: 100px;
+    background: #e38f66;
+  }
+  .circle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #62306d;
+    border-radius: 50%;
+  }
+  .circle.small {
+    width: 20px;
+    height: 20px;
+  }
+  .small.top {
+    top: -10;
+  }
+  .small.bottom {
+    bottom: -10;
+  }
+  .small.left {
+    left: -10;
+  }
+  .small.right {
+    right: -10;
+  }
+  .top {
+    top: -20;
+  }
+  .bottom {
+    bottom: -20;
+  }
+  .left {
+    left: -20;
+  }
+  .right {
+    right: -20;
+  }
+</style>
