@@ -1,0 +1,53 @@
+<div class="container">
+	<div class="left">
+	  <div class="green"></div>
+	  <div class="yellow"></div>
+	</div>
+	<div class="right">
+	  <div class="yellow"></div>
+	  <div class="green"></div>
+	</div>
+  </div>
+
+  <style>
+	body {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  margin: 0;
+	  background: #998235;
+	}
+
+	.container {
+	  display: flex;
+	  column-gap: 20px;
+	}
+
+	.left,
+	.right {
+	  flex: 1;
+	  display: flex;
+	  flex-direction: column;
+	  row-gap: 20px;
+	}
+
+	.right * {
+	  transform: scaleX(-1);
+	}
+
+	.green,
+	.yellow {
+	  width: 80px;
+	  border-radius: 0 50px;
+	}
+
+	.green {
+	  height: 100px;
+	  background: #1A4341;
+	}
+
+	.yellow {
+	  height: 60px;
+	  background: #F3AC3C;
+	}
+  </style>
