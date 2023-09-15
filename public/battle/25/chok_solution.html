@@ -1,0 +1,40 @@
+<div class="half">
+  <div class="big"></div>
+  <div class="small"></div>
+</div>
+<div class="half reverse">
+  <div class="big"></div>
+  <div class="small"></div>
+</div>
+<style>
+  body {
+    background: #998235;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .half {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .half div {
+    border-radius: 0 50px;
+  }
+  .reverse {
+    flex-direction: column-reverse;
+  }
+  .reverse div {
+    border-radius: 50px 0;
+  }
+  .big {
+    background: #1a4341;
+    height: 100px;
+  }
+  .small {
+    background: #f3ac3c;
+    height: 60px;
+  }
+</style>
