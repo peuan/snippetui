@@ -1,0 +1,106 @@
+<div class="container">
+	<div class="overlay">
+		<div class="border-primary top left"></div>
+		<div class="border-primary top right"></div>
+		<div class="border-primary bottom left"></div>
+		<div class="border-primary bottom right"></div>
+	</div>
+	<div class="list">
+		<div class="big"></div>
+		<div class="small"></div>
+	</div>
+</div>
+<style>
+	:root {
+		--c-size: 40px;
+	}
+
+	body {
+		display: grid;
+		place-content: center;
+		background: #62306D;
+	}
+
+	.container,
+	.list {
+		display: flex;
+		position: relative;
+	}
+
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+	}
+
+	.overlay>* {
+		position: absolute;
+		z-index: 2;
+	}
+
+	.top,
+	.big:not(:first-child)::before,
+	.small:not(:first-child)::before {
+		top: calc(var(--c-size) / -2);
+	}
+
+	.bottom,
+	.big:not(:first-child)::after,
+	.small:not(:first-child)::after {
+		bottom: calc(var(--c-size) / -2);
+	}
+
+	.left {
+		left: calc(var(--c-size) / -2);
+	}
+
+	.right {
+		right: calc(var(--c-size) / -2);
+	}
+
+	.overlay .border-primary {
+		width: var(--c-size);
+		height: var(--c-size);
+	}
+
+	.big,
+	.small {
+		height: 100px;
+		position: relative;
+		z-index: 1;
+		--c-size: 20px;
+	}
+
+	.big {
+		width: 140px;
+		background: #F7EC7D;
+	}
+
+	.small {
+		width: 60px;
+		background: #E38F66;
+	}
+
+	.border-primary,
+	.big:not(:first-child)::before,
+	.small:not(:first-child)::before,
+	.big:not(:first-child)::after,
+	.small:not(:first-child)::after {
+		background: #62306D;
+		border-radius: 50%;
+	}
+
+	.big:not(:first-child)::before,
+	.small:not(:first-child)::before,
+	.big:not(:first-child)::after,
+	.small:not(:first-child)::after {
+		content: '';
+		position: absolute;
+		z-index: 2;
+		width: var(--c-size);
+		height: var(--c-size);
+		left: calc(var(--c-size) / -2);
+	}
+</style>
