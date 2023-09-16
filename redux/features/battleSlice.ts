@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 const initialState: IBattleResult = {
   files: [],
   totalItems: 0,
+  allFiels: [],
 }
 
 export const battle = createSlice({
