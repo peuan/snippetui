@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="big-1"></div>
+  <div class="big-2"></div>
+  <div class="small-1"></div>
+  <div class="small-2"></div>
+</div>
+<style>
+  body {
+    background: #998235;
+    display: grid;
+    place-content: center;
+  }
+  .container {
+    width: 180px;
+    height: 180px;
+    position: relative;
+  }
+  .container > div {
+    position: absolute;
+  }
+  .big-1,
+  .big-2 {
+    height: 100px;
+    width: 80px;
+    background: #1a4341;
+  }
+  .small-1,
+  .small-2 {
+    height: 60px;
+    width: 80px;
+    background: #f3ac3c;
+  }
+  .big-1,
+  .small-1 {
+    border-radius: 0px 50px;
+  }
+  .big-2,
+  .small-2 {
+    border-radius: 50px 0px;
+  }
+  .big-2 {
+    right: 0;
+    bottom: 0px;
+  }
+  .small-1 {
+    bottom: 0px;
+  }
+  .small-2 {
+    right: 0;
+  }
+</style>

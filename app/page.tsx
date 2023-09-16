@@ -14,6 +14,7 @@ import {
   AiOutlineCaretUp,
   AiOutlineAntDesign,
 } from "react-icons/ai"
+import { IoAnalyticsSharp } from "react-icons/io5"
 import { BiSearchAlt } from "react-icons/bi"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
@@ -125,6 +126,7 @@ export default function Home() {
         setBattleResult({
           files: battleData.files,
           totalItems: total,
+          allFiels: battleData.allFiels,
         })
       )
 
@@ -273,28 +275,40 @@ export default function Home() {
               </div>
             </div>
           </div>
+
           <div className="flex justify-center mt-4">
             <Input
               onChange={onSearchChange}
               type="text"
               className="max-w-[300px] text-center lg:mt-0  border-slate-700 rounded-full"
-              placeholder="Search with level, player and status"
+              placeholder="Search with level, player or status"
               value={searchValue}
             />
           </div>
-          {currentPage === "BATTLE" && (
-            <>
-              {battleResults.totalItems === 0 && (
-                <div className="flex-col justify-center items-center mt-4">
-                  <BiSearchAlt className="text-center flex justify-center w-full h-[40px]" />
-                  <div className="flex-col text-center justify-center  items-center">
-                    No search results found
-                  </div>
-                </div>
-              )}
-              <Battle battleResults={battleResults} />
-            </>
+          {battleResults.totalItems === 0 && (
+            <div className="flex-col justify-center items-center mt-4">
+              <BiSearchAlt className="text-center flex justify-center w-full h-[40px]" />
+              <div className="flex-col text-center justify-center  items-center">
+                No search results found
+              </div>
+            </div>
           )}
+          <div className="flex justify-center ">
+            <div className="flex flex-col lg:container ">
+              <div className="flex gap-2  px-2 lg:mx-0 mx-8 mt-4 items-center">
+                <div className="font-bold text-xl text-yellow-400">
+                  {battleData?.totalItems?.toLocaleString("en-US")} Battles{" "}
+                </div>
+                <GiMagicAxe className="text-2xl text-green-500" />
+                <div className="font-bold text-xl text-yellow-400">
+                  {battleData?.allFiels?.length.toLocaleString("en-US")}{" "}
+                  Solutions{" "}
+                </div>
+                <IoAnalyticsSharp className="text-2xl text-green-400" />
+              </div>
+              <Battle battleResults={battleResults} />
+            </div>
+          </div>
 
           {!battleLoading && (
             <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
