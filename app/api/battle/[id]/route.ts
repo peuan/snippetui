@@ -25,6 +25,7 @@ export async function GET(
       .sort((a, b) =>
         sorting === "DESC" ? Number(b) - Number(a) : Number(a) - Number(b)
       )
+    const allFiels = await getAllFiels(filteredFiles)
     const paginatedFiles = paginateArray(
       filteredFiles,
       currentPage,
@@ -105,12 +106,63 @@ export async function GET(
     return NextResponse.json({
       files: sliceItems,
       totalItems: search ? filterEmpty.length : filteredFiles.length,
+      allFiels: allFiels,
     })
   } catch (error) {
     console.error("Error reading directory:", error)
     return NextResponse.error()
   }
 
+  async function getAllFiels(folders: string[]) {
+    const fileResults = await Promise.all(
+      folders.map(async (file) => {
+        const fileDir = path.resolve(dir, file)
+        const fileLists = await readdir(fileDir)
+        const fileListsFilterOutYaml = fileLists.filter(
+          (v) => !v.endsWith(".yml")
+        )
+        const filesWithCount = await Promise.all(
+          fileListsFilterOutYaml.map(async (fileName) => {
+            const filePath = path.resolve(fileDir, fileName)
+            const fileData = await readFile(filePath, "utf-8")
+
+            const yamlFilePath = path.join(
+              fileDir,
+              `${fileName.replace(".html", ".yml")}`
+            )
+
+            const yamlFileExists = await fileExists(yamlFilePath)
+
+            const yamlContent = yamlFileExists
+              ? yaml.load(readFileSync(yamlFilePath, "utf8"))
+              : ("" as any)
+
+            let status = "complete"
+            let description = null
+            let color = "primary"
+
+            if (yamlContent) {
+              status = yamlContent.status || status
+              description = yamlContent.description
+              color = yamlContent.color || color
+            }
+
+            return {
+              fileName,
+              characterCount: fileData.trim().length,
+              description: description,
+              status,
+              color,
+            }
+          })
+        )
+
+        return filesWithCount
+      })
+    )
+
+    return fileResults.flat(Infinity)
+  }
   function filteredFileResults(fileResults: IBattle[], search?: string) {
     return search
       ? fileResults.map((folderData) => {
