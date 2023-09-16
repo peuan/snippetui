@@ -281,7 +281,7 @@ export default function Home() {
               onChange={onSearchChange}
               type="text"
               className="max-w-[300px] text-center lg:mt-0  border-slate-700 rounded-full"
-              placeholder="Search with level, player and status"
+              placeholder="Search with level, player or status"
               value={searchValue}
             />
           </div>

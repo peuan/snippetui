@@ -26,6 +26,10 @@ export async function GET(
         sorting === "DESC" ? Number(b) - Number(a) : Number(a) - Number(b)
       )
     const allFiels = await getAllFiels(filteredFiles)
+    const filteredAllFiels = filteredFileResults(allFiels as IBattle[], search)
+    const resultAllfiels = filteredAllFiels
+      .map((item) => item.files)
+      .flat(Infinity)
     const paginatedFiles = paginateArray(
       filteredFiles,
       currentPage,
@@ -106,7 +110,7 @@ export async function GET(
     return NextResponse.json({
       files: sliceItems,
       totalItems: search ? filterEmpty.length : filteredFiles.length,
-      allFiels: allFiels,
+      allFiels: resultAllfiels,
     })
   } catch (error) {
     console.error("Error reading directory:", error)
@@ -157,7 +161,7 @@ export async function GET(
           })
         )
 
-        return filesWithCount
+        return { folder: file, files: filesWithCount }
       })
     )
 
