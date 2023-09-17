@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="item item-1"></div>
+  <div class="item item-2"></div>
+  <div class="item item-3"></div>
+</div>
+<style>
+  .container {
+    width: 150px;
+    height: 150px;
+  }
+  body {
+    background: #6592cf;
+    margin: 0;
+    display: grid;
+    place-content: end;
+  }
+  body > .container {
+    position: relative;
+    bottom: -75;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    transform: rotate(-45deg);
+    transform-origin: center top;
+  }
+  .item {
+    background: #060f55;
+  }
+  .item-1 {
+    height: 169px;
+    width: 30px;
+    border-radius: 20px 20px;
+  }
+  .item-2 {
+    height: 244px;
+    width: 50px;
+    border-radius: 30px 30px;
+  }
+  .item-3 {
+    height: 169px;
+    border-radius: 20px 20px;
+    width: 30px;
+  }
+</style>
