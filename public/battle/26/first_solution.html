@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="circle"></div>
+  <div class="circle"></div>
+  <div class="circle"></div>
+</div>
+<div class="rec"></div>
+<style>
+  body {
+    background: #6592CF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    height: 220px;
+    display: flex;
+    column-gap: 80px;
+    justify-content: center;
+  }
+  .circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: solid 20px #060F55;
+  }
+  .circle:last-child {
+    position: absolute;
+    bottom: 40px;
+  }
+  .rec {
+    position: absolute;
+    width: 320px;
+    height: 100px;
+    background: #6592CF;
+  }
+</style>
