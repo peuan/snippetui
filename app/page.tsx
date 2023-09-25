@@ -54,7 +54,7 @@ export default function Home() {
   const pageNumber = useAppSelector((state) => state.pageReducer.pageNumber)
 
   const [totalPages, setTotalPages] = useState(1)
-  const [sorting, setSorting] = useState<Sorting>(Sorting.DESC)
+  const [sorting, setSorting] = useState<Sorting>(Sorting.ASC)
   const [paginationValue, setPaginationValue] = useState<any>(pageNumber)
   const [searchValue, setSearchValue] = useState<any>("")
   const audioRef = useRef<any>(null)
