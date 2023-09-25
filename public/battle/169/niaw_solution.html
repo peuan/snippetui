@@ -1,0 +1,91 @@
+<div class="container">
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+  
+  <div class="triagle-container-left">
+    <div class="triagle">
+    </div>
+    <div class="triagle-inner"></div>
+    </div>
+  </div>
+
+  <div class="triagle-container-right">
+    <div class="triagle">
+    </div>
+    <div class="triagle-inner"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background: #4FA07B;    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  div.circle:nth-child(2) {
+   padding: 30px;
+  }
+   div.circle:nth-child(3) {
+   padding: 60px;
+  }
+  .circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 10px solid #0D1335;
+    position: absolute;
+  }
+
+ .triagle-container-left {
+   transform: rotate(90deg);
+   position: relative;
+   left: -55px;
+ }
+
+   .triagle-container-right {
+   transform: rotate(-90deg);
+  position: relative;
+  left: 200px;
+ }
+  
+  .triagle {
+    border-left-width: 120px;
+    border-left-style: solid;
+    border-left-color: transparent;
+    
+    border-right-width: 120px;
+    border-right-style: solid;
+    border-right-color: transparent;
+    
+    border-bottom-width: 200px;
+    border-bottom-style: solid;
+    border-bottom-color: #FBFAE2;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+.triagle-inner {
+    border-left-width: 100px;
+    border-left-style: solid;
+    border-left-color: transparent;
+  
+    border-right-width: 100px;
+    border-right-style: solid;
+    border-right-color: transparent;
+    
+    border-bottom-width: 180px;
+    border-bottom-style: solid;
+    border-bottom-color: #4FA07B;
+    position: absolute;
+  transform: translate(-50%, -50%);
+}
+</style>
