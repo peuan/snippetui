@@ -1,0 +1,88 @@
+<div class="container">
+  <div class="triangle-container">
+    <div class="center"></div>
+    <div class="line right-top"></div>
+    <div class="line right-bottom"></div>
+    <div class="line left-top"></div>
+    <div class="line left-bottom"></div>
+  </div>
+  <div class="circle big">
+    <div class="circle medium">
+      <div class="circle small"></div>
+    </div>
+  </div>
+</div>
+<style>
+  body {
+    background: #4fa07b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .circle {
+    aspect-ratio: 1;
+    border: 10px solid #0d1335;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .big {
+    width: 230px;
+  }
+  .medium {
+    width: 170px;
+  }
+  .small {
+    width: 110px;
+  }
+  .container {
+    position: relative;
+    padding: 0 30px;
+  }
+  .triangle-container {
+    top: 10px;
+    height: 230px;
+    width: 290px;
+    position: absolute;
+    border-left: 10px solid #fbfae2;
+    border-right: 10px solid #fbfae2;
+    left: 0;
+    overflow: hidden;
+  }
+  .line {
+    position: absolute;
+    height: 10px;
+    background: #fbfae2;
+    width: 216px;
+  }
+  .right-top {
+    left: -25;
+    top: 55;
+    transform: rotate(32deg);
+  }
+  .right-bottom {
+    left: -25;
+    bottom: 55;
+    transform: rotate(-32deg);
+  }
+  .left-top {
+    right: -25;
+    top: 55;
+    transform: rotate(-32deg);
+  }
+  .left-bottom {
+    right: -25;
+    bottom: 55;
+    transform: rotate(32deg);
+  }
+  .center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 40px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+    background: #fbfae2;
+  }
+</style>
