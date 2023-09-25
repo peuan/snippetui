@@ -6,6 +6,7 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { IoMdColorPalette } from "react-icons/io"
+import { GiTrophy } from "react-icons/gi"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -62,6 +63,13 @@ export default function Nav() {
             <Link href={"/playground"} className={navigationMenuTriggerStyle()}>
               Playground
               <IoMdColorPalette className="ml-2" />
+            </Link>
+            <Link
+              href={"/leaderboards"}
+              className={navigationMenuTriggerStyle()}
+            >
+              Leaderboards
+              <GiTrophy className="ml-2" />
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
