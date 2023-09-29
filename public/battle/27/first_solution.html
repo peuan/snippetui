@@ -1,0 +1,48 @@
+<div class="circle large">
+  <div class="circle small"></div>
+  <div class="rec large">  
+    <div class="rec small"></div>
+    <div class="rec small trans"></div>
+    <div class="rec small trans"></div>
+    <div class="rec small"></div>
+  </div>
+</div>
+<style>
+  body {
+    background: #E38F66;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .circle {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .circle.large {
+    width: 200px;
+    background: #AA445F;
+  }
+  .circle.small {
+    position: relative;
+    width: 80px;
+    border: 30px #F7EC7D solid;
+  }
+  .rec.large {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .rec.small {
+    width: 70px;
+    height: 70px;
+    background: #AA445F;
+  }
+  .rec.trans {
+    background: transparent;
+  }
+</style>
