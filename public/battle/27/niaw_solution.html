@@ -1,0 +1,44 @@
+<div class="circle">
+  <div class="squre left"></div>
+  <div class="small"></div>
+  <div class="squre right"></div>
+</div>
+<style>
+  body {
+    background: #e38f66;
+  }
+  body,
+  .circle {
+    display: grid;
+    place-content: center;
+    margin: 0;
+  }
+  .circle {
+    width: 250px;
+    height: 250px;
+    clip-path: circle(40%);
+    background: #aa445f;
+    position: relative;
+  }
+  .small {
+    width: 80px;
+    height: 80px;
+    background: #aa445f;
+    border-radius: 50%;
+    border: 30px solid #f7ec7d;
+  }
+  .squre {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    background: #aa445f;
+  }
+  .left {
+    left: 45px;
+    top: 45px;
+  }
+  .right {
+    right: 45px;
+    bottom: 45px;
+  }
+</style>
