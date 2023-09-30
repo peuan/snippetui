@@ -14,6 +14,7 @@ import toastReducer from "@/redux/features/toastSlice"
 import themeReducer from "@/redux/features/themeSlice"
 import pageReducer from "@/redux/features/pageSlice"
 import loadingReducer from "@/redux/features/loadingSlice"
+import leaderboardReducer from "@/redux/features/leaderboardSlice"
 
 import { battleApi } from "@/redux/services/battleApi"
 import { showCaseApi } from "@/redux/services/showCaseApi"
@@ -21,6 +22,7 @@ import { playgroundApi } from "@/redux/services/playgroundApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import { chatGPTApi } from "@/redux/services/chatGPTApi"
 import { kataApi } from "@/redux/services/kataApi"
+import { leaderboardApi } from "./services/leaderboardApi"
 
 export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
@@ -52,6 +54,7 @@ const middlewareEnhancer = applyMiddleware(rtkQueryErrorLogger)
 export const store = configureStore({
   reducer: {
     battleReducer,
+    leaderboardReducer,
     showCaseReducer,
     playgroundReducer,
     chatGPTReducer,
@@ -60,6 +63,7 @@ export const store = configureStore({
     pageReducer,
     loadingReducer,
     [battleApi.reducerPath]: battleApi.reducer,
+    [leaderboardApi.reducerPath]: leaderboardApi.reducer,
     [showCaseApi.reducerPath]: showCaseApi.reducer,
     [playgroundApi.reducerPath]: playgroundApi.reducer,
     [chatGPTApi.reducerPath]: chatGPTApi.reducer,
@@ -69,6 +73,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat(
       battleApi.middleware,
+      leaderboardApi.middleware,
       showCaseApi.middleware,
       playgroundApi.middleware,
       chatGPTApi.middleware,

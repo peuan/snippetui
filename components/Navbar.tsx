@@ -66,7 +66,10 @@ export default function Nav() {
             </Link>
             <Link
               href={"/leaderboards"}
-              className={navigationMenuTriggerStyle()}
+              className={navigationMenuTriggerStyle({
+                class:
+                  "dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:focus:bg-yellow-500",
+              })}
             >
               Leaderboards
               <GiTrophy className="ml-2" />
