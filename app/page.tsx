@@ -231,12 +231,12 @@ export default function Home() {
         <ScrollToTop />
         <div>
           <div className="flex flex-col justify-center items-center mt-2">
-            <AiFillSound
-              className="absolute mb-[120px] -ml-[250px] hover:cursor-pointer text-yellow-400 "
-              onClick={() => audioRef.current.play()}
-            />
-            <h1 className="text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
-              <div className="flex items-center px-5">
+            <h1 className="flex items-center text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
+              <AiFillSound
+                className="text-[20px] hover:cursor-pointer text-yellow-400 "
+                onClick={() => audioRef.current.play()}
+              />
+              <div className="flex items-center px-2">
                 SnippetUI
                 <TbMoustache className="ml-2" />
                 <audio ref={audioRef} src={"/snippetUI.mp3"} />

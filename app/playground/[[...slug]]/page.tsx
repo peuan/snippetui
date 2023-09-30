@@ -43,6 +43,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
     data,
     error,
   } = useGetCodeByPathQuery({ path: apiPath }, { skip: path === undefined })
+
   const [sendMessage, sendMessageResult] = usePostMessageMutation()
   const chatGPTApiKey = useAppSelector((state) => state.chatGPTReducer.apiKey)
   const toastResult = useAppSelector((state) => state.toastReducer.title)
