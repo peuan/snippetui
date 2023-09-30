@@ -33,8 +33,8 @@ export default function Leaderboard() {
             className={clsx(
               "flex items-center py-2 rounded-lg shadow-md mb-2 hover:scale-110 transition duration-300",
               index === 0 && "bg-indigo-600 h-20",
-              index === 1 && "bg-blue-500 h-18",
-              index === 2 && "bg-green-400 h-18"
+              index === 1 && "bg-purple-400 h-18",
+              index === 2 && "bg-blue-400 h-18"
             )}
           >
             <div className="w-1/2 text-center">
