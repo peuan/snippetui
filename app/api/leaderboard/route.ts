@@ -14,6 +14,8 @@ export async function GET(request: NextRequest) {
     const files = await readdir(dir)
     const filteredFiles = files.filter((file) => !file.includes("."))
 
+    // const allBattles = await getAllBattles(filteredFiles)
+
     const fileResults = await Promise.all(
       filteredFiles.map(async (file) => {
         const fileDir = path.resolve(dir, file)
@@ -164,5 +166,28 @@ export async function GET(request: NextRequest) {
     } catch (error) {
       return false
     }
+  }
+
+  async function getAllBattles(battles: string[]) {
+    const mapBattlesPromises = battles.map(async (battle) => {
+      const fetch = require("cross-fetch")
+      const response = await fetch(
+        `https://cssbattle.dev/targets/${battle}@2x.png`
+      )
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch battle ${battle}`)
+      }
+
+      const buffer = await response.buffer()
+      const base64Image = buffer.toString("base64")
+      return {
+        battle: battle,
+        image: `data:image/png;base64,${base64Image}`,
+      }
+    })
+
+    const mapBattles = await Promise.all(mapBattlesPromises)
+    return mapBattles
   }
 }
