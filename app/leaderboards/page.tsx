@@ -6,6 +6,7 @@ import { FaRegSadTear } from "react-icons/fa"
 import { useGetLeaderboardQuery } from "@/redux/services/leaderboardApi"
 import Loading from "@/components/Loading"
 import Image from "next/image"
+import { CSSBATTLE_URL } from "@/config"
 
 interface User {
   name: string
@@ -77,12 +78,15 @@ export default function Leaderboard() {
               <div className="ml-2 mt-2 flex flex-wrap gap-1">
                 {user.battles?.map((battle, index) => (
                   <Image
+                    onClick={() =>
+                      window.open(`${CSSBATTLE_URL}/play/${battle}`)
+                    }
                     key={index}
                     src={`https://cssbattle.dev/targets/${battle}@2x.png`}
                     alt={"battle-" + battle}
                     width={20}
                     height={20}
-                    className="rounded"
+                    className="rounded object-cover cursor-pointer"
                   />
                 ))}
               </div>
@@ -125,12 +129,15 @@ export default function Leaderboard() {
               <div className="ml-2 mt-2 flex flex-wrap gap-1">
                 {user.battles?.map((battle, index) => (
                   <Image
+                    onClick={() =>
+                      window.open(`${CSSBATTLE_URL}/play/${battle}`)
+                    }
                     key={index}
                     src={`https://cssbattle.dev/targets/${battle}@2x.png`}
                     alt={"battle-" + battle}
                     width={20}
                     height={20}
-                    className="rounded"
+                    className="rounded object-cover cursor-pointer"
                   />
                 ))}
               </div>
