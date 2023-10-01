@@ -1,10 +1,26 @@
 # Integrate with ChatGPT
 
-
 ![alt text](/doc-images/chatgpt-popup-apikey.png)
 ![alt text](/doc-images/chat-gpt.png)
 
 https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-03a6b0e8ab68
+
+# Dark/Light Mode
+
+![alt text](/doc-images/dark-mode.png)
+![alt text](/doc-images/light-mode.png)
+
+# Home Page
+
+![alt text](/doc-images/homepage.png)
+
+# Playground
+
+![alt text](/doc-images/playground.png)
+
+# Leaderboard
+
+![alt text](/doc-images/leaderboard.png)
 
 # Realtime Logging
 
@@ -13,18 +29,6 @@ https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-
 # Resize Panel
 
 ![alt text](/doc-images/resize-panel.png)
-
-# Home Page
-
-![alt text](/doc-images/homepage.png)
-
-# ShowCase
-
-![alt text](/doc-images/showcase.png)
-
-# Playground
-
-![alt text](/doc-images/playground.png)
 
 # Code Formatter
 
@@ -37,11 +41,6 @@ https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-
 # Social Share
 
 ![alt text](/doc-images/social-share.png)
-
-# Dark/Light Mode
-
-![alt text](/doc-images/dark-mode.png)
-![alt text](/doc-images/light-mode.png)
 
 # Tailwindcss Template
 
