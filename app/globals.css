@@ -228,3 +228,13 @@
 li[role="treeitem"] {
   background: unset !important;
 }
+
+.leaderboard-row:hover {
+  transform: translate3d(6px, -6px, 0);
+
+  transition-delay: 0s;
+  transition-duration: 0.4s;
+  transition-property: all;
+  transition-timing-function: line;
+  margin: 1rem;
+}

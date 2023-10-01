@@ -167,27 +167,4 @@ export async function GET(request: NextRequest) {
       return false
     }
   }
-
-  async function getAllBattles(battles: string[]) {
-    const mapBattlesPromises = battles.map(async (battle) => {
-      const fetch = require("cross-fetch")
-      const response = await fetch(
-        `https://cssbattle.dev/targets/${battle}@2x.png`
-      )
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch battle ${battle}`)
-      }
-
-      const buffer = await response.buffer()
-      const base64Image = buffer.toString("base64")
-      return {
-        battle: battle,
-        image: `data:image/png;base64,${base64Image}`,
-      }
-    })
-
-    const mapBattles = await Promise.all(mapBattlesPromises)
-    return mapBattles
-  }
 }

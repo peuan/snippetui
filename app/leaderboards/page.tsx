@@ -24,7 +24,7 @@ export default function Leaderboard() {
   return (
     <>
       {isLoading && <Loading />}
-      <div className="mt-8 flex flex-col items-center">
+      <div className="mt-8 flex flex-col items-center ">
         <div className="text-3xl mb-8">Leaderboards</div>
         <div className="lg:w-[80vw] w-full px-4">
           <div className="flex items-center py-2 rounded-lg shadow-md mb-2">
@@ -36,7 +36,7 @@ export default function Leaderboard() {
             <div
               key={index}
               className={clsx(
-                "flex-col items-center py-2 rounded-lg shadow-md mb-2 hover:scale-110 transition duration-300",
+                "flex-col items-center py-2 rounded-lg shadow-md mb-2 hover:scale-105 transition duration-300 hover:shadow-2xl",
                 index === 0 && "bg-indigo-600 h-fit",
                 index === 1 && "bg-purple-400 h-fit",
                 index === 2 && "bg-blue-400 h-fit"
@@ -56,13 +56,13 @@ export default function Leaderboard() {
                         )}
                       />
                     </div>
-                    <div className="lg:h-6 lg:w-24 h-8 w-8 lg:text-xs text-[5px] font-semibold rounded-full px-2 py-1 bg-yellow-500 flex justify-center items-center">
+                    <div className="lg:h-6 lg:w-20 h-6 w-10 lg:text-xs text-[6px] font-semibold rounded-full px-2 py-1 bg-yellow-500 flex justify-center items-center">
                       Gold {user.gold}
                     </div>
-                    <div className="lg:h-6 lg:w-24 h-8 w-8 lg:text-xs text-[5px] font-semibold rounded-full px-2 py-1 bg-slate-300 flex justify-center items-center">
+                    <div className="lg:h-6 lg:w-20 h-6 w-10 lg:text-xs text-[6px] font-semibold rounded-full px-2 py-1 bg-slate-300 flex justify-center items-center">
                       Silver {user.silver}
                     </div>
-                    <div className="lg:h-6 lg:w-24 h-8 w-8 lg:text-xs text-[5px] font-semibold rounded-full px-2 py-1 bg-amber-600 flex justify-center items-center">
+                    <div className="lg:h-6 lg:w-20 h-6 w-10 lg:text-xs text-[6px] font-semibold rounded-full px-2 py-1 bg-amber-600 flex justify-center items-center">
                       Bronze {user.bronze}
                     </div>
                   </div>
@@ -106,13 +106,13 @@ export default function Leaderboard() {
                     <div className="lg:h-8 lg:w-8 h-5 w-5 rounded-full bg-slate-700 flex items-center justify-center backdrop-blur-md shadow-lg ml-2">
                       <FaRegSadTear className="w-5 h-5" />
                     </div>
-                    <div className="lg:h-6 lg:w-24 h-8 w-8 lg:text-xs text-[5px] font-semibold rounded-full px-2 py-1 bg-yellow-500 flex justify-center items-center">
+                    <div className="lg:h-6 lg:w-20 h-6 w-10 lg:text-xs text-[6px] font-semibold rounded-full px-2 py-1 bg-yellow-500 flex justify-center items-center">
                       Gold {user.gold}
                     </div>
-                    <div className="lg:h-6 lg:w-24 h-8 w-8 lg:text-xs text-[5px] font-semibold rounded-full px-2 py-1 bg-slate-300 flex justify-center items-center">
+                    <div className="lg:h-6 lg:w-20 h-6 w-10 lg:text-xs text-[6px] font-semibold rounded-full px-2 py-1 bg-slate-300 flex justify-center items-center">
                       Silver {user.silver}
                     </div>
-                    <div className="lg:h-6 lg:w-24 h-8 w-8 lg:text-xs text-[5px] font-semibold rounded-full px-2 py-1 bg-amber-600 flex justify-center items-center">
+                    <div className="lg:h-6 lg:w-20 h-6 w-10 lg:text-xs text-[6px] font-semibold rounded-full px-2 py-1 bg-amber-600 flex justify-center items-center">
                       Bronze {user.bronze}
                     </div>
                   </div>
