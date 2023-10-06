@@ -1,0 +1,59 @@
+<div class="container">
+	<div class="item">
+	  <div class="circle"></div>
+	  <div class="tunnel flip yellow"></div>
+	</div>
+	<div class="item">
+	  <div class="tunnel yellow"></div>
+	  <div class="circle"></div>
+	</div>
+	<div class="item">
+	  <div class="tunnel"></div>
+	  <div class="circle yellow"></div>
+	</div>
+	<div class="item">
+	  <div class="circle yellow"></div>
+	  <div class="tunnel flip"></div>
+	</div>
+</div>
+
+<style>
+	body {
+	  background: #1A4341;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	}
+
+	.container {
+	  display: flex;
+	  column-gap: 20px;
+	}
+
+	.item > *:nth-child(2) {
+	  margin-top: 20px;
+	}
+
+	.circle,
+	.tunnel {
+	  width: 50px;
+	  height: 50px;
+	  background: #998235;
+	}
+
+	.circle {
+	  border-radius: 50%;
+	}
+
+	.tunnel {
+	  border-radius: 50% 50% 0 0;
+	}
+
+	.flip {
+	  transform: scaleY(-1);
+	}
+
+	.yellow {
+	  background: #F3AC3C;
+	}
+</style>
