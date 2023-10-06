@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="circle green"></div>
+  <div class="tunnel yellow"></div>
+  <div class="tunnel green"></div>
+  <div class="circle yellow"></div>
+  <div class="tunnel reverse yellow"></div>
+  <div class="circle green"></div>
+  <div class="circle yellow"></div>
+  <div class="tunnel reverse green"></div>
+</div>
+<style>
+  body {
+    background: #1a4341;
+    display: flex;
+  }
+  .container {
+    margin: auto;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 260px;
+  }
+  .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .tunnel {
+    width: 50px;
+    height: 50px;
+    border-radius: 50% 50% 0 0;
+  }
+  .green {
+    background: #998235;
+  }
+  .yellow {
+    background: #f3ac3c;
+  }
+  .reverse {
+    transform: rotate(180deg);
+  }
+</style>
