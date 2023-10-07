@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="circle green"></div>
+  <div class="radius yellow"></div>
+  <div class="radius green"></div>
+  <div class="circle yellow"></div>
+  <div class="radius yellow rotate"></div>
+  <div class="circle green"></div>
+  <div class="circle yellow"></div>
+  <div class="radius green rotate"></div>
+</div>
+<style>
+  body {
+    background: #1a4341;
+    display: grid;
+    place-content: center;
+  }
+  .container {
+    width: 260px;
+    height: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+    gap: 10px;
+  }
+  .circle,
+  .radius {
+    aspect-ratio: 1;
+    width: 50px;
+  }
+  .circle {
+    border-radius: 50%;
+  }
+  .radius {
+    border-radius: 30px 30px 0 0;
+  }
+  .green {
+    background: #998235;
+  }
+  .yellow {
+    background: #f3ac3c;
+  }
+  .rotate {
+    transform: rotate(180deg);
+  }
+</style>
