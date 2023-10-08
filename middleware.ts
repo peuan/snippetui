@@ -15,5 +15,5 @@ export default withAuth({
 })
 
 export const config = {
-  matcher: ["/playground/:path*", "/me", "/leaderboards"],
+  matcher: ["/playground/:path*", "/profile", "/leaderboards"],
 }
