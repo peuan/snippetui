@@ -7,6 +7,7 @@ import Nav from "@/components/Navbar"
 import { Providers } from "@/redux/provider"
 import Toast from "@/components/Toast"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import NextAuthProviders from "./(auth)/login/NextAuthProvider"
 
 const kanit = Kanit({ subsets: ["thai"], weight: "600" })
 
@@ -42,13 +43,15 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={clsx(`${kanit.className} dark:bg-slate-900 m-0 p-0 `)}
       >
-        <Providers>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Toast />
-            <Nav />
-            {children}
-          </ThemeProvider>
-        </Providers>
+        <NextAuthProviders>
+          <Providers>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <Toast />
+              <Nav />
+              {children}
+            </ThemeProvider>
+          </Providers>
+        </NextAuthProviders>
       </body>
     </html>
   )
