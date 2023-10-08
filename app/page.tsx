@@ -6,19 +6,15 @@ import { TbMoustache } from "react-icons/tb"
 import { GiMagicAxe } from "react-icons/gi"
 import {
   AiFillSound,
-  AiOutlineCaretDown,
   AiFillCaretDown,
   AiFillCaretUp,
   AiFillCaretLeft,
   AiFillCaretRight,
-  AiOutlineCaretUp,
-  AiOutlineAntDesign,
 } from "react-icons/ai"
 import { IoAnalyticsSharp } from "react-icons/io5"
 import { BiSearchAlt } from "react-icons/bi"
 import clsx from "clsx"
 import { BiLeftArrow, BiRightArrow } from "react-icons/bi"
-import { IoMdColorWand } from "react-icons/io"
 import debounce from "lodash.debounce"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
@@ -36,7 +32,6 @@ import { setPage } from "@/redux/features/pageSlice"
 import { useGetBattlesQuery } from "@/redux/services/battleApi"
 
 // import interface
-import { IPages } from "@/interfaces/IPage"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Sorting } from "@/types/sorting.enum"
