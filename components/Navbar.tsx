@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { IoMdColorPalette } from "react-icons/io"
 import { GiTrophy } from "react-icons/gi"
+import { LuLogIn } from "react-icons/lu"
 
 import { navigationMenuTriggerStyle } from "./ui/navigation-menu"
 
@@ -108,6 +109,7 @@ export default function Nav() {
                   className="lg:w-fit px-4 w-full dark:bg-blue-500 bg-slate-400 hover:bg-slate-600 dark:hover:bg-blue-600"
                 >
                   <span>Login</span>
+                  <LuLogIn className="ml-2" />
                 </Button>
               )}
               {session?.user && (
@@ -135,7 +137,7 @@ export default function Nav() {
                     defaultValue={resolvedTheme}
                   >
                     <DropdownMenuCheckboxItem
-                      onCheckedChange={() => handleTheme({ theme: "light" })}
+                      onCheckedChange={() => router.push("/profile")}
                     >
                       Profile
                     </DropdownMenuCheckboxItem>
