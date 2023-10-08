@@ -226,7 +226,7 @@ export default function Home() {
   }
   return (
     <>
-      <div className="mb-10">
+      <div className="mb-10 mt-20">
         {battleLoading && <Loading />}
         <ScrollToTop />
         <div>
@@ -311,10 +311,10 @@ export default function Home() {
           </div>
 
           {!battleLoading && (
-            <div className="invisible lg:visible flex justify-center items-center mt-10 gap-6">
+            <div className="invisible lg:visible flex justify-center items-center mt-10">
               <Button
                 className={clsx(
-                  "hover:text-white w-[120px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full",
+                  "hover:text-white w-[120px] bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full mr-2",
                   pageNumber === 1 && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === 1}
@@ -340,7 +340,7 @@ export default function Home() {
               </div>
               <Button
                 className={clsx(
-                  "w-[120px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full",
+                  "w-[120px] hover:text-white bg-slate-400 hover:bg-slate-500 dark:bg-green-500  dark:hover:bg-green-700 text-slate-800 dark:text-white font-bold px-4  rounded-full ml-2",
                   pageNumber === totalPages && "opacity-50 cursor-not-allowed"
                 )}
                 disabled={pageNumber === totalPages}

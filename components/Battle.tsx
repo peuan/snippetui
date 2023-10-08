@@ -30,7 +30,7 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
             </h3>
           </div>
 
-          <div className="flex  md:gap-4 gap-0 flex-wrap lg:justify-start justify-center">
+          <div className="flex  md:gap-4 gap-0 flex-wrap lg:justify-start justify-center max-w-[100vw]">
             {folder.files?.map((file, index) => (
               <Card
                 key={index}
