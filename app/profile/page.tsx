@@ -72,11 +72,11 @@ export default function Profile() {
                         </td>
                         <td className="px-2 py-2">
                           <a
-                            href={profile?.html_url}
+                            href={profile?.html_url ?? "#"}
                             target="_blank"
                             className="text-blue-400"
                           >
-                            {profile?.html_url}
+                            {profile?.html_url ?? "-"}
                           </a>
                         </td>
                       </tr>
@@ -85,7 +85,7 @@ export default function Profile() {
                           <BsCode />
                         </td>
                         <td className="px-2 py-2">
-                          {profile?.contributions} commits
+                          {profile?.contributions ?? 0} commits
                         </td>
                       </tr>
                     </tbody>
