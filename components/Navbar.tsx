@@ -37,7 +37,6 @@ export default function Nav() {
   const menus = [
     { title: "Playground", path: "/playground" },
     { title: "Leaderboards", path: "/leaderboards" },
-    { title: "Profile", path: "/profile" },
   ]
 
   const handleTheme = (theme: Itheme) => {
