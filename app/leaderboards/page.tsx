@@ -8,12 +8,6 @@ import Loading from "@/components/Loading"
 import Image from "next/image"
 import { CSSBATTLE_URL } from "@/config"
 
-interface User {
-  name: string
-  score: number
-  rank: number
-}
-
 export default function Leaderboard() {
   const { isLoading, isFetching, data, error } = useGetLeaderboardQuery({
     path: "leaderboard",
@@ -25,7 +19,7 @@ export default function Leaderboard() {
     <>
       {isLoading && <Loading />}
       <div className="mt-8 flex flex-col items-center ">
-        <div className="text-3xl mb-8">Leaderboards</div>
+        <div className="text-3xl mb-8 uppercase">Leaderboards</div>
         <div className="lg:w-[80vw] w-full px-4">
           <div className="flex items-center py-2 rounded-lg shadow-md mb-2">
             <div className="w-1/2 text-center">Player</div>

@@ -47,7 +47,9 @@ export default function RootLayout({
           <Providers>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Toast />
-              <Nav />
+              <div className="mb-20">
+                <Nav />
+              </div>
               {children}
             </ThemeProvider>
           </Providers>
