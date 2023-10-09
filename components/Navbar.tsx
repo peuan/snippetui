@@ -77,6 +77,7 @@ export default function Nav() {
                 <li key={idx} className="text-gray-600 hover:text-indigo-600">
                   {item.title === "Playground" && (
                     <Link
+                      onClick={() => setState(false)}
                       href={item.path}
                       className={navigationMenuTriggerStyle({
                         class: "min-w-full",
@@ -88,6 +89,7 @@ export default function Nav() {
                   )}
                   {item.title === "Leaderboards" && (
                     <Link
+                      onClick={() => setState(false)}
                       href={item.path}
                       className={navigationMenuTriggerStyle({
                         class:
@@ -102,7 +104,10 @@ export default function Nav() {
               ))}
               {!session?.user && (
                 <Button
-                  onClick={() => router.push("/login")}
+                  onClick={() => {
+                    router.push("/login")
+                    setState(false)
+                  }}
                   variant="secondary"
                   size="icon"
                   className="lg:w-fit px-4 w-full dark:bg-blue-500 bg-slate-400 hover:bg-slate-600 dark:hover:bg-blue-600"
@@ -136,7 +141,10 @@ export default function Nav() {
                     defaultValue={resolvedTheme}
                   >
                     <DropdownMenuCheckboxItem
-                      onCheckedChange={() => router.push("/profile")}
+                      onCheckedChange={() => {
+                        router.push("/profile")
+                        setState(false)
+                      }}
                     >
                       Profile
                     </DropdownMenuCheckboxItem>
@@ -145,6 +153,8 @@ export default function Nav() {
                       onCheckedChange={() =>
                         signOut({
                           callbackUrl: "/",
+                        }).then(() => {
+                          setState(false)
                         })
                       }
                     >
