@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="leaf green flip"></div>
+  <div class="leaf yellow flip"></div>
+  <div class="leaf yellow"></div>
+  <div class="leaf green"></div>
+</div>
+<style>
+  body {
+    background: #998235;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 20px
+  }
+  .leaf {
+    border-radius: 50px 0;
+  }
+  .green {
+    height: 100px;
+    background: #1A4341;
+  }
+  .yellow {
+    height: 60px;
+    background: #F3AC3C;
+  }
+  .flip {
+    transform: rotateX(0.5turn);
+  }
+</style>
