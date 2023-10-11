@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="circle c1"></div>
+  <div class="circle c2"></div>
+  <div class="circle c3"></div>
+  <div class="circle c4"></div>
+</div>
+<style>
+  body {
+    background: #f3ac3c;
+    display: grid;
+    place-content: center;
+  }
+  .container {
+    width: 190px;
+    height: 190px;
+    background: #1a4341;
+    position: relative;
+    transform: scale(1.02);
+  }
+  .circle {
+    width: 195px;
+    height: 195px;
+    border-radius: 50%;
+    background: #f3ac3c;
+    position: absolute;
+  }
+  .c1 {
+    left: -100px;
+    top: -100px;
+  }
+  .c2 {
+    left: -100px;
+    bottom: -100px;
+  }
+  .c3 {
+    top: -100px;
+    right: -100px;
+  }
+  .c4 {
+    right: -100px;
+    bottom: -100px;
+  }
+</style>
