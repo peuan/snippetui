@@ -1,0 +1,43 @@
+<div class="container"></div>
+<div class="square t1"></div>
+<div class="square t2"></div>
+<div class="square t3"></div>
+<div class="square t4"></div>
+<style>
+  body {
+    background: #F3AC3C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    background: #1A4341;
+    transform: rotate(45deg);
+  }
+  .square {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: #F3AC3C;
+    border-radius: 50%;
+  }
+  .t1 {
+    margin-bottom: -200px;
+    margin-left: -200px;
+  }
+  .t2 {
+    margin-bottom: -200px;
+    margin-right: -200px;
+  }
+  .t3 {
+    margin-top: -200px;
+    margin-right: -200px;
+  }
+  .t4 {
+    margin-top: -200px;
+    margin-left: -200px;
+  }
+</style>
