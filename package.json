@@ -16,6 +16,7 @@
     "@commitlint/config-conventional": "^17.6.7",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@giscus/react": "^2.3.0",
     "@hookform/resolvers": "^3.1.1",
     "@lezer/highlight": "^1.1.6",
     "@radix-ui/react-avatar": "^1.0.3",

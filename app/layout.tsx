@@ -47,10 +47,18 @@ export default function RootLayout({
           <Providers>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Toast />
-              <div className="mb-20">
-                <Nav />
+              <div className="relative min-h-[85vh]">
+                <div className="mb-20">
+                  <Nav />
+                </div>
+                <div className="pb-8">{children}</div>
+                <section className="text-center absolute bottom-0 mb-2 w-full">
+                  Build with ❤️ by{" "}
+                  <a href="https://github.com/niawjunior" target="_blank">
+                    Niaw{" "}
+                  </a>
+                </section>
               </div>
-              {children}
             </ThemeProvider>
           </Providers>
         </NextAuthProviders>
