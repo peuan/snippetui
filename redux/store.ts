@@ -32,7 +32,7 @@ export const rtkQueryErrorLogger: Middleware =
       if (action.payload.status) {
         dispatch(
           setToast({
-            title: action.payload.data.message,
+            title: action?.payload?.data?.message,
             status: action.payload.status,
           })
         )

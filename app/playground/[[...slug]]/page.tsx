@@ -34,9 +34,6 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
   if (path?.includes("battle")) {
     apiPath = `battle-detail/${path?.replace("battle", "")}`
   }
-  if (path?.includes("showcase")) {
-    apiPath = `showcase-detail/${path?.replace("showcase", "")}`
-  }
 
   const {
     isLoading: isFetching,
@@ -131,7 +128,7 @@ const Playground = ({ params }: { params: { slug: [] } }) => {
     <div>
       {isFetching && <Loading />}
       {!isFetching && (
-        <div>
+        <div className="pt-20 pb-16">
           <div className="flex lg:flex-row flex-col w-full lg:justify-start justify-center lg:items-center items-center lg:pb-0 pb-4">
             <form
               onSubmit={onSubmit}

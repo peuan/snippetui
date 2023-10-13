@@ -3,7 +3,10 @@
 import Giscus from "@giscus/react"
 import { useTheme } from "next-themes"
 
-export default function Comment() {
+interface IPage {
+  path?: string
+}
+export default function Comment({ path }: IPage) {
   const { setTheme, theme, resolvedTheme } = useTheme()
   return (
     <Giscus
@@ -14,7 +17,7 @@ export default function Comment() {
       categoryId="DIC_kwDOJ5O7wc4CaGB2"
       mapping="pathname"
       term="Welcome to SnippetUI!"
-      reactionsEnabled="0"
+      reactionsEnabled={path ? "1" : "0"}
       emitMetadata="0"
       inputPosition="top"
       theme={theme === "dark" ? "dark" : "light"}

@@ -13,6 +13,6 @@ interface IBattle {
 interface IBattleResult {
   files: IBattle[]
   totalItems: number
-  allFiels: Array<IFile>
+  allFiles: Array<IFile>
 }
 export type { IBattle, IBattleResult, IFile }

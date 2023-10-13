@@ -18,7 +18,7 @@ export default function Leaderboard() {
   return (
     <>
       {isLoading && <Loading />}
-      <div className="mt-8 flex flex-col items-center ">
+      <div className="flex flex-col items-center pt-20 pb-16 ">
         <div className="text-3xl mb-8 uppercase">Leaderboards</div>
         <div className="lg:w-[80vw] w-full px-4">
           <div className="flex items-center py-2 rounded-lg shadow-md mb-2">

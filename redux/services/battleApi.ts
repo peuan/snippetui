@@ -1,4 +1,4 @@
-import { IBattleResult } from "@/interfaces/IBattle"
+import { IBattleResult, IFile } from "@/interfaces/IBattle"
 import { Sorting } from "@/types/sorting.enum"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 
@@ -16,8 +16,8 @@ export const battleApi = createApi({
       query: ({ pageNumber, sorting, search }) =>
         `battle/${pageNumber}?sorting=${sorting}&q=${search}`,
     }),
-    getBattleById: builder.query<{ file: string }, { pageNumber: number }>({
-      query: ({ pageNumber }) => `battle/${pageNumber}`,
+    getBattleById: builder.query<IFile, { folder: string; file: string }>({
+      query: ({ folder, file }) => `battle?folder=${folder}&file=${file}`,
     }),
   }),
 })

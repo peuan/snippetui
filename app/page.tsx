@@ -121,7 +121,7 @@ export default function Home() {
         setBattleResult({
           files: battleData.files,
           totalItems: total,
-          allFiels: battleData.allFiels,
+          allFiles: battleData.allFiles,
         })
       )
 
@@ -221,10 +221,10 @@ export default function Home() {
   }
   return (
     <>
-      <div className="mb-10 mt-20">
+      <div>
         {battleLoading && <Loading />}
         <ScrollToTop />
-        <div>
+        <div className="pt-20 pb-16">
           <div className="flex flex-col justify-center items-center mt-2">
             <h1 className="flex items-center text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
               <AiFillSound
@@ -296,7 +296,7 @@ export default function Home() {
                 </div>
                 <GiMagicAxe className="text-2xl text-green-500" />
                 <div className="font-bold text-xl text-yellow-400">
-                  {battleData?.allFiels?.length.toLocaleString("en-US")}{" "}
+                  {battleData?.allFiles?.length.toLocaleString("en-US")}{" "}
                   Solutions{" "}
                 </div>
                 <IoAnalyticsSharp className="text-2xl text-green-400" />

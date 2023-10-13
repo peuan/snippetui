@@ -9,6 +9,7 @@ import { useState } from "react"
 import clsx from "clsx"
 import { FaHeartBroken } from "react-icons/fa"
 import { Button } from "@/components/ui/button"
+import { GoCommentDiscussion } from "react-icons/go"
 
 import {
   Dialog,
@@ -26,9 +27,10 @@ const Card = ({
 }: {
   folder: string
   file: IFile
-  index: number
+  index?: number
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isPlaygroundLoading, setIsPlaygroundLoading] = useState(false)
+  const [isDiscussionsLoading, setIsDiscussionsLoading] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const router = useRouter()
@@ -55,11 +57,20 @@ const Card = ({
   }
 
   const handleClickToPlayground = (folder: string, file: string) => {
-    setIsLoading(true)
+    setIsPlaygroundLoading(true)
 
     let fileName = file.split(".")[0]
 
     router.push(`/playground/battle/${folder}/${fileName}`)
+  }
+
+  const handleClickToDiscussions = (folder: string, file: string) => {
+    setIsDiscussionsLoading(true)
+
+    let fileName = file.split(".")[0]
+
+    router.push(`/discussions/battle/${folder}/${fileName}`)
+    setIsDiscussionsLoading(false)
   }
 
   //handle dialog for display description
@@ -72,21 +83,21 @@ const Card = ({
   }
 
   return (
-    <div className="overflow-hidden bg-yellow-200 dark:bg-slate-900 box-content mobile-scale rounded-[30px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg shadow-blue-600">
-      <div className="flip-card overflow-hidden">
+    <div className=" overflow-hidden bg-yellow-200 dark:bg-slate-900 box-content mobile-scale rounded-[30px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg card-animation">
+      <div className="flip-card overflow-hidden ">
         <div className="flip-card-inner flex justify-center items-center lg:scale-100">
           <Iframe
             title={file.fileName}
             overflow="hidden"
-            className="flip-card-front"
-            url={`battle/${folder}/${file.fileName}`}
+            className="flip-card-front rounded-[30px]"
+            url={`/battle/${folder}/${file.fileName}`}
           />
-          <div className="flip-card-back">
+          <div className="flip-card-back rounded-[30px]">
             <Iframe
               title={file.fileName}
               overflow="hidden"
               className="w-[400px] h-[300px]"
-              url={`battle/${folder}/${file.fileName}`}
+              url={`/battle/${folder}/${file.fileName}`}
             />
           </div>
         </div>
@@ -94,7 +105,7 @@ const Card = ({
 
       <div className="flex justify-between mt-2 px-2">
         <div className="flex justify-center mb-2">
-          <div className="rounded-full bg-yellow-300 dark:bg-slate-800  flex items-center px-2">
+          <div className="rounded-full bg-yellow-300 dark:bg-slate-800  flex items-center px-2 z-10">
             <Avatar className="ml-[-8px]">
               <AvatarImage src={getAvatar(autherName)!} />
               <AvatarFallback>
@@ -105,25 +116,40 @@ const Card = ({
               {" "}
               {autherName}
             </h3>
-            <button onClick={() => handleClickToCode(folder, file.fileName)}>
-              <BiLinkExternal className="dark:text-white text-slate-800 hover:text-white" />
-            </button>
-
-            <button
-              className="ml-6"
-              onClick={() => handleClickToPlayground(folder, file.fileName)}
-            >
-              {!isLoading && (
-                <BiCode className="dark:text-white text-slate-800 hover:text-white" />
-              )}
-              {isLoading && (
-                <ReloadIcon className="dark:text-white text-slate-800 hover:text-white mr-2 h-4 w-4 animate-spin" />
-              )}
-            </button>
+            <div className="flex gap-4">
+              <button
+                onClick={() => handleClickToCode(folder, file.fileName)}
+                title="Open Github"
+              >
+                <BiLinkExternal className="dark:text-white text-slate-800 hover:text-white" />
+              </button>
+              <button
+                title="Open Playground"
+                onClick={() => handleClickToPlayground(folder, file.fileName)}
+              >
+                {!isPlaygroundLoading && (
+                  <BiCode className="dark:text-white text-slate-800 hover:text-white" />
+                )}
+                {isPlaygroundLoading && (
+                  <ReloadIcon className="dark:text-white text-slate-800 hover:text-white h-4 w-4 animate-spin" />
+                )}
+              </button>
+              <button
+                onClick={() => handleClickToDiscussions(folder, file.fileName)}
+                title="Open Discussions"
+              >
+                {!isDiscussionsLoading && (
+                  <GoCommentDiscussion className="dark:text-white text-slate-800 hover:text-white" />
+                )}
+                {isDiscussionsLoading && (
+                  <ReloadIcon className="dark:text-white text-slate-800 hover:text-white h-4 w-4 animate-spin" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
-        <div className="flex text-sm justify-center items-center dark:text-white text-slate-800 mb-2">
-          {index <= 2 && (
+        <div className="flex text-xs justify-center items-center dark:text-white text-slate-800 mb-2">
+          {index! <= 2 && (
             <BiMedal
               className={clsx(
                 "w-7 h-7",
