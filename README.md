@@ -22,6 +22,10 @@ https://github.com/niawjunior/snippetui/assets/17493195/3b925218-5df3-4875-b14c-
 
 ![alt text](/doc-images/leaderboard.png)
 
+# Discussions
+
+![alt text](/doc-images/discussions.png)
+
 # SignIn with Github/ Profile
 
 ![alt text](/doc-images/github-signIn.png)
