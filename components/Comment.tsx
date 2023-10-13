@@ -5,7 +5,6 @@ import { useTheme } from "next-themes"
 
 export default function Comment() {
   const { setTheme, theme, resolvedTheme } = useTheme()
-  console.log(theme)
   return (
     <Giscus
       id="comments"
@@ -13,7 +12,7 @@ export default function Comment() {
       repoId="R_kgDOJ5O7wQ"
       category="General"
       categoryId="DIC_kwDOJ5O7wc4CaGB2"
-      mapping="specific"
+      mapping="pathname"
       term="Welcome to SnippetUI!"
       reactionsEnabled="0"
       emitMetadata="0"
