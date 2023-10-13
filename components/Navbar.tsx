@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { IoMdColorPalette } from "react-icons/io"
 import { GiTrophy } from "react-icons/gi"
 import { LuLogIn } from "react-icons/lu"
+import { GoCommentDiscussion } from "react-icons/go"
 
 import { navigationMenuTriggerStyle } from "./ui/navigation-menu"
 
@@ -37,6 +38,7 @@ export default function Nav() {
   const menus = [
     { title: "Playground", path: "/playground" },
     { title: "Leaderboards", path: "/leaderboards" },
+    { title: "Discussions", path: "/discussions" },
   ]
 
   const handleTheme = (theme: Itheme) => {
@@ -98,6 +100,19 @@ export default function Nav() {
                     >
                       {item.title}
                       <GiTrophy className="ml-2" />
+                    </Link>
+                  )}
+                  {item.title === "Discussions" && (
+                    <Link
+                      onClick={() => setState(false)}
+                      href={item.path}
+                      className={navigationMenuTriggerStyle({
+                        class:
+                          "min-w-full dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:bg-indigo-500",
+                      })}
+                    >
+                      {item.title}
+                      <GoCommentDiscussion className="ml-2" />
                     </Link>
                   )}
                 </li>
