@@ -14,20 +14,22 @@ export async function GET(
   const { searchParams } = new URL(request.url)
   const sorting = searchParams.get("sorting")
   const search = searchParams.get("q")!
+  const folder = searchParams.get("folder")!
+  const file = searchParams.get("file")!
 
   const dirRelativeToPublicFolder = "battle"
   const dir = path.resolve("./public", dirRelativeToPublicFolder)
 
   try {
     const files = await readdir(dir)
-    const filteredFiles = files
+    const filteredFiles = filterFolders(files, folder)
       .filter((file) => !file.includes("."))
       .sort((a, b) =>
         sorting === "DESC" ? Number(b) - Number(a) : Number(a) - Number(b)
       )
-    const allFiels = await getAllFiels(filteredFiles)
-    const filteredAllFiels = filteredFileResults(allFiels as IBattle[], search)
-    const resultAllfiels = filteredAllFiels
+    const allFiles = await getAllFiles(filteredFiles)
+    const filteredAllFiles = filteredFileResults(allFiles as IBattle[], search)
+    const resultAllFiles = filteredAllFiles
       .map((item) => item.files)
       .flat(Infinity)
     const paginatedFiles = paginateArray(
@@ -35,7 +37,11 @@ export async function GET(
       currentPage,
       ITEMS_PER_PAGE
     )
-    const getAllResult = search ? filteredFiles : paginatedFiles
+    const getAllResult = search
+      ? filteredFiles
+      : folder
+      ? filteredFiles
+      : paginatedFiles
     const fileResults = await Promise.all(
       getAllResult.map(async (file) => {
         const fileDir = path.resolve(dir, file)
@@ -107,17 +113,36 @@ export async function GET(
     const sliceItems = search
       ? paginateArray(filterEmpty, currentPage, ITEMS_PER_PAGE)
       : filterEmpty
-    return NextResponse.json({
-      files: sliceItems,
-      totalItems: search ? filterEmpty.length : filteredFiles.length,
-      allFiels: resultAllfiels,
-    })
+
+    return folder && file
+      ? NextResponse.json(filterFile(sliceItems, folder, file))
+      : NextResponse.json({
+          files: sliceItems,
+          totalItems: search ? filterEmpty.length : filteredFiles.length,
+          allFiles: resultAllFiles,
+        })
   } catch (error) {
     console.error("Error reading directory:", error)
     return NextResponse.error()
   }
 
-  async function getAllFiels(folders: string[]) {
+  function filterFile(files: any[], folder: string, fileName: string) {
+    let result = []
+
+    const filterFolder = files.find((file) => {
+      return file.folder === folder
+    })
+    const filerFile = filterFolder.files?.find((file: any) => {
+      return file.fileName.replace(".html", "") === fileName
+    })
+    result = filerFile
+    return result
+  }
+
+  function filterFolders(files: string[], folder: string) {
+    return folder ? files.filter((file) => file === folder) : files
+  }
+  async function getAllFiles(folders: string[]) {
     const fileResults = await Promise.all(
       folders.map(async (file) => {
         const fileDir = path.resolve(dir, file)

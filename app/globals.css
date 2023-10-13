@@ -109,10 +109,31 @@
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
+.card-animation {
+  animation: crescendo 2s alternate infinite ease-in;
+}
 
 /* Do an horizontal flip when you move the mouse over the flip box container */
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
+}
+
+@keyframes crescendo {
+  0% {
+    @apply shadow-blue-600/60;
+  }
+  60% {
+    @apply shadow-blue-600/70;
+  }
+  80% {
+    @apply shadow-blue-600/80;
+  }
+  90% {
+    @apply shadow-blue-600/90;
+  }
+  100% {
+    @apply shadow-blue-600/100;
+  }
 }
 
 /* Position the front and back side */

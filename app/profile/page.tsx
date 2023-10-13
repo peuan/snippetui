@@ -40,7 +40,7 @@ export default function Profile() {
     <>
       {isLoading && <Loading />}
       {session && (
-        <div className="mt-8 flex flex-col items-center ">
+        <div className="mt-8 flex flex-col items-center pt-20 pb-16">
           <div className="text-3xl mb-8 uppercase">Profile</div>
           <div className="flex items-center  w-full justify-center">
             <div className="lg:w-[30vw] w-full px-4">
