@@ -4,11 +4,10 @@ import Comment from "@/components/Comment"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
 import Card from "@/components/BattleCard"
 import { useGetBattleByIdQuery } from "@/redux/services/battleApi"
+import { useGetContributorsQuery } from "@/redux/services/githubApi"
 
 export default function Discussions() {
   const pathname = usePathname()
-  const params = useSearchParams()
-
   const path = pathname.split("/discussions").filter(Boolean).join("")
   const [folder, file] = path?.replace("/battle", "").split("/").filter(Boolean)
 
@@ -17,7 +16,13 @@ export default function Discussions() {
     { skip: !folder || !file }
   )
 
-  console.log(data)
+  const {
+    isLoading: isLoadingContributors,
+    isFetching: isFetchingContributors,
+    data: dataContributors,
+    error: errorContributors,
+  } = useGetContributorsQuery()
+
   return (
     <>
       <div className="mt-8 flex flex-col items-center pt-20 pb-16">
@@ -26,7 +31,12 @@ export default function Discussions() {
           {path && data && (
             <>
               <div className="w-[400px] lg:scale-100 scale-75">
-                <Card folder={folder} file={data} />
+                <Card
+                  folder={folder}
+                  file={data}
+                  contributors={dataContributors?.contributors}
+                  rank={data.rank}
+                />
               </div>
               <div className="lg:w-[60%] px-10 w-full p-4 rounded-lg shadow-md mb-2 dark:bg-slate-800">
                 <Comment path={path} />

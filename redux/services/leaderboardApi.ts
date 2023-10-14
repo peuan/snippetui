@@ -8,8 +8,8 @@ export const leaderboardApi = createApi({
     baseUrl: "/api/",
   }),
   endpoints: (builder) => ({
-    getLeaderboard: builder.query<ILeaderboard, { path: string }>({
-      query: ({ path }) => path,
+    getLeaderboard: builder.query<ILeaderboard, void>({
+      query: () => "leaderboard",
     }),
   }),
 })

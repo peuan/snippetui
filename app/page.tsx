@@ -35,6 +35,7 @@ import { useGetBattlesQuery } from "@/redux/services/battleApi"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Sorting } from "@/types/sorting.enum"
+import { useGetContributorsQuery } from "@/redux/services/githubApi"
 
 // items per page
 const ITEMS_PER_PAGE = 3
@@ -62,6 +63,14 @@ export default function Home() {
     { pageNumber: pageNumber, sorting: sorting, search: searchValue },
     { skip: currentPage !== "BATTLE" }
   )
+
+  const {
+    isLoading: isLoadingContributors,
+    isFetching: isFetchingContributors,
+    data: dataContributors,
+    error: errorContributors,
+  } = useGetContributorsQuery()
+
   const dispatch = useAppDispatch()
   const createQueryString = useCallback(
     (
@@ -222,7 +231,7 @@ export default function Home() {
   return (
     <>
       <div>
-        {battleLoading && <Loading />}
+        {(battleLoading || isLoadingContributors) && <Loading />}
         <ScrollToTop />
         <div className="pt-20 pb-16">
           <div className="flex flex-col justify-center items-center mt-2">
@@ -301,11 +310,14 @@ export default function Home() {
                 </div>
                 <IoAnalyticsSharp className="text-2xl text-green-400" />
               </div>
-              <Battle battleResults={battleResults} />
+              <Battle
+                battleResults={battleResults}
+                contributors={dataContributors}
+              />
             </div>
           </div>
 
-          {!battleLoading && (
+          {!battleLoading && !isLoadingContributors && (
             <div className="invisible lg:visible flex justify-center items-center mt-10">
               <Button
                 className={clsx(

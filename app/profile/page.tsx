@@ -1,9 +1,8 @@
 "use client"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { BiMedal } from "react-icons/bi"
 import { AiOutlineMail, AiOutlineGithub } from "react-icons/ai"
 import { BsCode } from "react-icons/bs"
-import { useGetLeaderboardQuery } from "@/redux/services/leaderboardApi"
 import Loading from "@/components/Loading"
 import Image from "next/image"
 import { useSession } from "next-auth/react"
@@ -13,11 +12,14 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false)
   const [profile, setProfile] = useState<any>()
 
-  const getGithubProfile = (profile: any) => {
-    return profile.find((p: any) => p.login === session?.user?.name)
-  }
+  const getGithubProfile = useCallback(
+    (profile: any) => {
+      return profile.find((p: any) => p.login === session?.user?.name)
+    },
+    [session]
+  )
 
-  const getContributions = async () => {
+  const getContributions = useCallback(async () => {
     setIsLoading(true)
     try {
       const response = await fetch(
@@ -31,11 +33,11 @@ export default function Profile() {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [getGithubProfile])
 
   useEffect(() => {
     getContributions()
-  }, [session])
+  }, [getContributions])
   return (
     <>
       {isLoading && <Loading />}

@@ -1,3 +1,31 @@
+# What is the Snippet UI?
+
+We are developers who aim to enhance our CSS skills through practice and challenges on the https://cssbattle.dev website. We have created this platform to record and track our progress.
+
+# How to Join Us?
+
+Step 1: Add your name to the contributors' configuration file following this pattern:
+
+```
+config/contributors.ts
+{
+  "name": "[Name of the file (you can refer to examples from public/battle/[battle level]/[name]_solution.html)]",
+  "githubName": "[Your GitHub username]"
+}
+```
+
+Step 2: Visit our website at https://css-battle-eta.vercel.app or https://cssbattle.dev and choose the battle you want to participate in.
+
+Step 3: After completing the challenge, place your solution file in the folder corresponding to the battle level you played. For example, if you played battle level 1, your file should be located here:
+
+```
+public/battle/1/[name]_solution.html
+```
+
+(Note: Replace [name] with the file name you used in the contributor file, not your GitHub username.)
+
+Step 4: Create a pull request (PR) and enjoy the fun!
+
 # Integrate with ChatGPT
 
 ![alt text](/doc-images/chatgpt-popup-apikey.png)

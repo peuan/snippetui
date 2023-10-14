@@ -50,7 +50,7 @@ export async function GET(
           (v) => !v.endsWith(".yml")
         )
         const filesWithCount = await Promise.all(
-          fileListsFilterOutYaml.map(async (fileName) => {
+          fileListsFilterOutYaml.map(async (fileName, index) => {
             const filePath = path.resolve(fileDir, fileName)
             const fileData = await readFile(filePath, "utf-8")
 
@@ -84,22 +84,15 @@ export async function GET(
             }
           })
         )
-        filesWithCount.sort((a, b) => {
-          if (
-            a.status.includes("incomplete") &&
-            !b.status.includes("incomplete")
-          ) {
-            return 1
-          } else if (
-            !a.status.includes("incomplete") &&
-            b.status.includes("incomplete")
-          ) {
-            return -1
-          } else {
-            return a.characterCount - b.characterCount
+
+        const filesSorting = sortingFile(filesWithCount)
+        const mapFileSorting = filesSorting.map((file, index) => {
+          return {
+            ...file,
+            rank: index + 1,
           }
         })
-        return { folder: file, files: filesWithCount }
+        return { folder: file, files: mapFileSorting }
       })
     )
     fileResults.sort((a, b) =>
@@ -236,5 +229,20 @@ export async function GET(
     } catch (error) {
       return false
     }
+  }
+
+  function sortingFile(filesWithCount: any[]) {
+    return filesWithCount.sort((a, b) => {
+      if (a.status.includes("incomplete") && !b.status.includes("incomplete")) {
+        return 1
+      } else if (
+        !a.status.includes("incomplete") &&
+        b.status.includes("incomplete")
+      ) {
+        return -1
+      } else {
+        return a.characterCount - b.characterCount
+      }
+    })
   }
 }

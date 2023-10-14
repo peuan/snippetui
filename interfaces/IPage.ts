@@ -1,5 +1,5 @@
 interface IPages {
-  page: "BATTLE" | "SHOWCASE"
+  page: "BATTLE"
   pageNumber: number
 }
 

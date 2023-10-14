@@ -6,7 +6,6 @@ import {
   isRejectedWithValue,
 } from "@reduxjs/toolkit"
 import battleReducer from "@/redux/features/battleSlice"
-import showCaseReducer from "@/redux/features/showCaseSlice"
 import playgroundReducer from "@/redux/features/playgroundSlice"
 import { setToast } from "@/redux/features/toastSlice"
 import chatGPTReducer from "@/redux/features/chatGPTSlice"
@@ -15,14 +14,15 @@ import themeReducer from "@/redux/features/themeSlice"
 import pageReducer from "@/redux/features/pageSlice"
 import loadingReducer from "@/redux/features/loadingSlice"
 import leaderboardReducer from "@/redux/features/leaderboardSlice"
+import githubReducer from "@/redux/features/githubSlice"
 
 import { battleApi } from "@/redux/services/battleApi"
-import { showCaseApi } from "@/redux/services/showCaseApi"
 import { playgroundApi } from "@/redux/services/playgroundApi"
 import { setupListeners } from "@reduxjs/toolkit/dist/query"
 import { chatGPTApi } from "@/redux/services/chatGPTApi"
 import { kataApi } from "@/redux/services/kataApi"
 import { leaderboardApi } from "./services/leaderboardApi"
+import { githubApi } from "./services/githubApi"
 
 export const rtkQueryErrorLogger: Middleware =
   (api: MiddlewareAPI) => (next) => (action) => {
@@ -55,29 +55,29 @@ export const store = configureStore({
   reducer: {
     battleReducer,
     leaderboardReducer,
-    showCaseReducer,
     playgroundReducer,
     chatGPTReducer,
     toastReducer,
     themeReducer,
     pageReducer,
     loadingReducer,
+    githubReducer,
     [battleApi.reducerPath]: battleApi.reducer,
     [leaderboardApi.reducerPath]: leaderboardApi.reducer,
-    [showCaseApi.reducerPath]: showCaseApi.reducer,
     [playgroundApi.reducerPath]: playgroundApi.reducer,
     [chatGPTApi.reducerPath]: chatGPTApi.reducer,
     [kataApi.reducerPath]: kataApi.reducer,
+    [githubApi.reducerPath]: githubApi.reducer,
   },
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat(
       battleApi.middleware,
       leaderboardApi.middleware,
-      showCaseApi.middleware,
       playgroundApi.middleware,
       chatGPTApi.middleware,
-      kataApi.middleware
+      kataApi.middleware,
+      githubApi.middleware
     ),
   enhancers: [middlewareEnhancer],
 })
