@@ -1,41 +1,49 @@
 "use client"
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { BiMedal } from "react-icons/bi"
 import { AiOutlineMail, AiOutlineGithub } from "react-icons/ai"
 import { BsCode } from "react-icons/bs"
-import { useGetLeaderboardQuery } from "@/redux/services/leaderboardApi"
 import Loading from "@/components/Loading"
 import Image from "next/image"
 import { useSession } from "next-auth/react"
+import { useGetContributorsQuery } from "@/redux/services/githubApi"
 
 export default function Profile() {
   const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(false)
   const [profile, setProfile] = useState<any>()
 
-  const getGithubProfile = (profile: any) => {
-    return profile.find((p: any) => p.login === session?.user?.name)
-  }
+  const {
+    isLoading: isLoadingContributors,
+    isFetching: isFetchingContributors,
+    data: dataContributors,
+    error: errorContributors,
+  } = useGetContributorsQuery()
 
-  const getContributions = async () => {
-    setIsLoading(true)
-    try {
-      const response = await fetch(
-        "https://api.github.com/repos/peuan/snippetui/contributors"
-      )
-      if (response.ok) {
-        const data = await response.json()
-        const profile = getGithubProfile(data)
-        setProfile(profile)
-      }
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const getGithubProfile = useCallback(
+    (profile: any) => {
+      return profile.find((p: any) => p.login === session?.user?.name)
+    },
+    [session?.user?.name]
+  )
 
   useEffect(() => {
-    getContributions()
-  }, [session])
+    if (status === "loading" || isLoadingContributors) {
+      setIsLoading(true)
+    } else {
+      setIsLoading(false)
+    }
+    if (session && !isLoadingContributors) {
+      const profile = getGithubProfile(dataContributors?.contributors)
+      setProfile(profile)
+    }
+  }, [
+    dataContributors,
+    getGithubProfile,
+    isLoadingContributors,
+    session,
+    status,
+  ])
   return (
     <>
       {isLoading && <Loading />}

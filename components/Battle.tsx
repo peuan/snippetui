@@ -3,8 +3,15 @@ import { BiPlay } from "react-icons/bi"
 import { CSSBATTLE_URL } from "@/config"
 import { IBattleResult } from "@/interfaces/IBattle"
 import Card from "@/components/BattleCard"
+import { IContributor } from "@/interfaces/IContributor"
 
-const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
+const Battle = ({
+  battleResults,
+  contributors,
+}: {
+  battleResults: IBattleResult
+  contributors?: IContributor
+}) => {
   const handleClickToPlay = (level: string) => {
     window.open(`${CSSBATTLE_URL}/play/${level}`, level)
   }
@@ -36,7 +43,8 @@ const Battle = ({ battleResults }: { battleResults: IBattleResult }) => {
                 key={index}
                 folder={folder.folder}
                 file={file}
-                index={index}
+                rank={file.rank}
+                contributors={contributors?.contributors}
               />
             ))}
           </div>

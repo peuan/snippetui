@@ -4,6 +4,7 @@ interface IFile {
   status: string
   description?: string
   color?: "default" | "destructive" | "ghost" | "link" | "outline" | "secondary"
+  rank: number
 }
 interface IBattle {
   folder: string

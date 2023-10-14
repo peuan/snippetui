@@ -3,7 +3,7 @@ import { IFile } from "@/interfaces/IBattle"
 import Iframe from "react-iframe"
 import { GITHUB_URL } from "@/config"
 
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { BiCode, BiInfoCircle, BiLinkExternal, BiMedal } from "react-icons/bi"
 import { useState } from "react"
 import clsx from "clsx"
@@ -19,37 +19,36 @@ import {
 } from "@/components/ui/dialog"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ReloadIcon } from "@radix-ui/react-icons"
+import { GitHubUser } from "@/interfaces/IContributor"
+import { contributors as githubContributors } from "@/config/contributors"
 
 const Card = ({
   folder,
   file,
-  index,
+  rank,
+  contributors,
 }: {
   folder: string
   file: IFile
-  index?: number
+  rank: number
+  contributors?: GitHubUser[]
 }) => {
   const [isPlaygroundLoading, setIsPlaygroundLoading] = useState(false)
   const [isDiscussionsLoading, setIsDiscussionsLoading] = useState(false)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const pathname = usePathname()
 
   const router = useRouter()
 
-  const autherName = file.fileName.split("_")[0]
+  const authorName = file.fileName.split("_")[0]
 
-  const getAvatar = (name: string) => {
-    switch (name) {
-      case "niaw":
-        return "/niaw.png"
-      case "first":
-        return "/first.png"
-      case "chok":
-        return "/chok.png"
-      case "ake":
-        return "/ake.png"
-      default:
-        break
-    }
+  const getGitDetailByFileName = (name: string) => {
+    const githubName = contributors?.find(
+      (contributor: GitHubUser) =>
+        contributor.login ===
+        githubContributors.find((user) => user.name === name)?.githubName
+    )
+    return githubName
   }
 
   const handleClickToCode = (folder: string, file: string) => {
@@ -65,12 +64,13 @@ const Card = ({
   }
 
   const handleClickToDiscussions = (folder: string, file: string) => {
-    setIsDiscussionsLoading(true)
+    if (!pathname?.includes("discussions")) {
+      setIsDiscussionsLoading(true)
 
-    let fileName = file.split(".")[0]
+      let fileName = file.split(".")[0]
 
-    router.push(`/discussions/battle/${folder}/${fileName}`)
-    setIsDiscussionsLoading(false)
+      router.push(`/discussions/battle/${folder}/${fileName}`)
+    }
   }
 
   //handle dialog for display description
@@ -83,16 +83,16 @@ const Card = ({
   }
 
   return (
-    <div className=" overflow-hidden bg-yellow-200 dark:bg-slate-900 box-content mobile-scale rounded-[30px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg card-animation">
+    <div className=" overflow-hidden bg-yellow-200 dark:bg-slate-900 box-content mobile-scale rounded-[15px] border-[1px] hover:border-yellow-400 active:border-yellow-400 focus:outline-none focus:ring focus:ring-blue-bg-yellow-400 shadow-lg card-animation">
       <div className="flip-card overflow-hidden ">
         <div className="flip-card-inner flex justify-center items-center lg:scale-100">
           <Iframe
             title={file.fileName}
             overflow="hidden"
-            className="flip-card-front rounded-[30px]"
+            className="flip-card-front"
             url={`/battle/${folder}/${file.fileName}`}
           />
-          <div className="flip-card-back rounded-[30px]">
+          <div className="flip-card-back">
             <Iframe
               title={file.fileName}
               overflow="hidden"
@@ -107,14 +107,18 @@ const Card = ({
         <div className="flex justify-center mb-2">
           <div className="rounded-full bg-yellow-300 dark:bg-slate-800  flex items-center px-2 z-10">
             <Avatar className="ml-[-8px]">
-              <AvatarImage src={getAvatar(autherName)!} />
+              <AvatarImage
+                src={getGitDetailByFileName(authorName)?.avatar_url}
+              />
               <AvatarFallback>
-                {getAvatar(autherName) ? "" : autherName[0].toUpperCase()}
+                {getGitDetailByFileName(authorName)?.avatar_url
+                  ? ""
+                  : authorName[0].toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <h3 className="dark:text-white text-slate-800 font-bold  py-1 px-4 text-md ">
+            <h3 className="dark:text-white text-slate-800 font-bold  py-1 px-4 text-xs ">
               {" "}
-              {autherName}
+              {getGitDetailByFileName(authorName)?.login}
             </h3>
             <div className="flex gap-4">
               <button
@@ -139,7 +143,7 @@ const Card = ({
                 title="Open Discussions"
               >
                 {!isDiscussionsLoading && (
-                  <GoCommentDiscussion className="dark:text-white text-slate-800 hover:text-white" />
+                  <GoCommentDiscussion className="dark:text-white text-slate-800 hover:text-white " />
                 )}
                 {isDiscussionsLoading && (
                   <ReloadIcon className="dark:text-white text-slate-800 hover:text-white h-4 w-4 animate-spin" />
@@ -149,15 +153,20 @@ const Card = ({
           </div>
         </div>
         <div className="flex text-xs justify-center items-center dark:text-white text-slate-800 mb-2">
-          {index! <= 2 && (
+          {rank <= 3 && (
             <BiMedal
               className={clsx(
                 "w-7 h-7",
-                index === 0 && "text-yellow-500",
-                index === 1 && "text-slate-300",
-                index === 2 && "text-amber-600"
+                rank === 1 && "text-yellow-500",
+                rank === 2 && "text-slate-300",
+                rank === 3 && "text-amber-600"
               )}
             />
+          )}
+          {rank > 3 && (
+            <div className="w-5 h-5 rounded-full bg-slate-400 flex justify-center items-center dark:text-white text-slate-800 mr-2">
+              {rank}
+            </div>
           )}{" "}
           {`( ${file.characterCount.toLocaleString("en-US")} characters ) `}
           {file.status === "incomplete" && (
