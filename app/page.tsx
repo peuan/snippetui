@@ -235,7 +235,7 @@ export default function Home() {
         <ScrollToTop />
         <div className="pt-20 pb-16">
           <div className="flex flex-col justify-center items-center mt-2">
-            <h1 className="flex items-center text-[50px] font-bold text-center px-2 py-2 text-yellow-400">
+            <h1 className="flex items-center text-[24px] font-bold text-center px-2 py-2 text-yellow-400">
               <AiFillSound
                 className="text-[20px] hover:cursor-pointer text-yellow-400 "
                 onClick={() => audioRef.current.play()}
@@ -246,17 +246,17 @@ export default function Home() {
                 <audio ref={audioRef} src={"/snippetUI.mp3"} />
               </div>
             </h1>
-            <h6 className="text-[24px] font-light text-center px-2 pb-4 text-yellow-400">
+            <h6 className="text-[18px] font-light text-center px-2 pb-4 text-yellow-400">
               “Begin Your Coding Journey Here”
             </h6>
           </div>
           <div className="flex-col justify-center items-center gap-4">
-            <div className="flex container justify-center items-center gap-4  mt-4">
+            <div className="flex container justify-center items-center gap-4">
               <div className=" flex">
                 <Button
                   onClick={() => handleOnSorting(Sorting.ASC)}
                   className={clsx(
-                    `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs  rounded-r-none bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800`,
+                    `rounded-full h-[24px!important] text-slate-800 dark:text-white hover:text-white text-xs  rounded-r-none bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800`,
                     sorting === Sorting.ASC &&
                       "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
                   )}
@@ -268,7 +268,7 @@ export default function Home() {
                 <Button
                   onClick={() => handleOnSorting(Sorting.DESC)}
                   className={clsx(
-                    `rounded-full h-[30px!important] text-slate-800 dark:text-white hover:text-white text-xs bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800  rounded-l-none`,
+                    `rounded-full h-[24px!important] text-slate-800 dark:text-white hover:text-white text-xs bg-slate-400 hover:bg-slate-400  dark:bg-blue-700  dark:hover:bg-blue-800  rounded-l-none`,
                     sorting === Sorting.DESC &&
                       "bg-slate-300 hover:bg-slate-400 dark:bg-blue-500  hover:dark:bg-blue-600"
                   )}
@@ -300,15 +300,15 @@ export default function Home() {
           <div className="flex justify-center ">
             <div className="flex flex-col lg:container ">
               <div className="flex gap-2  px-2 lg:mx-0 mx-8 mt-4 items-center">
-                <div className="font-bold text-xl text-yellow-400">
+                <div className="font-bold text-lg text-yellow-400">
                   {battleData?.totalItems?.toLocaleString("en-US")} Battles{" "}
                 </div>
-                <GiMagicAxe className="text-2xl text-green-500" />
-                <div className="font-bold text-xl text-yellow-400">
+                <GiMagicAxe className="text-1xl text-green-500" />
+                <div className="font-bold text-lg text-yellow-400">
                   {battleData?.allFiles?.length.toLocaleString("en-US")}{" "}
                   Solutions{" "}
                 </div>
-                <IoAnalyticsSharp className="text-2xl text-green-400" />
+                <IoAnalyticsSharp className="text-1xl text-green-400" />
               </div>
               <Battle
                 battleResults={battleResults}
