@@ -201,37 +201,35 @@ const Editor = ({ code, isLoading }: IPlayground) => {
 
   // handle download image
   const handleDownloadImage = async () => {
-    setIsDownload(true)
-    try {
-      const response = await fetch("/api/convert-to-image", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ htmlContent: editorCode }),
-      })
-      if (response.ok) {
-        const arrayBuffer = await response.arrayBuffer()
-        const base64String = btoa(
-          new Uint8Array(arrayBuffer).reduce(
-            (data, byte) => data + String.fromCharCode(byte),
-            ""
-          )
-        )
-
-        const imagePathHeader = response.headers.get("X-Image-Path")
-        if (imagePathHeader) {
-          const imgPath = imagePathHeader.split("/").pop()
-          if (imgPath) {
-            setImagePath(imagePath)
-          }
-        }
-
-        setDownloadUrl(`data:image/png;base64,${base64String}`)
-      }
-    } finally {
-      setIsDownload(false)
-    }
+    // setIsDownload(true)
+    // try {
+    //   const response = await fetch("/api/convert-to-image", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ htmlContent: editorCode }),
+    //   })
+    //   if (response.ok) {
+    //     const arrayBuffer = await response.arrayBuffer()
+    //     const base64String = btoa(
+    //       new Uint8Array(arrayBuffer).reduce(
+    //         (data, byte) => data + String.fromCharCode(byte),
+    //         ""
+    //       )
+    //     )
+    //     const imagePathHeader = response.headers.get("X-Image-Path")
+    //     if (imagePathHeader) {
+    //       const imgPath = imagePathHeader.split("/").pop()
+    //       if (imgPath) {
+    //         setImagePath(imagePath)
+    //       }
+    //     }
+    //     setDownloadUrl(`data:image/png;base64,${base64String}`)
+    //   }
+    // } finally {
+    //   setIsDownload(false)
+    // }
   }
 
   const handleSelectLanguage = (event: ITemplate) => {

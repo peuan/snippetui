@@ -8,6 +8,9 @@ import { Providers } from "@/redux/provider"
 import Toast from "@/components/Toast"
 import { ThemeProvider } from "@/components/ThemeProvider"
 import NextAuthProviders from "./(auth)/login/NextAuthProvider"
+import { AiOutlineGithub } from "react-icons/ai"
+import { GITHUB_URL } from "@/config"
+import Footer from "@/components/Footer"
 
 const kanit = Kanit({ subsets: ["thai"], weight: "600" })
 
@@ -47,17 +50,12 @@ export default function RootLayout({
           <Providers>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <Toast />
-              <div className="relative min-h-[90vh]">
+              <div className="relative min-h-screen">
                 <div>
                   <Nav />
                 </div>
                 <div className="">{children}</div>
-                <section className="text-center absolute bottom-0 mb-2 w-full">
-                  Build with ❤️ by{" "}
-                  <a href="https://github.com/niawjunior" target="_blank">
-                    Niaw{" "}
-                  </a>
-                </section>
+                <Footer />
               </div>
             </ThemeProvider>
           </Providers>
