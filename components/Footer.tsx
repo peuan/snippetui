@@ -16,7 +16,7 @@ const Footer = () => {
         </a>
       </div>
       <div className="ml-auto">
-        <button onClick={() => window.open(GITHUB_URL)}>
+        <button onClick={() => window.open(GITHUB_URL)} className="mt-2">
           <AiOutlineGithub />
         </button>
       </div>
