@@ -6,38 +6,44 @@ import { BsCode } from "react-icons/bs"
 import Loading from "@/components/Loading"
 import Image from "next/image"
 import { useSession } from "next-auth/react"
+import { useGetContributorsQuery } from "@/redux/services/githubApi"
 
 export default function Profile() {
   const { data: session, status } = useSession()
   const [isLoading, setIsLoading] = useState(false)
   const [profile, setProfile] = useState<any>()
 
+  const {
+    isLoading: isLoadingContributors,
+    isFetching: isFetchingContributors,
+    data: dataContributors,
+    error: errorContributors,
+  } = useGetContributorsQuery()
+
   const getGithubProfile = useCallback(
     (profile: any) => {
       return profile.find((p: any) => p.login === session?.user?.name)
     },
-    [session]
+    [session?.user?.name]
   )
 
-  const getContributions = useCallback(async () => {
-    setIsLoading(true)
-    try {
-      const response = await fetch(
-        "https://api.github.com/repos/peuan/snippetui/contributors"
-      )
-      if (response.ok) {
-        const data = await response.json()
-        const profile = getGithubProfile(data)
-        setProfile(profile)
-      }
-    } finally {
+  useEffect(() => {
+    if (status === "loading" || isLoadingContributors) {
+      setIsLoading(true)
+    } else {
       setIsLoading(false)
     }
-  }, [getGithubProfile])
-
-  useEffect(() => {
-    getContributions()
-  }, [getContributions])
+    if (session && !isLoadingContributors) {
+      const profile = getGithubProfile(dataContributors?.contributors)
+      setProfile(profile)
+    }
+  }, [
+    dataContributors,
+    getGithubProfile,
+    isLoadingContributors,
+    session,
+    status,
+  ])
   return (
     <>
       {isLoading && <Loading />}
