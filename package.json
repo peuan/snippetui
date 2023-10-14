@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npx playwright install",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install"
@@ -61,7 +61,6 @@
     "next-themes": "^0.2.1",
     "octokit": "^3.1.1",
     "openai": "^3.3.0",
-    "playwright": "^1.36.1",
     "postcss": "8.4.25",
     "react": "latest",
     "react-dom": "latest",
@@ -87,6 +86,7 @@
     "@types/html-validator": "^5.0.3",
     "@types/js-beautify": "^1.13.3",
     "@types/js-yaml": "^4.0.5",
-    "@types/lodash.debounce": "^4.0.7"
+    "@types/lodash.debounce": "^4.0.7",
+    "playwright": "^1.39.0"
   }
 }
