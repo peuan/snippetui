@@ -5,18 +5,18 @@ export const contributors = [
   },
   {
     name: "first",
-    githubName: "Thanachon",
+    githubName: "thasup",
   },
   {
     name: "chok",
-    githubName: "rmuti56",
+    githubName: "chok-watcharathep",
   },
   {
     name: "ake",
     githubName: "akegvd",
   },
   {
-    name: "Neung",
+    name: "neung",
     githubName: "apirom9",
   },
 ]
