@@ -9,7 +9,7 @@ export const contributors = [
   },
   {
     name: "chok",
-    githubName: "chok-watcharathep",
+    githubName: "rmuti56",
   },
   {
     name: "ake",
