@@ -13,6 +13,7 @@ export default function Profile() {
   const [isLoading, setIsLoading] = useState(false)
   const [profile, setProfile] = useState<any>()
 
+  console.log(session)
   const {
     isLoading: isLoadingContributors,
     isFetching: isFetchingContributors,

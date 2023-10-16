@@ -5,7 +5,7 @@ export const contributors = [
   },
   {
     name: "first",
-    githubName: "thasup",
+    githubName: "Thanachon",
   },
   {
     name: "chok",
@@ -16,7 +16,7 @@ export const contributors = [
     githubName: "akegvd",
   },
   {
-    name: "neung",
+    name: "Neung",
     githubName: "apirom9",
   },
 ]
