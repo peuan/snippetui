@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="item right"></div>
+  <div class="item left"></div>
+  <div class="item rec"></div>
+</div>
+<style>
+  body {
+    background: #AA445F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    position: relative;
+    width: 250px;
+    height: 200px;
+    background: #F7EC7D;
+    border-radius: 100px;
+  }
+  .item {
+    position: absolute;
+    height: 200px;
+  }
+  .right {
+    right: 0;
+    width: 200px;
+    background: #E38F66;
+    border-radius: 50%;
+  }
+  .left {
+    left: 50px;
+    width: 100px;
+    background: #F7EC7D;
+    border-radius: 50% 0 0 50%;
+    z-index: 2;
+  }
+  .rec {
+    width: 50px;
+    background: #AA445F;
+    position: absolute;
+    left: calc(50% - 25px);
+    z-index: 3;
+  }
+</style>
