@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="left">
+    <div class="circle"></div>
+  </div>
+  <div class="right">
+    <div class="circle"></div>
+  </div>
+</div>
+<style>
+  body {
+    background: #aa445f;
+    display: grid;
+    place-content: center;
+  }
+  .container {
+    width: 250px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  .circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+  }
+  .left > .circle {
+    background: #f7ec7d;
+  }
+  .right {
+    right: 0px;
+  }
+  .right > .circle {
+    background: #e38f66;
+    right: 0;
+  }
+  .right,
+  .left {
+    width: 100px;
+    height: 200px;
+    position: absolute;
+    overflow: hidden;
+  }
+</style>
