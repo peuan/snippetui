@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="half-1">
+    <div class="circle"></div>
+  </div>
+  <div class="half-2"></div>
+</div>
+<style>
+  body {
+    background: #1A4341;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    position: relative;
+    width: 175px;
+    height: 175px;
+    margin-top: -25px;
+    margin-left: 25px;
+  }
+  .half-1 {
+    position: absolute;
+    bottom: 0;
+    width: 75px;
+    height: 150px;
+    background: #998235;
+    border-radius: 75px 0 0 75px;
+  }
+  .circle {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 30px;
+    height: 30px;
+    background: #0B2429;
+    border-radius: 50%;
+  }
+  .half-2 {
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: #F3AC3C;
+    border-radius: 0 100px 0 0;
+  }
+</style>
