@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="half">
+    <div class="circle"></div>
+  </div>
+  <div class="quarter"></div>
+</div>
+<style>
+  body {
+    background: #1a4341;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .half {
+    margin-left: 25px;
+    border-radius: 75px 0 0 75px;
+    border-top: 150px solid #998235;
+    width: 75px;
+  }
+
+  .circle {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background: #0b2429;
+    border-radius: 50%;
+    top: 30;
+    left: 55;
+  }
+  .quarter {
+    border-radius: 0 100px 0 0;
+    border-top: 100px solid #f3ac3c;
+    width: 100px;
+    margin-top: -25px;
+  }
+</style>
