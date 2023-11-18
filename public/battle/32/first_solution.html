@@ -1,0 +1,47 @@
+<div class="box">
+  <div class="green-1"></div>
+  <div class="orange-1"></div>
+  <div class="banana"></div>
+  <div class="orange-2"></div>
+  <div class="green-2"></div>
+</div>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .box {
+    width: 200px;
+    height: 200px;
+    display: grid;
+    grid-template-columns: 1fr 50px 1fr;
+    grid-template-rows: 1fr 50px 1fr;
+    transform: rotate(45deg);
+  }
+  .green-1 {
+    grid-column: 2;
+    grid-row: 1;
+    background: #A3A368;
+  }
+  .green-2 {
+    grid-column: 2;
+    grid-row: 3;
+    background: #A3A368;
+  }
+  .orange-1 {
+    grid-column: 1;
+    grid-row: 2;
+    background: #F3AC3C;
+  }
+  .orange-2 {
+    grid-column: 3;
+    grid-row: 2;
+    background: #F3AC3C;
+  }
+  .banana {
+    grid-column: 2;
+    grid-row: 2;
+    background: #FBE18C;
+  }
+</style>
