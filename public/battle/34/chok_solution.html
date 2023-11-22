@@ -1,0 +1,33 @@
+<div class="box">
+  <div class="t"></div>
+  <div class="t t2"></div>
+  <div class="t t3"></div>
+</div>
+<style>
+  body {
+    background: #007065;
+    display: flex;
+  }
+  .box {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+  .t {
+    border-left: 125px solid transparent;
+    border-right: 125px solid transparent;
+    border-bottom: 100px solid #ffeecf;
+  }
+  .t2,
+  .t3 {
+    margin-top: -50px;
+  }
+  .t2 {
+    border-bottom-color: #f5c181;
+    z-index: -1;
+  }
+  .t3 {
+    border-bottom-color: #00a79d;
+    z-index: -2;
+  }
+</style>
