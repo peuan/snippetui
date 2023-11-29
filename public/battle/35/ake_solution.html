@@ -1,0 +1,34 @@
+<div></div>
+<style>
+  body {
+    background: #293462;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  /* ice cream */
+  div {
+    position: relative;
+    width: 100px;
+    height: 150px;
+    margin-bottom: 50px;
+    background: #FFF1C1;
+    border-radius: 50px 50px 20px 20px;
+  }
+
+  /* stick and shadow */
+  div::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 40px;
+    background: #FE5F55;
+    border-top: 10px solid #A64942;
+    border-radius: 0 0 10px 10px;
+  }
+</style>
