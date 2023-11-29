@@ -19,4 +19,8 @@ export const contributors = [
     name: "neung",
     githubName: "apirom9",
   },
+  {
+    name: "gun",
+    githubName: "pupongsin7",
+  },
 ]
