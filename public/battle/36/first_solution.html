@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="item down"></div>
+  <div class="item"></div>
+  <div class="item down"></div>
+  <div class="item"></div>
+  <div class="item down"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #1A4341;
+    display: grid;
+    place-content: center;
+    height: 100vh;
+  }
+  .container {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .item {
+    width: 50px;
+    height: 200px;
+    border-radius: 0 0 25px 25px;
+    background: #998235;
+  }
+  .item.down {
+    margin-top: calc(100vh - 200px);
+    transform: rotate(180deg);
+    background: #F3AC3C;
+  }
+</style>
