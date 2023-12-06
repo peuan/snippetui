@@ -1,0 +1,31 @@
+<div class="cont">
+  <div class="b1"></div>
+  <div class="b1 flip"></div>
+  <div class="b1"></div>
+  <div class="b1 flip"></div>
+  <div class="b1"></div>
+</div>
+<style>
+  body {
+    background-color: #1A4341;
+    margin: 0;
+  }
+  .b1.flip {
+    transform: rotate(180deg);
+    margin-top: 0;
+    background-color: #998235;
+  }
+  .cont {
+    margin: 0px 25px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .b1 {
+    margin-top: auto;
+    width: 50px;
+    height: 200px;
+    background: #F3AC3C;
+    border-radius: 100px 100px 0px 0px;
+  }
+</style>
