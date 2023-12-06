@@ -116,7 +116,7 @@ const Card = ({
                   : authorName[0].toUpperCase()}
               </AvatarFallback>
             </Avatar>
-            <h3 className="dark:text-white text-slate-800 font-bold  py-1 px-4 text-xs ">
+            <h3 className="dark:text-white text-slate-800 font-bold  py-1 px-4 text-xs w-[120px] break-words">
               {" "}
               {getGitDetailByFileName(authorName)?.login}
             </h3>
