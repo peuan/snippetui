@@ -1,9 +1,9 @@
-<div class="container">
-  <div class="item yellow"></div>
-  <div class="item green"></div>
-  <div class="item yellow"></div>
-  <div class="item green"></div>
-  <div class="item yellow"></div>
+<div class="items">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
 </div>
 <style>
   body {
@@ -12,26 +12,24 @@
     justify-content: center;
     margin: 0;
   }
-  .container {
+  .items {
     width: 350px;
-    height: 350px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     margin: auto;
   }
-  .item {
+  .items > div {
     width: 50px;
     height: 200px;
     border-radius: 30px 30px 0 0;
   }
-  .yellow {
+  .items > div:nth-child(odd) {
     background: #f3ac3c;
-    margin-top: 50px;
   }
-  .green {
+  .items > div:nth-child(even) {
     background: #998235;
     rotate: 180deg;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
   }
 </style>
