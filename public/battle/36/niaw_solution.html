@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="item bottom"></div>
-  <div class="item top"></div>
-  <div class="item bottom"></div>
-  <div class="item top"></div>
-  <div class="item bottom"></div>
+  <div class="item yellow"></div>
+  <div class="item green"></div>
+  <div class="item yellow"></div>
+  <div class="item green"></div>
+  <div class="item yellow"></div>
 </div>
 <style>
   body {
@@ -14,21 +14,24 @@
   }
   .container {
     width: 350px;
+    height: 350px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    margin: auto;
   }
   .item {
     width: 50px;
     height: 200px;
     border-radius: 30px 30px 0 0;
   }
-  .bottom {
+  .yellow {
     background: #f3ac3c;
+    margin-top: 50px;
   }
-  .top {
+  .green {
     background: #998235;
     rotate: 180deg;
-    margin-bottom: 100px;
+    margin-bottom: 150px;
   }
 </style>
