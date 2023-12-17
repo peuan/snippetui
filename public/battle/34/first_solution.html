@@ -1,0 +1,30 @@
+<div>
+  <div class="up"></div>
+  <div class="down"></div>
+</div>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #007065;
+  }
+  div {
+    border-left: 125px solid transparent;
+    border-right: 125px solid transparent;
+    border-bottom: 100px solid #F5C181;
+  }
+  .up, .down {
+    position: absolute;
+    left: 75px;
+  }
+  .up {
+    top: 50px;
+    border-bottom-color: #FFEECF;
+  }
+  .down {
+    bottom: 50px;
+    border-bottom-color: #00A79D;
+    z-index: -1;
+  }
+</style>
