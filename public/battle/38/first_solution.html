@@ -1,0 +1,45 @@
+<div class="container"> 
+  <div class="cream"></div>
+  <div class="red-lg-y"></div>
+  <div class="red-sm-y"></div>
+  <div class="red-lg-x"></div>
+  <div class="red-sm-x"></div>
+</div>
+<style>
+  body {
+    margin: 0;
+    background: #293462;
+  }
+  .container {
+    display: grid;
+    grid-template-rows: 150px 50px 100px;
+    grid-template-columns: 150px 50px 100px;
+  }
+  .cream {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+    background: #FFF1C1;
+  }
+  .red-lg-y,.red-lg-x {
+    background: #FE5F55;
+  }
+  .red-sm-y,.red-sm-x {
+    background: #A64942;
+  }
+  .red-lg-y {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .red-sm-y {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  .red-lg-x {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .red-sm-x {
+    grid-column: 2;
+    grid-row: 3;
+  }
+</style>
