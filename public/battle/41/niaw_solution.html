@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="magic"></div>
+  <div class="half left">
+    <div class="small s-left"></div>
+  </div>
+  <div class="half right">
+    <div class="small s-right"></div>
+  </div>
+  <div class="half h-bottom b-left"></div>
+  <div class="half h-bottom b-right"></div>
+</div>
+<style>
+  body {
+    background: #293462;
+    display: flex;
+  }
+  .half {
+    width: 90px;
+    height: 90px;
+    background: #fe5f55;
+    position: absolute;
+    border-radius: 40px;
+  }
+  .left {
+    left: -40px;
+  }
+  .right {
+    right: -40;
+  }
+  .small {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #293462;
+    bottom: 0;
+    border-radius: 50%;
+  }
+  .s-left {
+    left: 55px;
+  }
+  .s-right {
+    right: 55px;
+  }
+  .container {
+    margin: auto;
+    width: 100px;
+    height: 140px;
+    background: #fe5f55;
+    position: relative;
+    overflow: hidden;
+  }
+  .h-bottom {
+    bottom: -50px;
+    background: #293462;
+  }
+  .b-left {
+    left: -40px;
+  }
+  .b-right {
+    right: -40px;
+  }
+  .magic {
+    width: 100px;
+    height: 50px;
+    background: #293462;
+    position: absolute;
+  }
+</style>
