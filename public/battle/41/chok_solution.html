@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="circle"></div>
+  <div class="circle r"></div>
+  <div class="half"></div>
+  <div class="half r"></div>
+  <div class="fill">
+    <div class="half blud"></div>
+    <div class="half r blud"></div>
+  </div>
+</div>
+<style>
+  body {
+    background: #293462;
+    display: flex;
+  }
+  .container {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100px;
+    height: 140px;
+  }
+  .half {
+    background: #fe5f55;
+    width: 50px;
+    height: 100px;
+    border-radius: 0 40px 0 0;
+  }
+  .r {
+    border-radius: 40px 0 0 0;
+  }
+  .blud {
+    z-index: 0;
+    background: #293462;
+  }
+  .fill {
+    background: #fe5f55;
+    display: flex;
+  }
+  .circle {
+    position: absolute;
+    background: #293462;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    top: 60px;
+    left: 15px;
+  }
+  .circle.r {
+    left: 55px;
+  }
+</style>
