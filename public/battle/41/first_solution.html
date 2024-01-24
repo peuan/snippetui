@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="box blue">
+    <div class="sq l pink"></div>
+    <div class="sq r pink"></div>
+    <div class="sq pink">
+      <div class="circle blue c1"></div>
+    </div>
+    <div class="sq pink">
+      <div class="circle blue c2"></div>
+    </div>
+  </div>
+  <div class="box pink">
+    <div class="sq l blue"></div>
+    <div class="sq r blue"></div>
+  </div>
+</div>
+<style>
+  body {
+    background: #293462;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    margin-top: 10px;
+  }
+  .sq {
+    width: 50px;
+    height: 50px;
+    position: relative;
+  }
+  .l {
+    border-radius: 0 40px 0 0;
+  }
+  .r {
+    border-radius: 40px 0 0 0;
+  }
+  .pink {
+    background: #FE5F55;
+  }
+  .blue {
+    background: #293462;
+  }
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100px;
+  }
+  .circle {
+    top: 10;
+    position: absolute;
+    border-radius: 50%;
+    width: 30px;
+    aspect-ratio: 1;
+  }
+  .c1 {
+    left: 15;
+  }
+  .c2 {
+    right: 15;
+  }
+</style>
