@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="hair"></div>
+  <div class="hair right"></div>
+  <div class="eye left"></div>
+  <div class="eye right"></div>
+  <div class="mouth"></div>
+</div>
+<style>
+  body {
+    background: #293462;
+    display: flex;
+  }
+  .container {
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    background: #fe5f55;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .eye {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    background: #fff1c1;
+    bottom: 50px;
+  }
+  .eye.left {
+    left: 20px;
+  }
+  .eye.right {
+    right: 20;
+  }
+  .hair {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #fff1c1;
+    position: absolute;
+    top: -50px;
+  }
+  .hair.left {
+    left: 0;
+  }
+  .hair.right {
+    right: 0;
+  }
+  .mouth {
+    position: absolute;
+    width: 40px;
+    background: #fff1c1;
+    bottom: 20;
+    height: 10px;
+    border-radius: 5px;
+    left: 80px;
+  }
+</style>
