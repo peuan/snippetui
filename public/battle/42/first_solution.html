@@ -1,0 +1,56 @@
+<div class="head">
+  <div class="hair flex">
+    <div class="circle yellow"></div>
+    <div class="circle yellow"></div>
+  </div>
+  <div class="face flex">
+    <div class="circle eyes yellow"></div>
+    <div class="circle eyes yellow"></div>
+  </div>
+  <div class="mouth flex yellow"></div>
+</div>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #293462;
+  }
+  .yellow {
+    background: #FFF1C1;
+  }
+  .flex {
+    display: flex;
+    justify-content: center;
+  }
+  .head {
+    width: 200px;
+    height: 200px;
+    background: #FE5F55;
+    overflow: hidden;
+    border-radius: 50% 50% 50px 50px;
+  }
+  .circle {
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+  .hair {
+    margin-top: -50px;
+  }
+  .hair .circle {
+    width: 100px;
+  }
+  .face {
+    margin-top: 40px;
+  }
+  .eyes {
+    width: 60px;
+    margin: auto;
+  }
+  .mouth {
+    width: 40px;
+    height: 10px;
+    margin: 20px auto;
+    border-radius: 5px;
+  }
+</style>
