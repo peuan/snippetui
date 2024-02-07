@@ -1,4 +1,4 @@
-<div class="container">
+<div class="face">
   <div class="hair"></div>
   <div class="hair right"></div>
   <div class="eye left"></div>
@@ -10,15 +10,12 @@
     background: #293462;
     display: flex;
   }
-  .container {
+  .face {
     margin: auto;
     width: 200px;
     height: 200px;
     background: #fe5f55;
-    border-top-left-radius: 100px;
-    border-top-right-radius: 100px;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-radius: 100% 100% 50% 50%;
     position: relative;
     overflow: hidden;
   }
@@ -43,9 +40,6 @@
     background: #fff1c1;
     position: absolute;
     top: -50px;
-  }
-  .hair.left {
-    left: 0;
   }
   .hair.right {
     right: 0;
