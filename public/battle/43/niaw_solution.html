@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="circle right-top">
+    <div class="circle-top-magic"></div>
+  </div>
+  <div class="circle left-top">
+    <div class="circle-top-magic"></div>
+  </div>
+
+  <div class="center"></div>
+</div>
+<style>
+  body {
+    background: #6592cf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    position: relative;
+    width: 110px;
+    height: 250px;
+    overflow: hidden;
+    margin-top: -0px;
+  }
+  .center {
+    width: 30px;
+    height: 150px;
+    background: #243d83;
+    left: 40px;
+    bottom: 0px;
+    position: absolute;
+    z-index: 2;
+  }
+  .circle {
+    width: 100px;
+    height: 72px;
+    background: #6592cf;
+    border-radius: 50%;
+    border: 30px solid #243d83;
+    position: absolute;
+  }
+  .left-top {
+    top: -0px;
+    left: -90px;
+  }
+  .right-top {
+    top: -0px;
+    right: -90px;
+  }
+
+  .circle-top-magic {
+    width: 100px;
+    height: 100px;
+    background: #6592cf;
+    position: absolute;
+    bottom: -50;
+    left: 0px;
+  }
+</style>
