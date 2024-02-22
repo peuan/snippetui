@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="circle"></div>
+  <div class="circle right"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+</div>
+<style>
+  body {
+    background: #1a4341;
+    display: flex;
+  }
+
+  .container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .item {
+    height: 20px;
+    width: 150px;
+    background: #f3ac3c;
+  }
+
+  .circle {
+    position: absolute;
+    background: #1a4341;
+    height: 280px;
+    width: 250px;
+    border-radius: 50%;
+    left: -225px;
+  }
+  .right {
+    left: 125px;
+  }
+</style>
