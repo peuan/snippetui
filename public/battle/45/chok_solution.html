@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="square">
+    <div class="square small"></div>
+  </div>
+  <div class="bottom"></div>
+  <div class="pole"></div>
+</div>
+<style>
+  body {
+    background: #1a4341;
+    margin: 0;
+    display: flex;
+  }
+  div {
+    box-sizing: border-box;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 300px;
+    width: 270px;
+    gap: 30px;
+    position: relative;
+  }
+  .square {
+    display: flex;
+    justify-content: center;
+    height: 210px;
+    border: 30px solid #f3ac3c;
+    border-top-width: 0px;
+  }
+  .small {
+    width: 150px;
+    height: 150px;
+    border-color: #998235;
+  }
+  .pole {
+    width: 30px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background: #f3ac3c;
+  }
+  .bottom {
+    height: 30px;
+    background: #998235;
+  }
+</style>
