@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="up">
+    <div class="center"></div>
+  </div>
+  <div class="down"></div>
+</div>
+<div class="line"></div>
+<style>
+  body {
+    margin: 0;
+    display: flex;
+    background: #1A4341;
+  }
+  .container {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    width: 270px;
+    height: 300px;
+  }
+  .up {
+    height: 180px;
+    border: solid 30px #F3AC3C;
+    border-top-width: 0px;
+  }
+  .center {
+    margin: auto;
+    width: 90px;
+    height: 120px;
+    border: solid 30px #998235;
+    border-top-width: 0px;
+  }
+  .down {
+    height: 30px;
+    background: #998235;
+  }
+  .line {
+    width: 30px;
+    height: 300px;
+    background: #F3AC3C;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+  }
+</style>
