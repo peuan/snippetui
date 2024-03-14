@@ -1,6 +1,6 @@
 <div class="circle">
   <div class="mountain">
-    <div></div>
+    <div class="small"></div>
   </div>
 </div>
 <style>
@@ -17,21 +17,20 @@
     position: relative;
     overflow: hidden;
   }
-  .mountain {
-    width: 149px;
-    height: 152px;
+  .mountain,
+  .small {
+    width: 150px;
+    height: 150px;
     background: #fe5f55;
     position: absolute;
-    bottom: -42;
-    rotate: 45deg;
-    right: -15;
   }
-  .mountain > div {
-    width: 70px;
-    height: 35px;
-    background: #fe5f55;
-    bottom: -11px;
-    left: -30px;
-    position: absolute;
+  .mountain {
+    bottom: -40;
+    rotate: 45deg;
+    right: -16;
+  }
+  .small {
+    bottom: -129;
+    right: 29;
   }
 </style>
