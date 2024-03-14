@@ -1,0 +1,36 @@
+<div class="circle">
+  <div class="square"></div>
+  <div class="square big"></div>
+</div>
+<style>
+  body {
+    background: #293462;
+    display: flex;
+  }
+  .circle {
+    margin: auto;
+    display: flex;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #fff1c1;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    position: relative;
+  }
+  .square {
+    background: #fe5f55;
+    width: 60px;
+    aspect-ratio: 1;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 142;
+  }
+  .big {
+    transform: rotate(-45deg);
+    top: 123;
+    left: -12.5;
+    width: 307px;
+  }
+</style>
