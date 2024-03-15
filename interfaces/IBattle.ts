@@ -3,6 +3,7 @@ interface IFile {
   characterCount: number
   status: string
   description?: string
+  percentage?: string
   color?: "default" | "destructive" | "ghost" | "link" | "outline" | "secondary"
   rank: number
 }

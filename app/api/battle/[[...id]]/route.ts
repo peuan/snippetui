@@ -67,11 +67,13 @@ export async function GET(
 
             let status = "complete"
             let description = null
+            let percentage = null
             let color = "primary"
 
             if (yamlContent) {
               status = yamlContent.status || status
               description = yamlContent.description
+              percentage = yamlContent.percentage
               color = yamlContent.color || color
             }
 
@@ -79,6 +81,7 @@ export async function GET(
               fileName,
               characterCount: fileData.trim().length,
               description: description,
+              percentage,
               status,
               color,
             }
@@ -161,11 +164,13 @@ export async function GET(
 
             let status = "complete"
             let description = null
+            let percentage = null
             let color = "primary"
 
             if (yamlContent) {
               status = yamlContent.status || status
               description = yamlContent.description
+              percentage = yamlContent.percentage
               color = yamlContent.color || color
             }
 
@@ -173,6 +178,7 @@ export async function GET(
               fileName,
               characterCount: fileData.trim().length,
               description: description,
+              percentage,
               status,
               color,
             }
