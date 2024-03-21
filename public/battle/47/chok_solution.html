@@ -1,0 +1,71 @@
+<div class="circle main">
+  <div class="pipe l1"></div>
+  <div class="pipe l2"></div>
+  <div class="pipe l3"></div>
+  <div class="inner-top">
+    <div class="circle lg"></div>
+    <div class="circle sm"></div>
+  </div>
+  <div class="circle md"></div>
+</div>
+<style>
+  body {
+    background: #1a4341;
+    display: flex;
+  }
+  .main {
+    margin: auto;
+    position: relative;
+    box-sizing: border-box;
+    padding: 15px;
+    width: 100px;
+    background: #f3ac3c !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .inner-top {
+    display: flex;
+    justify-content: space-between;
+    width: 60px;
+    margin-top: 5px;
+  }
+  .circle {
+    border-radius: 50%;
+    background: #998235;
+    aspect-ratio: 1;
+  }
+  .pipe {
+    background: #f3ac3c;
+    width: 10px;
+    height: 180px;
+    position: absolute;
+    border-radius: 5px;
+    z-index: -1;
+  }
+  .l1 {
+    top: -50;
+    left: 45;
+  }
+  .l2 {
+    top: -45;
+    left: 53;
+    rotate: 60deg;
+  }
+  .l3 {
+    top: -35;
+    left: 53;
+    rotate: -60deg;
+  }
+  .md {
+    width: 20px;
+  }
+  .sm {
+    width: 10px;
+    height: 10px;
+  }
+  .lg {
+    width: 30px;
+  }
+</style>
