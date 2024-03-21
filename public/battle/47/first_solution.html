@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="circle virus">
+    <div class="circle dot d1"></div>
+    <div class="circle dot d2"></div>
+    <div class="circle dot d3"></div>
+  </div>
+  <div class="line l1"></div>
+  <div class="line l2"></div>
+  <div class="line l3"></div>
+</div>
+<style>
+  body {
+    background: #1A4341;
+    display: flex;
+  }
+  .circle {
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+  .container {
+    display: flex;
+    margin: auto;
+  }
+  .line {
+    position: absolute;
+    width: 10px;
+    height: 180px;
+    background: #F3AC3C;
+    border-radius: 5px;
+    transform: translate(-50%, -50%);
+  }
+  .l1 {
+    top: 140;
+    left: 50%;
+  }
+  .l2 {
+    rotate: 60deg;
+    top: 104;
+    left: 129;
+  }
+  .l3 {
+    rotate: -60deg;
+    top: 106;
+    right: 106;
+  }
+  .virus {
+    position: relative;
+    width: 100px;
+    background: #F3AC3C;
+  }
+  .dot {
+    z-index: 1;
+    background: #998235;
+    position: absolute;
+  }
+  .d1 {
+    width: 30px;
+    top: 20;
+    left: 20;
+  }
+  .d2 {
+    width: 10px;
+    top: 20;
+    right: 20;
+  }
+  .d3 {
+    width: 20px;
+    top: 65;
+    left: 40;
+  }
+</style>
