@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="triangle"></div>
+    <div class="square">
+        <div class="light bg-y"></div>
+        <div class="door bg-y"></div>
+    </div>
+</div>
+<style>
+    body {
+        background: #6592CF;
+        display: flex;
+    }
+
+    .bg-y {
+        background: #EEB850;
+    }
+
+    .container {
+        margin: auto;
+        width: 200px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .triangle {
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-bottom: 100px solid #243D83;
+    }
+
+    .square {
+        background: #243D83;
+        height: 100px;
+        width: 150px;
+        border-radius: 0 0 10px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .light {
+        margin-top: -5px;
+        width: 100px;
+        height: 10px;
+        border-radius: 5px;
+    }
+
+    .door {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px 10px 0 0;
+    }
+</style>
