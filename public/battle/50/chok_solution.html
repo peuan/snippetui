@@ -1,0 +1,95 @@
+<div class="container col flex">
+  <div class="top bg-y">
+      <div class="water flex col">
+        <div class="box bg-y br-bl br-br"></div>
+        <div class="box bg-g radius"></div>
+        <div class="box bg-g radius"></div>
+      </div>
+  </div>
+  <div class="box bg-y"></div>
+  <div class="middle bg-y"></div>
+  <div class="bottle flex bg-y">
+    <div class="water-left flex bg-g br-tl br-tr"></div>
+     <div class="bottle-right bg-g">
+       <div class="air bg-y br-bl br-br">
+       </div>
+     </div>
+  </div>
+</div>
+<style>
+  body {
+    background: #1A4341;
+    display: flex;
+  }
+  .flex {
+    display: flex;
+  }
+  .container {
+    margin: auto;
+    align-items: center;
+  }
+  .col {
+    flex-direction: column;
+  }
+  .top {
+      margin-left: 50px;
+      width: 150px;
+      height: 20px;
+      position: relative;
+      border-radius: 20px 20px 0;
+  }
+  .box {
+    width: 20px;
+    height: 20px;
+  }
+  .middle {
+    height: 20px;
+    width: 50px;
+    border-radius: 10px 10px 0 0;
+  }
+  .bottle {
+    height: 140px;
+    width: 100px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .water-left {
+    height: 110px;
+    width: 50px;
+    margin-top: auto;
+  }
+  .bottle-right {
+    height: 100%;
+    width: 50px;
+  }
+  .air {
+    height: 80px;
+  }
+  .radius {
+    border-radius: 50%;
+  }
+  .water {
+    position: absolute;
+    gap: 10px;
+    right: 0;
+    top: 20px;
+  }
+  .br-tr {
+    border-top-right-radius: 24px;
+  }
+  .br-br {
+    border-bottom-right-radius: 25px;
+  }
+  .br-tl {
+    border-top-left-radius: 25px;
+  }
+  .br-bl {
+    border-bottom-left-radius: 25px;
+  }
+  .bg-y {
+    background: #F3AC3C;
+  }
+  .bg-g {
+    background: #998235;
+  }
+</style>
