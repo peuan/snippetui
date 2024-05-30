@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="hor-top">
+    <div class="ver-right">
+      <div class="small circle sc1"></div>
+      <div class="small circle sc2"></div>
+    </div>
+  </div>
+  <div class="ver-top"></div>
+  <div class="top-bg"></div>
+  <div class="top-header"></div>
+  <div class="top-body"></div>
+  <div class="circle c1"></div>
+  <div class="circle c2"></div>
+</div>
+<style>
+  body {
+    background: #1a4341;
+    display: flex;
+  }
+  .circle,
+  .top-body,
+  .top-header,
+  .ver-top,
+  .ver-right,
+  .hor-top {
+    position: absolute;
+  }
+  .c1,
+  .c2 {
+    bottom: 60;
+  }
+  .container {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 200px;
+    background: #998235;
+    border-radius: 20px;
+    position: relative;
+  }
+  .circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .c1 {
+    background: #998235;
+    left: 0;
+  }
+  .c2 {
+    background: #f3ac3c;
+    right: 0;
+  }
+  .top-body {
+    height: 50px;
+    width: 100%;
+    background: #f3ac3c;
+    top: 60;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  .top-header {
+    height: 40px;
+    width: 50%;
+    background: #f3ac3c;
+    top: 40;
+    border-radius: 10px;
+  }
+  .top-bg {
+    width: 100%;
+    height: 80px;
+    background: #1a4341;
+  }
+  .ver-top {
+    width: 20px;
+    height: 40px;
+    background: #f3ac3c;
+  }
+  .hor-top {
+    width: 150px;
+    height: 20px;
+    background: #f3ac3c;
+    border-radius: 10px;
+    left: 0;
+  }
+  .ver-right {
+    width: 20px;
+    height: 40px;
+    background: #f3ac3c;
+    right: 0;
+    border-radius: 10px;
+  }
+  .small {
+    width: 20px;
+    height: 20px;
+    background: #998235;
+  }
+  .sc1 {
+    top: 50;
+  }
+  .sc2 {
+    top: 80;
+  }
+</style>
