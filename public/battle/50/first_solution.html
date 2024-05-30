@@ -1,0 +1,103 @@
+<div class="container trans">
+  <div class="top trans">
+    <div class="pc1 radius sq">
+      <div class="pc1-1 radius sq">
+        <div class="drop d1 abs water"></div>
+        <div class="drop d2 abs water"></div>
+      </div>
+    </div>
+    <div class="pc2 flex trans">
+      <div class="sq"></div>
+      <div class="pc2-1 sq radius"></div>
+    </div>
+  </div>
+  <div class="bottom flex">
+    <div class="water water"></div>
+    <div class="water2 water">
+      <div class="water3 water"></div>
+    </div>
+  </div>
+</div>
+<style>
+  div {
+    background: #F3AC3C;
+  }
+  .water {
+    background: #998235;
+  }
+  .trans {
+    background: transparent;
+  }
+  .radius {
+    border-radius: 10px;
+  }
+  .abs {
+    position: absolute;
+  }
+  .sq {
+    width: 20px;
+    height: 20px;
+  }
+  .flex {
+    display: flex;
+  }
+  body {
+    display: flex;
+    background: #1A4341;
+  }
+  .container {
+    margin: auto;
+  }
+  .top {
+    width: 100px;
+    height: 60px;
+  }
+  .bottom {
+    width: 100px;
+    height: 140px;
+    border-radius: 20px;
+    align-items: flex-end;
+  }
+  .water {
+    width: 50px;
+    height: 110px;
+    border-radius: 25px 25px 0 20px;
+  }
+  .water2 {
+    width: 50px;
+    height: 85px;
+    border-radius: 0 0 20px 0;
+  }
+  .water3 {
+    width: 50px;
+    height: 25px;
+    border-radius: 0 0 25px 25px;
+    background: #F3AC3C;
+  }
+  .pc1 {
+    width: 150px;
+  }
+  .pc1-1 {
+    height: 40px;
+    margin-left: auto;
+  }
+  .pc2 {
+    flex-direction: column;
+    align-items: center;
+  }
+  .pc2-1 {
+    width: 50px;
+    border-radius: 10px 10px 0 0;
+  }
+  .drop {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  .d1 {
+    margin-top: 50px;
+  }
+  .d2 {
+    margin-top: 80px;
+  }
+</style>
