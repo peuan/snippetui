@@ -1,48 +1,35 @@
+<div class="container">
+  <div class="circle"></div>
+</div>
 <style>
   body {
     background: #6592cf;
-    margin: 0;
-  }
-  .center {
     display: flex;
     justify-content: center;
     align-items: center;
   }
   .container {
-    height: 100vh;
-  }
-  .item1 {
     width: 300px;
     height: 150px;
     background: #243d83;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
-  .item2 {
-    width: 250px;
-    height: 250px;
-    background: #6592cf;
-    border-radius: 50%;
-  }
-  .item3 {
-    width: 150px;
-    height: 150px;
-    background: #243d83;
-    border-radius: 50%;
-  }
-  .item4 {
+  .circle {
     width: 50px;
     height: 50px;
     background: #eeb850;
     border-radius: 50%;
+    border: 50px solid #243d83;
+    z-index: 1;
+  }
+  .container::before {
+    content: "";
+    width: 250px;
+    height: 250px;
+    background: #6592cf;
+    position: absolute;
+    border-radius: 50%;
   }
 </style>
-<body>
-  <div class="container center">
-    <div class="item1 center">
-      <div class="item2 center">
-        <div class="item3 center">
-          <div class="item4 center"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
