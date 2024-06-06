@@ -1,0 +1,55 @@
+<div class="con">
+  <div class="top"></div>
+  <div class="center">
+     <div>
+        <div class="line bg-red"></div>
+        <div class="line bg-red"></div>
+     </div>
+    <div class="circle bg-red"></div>
+  </div>
+</div>
+<style>
+  div {
+    box-sizing: border-box;
+  }
+  body {
+    background: #293462;
+    display: flex;
+  }
+  .con {
+    margin: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .top {
+    position: absolute;
+    width: 270px;
+    height: 60px;
+    border: 10px solid #FFF1C1;
+    border-radius: 40px;
+  }
+  .center {
+    z-index: 1;
+    padding: 20px;
+    width: 150px;
+    height: 100px;
+    background: #FFF1C1;
+    border-radius: 0 0 50px 50px;
+  }
+  .line {
+    border-radius: 40px;
+    height: 10px;
+    width: 40px;
+    margin-bottom: 10px;
+  }
+  .bg-red {
+    background: #FE5F55;
+  }
+  .circle {
+    margin: -20px 0 20px 70px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+</style>
