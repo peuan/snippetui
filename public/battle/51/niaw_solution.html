@@ -1,0 +1,58 @@
+<div class="mask">
+  <div class="ear"></div>
+  <div class="inner">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="circle"></div>
+  </div>
+</div>
+<style>
+  body {
+    background: #293462;
+    margin: 0;
+    display: flex;
+  }
+  .inner,
+  .circle,
+  .line {
+    position: absolute;
+  }
+  .mask {
+    margin: auto;
+    bottom: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .ear {
+    width: 250px;
+    height: 40px;
+    border-radius: 30px;
+    border: 10px solid #fff1c1;
+  }
+  .inner {
+    width: 150px;
+    height: 100px;
+    background: #fff1c1;
+    border-radius: 0 0px 50px 50px;
+  }
+  .line {
+    width: 40px;
+    height: 10px;
+    border-radius: 10px;
+    background: #fe5f55;
+    top: 20;
+    left: 20;
+  }
+  .line:nth-child(2) {
+    top: 40;
+  }
+  .circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #fe5f55;
+    right: 20;
+    bottom: 20;
+  }
+</style>
